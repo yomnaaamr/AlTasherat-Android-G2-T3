@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.androidx.recyclerview)
 
+
     implementation(libs.ssp.android)
     implementation(libs.sdp.android)
 
