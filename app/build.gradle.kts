@@ -53,6 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
+<<<<<<< HEAD
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
 
@@ -79,4 +80,8 @@ dependencies {
     testImplementation(libs.truth)
 
 
+=======
+
+    implementation(libs.androidx.core.splashscreen)
+>>>>>>> ec1a539 (Revamp app appearance with new theme, fonts, and splash screen)
 }
