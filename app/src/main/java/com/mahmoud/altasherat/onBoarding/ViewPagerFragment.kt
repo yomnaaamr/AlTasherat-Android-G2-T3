@@ -10,10 +10,11 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentViewPagerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ViewPagerFragment : Fragment() {
 
-    private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var binding: FragmentViewPagerBinding
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
@@ -24,6 +25,7 @@ class ViewPagerFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
+        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
