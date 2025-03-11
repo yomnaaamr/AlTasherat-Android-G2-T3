@@ -14,8 +14,4 @@ interface OnBoardingContract {
             )
         }
     }
-
-sealed interface OnBoardingAction {
-    sealed interface SaveOnBoardingShown : OnBoardingAction
-}
 }
