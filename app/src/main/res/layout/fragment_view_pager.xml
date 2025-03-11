@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/screen_background"
     tools:context=".onBoarding.ViewPagerFragment">
 
+    <ImageView
+        android:id="@+id/img_onBoarding_background"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/img_on_boarding_background"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
@@ -33,9 +43,10 @@
         app:layout_constraintEnd_toEndOf="@id/button_next"
         app:layout_constraintStart_toStartOf="@id/button_next"
         app:layout_constraintTop_toBottomOf="@id/guideLine70"
+        app:tabBackground="@drawable/selector_indicator"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp" />
-    <!--        app:tabBackground="@drawable/selector_tab_indicator"-->
+    <!--        app:tabBackground="@drawable-hdpi/selector_tab_indicator"-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_next"
