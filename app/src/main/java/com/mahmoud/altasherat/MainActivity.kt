@@ -8,11 +8,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.mahmoud.altasherat.common.data.local.StorageKeyEnum
+import com.mahmoud.altasherat.common.domain.local.ILocalStorageProvider
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     private lateinit var navController: NavController
+
+    @Inject
+    lateinit var ILocalStorageProvider: ILocalStorageProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,5 +36,9 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        runBlocking {
+            ILocalStorageProvider.save(StorageKeyEnum.COUNTRIES, "listOf()", String::class)
+        }
     }
 }

@@ -16,5 +16,7 @@
     <string name="error_io">An I/O error occurred while accessing local storage</string>
     <string name="error_data_corruption">Data corruption detected in local storage</string>
     <string name="error_type_mismatch">Unsupported data type for local storage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
