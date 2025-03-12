@@ -10,11 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-<<<<<<< HEAD
 @AndroidEntryPoint
-=======
-
->>>>>>> ec1a539 (Revamp app appearance with new theme, fonts, and splash screen)
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
