@@ -1,4 +1,20 @@
 <resources>
-    <string name="app_name">Al Tasherat</string>
-    <string name="altasherat_platform">منصة التأشيرات</string>
+    <string name="app_name" translatable="false">Al Tasherat</string>
+    <string name="altasherat_platform">Altasherat Platform</string>
+
+    <string name="error_no_internet">Couldn\'t connect to server, please check your internet connection.</string>
+    <string name="error_unknown">Something went wrong. Please try again later.</string>
+    <string name="error_serialization">Couldn\'t serialize or deserialize data.</string>
+    <string name="error_internal_server">Internal server error with code:%d, and the failure reason: %s</string>
+    <string name="error_bad_request">The request was malformed or invalid. Please check your input and try again.</string>
+    <string name="error_unauthorized">You are not authorized to access this resource. Please log in and try again.</string>
+    <string name="error_forbidden">Access to this resource is forbidden. You do not have the required permissions.</string>
+    <string name="error_not_found">The requested resource could not be found. Please check the URL or try again later.</string>
+    <string name="error_unknown_http">An unexpected error occurred (HTTP %1$d). Please try again later or contact support.</string>
+
+
+    <string name="error_io">An I/O error occurred while accessing local storage</string>
+    <string name="error_data_corruption">Data corruption detected in local storage</string>
+    <string name="error_type_mismatch">Unsupported data type for local storage</string>
+
 </resources>
