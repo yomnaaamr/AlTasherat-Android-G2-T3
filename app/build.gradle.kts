@@ -18,6 +18,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://intern.api.altashirat.solutionplus.net/api/\"")
+
     }
 
     buildTypes {
@@ -38,6 +41,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -70,6 +74,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.okhttp3)
     implementation(libs.gson.converter)
+    implementation(libs.logging.interceptor)
+
 
     //testing
     testImplementation(libs.kotlinx.coroutines.test)

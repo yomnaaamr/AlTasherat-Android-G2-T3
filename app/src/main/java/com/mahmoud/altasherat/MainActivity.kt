@@ -8,8 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.mahmoud.altasherat.common.data.local.StorageKeyEnum
-import com.mahmoud.altasherat.common.domain.local.ILocalStorageProvider
+import com.mahmoud.altasherat.common.data.repository.local.StorageKeyEnum
+import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject

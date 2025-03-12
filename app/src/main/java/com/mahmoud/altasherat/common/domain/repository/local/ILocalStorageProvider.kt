@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.common.domain.local
+package com.mahmoud.altasherat.common.domain.repository.local
 
 import kotlinx.coroutines.flow.Flow
 import kotlin.reflect.KClass

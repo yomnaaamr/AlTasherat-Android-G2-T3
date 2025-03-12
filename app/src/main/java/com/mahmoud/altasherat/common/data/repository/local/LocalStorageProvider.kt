@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.common.data.local
+package com.mahmoud.altasherat.common.data.repository.local
 
 import android.content.Context
 import androidx.datastore.preferences.core.Preferences
@@ -10,8 +10,8 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.mahmoud.altasherat.common.domain.local.ILocalStorageProvider
-import com.mahmoud.altasherat.common.domain.local.IStorageKeyEnum
+import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
+import com.mahmoud.altasherat.common.domain.repository.local.IStorageKeyEnum
 import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import kotlinx.coroutines.flow.Flow
