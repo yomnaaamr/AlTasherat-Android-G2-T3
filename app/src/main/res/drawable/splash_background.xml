@@ -4,7 +4,7 @@
     android:viewportWidth="375"
     android:viewportHeight="812">
     <path
-        android:fillColor="#FFF"
+        android:fillColor="@color/splash_screen_background"
         android:fillType="evenOdd"
         android:pathData="M0,0h375v812H0z" />
     <group>
