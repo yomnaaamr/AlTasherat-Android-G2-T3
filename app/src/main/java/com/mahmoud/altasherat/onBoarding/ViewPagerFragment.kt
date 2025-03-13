@@ -17,6 +17,7 @@ class ViewPagerFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var binding: FragmentViewPagerBinding
+    private lateinit var viewPager2: ViewPager2
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
 
 
@@ -32,12 +33,19 @@ class ViewPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeViews()
+
     }
 
     private fun initializeViews() {
         tabLayout = binding.tabLayout
         setupViewPager()
         setupTabLayout()
+        binding.buttonNext.setOnClickListener {
+            val nextScreen = viewPager2.currentItem + 1
+            if (nextScreen < onBoardingViewPagerAdapter.itemCount) {
+                viewPager2.currentItem = nextScreen
+            }
+        }
     }
 
     private fun setupViewPager() {
@@ -48,6 +56,7 @@ class ViewPagerFragment : Fragment() {
         )
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(requireContext(), pages)
         binding.viewPager2.adapter = onBoardingViewPagerAdapter
+        viewPager2 = binding.viewPager2
     }
 
     private fun setupTabLayout() {
