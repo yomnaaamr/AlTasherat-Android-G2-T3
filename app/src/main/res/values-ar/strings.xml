@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="altasherat_platform">منصة التأشيرات</string>
+
+    <string name="error_no_internet">تعذر الاتصال بالخادم، يرجى التحقق من اتصال الإنترنت.</string>
+    <string name="error_unknown">حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.</string>
+    <string name="error_serialization">تعذرت معالجة البيانات.</string>
+    <string name="error_internal_server">خطأ داخلي في الخادم (الرمز: %d)، السبب: %s</string>
+    <string name="error_bad_request">طلب غير صالح. يرجى التحقق من المدخلات والمحاولة مرة أخرى.</string>
+    <string name="error_unauthorized">غير مصرح لك بالوصول. يرجى تسجيل الدخول والمحاولة مرة أخرى.</string>
+    <string name="error_forbidden">الوصول إلى هذا المورد ممنوع. ليس لديك الصلاحيات المطلوبة.</string>
+    <string name="error_not_found">تعذر العثور على المورد المطلوب. يرجى التحقق من الرابط أو المحاولة لاحقًا.</string>
+    <string name="error_unknown_http">حدث خطأ غير متوقع (HTTP %1$d). يرجى المحاولة لاحقًا أو التواصل مع الدعم.</string>
+
+    <string name="error_io">حدث خطأ في الإدخال/الإخراج أثناء الوصول إلى التخزين المحلي</string>
+    <string name="error_data_corruption">تم اكتشاف تلف في البيانات في التخزين المحلي</string>
+    <string name="error_type_mismatch">نوع بيانات غير مدعوم في التخزين المحلي</string>
+
+</resources>
