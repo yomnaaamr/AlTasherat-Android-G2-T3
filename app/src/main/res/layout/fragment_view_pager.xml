@@ -7,6 +7,12 @@
     android:background="@drawable/screen_background"
     tools:context=".onBoarding.ViewPagerFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine30"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent=".3"
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/img_onBoarding_background"
         android:layout_width="0dp"
@@ -14,7 +20,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
         android:src="@drawable/img_on_boarding_background"/>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -22,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/guideLine90"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
