@@ -65,7 +65,7 @@
                 android:id="@+id/seprator_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#7747464F"
+                android:background="#6547464F"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/language_recycler" />
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
-                        android:paddingHorizontal="12dp"
+                        android:paddingHorizontal="8dp"
                         android:textAlignment="viewStart"
                         tools:text="Egypt" />
 
@@ -145,15 +145,15 @@
 
             <TextView
                 android:id="@+id/helper_txt"
+                style="@style/TextAppearance.AlTasherat.TitleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.AlTasherat.TitleSmall"
+                android:layout_marginHorizontal="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.9"
-                android:layout_marginHorizontal="16dp"
                 tools:text="You can change your country or language any time from menu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -114,7 +114,7 @@
     </style>
 
     <style name="TextAppearance.AlTasherat.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
-        <item name="fontFamily">@font/app_font_plain</item>
+        <item name="fontFamily">@font/app_font_bold</item>
     </style>
 
 
