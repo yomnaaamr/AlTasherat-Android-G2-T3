@@ -90,58 +90,32 @@
                 app:layout_constraintStart_toEndOf="@id/second_trailing"
                 app:layout_constraintTop_toBottomOf="@id/seprator_view" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/choose_country_card"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/choose_country_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="18dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:cardStrokeColor="@color/md_theme_secondary"
-                app:cardStrokeWidth="4dp"
+                app:boxCornerRadiusBottomEnd="28dp"
+                app:boxCornerRadiusBottomStart="28dp"
+                app:boxCornerRadiusTopEnd="28dp"
+                app:boxCornerRadiusTopStart="28dp"
+                app:boxStrokeColor="@color/md_theme_secondary"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="custom"
+                app:prefixText="🇸🇦"
+                app:prefixTextAppearance="@style/TextAppearance.AlTasherat.TitleLarge"
+                app:endIconDrawable="@drawable/ic_arrow_down"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/choose_country_txt">
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/country_flag"
-                        style="@style/TextAppearance.AlTasherat.TitleMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="0.2"
-                        tools:text="🇸🇦" />
-
-                    <TextView
-                        android:id="@+id/country_name"
-                        style="@style/TextAppearance.AlTasherat.TitleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:paddingHorizontal="8dp"
-                        android:textAlignment="viewStart"
-                        tools:text="Egypt" />
-
-                    <ImageButton
-                        android:id="@+id/arrow_down"
-                        android:layout_width="24dp"
-                        android:layout_height="30dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="0.2"
-                        android:background="@android:color/transparent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_arrow_down" />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                    android:focusable="false"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/helper_txt"
@@ -175,10 +149,8 @@
         android:id="@+id/continue_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_button_bg"
+        style="@style/CustomButton"
         android:drawableEnd="@drawable/ic_continue_icon"
-        android:drawablePadding="10dp"
-        android:paddingHorizontal="54dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="@id/content_card"
         app:layout_constraintEnd_toEndOf="parent"
