@@ -15,5 +15,9 @@
     <string name="error_io">حدث خطأ في الإدخال/الإخراج أثناء الوصول إلى التخزين المحلي</string>
     <string name="error_data_corruption">تم اكتشاف تلف في البيانات في التخزين المحلي</string>
     <string name="error_type_mismatch">نوع بيانات غير مدعوم في التخزين المحلي</string>
+    <string name="continue_txt">الاستمرار</string>
+    <string name="please_choose_language_txt">من فضلك اختراللغة</string>
+    <string name="please_choose_country_txt">من فضلك اختر الدولة</string>
+    <string name="you_can_change_your_country_or_language_any_time_from_menu">بإمكانك تغيير بلدك ولغتك فى اى وقت من القائمة</string>
 
 </resources>
