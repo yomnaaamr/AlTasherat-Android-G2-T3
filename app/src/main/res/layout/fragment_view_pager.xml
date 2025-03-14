@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/screen_background"
+    android:paddingHorizontal="16dp"
+    android:background="@drawable/img_screen_background"
     tools:context=".onBoarding.ViewPagerFragment">
+
+    <ImageView
+        android:layout_width="341dp"
+        android:layout_height="234dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="139dp"
+        android:src="@drawable/ic_star_background"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLine30"
@@ -17,7 +27,7 @@
         android:id="@+id/img_onBoarding_background"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="165dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
@@ -60,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/next"
+        style="@style/CustomButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
