@@ -23,39 +23,46 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="27dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/cardViewBackground"
         app:cardCornerRadius="18dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideLine"
 
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:orientation="vertical">
+            android:paddingTop="16dp">
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/onBoardingTitle"
+                style="@style/TextAppearance.AlTasherat.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/onBoardingTitle"/>
+                android:text="@string/onBoardingTitle"
+                android:textColor="@color/textColor" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/onBoardingSubTitle"
+                style="@style/TextAppearance.AlTasherat.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginBottom="16dp"
-                tools:text="تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية"
-                />
+                android:textColor="@color/textColor"
+                tools:text="تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

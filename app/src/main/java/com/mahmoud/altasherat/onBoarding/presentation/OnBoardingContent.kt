@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.onBoarding
+package com.mahmoud.altasherat.onBoarding.presentation
 
 import androidx.annotation.StringRes
 
