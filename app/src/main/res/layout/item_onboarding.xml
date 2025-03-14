@@ -10,7 +10,7 @@
         android:id="@+id/onBoardingImg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="170dp"
         app:layout_constraintBottom_toTopOf="@id/guideLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,28 +23,39 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/onBoardingTitle"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/onBoardingTitle"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="27dp"
+        android:background="@color/cardViewBackground"
+        app:cardCornerRadius="18dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideLine" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/onBoardingSubTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        tools:text="تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/onBoardingTitle" />
+        app:layout_constraintTop_toBottomOf="@id/guideLine"
 
-
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:orientation="vertical">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/onBoardingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/onBoardingTitle"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/onBoardingSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="16dp"
+                tools:text="تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
