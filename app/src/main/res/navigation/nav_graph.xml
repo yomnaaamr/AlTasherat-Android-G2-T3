@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/viewPagerFragment">
+    app:startDestination="@id/splashFragment">
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.mahmoud.altasherat.onBoarding.ViewPagerFragment"
+        android:name="com.mahmoud.altasherat.onBoarding.presentation.OnBoardingFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
+        tools:layout="@layout/fragment_on_boarding" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.mahmoud.altasherat.features.splash.presentation.SplashFragment"
@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_splashFragment_to_placeholder"
             app:destination="@id/placeholder" />
+        <action
+            android:id="@+id/action_splashFragment_to_onBoardingFragment"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
     <fragment android:id="@+id/placeholder" />
 </navigation>

@@ -1,24 +1,27 @@
-package com.mahmoud.altasherat.onBoarding
+package com.mahmoud.altasherat.onBoarding.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentViewPagerBinding
+import com.mahmoud.altasherat.onBoarding.presentation.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ViewPagerFragment : Fragment() {
+class OnBoardingFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var binding: FragmentViewPagerBinding
     private lateinit var viewPager2: ViewPager2
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
+    private val onBoardingViewModel:OnBoardingViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -32,6 +35,7 @@ class ViewPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onBoardingViewModel.setOnBoardingVisibilityShown()
         initializeViews()
 
     }

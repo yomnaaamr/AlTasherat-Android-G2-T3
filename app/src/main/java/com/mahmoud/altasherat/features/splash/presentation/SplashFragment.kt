@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +24,7 @@ class SplashFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         setupObservers()
@@ -43,6 +44,7 @@ class SplashFragment : Fragment() {
                             is SplashState.Success -> {
                                 // Handle Success state
                             }
+
                             is SplashState.Error -> {
                                 // Handle Error state
                             }
@@ -62,6 +64,11 @@ class SplashFragment : Fragment() {
                             val errorMessage = splashEvent.error.toErrorMessage(requireContext())
                             showToast(errorMessage)
                         }
+
+                        SplashEvent.NavigateToOnBoarding -> {
+                            Log.d("CUSTOM", "setupObservers: Navigate To onBoarding")
+                            findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment)
+                        }
                     }
                 }
 
@@ -73,7 +80,7 @@ class SplashFragment : Fragment() {
 
     private fun showToast(
         message: String,
-        duration: Int = Toast.LENGTH_LONG
+        duration: Int = Toast.LENGTH_LONG,
     ) {
         Toast.makeText(requireContext(), message, duration).show()
     }

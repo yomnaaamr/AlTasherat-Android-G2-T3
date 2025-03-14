@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
     android:background="@drawable/img_screen_background"
-    tools:context=".onBoarding.ViewPagerFragment">
+    tools:context=".onBoarding.presentation.OnBoardingFragment">
 
     <ImageView
         android:layout_width="341dp"
