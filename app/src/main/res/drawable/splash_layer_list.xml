@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background (solid color or image) -->
+    <item android:drawable="@drawable/splash_background" />
+    <!-- App Icon centered -->
+    <item android:drawable="@drawable/ic_splash" android:gravity="center" />
+    <!-- Localized Text Bitmap at bottom center -->
+<!--    <item  android:gravity="center" />-->
+<!--    &lt;!&ndash; Animated Progress Bar at bottom center &ndash;&gt;-->
+<!--    <item android:drawable="@drawable/progress_animation" android:gravity="bottom|center_horizontal" />-->
+<!--    <item android:drawable="@android:color/white"/>-->
+</layer-list>

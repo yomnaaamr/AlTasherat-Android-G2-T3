@@ -73,6 +73,7 @@
         <item name="textAppearanceLabelMedium">@style/TextAppearance.AlTasherat.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.AlTasherat.LabelSmall</item>
 
+
     </style>
 
     <style name="Theme.AlTasherat" parent="Base.Theme.AlTasherat" />

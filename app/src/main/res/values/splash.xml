@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+
+<!--        when i make this only it shows the custom layout ahead-->
+        <item name="windowSplashScreenBackground">@drawable/splash_layer_list</item>
+<!--        when i make it the static version appears-->
+<!--        <item name="android:windowBackground">@drawable/splash_layer_list</item>-->
+<!--        <item name="windowSplashScreenAnimationDuration">900</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>-->
+        <item name="postSplashScreenTheme">@style/Theme.AlTasherat</item>
+<!--        <item name="windowSplashScreenBackground">@drawable/splash_background</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>-->
+<!--        <item name="windowSplashScreenBackground">@drawable/splash_layer_list</item>-->
+
+<!--        <item name="windowSplashScreenBackground">@drawable/splash_layer_list</item>-->
+        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+    </style>
+
+
+</resources>

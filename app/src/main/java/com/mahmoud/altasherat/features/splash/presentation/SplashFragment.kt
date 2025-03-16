@@ -38,7 +38,7 @@ class SplashFragment : Fragment() {
                 launch {
                     splashViewModel.state.collect { splashState ->
                         when (splashState) {
-                            is SplashState.Idle -> {}
+//                            is SplashState.Idle -> {}
                             is SplashState.Loading -> {}
                             is SplashState.Success -> {
                                 // Handle Success state
