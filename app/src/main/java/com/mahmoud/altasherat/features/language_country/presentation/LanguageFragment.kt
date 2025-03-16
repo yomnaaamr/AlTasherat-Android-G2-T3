@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.data.LanguageDataSource
 import com.mahmoud.altasherat.common.domain.models.ListItem
-import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
-import com.mahmoud.altasherat.common.presentation.OnItemClickListener
-import com.mahmoud.altasherat.common.presentation.SingleSelectionAdapter
+import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
+import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
+import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -75,6 +76,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
                 viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
                 Toast.makeText(requireContext(), "Selections saved", Toast.LENGTH_SHORT).show()
+                requireContext().changeLocale(selectedLanguage!!.code)
             } else {
                 Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
             }

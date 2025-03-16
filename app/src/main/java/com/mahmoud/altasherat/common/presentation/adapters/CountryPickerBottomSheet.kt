@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.common.presentation
+package com.mahmoud.altasherat.common.presentation.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater

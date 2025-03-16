@@ -12,7 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.presentation.toErrorMessage
+import com.mahmoud.altasherat.common.presentation.utils.changeLocale
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -79,9 +80,25 @@ class SplashFragment : Fragment() {
         }
 
 
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    splashViewModel.languageCode.collect { languageCode ->
+                        if (languageCode != null) {
+                            requireContext().changeLocale(languageCode)
+                        } else {
+                            //  Set a default locale
+                            requireContext().changeLocale( "en")
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
-    fun showToast(
+    private fun showToast(
         message: String,
         duration: Int = Toast.LENGTH_LONG
     ) {

@@ -6,5 +6,6 @@ import com.mahmoud.altasherat.common.domain.models.ListItem
 interface ILanguageCountryRepository {
     suspend fun getCountries(): List<Country>
     suspend fun saveSelections(selectedLanguage: ListItem, selectedCountry: ListItem)
+    suspend fun getLanguageCode(): String?
 
 }
