@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.databinding.FragmentViewPagerBinding
+import com.mahmoud.altasherat.databinding.FragmentOnBoardingBinding
 import com.mahmoud.altasherat.onBoarding.presentation.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OnBoardingFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
-    private lateinit var binding: FragmentViewPagerBinding
+    private lateinit var binding: FragmentOnBoardingBinding
     private lateinit var viewPager2: ViewPager2
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
     private val onBoardingViewModel:OnBoardingViewModel by viewModels()
@@ -29,7 +29,7 @@ class OnBoardingFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
         return binding.root
     }
 

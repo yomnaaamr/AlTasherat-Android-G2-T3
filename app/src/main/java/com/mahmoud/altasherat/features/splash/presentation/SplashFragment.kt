@@ -80,6 +80,8 @@ class SplashFragment : Fragment() {
                                     splashEvent.error.toErrorMessage(requireContext())
                                 showToast(errorMessage)
                             }
+
+                            SplashEvent.NavigateToOnBoarding -> TODO()
                         }
                     }
 

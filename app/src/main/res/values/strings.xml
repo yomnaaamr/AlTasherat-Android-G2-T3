@@ -26,15 +26,7 @@
     <string name="please_choose_language_txt">Please Choose Language</string>
     <string name="please_choose_country_txt">Please Choose Country</string>
     <string name="you_can_change_your_country_or_language_any_time_from_menu">You can change your country or language any time from menu</string>
-    <string name="app_name">Al Tasherat</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="onBoardingTitle">Welcome to the Visa Application</string>
-    <string name="onBoarding1_SubTitle">
-        With the Visa Application, obtaining your electronic visa has become incredibly easy, whether it\'s a tourist visa, employment visa, or company visa. Don\'t worry about the exhausting procedures; we have a complete team working for your convenience.</string>
-    <string name="onBoarding2_subTitle">Whether you are looking for a job or you are one of the owners of companies looking for employment, a team of experts will be at your service at the highest level, just fill out your form with easy steps without complications</string>
-    <string name="onBoarding3_subTitle">You can reach your favorite destination anywhere in the world just prepare for your trip and leave the rest to us and enjoy a smooth and safe experience of obtaining your tourist visa</string>
-    <string name="next">Next</string>
 
 
 </resources>
