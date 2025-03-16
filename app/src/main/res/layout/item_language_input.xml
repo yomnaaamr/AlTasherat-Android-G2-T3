@@ -8,8 +8,7 @@
     app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="28dp"
     app:cardElevation="0dp"
-    app:strokeColor="@color/md_theme_secondary"
-    app:strokeWidth="2dp">
+    android:background="@drawable/bg_language_selector" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,18 +20,21 @@
         android:paddingVertical="8dp">
 
         <TextView
+            android:id="@+id/language_flag"
             style="@style/TextAppearance.AlTasherat.TitleLarge"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             tools:text="🇸🇦" />
 
         <TextView
+            android:id="@+id/language_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="4dp" />
 
         <ImageView
+            android:id="@+id/language_checked"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_unchecked" />

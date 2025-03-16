@@ -25,7 +25,7 @@ class CountryPickerBottomSheet(private val onCountrySelected: (String) -> Unit) 
         val recyclerView = view.findViewById<RecyclerView>(R.id.country_picker_recycler)
         val countries = listOf("السعودية", "مصر", "أفغانستان", "ألبانيا", "الجزائر")
 
-        val adapter = CountryPickerAdapter(countries, this@CountryPickerBottomSheet)
+        val adapter = SingleSelectionAdapter(countries, this@CountryPickerBottomSheet)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
