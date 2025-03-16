@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.data.LanguageDataSource
 import com.mahmoud.altasherat.common.domain.models.ListItem
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
@@ -28,12 +29,14 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     private val viewModel: LanguageViewModel by viewModels()
     private lateinit var bottomSheet: CountryPickerBottomSheet
 
+    private var selectedLanguage: ListItem? = null
+    private var selectedCountry: ListItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
         languageAdapter =
@@ -49,6 +52,8 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                 launch {
                     viewModel.countries.collect { countries ->
                         bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
+                            this@LanguageFragment.selectedCountry = selectedCountry
+                            updateContinueButtonState()
                             binding.countryFlag.text = selectedCountry.flag
                             binding.countryName.text = selectedCountry.name
                             Toast.makeText(
@@ -65,11 +70,28 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         binding.chooseCountryLayout.setOnClickListener {
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
+
+        binding.continueBtn.setOnClickListener {
+            if (selectedLanguage != null && selectedCountry != null) {
+                viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
+                Toast.makeText(requireContext(), "Selections saved", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
+            }
+
+        }
         return binding.root
     }
 
     override fun onItemSelected(item: ListItem) {
         Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
+        selectedLanguage = item
+        updateContinueButtonState()
+    }
+
+
+    private fun updateContinueButtonState() {
+        binding.continueBtn.isEnabled = selectedLanguage != null && selectedCountry != null
     }
 
 }
