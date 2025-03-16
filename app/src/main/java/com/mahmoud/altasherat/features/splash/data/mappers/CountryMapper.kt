@@ -2,7 +2,7 @@ package com.mahmoud.altasherat.features.splash.data.mappers
 
 import com.mahmoud.altasherat.features.splash.data.models.dto.CountryDto
 import com.mahmoud.altasherat.features.splash.data.models.entity.CountryEntity
-import com.mahmoud.altasherat.features.splash.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.Country
 
 internal object CountryMapper {
     fun dtoToDomain(model: CountryDto): Country {

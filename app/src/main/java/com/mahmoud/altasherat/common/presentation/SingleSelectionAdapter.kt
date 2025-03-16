@@ -3,15 +3,16 @@ package com.mahmoud.altasherat.common.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.Language
+import com.mahmoud.altasherat.common.domain.models.ListItem
 import com.mahmoud.altasherat.databinding.ItemCountryBinding
 import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
 
 class SingleSelectionAdapter(
-    private val items: List<String>,
+    private val items: List<ListItem>,
     private val clickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -29,11 +30,11 @@ class SingleSelectionAdapter(
             itemView.setOnClickListener(this)
         }
 
-        fun bind(item: ListItem.CountryItem) {
+        fun bind(item: ListItem) {
             val isItemSelected = checkedPosition == adapterPosition
-            binding.countryName.text = item.countryName
+            binding.countryName.text = item.name
             binding.checkIcon.visibility = if (isItemSelected) View.VISIBLE else View.GONE
-//            item.isSelected = isItemSelected
+            item.isSelected = isItemSelected
 
         }
 
@@ -45,6 +46,7 @@ class SingleSelectionAdapter(
         }
     }
 
+    //ViewHolder for Language Item
     inner class LanguageViewHolder(private val binding: ItemLanguageInputBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -52,10 +54,11 @@ class SingleSelectionAdapter(
             itemView.setOnClickListener(this)
         }
 
-        fun bind(item: ListItem.LanguageItem) {
+        fun bind(item: ListItem) {
             val isItemSelected = checkedPosition == adapterPosition
-            binding.languageName.setText(item.languageName)
-            binding.languageFlag.setText(item.flagRes)
+            binding.languageName.text = item.name
+            binding.languageFlag.text = item.flag
+            item.isSelected = isItemSelected
             if (isItemSelected) {
                 binding.languageChecked.setImageResource(R.drawable.ic_checked)
             } else {
@@ -72,35 +75,10 @@ class SingleSelectionAdapter(
         }
     }
 
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
-        val countryNameTxt = itemView.findViewById<TextView>(R.id.country_name)
-        val checkIconImg = itemView.findViewById<ImageView>(R.id.check_icon)
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        fun bind(item: String) {
-            val isItemSelected = checkedPosition == adapterPosition
-            checkIconImg.visibility = if (isItemSelected) View.VISIBLE else View.GONE
-            countryNameTxt.text = item
-//            item.isSelected = isItemSelected
-        }
-
-        override fun onClick(view: View) {
-            val current = items[adapterPosition]
-            val position = items.indexOf(current)
-            checkedPosition = position
-            clickListener.onItemSelected(current)
-        }
-    }
-
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is ListItem.CountryItem -> VIEW_TYPE_COUNTRY
-            is ListItem.LanguageItem -> VIEW_TYPE_LANGUAGE
+            is Country -> VIEW_TYPE_COUNTRY
+            is Language -> VIEW_TYPE_LANGUAGE
         }
     }
 
@@ -132,12 +110,12 @@ class SingleSelectionAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = items[position]) {
-            is ListItem.CountryItem -> (holder as CountryViewHolder).bind(item)
-            is ListItem.LanguageItem -> (holder as LanguageViewHolder).bind(item)
+            is Country -> (holder as CountryViewHolder).bind(item)
+            is Language -> (holder as LanguageViewHolder).bind(item)
         }
     }
 }
 
 interface OnItemClickListener {
-    fun onItemSelected(item: String)
+    fun onItemSelected(item: ListItem)
 }
