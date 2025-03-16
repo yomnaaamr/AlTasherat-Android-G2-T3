@@ -1,11 +1,11 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -44,7 +44,6 @@ class SplashFragment : Fragment() {
                             is SplashState.Success -> {
                                 // Handle Success state
                             }
-
                             is SplashState.Error -> {
                                 // Handle Error state
                             }
@@ -64,16 +63,15 @@ class SplashFragment : Fragment() {
                                 findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                             }
 
-                            is SplashEvent.Error -> {
-                                val errorMessage =
-                                    splashEvent.error.toErrorMessage(requireContext())
-                                showToast(errorMessage)
-                            }
+                        is SplashEvent.Error -> {
+                            val errorMessage = splashEvent.error.toErrorMessage(requireContext())
+                            showToast(errorMessage)
                         }
                     }
-
                 }
+
             }
+
 
         }
     }

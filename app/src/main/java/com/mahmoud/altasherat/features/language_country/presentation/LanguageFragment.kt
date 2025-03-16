@@ -19,6 +19,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
     private lateinit var binding: FragmentLanguageBinding
     private lateinit var languageAdapter: SingleSelectionAdapter
+    private val viewModel: LanguageCountryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,5 +53,16 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     override fun onItemSelected(item: ListItem) {
         Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
     }
+
+
+    override fun onItemSelected(item: SingleItem) {
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getCountriesUC: GetCountriesUC
+    private val fetchCountriesUC: FetchCountriesUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
@@ -26,7 +26,7 @@ class SplashViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     init {
-        getCountriesUC()
+        fetchCountriesUC()
             .onEach { result ->
                 Log.d("SplashResult", result.toString())
                 _state.value = when (result) {
