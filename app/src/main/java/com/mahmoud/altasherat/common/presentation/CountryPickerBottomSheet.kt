@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -34,6 +35,9 @@ class CountryPickerBottomSheet(private val onCountrySelected: (ListItem) -> Unit
 
         val adapter = SingleSelectionAdapter(countries, this@CountryPickerBottomSheet)
 
+        val itemDecoration: RecyclerView.ItemDecoration =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }

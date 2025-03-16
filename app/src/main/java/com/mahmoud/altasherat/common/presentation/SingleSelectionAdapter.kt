@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.common.presentation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,28 +21,31 @@ class SingleSelectionAdapter(
         private const val VIEW_TYPE_LANGUAGE = 1
     }
 
-    var checkedPosition = -1
+    var checkedLanguagePosition = 0
+    var checkedCountryPosition = -1
 
     // ViewHolder for Country Item
     inner class CountryViewHolder(private val binding: ItemCountryBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
+            checkedCountryPosition = -1
             itemView.setOnClickListener(this)
         }
 
         fun bind(item: ListItem) {
-            val isItemSelected = checkedPosition == adapterPosition
+            val isItemSelected = checkedCountryPosition == adapterPosition
             binding.countryName.text = item.name
-            binding.checkIcon.visibility = if (isItemSelected) View.VISIBLE else View.GONE
             item.isSelected = isItemSelected
-
+            Log.d("IsItemSelected?", isItemSelected.toString())
+            binding.checkIcon.visibility = if (isItemSelected) View.VISIBLE else View.INVISIBLE
         }
 
         override fun onClick(view: View?) {
             val current = items[adapterPosition]
             val position = items.indexOf(current)
-            checkedPosition = position
+            checkedCountryPosition = position
+            notifyDataSetChanged()
             clickListener.onItemSelected(current)
         }
     }
@@ -55,14 +59,18 @@ class SingleSelectionAdapter(
         }
 
         fun bind(item: ListItem) {
-            val isItemSelected = checkedPosition == adapterPosition
+            val isItemSelected = checkedLanguagePosition == adapterPosition
             binding.languageName.text = item.name
             binding.languageFlag.text = item.flag
             item.isSelected = isItemSelected
+            binding.root.isActivated = (checkedLanguagePosition == adapterPosition)
+            binding.root.setBackgroundResource(R.drawable.bg_language_selector)
+
             if (isItemSelected) {
                 binding.languageChecked.setImageResource(R.drawable.ic_checked)
             } else {
                 binding.languageChecked.setImageResource(R.drawable.ic_unchecked)
+
             }
 
         }
@@ -70,7 +78,8 @@ class SingleSelectionAdapter(
         override fun onClick(view: View?) {
             val current = items[adapterPosition]
             val position = items.indexOf(current)
-            checkedPosition = position
+            checkedLanguagePosition = position
+            notifyDataSetChanged()
             clickListener.onItemSelected(current)
         }
     }

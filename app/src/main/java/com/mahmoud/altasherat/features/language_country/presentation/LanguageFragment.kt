@@ -33,7 +33,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
         languageAdapter =
-            SingleSelectionAdapter(LanguageDataSource.getLanguages(), this@LanguageFragment)
+            SingleSelectionAdapter(LanguageDataSource.getLanguages(requireContext()), this@LanguageFragment)
 
         binding.languageRecycler.apply {
             adapter = languageAdapter
@@ -41,7 +41,8 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         }
         binding.chooseCountryLayout.setOnClickListener {
             val bottomSheet = CountryPickerBottomSheet { selectedCountry ->
-                Toast.makeText(requireActivity(), selectedCountry.name, Toast.LENGTH_SHORT).show()
+                binding.countryFlag.text = selectedCountry.flag
+                binding.countryName.text = selectedCountry.name
             }
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
@@ -49,7 +50,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemSelected(item: ListItem) {
-        Toast.makeText(requireContext(), item.name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
     }
 
 }

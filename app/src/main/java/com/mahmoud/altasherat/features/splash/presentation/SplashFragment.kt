@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.toErrorMessage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -59,6 +60,7 @@ class SplashFragment : Fragment() {
                     splashViewModel.events.collect { splashEvent ->
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
+                                delay(3000)
                                 findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                             }
 
