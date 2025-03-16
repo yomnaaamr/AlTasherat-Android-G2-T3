@@ -3,6 +3,7 @@
     android:shape="rectangle">
     <solid android:color="@android:color/white" />
     <corners android:radius="28dp" />
-    <stroke android:color="@android:color/transparent" />
+    <stroke android:color="@null"
+        android:width="0dp"/>
 
 </shape>
