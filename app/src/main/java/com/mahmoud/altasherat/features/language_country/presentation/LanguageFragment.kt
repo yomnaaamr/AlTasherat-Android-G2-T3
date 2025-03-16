@@ -33,7 +33,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
         languageAdapter =
-            SingleSelectionAdapter(LanguageDataSource.getLanguages(), this@LanguageFragment)
+            SingleSelectionAdapter(LanguageDataSource.getLanguages(requireContext()), this@LanguageFragment)
 
         binding.languageRecycler.apply {
             adapter = languageAdapter

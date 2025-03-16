@@ -20,5 +20,7 @@
     <string name="please_choose_country_txt">من فضلك اختر الدولة</string>
     <string name="you_can_change_your_country_or_language_any_time_from_menu">بإمكانك تغيير بلدك ولغتك فى اى وقت من القائمة</string>
     <string name="choose_country">اختر الدولة</string>
+    <string name="arabic_language">العربية</string>
+    <string name="english_language">الانجليزية</string>
 
 </resources>
