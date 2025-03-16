@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -27,6 +28,7 @@ class SplashViewModel @Inject constructor(
     init {
         getCountriesUC()
             .onEach { result ->
+                Log.d("SplashResult", result.toString())
                 _state.value = when (result) {
                     is Resource.Error -> {
                         _events.send(SplashEvent.Error(result.error))

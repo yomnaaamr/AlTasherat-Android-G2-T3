@@ -100,6 +100,7 @@
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="28dp"
                 app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/choose_country_txt"
