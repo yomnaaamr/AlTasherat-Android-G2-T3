@@ -7,7 +7,7 @@
     <color name="md_theme_onSecondary">#00344F</color>
     <color name="md_theme_secondaryContainer">#004B70</color>
     <color name="md_theme_onSecondaryContainer">#CAE6FF</color>
-    <color name="md_theme_tertiary">#94D5A8</color>
+    <color name="md_theme_tertiary">#8ee7ad</color>
     <color name="md_theme_onTertiary">#00391E</color>
     <color name="md_theme_tertiaryContainer">#0E512F</color>
     <color name="md_theme_onTertiaryContainer">#B0F1C3</color>
@@ -17,7 +17,7 @@
     <color name="md_theme_onErrorContainer">#FFDAD6</color>
     <color name="md_theme_background">#131318</color>
     <color name="md_theme_onBackground">#E5E1E9</color>
-    <color name="md_theme_surface">#1c204c</color>
+    <color name="md_theme_surface">#871C204C</color>
     <color name="md_theme_onSurface">#FFFFFF</color>
     <color name="md_theme_surfaceVariant">#47464F</color>
     <color name="md_theme_onSurfaceVariant">#C8C5D0</color>
