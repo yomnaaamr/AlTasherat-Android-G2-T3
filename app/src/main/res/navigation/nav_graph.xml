@@ -17,18 +17,21 @@
         <action
             android:id="@+id/action_splashFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_onBoardingFragment2"
+            app:destination="@id/onBoardingFragment2" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
         android:name="com.mahmoud.altasherat.features.language_country.presentation.LanguageFragment"
         android:label="fragment_language"
-        tools:layout="@layout/fragment_language" >
-        <action
-            android:id="@+id/action_languageFragment_to_onBoardingFragment2"
-            app:destination="@id/onBoardingFragment2" />
-    </fragment>
+        tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/onBoardingFragment2"
         android:name="com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingFragment"
-        android:label="OnBoardingFragment" />
+        android:label="OnBoardingFragment" >
+        <action
+            android:id="@+id/action_onBoardingFragment2_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
 </navigation>

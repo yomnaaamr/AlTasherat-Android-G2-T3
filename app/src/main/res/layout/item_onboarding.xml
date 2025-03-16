@@ -42,7 +42,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        style="@style/TextAppearance.AlTasherat.BodyLarge"
+        style="@style/TextAppearance.AlTasherat.BodyMedium"
         tools:text="@string/onBoarding1_SubTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

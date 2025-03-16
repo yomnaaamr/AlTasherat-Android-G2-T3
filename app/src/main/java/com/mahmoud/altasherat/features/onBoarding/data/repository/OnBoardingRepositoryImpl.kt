@@ -10,8 +10,8 @@ class OnBoardingRepositoryImpl @Inject constructor(private val onBoardingLocalDS
         onBoardingLocalDS.setOnBoardingShown()
     }
 
-    override suspend fun getOnBoardingVisibility(): Boolean {
-        return onBoardingLocalDS.getOnBoardingVisibility()
+    override suspend fun isFirstTimeToLaunchTheApp(): Boolean {
+        return onBoardingLocalDS.isFirstTimeToLaunchTheApp()
     }
 
 }

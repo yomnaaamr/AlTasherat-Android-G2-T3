@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.toErrorMessage
+import com.mahmoud.altasherat.features.onBoarding.presentation.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
 class SplashFragment : Fragment() {
 
     private val splashViewModel: SplashViewModel by viewModels()
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +64,15 @@ class SplashFragment : Fragment() {
                         Log.d("AITASHERAAT", "event = $splashEvent")
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
-                                findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
+                                lifecycleScope.launch {
+                                    Log.d(
+                                        "AITASHERAAT",
+                                        "Is first Time To Launch? ${onBoardingViewModel.isFirstTimeToLaunchTheApp()}"
+                                    )
+                                    if (onBoardingViewModel.isFirstTimeToLaunchTheApp())
+                                        findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
+                                    else findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
+                                }
                             }
 
                             is SplashEvent.Error -> {

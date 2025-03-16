@@ -5,7 +5,7 @@ import com.mahmoud.altasherat.features.onBoarding.data.local.OnBoardingLocalDS
 import com.mahmoud.altasherat.features.onBoarding.data.repository.OnBoardingRepositoryImpl
 import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalDS
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingVisibilityUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingAsShownUC
 import dagger.Module
 import dagger.Provides
@@ -34,7 +34,7 @@ object OnBoardingModule {
     @Provides
     fun provideGetOnBoardingVisibilityUseCase(
         onBoardingRepository: IOnBoardingRepository
-    ): GetOnBoardingVisibilityUC {
-        return GetOnBoardingVisibilityUC(onBoardingRepository)
+    ): IsFirstTimeToLaunchTheAppUC {
+        return IsFirstTimeToLaunchTheAppUC(onBoardingRepository)
     }
 }

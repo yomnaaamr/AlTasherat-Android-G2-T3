@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.splash.domain.usecase
 
+import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException

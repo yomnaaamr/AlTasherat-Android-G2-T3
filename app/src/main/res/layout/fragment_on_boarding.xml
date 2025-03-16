@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="139dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/ic_star_background"/>
 
     <androidx.constraintlayout.widget.Guideline
@@ -26,7 +26,7 @@
         android:id="@+id/img_onBoarding_background"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:icon="@drawable/arror_back"
+        android:drawableEnd="@drawable/arror_back"
         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     <androidx.constraintlayout.widget.Guideline
