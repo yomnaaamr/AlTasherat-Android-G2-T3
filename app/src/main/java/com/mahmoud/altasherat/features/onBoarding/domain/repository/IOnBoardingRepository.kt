@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.onBoarding.domain.repository
+package com.mahmoud.altasherat.features.onBoarding.domain.repository
 
 interface IOnBoardingRepository {
     suspend fun saveOnBoardingShown()

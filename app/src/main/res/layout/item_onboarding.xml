@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/onBoardingTitle"
+        style="@style/TextAppearance.AlTasherat.TitleLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideLine" />
@@ -41,7 +42,8 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        tools:text="تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية تطبيق لطلب تأشيرة ولعرض تأشيرة او لاستخراج فيزا سياحية او دينية"
+        style="@style/TextAppearance.AlTasherat.BodyLarge"
+        tools:text="@string/onBoarding1_SubTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/onBoardingTitle" />

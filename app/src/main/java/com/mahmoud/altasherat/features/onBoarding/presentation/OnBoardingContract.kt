@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.onBoarding.presentation
+package com.mahmoud.altasherat.features.onBoarding.presentation
 
 interface OnBoardingContract {
     data class OnBoardingState(

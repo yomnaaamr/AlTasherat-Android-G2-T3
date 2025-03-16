@@ -1,18 +1,15 @@
-package com.mahmoud.altasherat.onBoarding.di
+package com.mahmoud.altasherat.features.onBoarding.di
 
-import com.mahmoud.altasherat.common.data.repository.local.LocalStorageProvider
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.onBoarding.data.local.OnBoardingLocalDS
-import com.mahmoud.altasherat.onBoarding.data.repository.OnBoardingRepositoryImpl
-import com.mahmoud.altasherat.onBoarding.domain.local.IOnBoardingLocalDS
-import com.mahmoud.altasherat.onBoarding.domain.repository.IOnBoardingRepository
-import com.mahmoud.altasherat.onBoarding.domain.useCase.GetOnBoardingVisibilityUC
-import com.mahmoud.altasherat.onBoarding.domain.useCase.SaveOnBoardingVisibilityUC
+import com.mahmoud.altasherat.features.onBoarding.data.local.OnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.data.repository.OnBoardingRepositoryImpl
+import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingVisibilityUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingAsShownUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ServiceComponent
-import dagger.hilt.android.scopes.FragmentScoped
 import dagger.hilt.components.SingletonComponent
 
 @Module
@@ -30,8 +27,8 @@ object OnBoardingModule {
     @Provides
     fun provideSaveOnBoardingUseCase(
         onBoardingRepository: IOnBoardingRepository
-    ): SaveOnBoardingVisibilityUC {
-        return SaveOnBoardingVisibilityUC(onBoardingRepository)
+    ):SetOnBoardingAsShownUC {
+        return SetOnBoardingAsShownUC(onBoardingRepository)
     }
 
     @Provides

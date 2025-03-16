@@ -1,7 +1,7 @@
-package com.mahmoud.altasherat.onBoarding.data.repository
+package com.mahmoud.altasherat.features.onBoarding.data.repository
 
-import com.mahmoud.altasherat.onBoarding.domain.local.IOnBoardingLocalDS
-import com.mahmoud.altasherat.onBoarding.domain.repository.IOnBoardingRepository
+import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
 import javax.inject.Inject
 
 class OnBoardingRepositoryImpl @Inject constructor(private val onBoardingLocalDS: IOnBoardingLocalDS):

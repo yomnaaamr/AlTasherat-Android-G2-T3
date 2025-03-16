@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.ListItem
 
 class CountryPickerBottomSheet(private val onCountrySelected: (String) -> Unit) :
     BottomSheetDialogFragment(), OnItemClickListener {
@@ -24,15 +26,15 @@ class CountryPickerBottomSheet(private val onCountrySelected: (String) -> Unit) 
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.country_picker_recycler)
         val countries = listOf("السعودية", "مصر", "أفغانستان", "ألبانيا", "الجزائر")
-
-        val adapter = SingleSelectionAdapter(countries, this@CountryPickerBottomSheet)
+        val listItems = listOf(Country(),Country(),Country(),Country())
+        val adapter = SingleSelectionAdapter(listItems, this@CountryPickerBottomSheet)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 
-    override fun onItemSelected(item: String) {
-        onCountrySelected(item)
+    override fun onItemSelected(item: ListItem) {
+        onCountrySelected("")
         dismiss()
     }
 }

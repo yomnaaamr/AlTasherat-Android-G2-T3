@@ -1,7 +1,8 @@
-package com.mahmoud.altasherat.onBoarding.presentation
+package com.mahmoud.altasherat.features.onBoarding
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.altasherat.databinding.ItemOnboardingBinding
@@ -21,7 +22,7 @@ class OnBoardingViewPagerAdapter(
 
     inner class OnBoardingViewHolder(private val binding: ItemOnboardingBinding):
         RecyclerView.ViewHolder(binding.root){
-        fun bind(context: Context , page: OnBoardingContent) = with(binding){
+        fun bind(context: Context , page:OnBoardingContent) = with(binding){
             onBoardingImg.setImageResource(page.imgID)
             onBoardingSubTitle.text = context.getString(page.imageDescription)
         }

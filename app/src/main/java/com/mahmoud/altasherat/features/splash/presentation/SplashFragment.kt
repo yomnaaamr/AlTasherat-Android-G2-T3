@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class SplashFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         setupObservers()
@@ -37,6 +38,7 @@ class SplashFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     splashViewModel.state.collect { splashState ->
+                        Log.d("AITASHERAAT", "state = $splashState")
                         when (splashState) {
                             is SplashState.Idle -> {}
                             is SplashState.Loading -> {}
@@ -57,6 +59,7 @@ class SplashFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     splashViewModel.events.collect { splashEvent ->
+                        Log.d("AITASHERAAT", "event = $splashEvent")
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
                                 findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
@@ -78,7 +81,7 @@ class SplashFragment : Fragment() {
 
     private fun showToast(
         message: String,
-        duration: Int = Toast.LENGTH_LONG
+        duration: Int = Toast.LENGTH_LONG,
     ) {
         Toast.makeText(requireContext(), message, duration).show()
     }

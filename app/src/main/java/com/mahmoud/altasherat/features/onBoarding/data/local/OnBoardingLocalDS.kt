@@ -1,8 +1,8 @@
-package com.mahmoud.altasherat.onBoarding.data.local
+package com.mahmoud.altasherat.features.onBoarding.data.local
 
 import com.mahmoud.altasherat.common.data.repository.local.StorageKeyEnum
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.onBoarding.domain.local.IOnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalDS
 
 class OnBoardingLocalDS(
     private val localStorageProvider: ILocalStorageProvider,
