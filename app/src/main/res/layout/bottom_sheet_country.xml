@@ -13,7 +13,8 @@
         style="@style/TextAppearance.AlTasherat.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="اختر الدولة" />
+        android:text="@string/choose_country"
+         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_picker_recycler"
