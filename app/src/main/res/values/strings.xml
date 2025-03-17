@@ -27,5 +27,7 @@
     <string name="signup">SignUp</string>
     <string name="already_have_account">Already have account?</string>
     <string name="sign_in">Sign in</string>
+    <string name="not_have_account">Do not have account?</string>
+    <string name="create_new_acc">Create new account</string>
 
 </resources>

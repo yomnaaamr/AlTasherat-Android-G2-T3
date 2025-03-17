@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/have_account_txt"
-        style="@style/TextAppearance.AlTasherat.TitleLarge"
+        style="@style/TextAppearance.AlTasherat.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/sign_in_txt"
-        style="@style/TextAppearance.AlTasherat.TitleLarge"
+        style="@style/TextAppearance.AlTasherat.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

@@ -26,5 +26,9 @@
     <string name="signup">حساب جديد</string>
     <string name="already_have_account">لديك حساب بالفعل؟ </string>
     <string name="sign_in">تسجيل دخول</string>
+    <string name="not_have_account">ليس لديك حساب؟</string>
+    <string name="create_new_acc">تسجيل حساب جديد</string>
+
+
 
 </resources>
