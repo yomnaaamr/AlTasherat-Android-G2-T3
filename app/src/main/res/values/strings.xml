@@ -24,6 +24,8 @@
     <string name="arabic_language">Arabic</string>
     <string name="english_language">English</string>
     <string name="skip_txt">Skip</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signup">SignUp</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="sign_in">Sign in</string>
+
 </resources>

@@ -31,7 +31,7 @@ class AuthFragment : Fragment() {
         setupTab(binding.authTabLayout)
 
         parentFragmentManager.beginTransaction()
-            .replace(R.id.auth_fragment_container, LoginFragment())
+            .replace(R.id.auth_fragment_container, SignupFragment())
             .commit()
 
         updateTabSelection(binding.authTabLayout, 0)
@@ -40,9 +40,9 @@ class AuthFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 val fragment = when (tab?.position) {
-                    0 -> LoginFragment()
-                    1 -> SignupFragment()
-                    else -> LoginFragment()
+                    0 -> SignupFragment()
+                    1 -> LoginFragment()
+                    else -> SignupFragment()
                 }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)

@@ -23,5 +23,8 @@
     <string name="arabic_language">العربية</string>
     <string name="english_language">الانجليزية</string>
     <string name="skip_txt">تخطي</string>
+    <string name="signup">حساب جديد</string>
+    <string name="already_have_account">لديك حساب بالفعل؟ </string>
+    <string name="sign_in">تسجيل دخول</string>
 
 </resources>
