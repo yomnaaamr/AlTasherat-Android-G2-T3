@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -60,7 +61,10 @@ class SplashViewModel @Inject constructor(
 
     private fun getLanguageCode() {
         viewModelScope.launch {
-            _languageCode.value = getLanguageCodeUC()
+            getLanguageCodeUC()
+                .onSuccess { languageCode ->
+                    _languageCode.value = languageCode
+                }
         }
     }
 }

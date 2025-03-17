@@ -13,6 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.data.LanguageDataSource
+import com.mahmoud.altasherat.common.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.Language
 import com.mahmoud.altasherat.common.domain.models.ListItem
 import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
@@ -30,8 +32,8 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     private val viewModel: LanguageViewModel by viewModels()
     private lateinit var bottomSheet: CountryPickerBottomSheet
 
-    private var selectedLanguage: ListItem? = null
-    private var selectedCountry: ListItem? = null
+    private var selectedLanguage: Language? = null
+    private var selectedCountry: Country? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +55,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                 launch {
                     viewModel.countries.collect { countries ->
                         bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                            this@LanguageFragment.selectedCountry = selectedCountry
-                            updateContinueButtonState()
+                            this@LanguageFragment.selectedCountry = selectedCountry as Country
                             binding.countryFlag.text = selectedCountry.flag
                             binding.countryName.text = selectedCountry.name
                             Toast.makeText(
@@ -87,13 +88,8 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
     override fun onItemSelected(item: ListItem) {
         Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
-        selectedLanguage = item
-        updateContinueButtonState()
+        selectedLanguage = item as Language
     }
 
-
-    private fun updateContinueButtonState() {
-        binding.continueBtn.isEnabled = selectedLanguage != null && selectedCountry != null
-    }
 
 }

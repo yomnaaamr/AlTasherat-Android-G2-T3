@@ -2,8 +2,8 @@ package com.mahmoud.altasherat.features.language_country.data.repository.local
 
 import com.google.gson.Gson
 import com.mahmoud.altasherat.common.data.repository.local.StorageKeyEnum
+import com.mahmoud.altasherat.common.domain.models.Country
 import com.mahmoud.altasherat.common.domain.models.Language
-import com.mahmoud.altasherat.common.domain.models.ListItem
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import com.mahmoud.altasherat.features.language_country.domain.repository.local.ILanguageCountryLocalDS
 import com.mahmoud.altasherat.features.splash.data.models.entity.SplashEntity
@@ -18,7 +18,7 @@ internal class LanguageCountryLocalDS(
         return gson.fromJson(countriesJson, SplashEntity::class.java)
     }
 
-    override suspend fun saveSelections(selectedLanguage: ListItem, selectedCountry: ListItem) {
+    override suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
         val selectedLanguageJson = gson.toJson(selectedLanguage)
         val selectedCountryJson = gson.toJson(selectedCountry)
         localStorageProvider.save(StorageKeyEnum.SELECTED_LANGUAGE, selectedLanguageJson, String::class)

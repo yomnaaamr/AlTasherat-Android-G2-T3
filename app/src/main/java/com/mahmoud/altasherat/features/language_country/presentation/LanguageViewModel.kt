@@ -3,9 +3,9 @@ package com.mahmoud.altasherat.features.language_country.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.models.Country
-import com.mahmoud.altasherat.common.domain.models.ListItem
+import com.mahmoud.altasherat.common.domain.models.Language
+import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetCountriesUC
-import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.language_country.domain.usecase.SaveSelectionsUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,6 @@ class LanguageViewModel @Inject constructor(
     val countries: StateFlow<List<Country>> = _countries.asStateFlow()
 
 
-
     fun onAction(action: LanguageAction) {
         when (action) {
             is LanguageAction.SaveSelections -> {
@@ -33,7 +32,7 @@ class LanguageViewModel @Inject constructor(
         }
     }
 
-    private fun saveSelections(selectedLanguage: ListItem, selectedCountry: ListItem) {
+    private fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
         viewModelScope.launch {
             saveSelectionsUC(selectedLanguage, selectedCountry)
         }
@@ -45,13 +44,11 @@ class LanguageViewModel @Inject constructor(
 
     private fun getCountries() {
         viewModelScope.launch {
-            _countries.value = getCountriesUC()
+            getCountriesUC()
+                .onSuccess { countries ->
+                    _countries.value = countries
+                }
         }
     }
-
-
-
-
-
 
 }
