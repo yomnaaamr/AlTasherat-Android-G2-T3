@@ -16,6 +16,7 @@ import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.toErrorMessage
 import com.mahmoud.altasherat.features.onBoarding.presentation.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -73,6 +74,8 @@ class SplashFragment : Fragment() {
                                         findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
                                     else findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                                 }
+                                delay(3000)
+                                findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                             }
 
                             is SplashEvent.Error -> {

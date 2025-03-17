@@ -3,12 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment"><![CDATA[
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
-    ]]>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.mahmoud.altasherat.features.splash.presentation.SplashFragment"
@@ -16,10 +12,9 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_languageFragment"
-            app:destination="@id/languageFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_onBoardingFragment2"
-            app:destination="@id/onBoardingFragment2" />
+            app:destination="@id/languageFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"

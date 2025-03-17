@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="6dp"
+        android:background="@color/md_theme_primary"/>
 
     <TextView
         android:id="@+id/bs_choose_country_txt"
         style="@style/TextAppearance.AlTasherat.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="اختر الدولة" />
+        android:text="@string/choose_country" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_picker_recycler"
