@@ -15,6 +15,9 @@
             app:destination="@id/languageFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_onBoardingFragment2"
+            app:destination="@id/onBoardingFragment2" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
