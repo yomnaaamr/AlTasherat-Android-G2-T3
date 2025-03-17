@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.common.data.LanguageDataSource
 import com.mahmoud.altasherat.common.domain.models.ListItem
@@ -13,18 +17,17 @@ import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.SingleSelectionAdapter
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LanguageFragment : Fragment(), OnItemClickListener {
 
     private lateinit var binding: FragmentLanguageBinding
     private lateinit var languageAdapter: SingleSelectionAdapter
-    private val viewModel: LanguageCountryViewModel by viewModels()
+    private val viewModel: LanguageViewModel by viewModels()
+    private lateinit var bottomSheet: CountryPickerBottomSheet
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +43,26 @@ class LanguageFragment : Fragment(), OnItemClickListener {
             adapter = languageAdapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
-        binding.chooseCountryLayout.setOnClickListener {
-            val bottomSheet = CountryPickerBottomSheet { selectedCountry ->
-                binding.countryFlag.text = selectedCountry.flag
-                binding.countryName.text = selectedCountry.name
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.countries.collect { countries ->
+                        bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
+                            binding.countryFlag.text = selectedCountry.flag
+                            binding.countryName.text = selectedCountry.name
+                            Toast.makeText(
+                                requireActivity(),
+                                selectedCountry.name,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
             }
+        }
+
+        binding.chooseCountryLayout.setOnClickListener {
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
         return binding.root
@@ -53,16 +71,5 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     override fun onItemSelected(item: ListItem) {
         Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
     }
-
-
-    override fun onItemSelected(item: SingleItem) {
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
 }

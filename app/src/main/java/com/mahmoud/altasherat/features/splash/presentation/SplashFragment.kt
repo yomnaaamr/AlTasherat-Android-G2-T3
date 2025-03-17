@@ -44,6 +44,7 @@ class SplashFragment : Fragment() {
                             is SplashState.Success -> {
                                 // Handle Success state
                             }
+
                             is SplashState.Error -> {
                                 // Handle Error state
                             }
@@ -63,20 +64,24 @@ class SplashFragment : Fragment() {
                                 findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                             }
 
-                        is SplashEvent.Error -> {
-                            val errorMessage = splashEvent.error.toErrorMessage(requireContext())
-                            showToast(errorMessage)
+                            is SplashEvent.Error -> {
+                                val errorMessage =
+                                    splashEvent.error.toErrorMessage(requireContext())
+                                showToast(errorMessage)
+                            }
                         }
                     }
+
                 }
 
+
             }
-
-
         }
+
+
     }
 
-    private fun showToast(
+    fun showToast(
         message: String,
         duration: Int = Toast.LENGTH_LONG
     ) {
