@@ -34,6 +34,8 @@ class AuthFragment : Fragment() {
             .replace(R.id.auth_fragment_container, LoginFragment())
             .commit()
 
+        updateTabSelection(binding.authTabLayout, 0)
+
         binding.authTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
@@ -58,7 +60,7 @@ class AuthFragment : Fragment() {
     }
 
     private fun setupTab(authTabLayout: TabLayout) {
-        val tabTitles = listOf("تسجيل الدخول", "حساب جديد")
+        val tabTitles = listOf("SignUp", "SignIn")
 
         for (i in tabTitles.indices) {
             val tab = authTabLayout.newTab()
@@ -94,8 +96,8 @@ class AuthFragment : Fragment() {
                     )
                 )
             } else {
-                planeIcon?.visibility = View.GONE
-                indicator?.visibility = View.GONE
+                planeIcon?.visibility = View.INVISIBLE
+                indicator?.visibility = View.INVISIBLE
                 text?.setTextColor(
                     ContextCompat.getColor(
                         this.requireContext(),
