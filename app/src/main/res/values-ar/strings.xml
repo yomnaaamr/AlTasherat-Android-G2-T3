@@ -22,5 +22,6 @@
     <string name="choose_country">اختر الدولة</string>
     <string name="arabic_language">العربية</string>
     <string name="english_language">الانجليزية</string>
+    <string name="skip_txt">تخطي</string>
 
 </resources>

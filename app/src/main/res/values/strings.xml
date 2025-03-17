@@ -23,4 +23,5 @@
     <string name="choose_country">Choose Country</string>
     <string name="arabic_language">Arabic</string>
     <string name="english_language">English</string>
+    <string name="skip_txt">Skip</string>
 </resources>
