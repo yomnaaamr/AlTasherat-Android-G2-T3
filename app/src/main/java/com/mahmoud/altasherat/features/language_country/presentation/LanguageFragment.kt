@@ -23,6 +23,7 @@ import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @AndroidEntryPoint
 class LanguageFragment : Fragment(), OnItemClickListener {
@@ -42,8 +43,15 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
+        val languages = LanguageDataSource.getLanguages(requireContext())
+        val defaultLanguageIndex =
+            languages.indexOfFirst { it.code == Locale.getDefault().language }
         languageAdapter =
-            SingleSelectionAdapter(LanguageDataSource.getLanguages(requireContext()), this@LanguageFragment)
+            SingleSelectionAdapter(
+                languages,
+                this@LanguageFragment,
+                defaultLanguageIndex
+                )
 
         binding.languageRecycler.apply {
             adapter = languageAdapter
@@ -75,11 +83,20 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
         binding.continueBtn.setOnClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
-                viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
+                viewModel.onAction(
+                    LanguageAction.SaveSelections(
+                        selectedLanguage!!,
+                        selectedCountry!!
+                    )
+                )
                 Toast.makeText(requireContext(), "Selections saved", Toast.LENGTH_SHORT).show()
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
-                Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.selection_required),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
