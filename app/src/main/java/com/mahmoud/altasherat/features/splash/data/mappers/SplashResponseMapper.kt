@@ -17,4 +17,11 @@ internal object SplashResponseMapper {
             data = model.data.map { CountryMapper.domainToEntity(it) }
         )
     }
+
+    fun entityToDomain(model: SplashEntity): SplashResponse{
+        return SplashResponse(
+            data = model.data.map { CountryMapper.entityToDomain(it) }
+        )
+
+    }
 }
