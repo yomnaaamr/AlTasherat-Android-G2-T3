@@ -27,6 +27,7 @@ class SignupUC(
                 }
 
             val response = repository.signup(signupRequest)
+            repository.saveSignup(response)
             emit(Resource.Success(response))
 
         }.catch { throwable ->

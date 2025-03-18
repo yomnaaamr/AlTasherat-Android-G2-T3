@@ -1,9 +1,13 @@
 package com.mahmoud.altasherat.features.signup.di
 
+import com.google.gson.Gson
+import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.signup.data.repository.SignupRepository
+import com.mahmoud.altasherat.features.signup.data.repository.local.SignupLocalDS
 import com.mahmoud.altasherat.features.signup.data.repository.remote.SignupRemoteDS
 import com.mahmoud.altasherat.features.signup.domain.repository.ISignupRepository
+import com.mahmoud.altasherat.features.signup.domain.repository.local.ISignupLocalDS
 import com.mahmoud.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
 import com.mahmoud.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.Module
@@ -23,10 +27,20 @@ internal object SignupDI {
 
 
     @Provides
+    fun provideLocalDataSource(
+        localStorageProvider: ILocalStorageProvider,
+        gson: Gson
+    ): ISignupLocalDS {
+        return SignupLocalDS(localStorageProvider, gson)
+    }
+
+
+    @Provides
     fun provideSignupRepository(
         remoteDataSource: ISignupRemoteDS,
+        localDataSource: ISignupLocalDS
     ): ISignupRepository {
-        return SignupRepository(remoteDataSource)
+        return SignupRepository(remoteDataSource,localDataSource)
     }
 
 

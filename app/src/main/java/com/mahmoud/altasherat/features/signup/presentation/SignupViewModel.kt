@@ -35,14 +35,10 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-
-    init {
-        signUp()
-    }
-
     private fun signUp() {
 
         val phone = Phone(
+//            should we generate this id using random class or what?
             id = 0,
             countryCode = "0020",
             number = "1279411825",
@@ -54,10 +50,11 @@ class SignupViewModel @Inject constructor(
         val signupRequest = SignUpRequest(
             firstName = "menna",
             lastname = "ahmed",
-            email = "yomna1234@gmail.com",
+            email = "yomna12345@gmail.com",
             password = "12345678",
             passwordConfirmation = "12345678",
             phone = phone,
+//            selectedCountryId
             country = "1"
         )
 

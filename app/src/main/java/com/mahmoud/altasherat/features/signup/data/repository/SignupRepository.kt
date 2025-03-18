@@ -4,17 +4,21 @@ import com.mahmoud.altasherat.features.signup.data.mappers.SignUpResponseMapper
 import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.signup.domain.models.SignUp
 import com.mahmoud.altasherat.features.signup.domain.repository.ISignupRepository
+import com.mahmoud.altasherat.features.signup.domain.repository.local.ISignupLocalDS
 import com.mahmoud.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
 
 internal class SignupRepository(
-    private val remoteDS: ISignupRemoteDS
+    private val remoteDS: ISignupRemoteDS,
+    private val localDS: ISignupLocalDS
 ): ISignupRepository {
+
     override suspend fun signup(signupRequest: SignUpRequest): SignUp {
         val response = remoteDS.signup(signupRequest)
         return SignUpResponseMapper.dtoToDomain(response)
     }
 
     override suspend fun saveSignup(signup: SignUp) {
-        TODO("Not yet implemented")
+        val signupEntity = SignUpResponseMapper.domainToEntity(signup)
+        localDS.saveSignup(signupEntity)
     }
 }
