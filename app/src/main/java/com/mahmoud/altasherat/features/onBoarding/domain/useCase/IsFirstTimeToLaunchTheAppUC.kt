@@ -1,10 +1,20 @@
 package com.mahmoud.altasherat.features.onBoarding.domain.useCase
 
+import androidx.datastore.core.IOException
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
+import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
 import javax.inject.Inject
 
-class IsFirstTimeToLaunchTheAppUC @Inject constructor(private val repository: IOnBoardingRepository) {
+class IsFirstTimeToLaunchTheAppUC(private val repository: IOnBoardingRepository) {
     suspend operator fun invoke(): Boolean {
-        return repository.isFirstTimeToLaunchTheApp()
+        return try {
+            repository.isFirstTimeToLaunchTheApp()
+        }catch (ioException: IOException){
+            throw AltasheratException(LocalStorageError.IO_ERROR)
+        }catch (e: Exception){
+            throw AltasheratException(AltasheratError.UnknownError(e.message!!))
+        }
     }
 }

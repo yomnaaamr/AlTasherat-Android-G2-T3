@@ -1,23 +1,17 @@
 package com.mahmoud.altasherat.features.onBoarding.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentOnBoardingBinding
-import com.mahmoud.altasherat.features.onBoarding.presentation.viewModel.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import kotlin.math.log
 
 @AndroidEntryPoint
 class OnBoardingFragment : Fragment() {
@@ -26,7 +20,6 @@ class OnBoardingFragment : Fragment() {
     private lateinit var binding: FragmentOnBoardingBinding
     private lateinit var viewPager2: ViewPager2
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
-    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -53,12 +46,7 @@ class OnBoardingFragment : Fragment() {
             if (nextScreen < onBoardingViewPagerAdapter.itemCount) {
                 viewPager2.currentItem = nextScreen
             } else {
-                Log.d("AITASHERAAT", "Setting onBoarding Visibility To Shown")
-                lifecycleScope.launch {
-                    onBoardingViewModel.setOnBoardingVisibilityShown()
-                }
                 findNavController().navigate(R.id.action_onBoardingFragment2_to_languageFragment)
-
             }
         }
     }

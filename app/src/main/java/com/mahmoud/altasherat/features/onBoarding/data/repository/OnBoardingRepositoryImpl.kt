@@ -4,7 +4,7 @@ import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalD
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
 import javax.inject.Inject
 
-class OnBoardingRepositoryImpl @Inject constructor(private val onBoardingLocalDS: IOnBoardingLocalDS):
+class OnBoardingRepositoryImpl (private val onBoardingLocalDS: IOnBoardingLocalDS):
     IOnBoardingRepository {
     override suspend fun saveOnBoardingShown() {
         onBoardingLocalDS.setOnBoardingShown()

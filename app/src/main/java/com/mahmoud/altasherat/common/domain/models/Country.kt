@@ -1,11 +1,11 @@
 package com.mahmoud.altasherat.common.domain.models
 
 data class Country(
-    override val id: Int = 1,
-    override val name: String = "مصر",
-    val currency: String = "EGP",
-    override val code: String= "EG",
-    val phoneCode: String = "+20",
-    override val flag: String = "none",
+    override val id: Int,
+    override val name: String,
+    val currency: String,
+    override val code: String,
+    val phoneCode: String ,
+    override val flag: String,
     override var isSelected: Boolean = false
 ): ListItem

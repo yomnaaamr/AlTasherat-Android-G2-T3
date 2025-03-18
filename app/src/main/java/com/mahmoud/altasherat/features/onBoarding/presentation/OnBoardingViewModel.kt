@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.onBoarding.presentation.viewModel
+package com.mahmoud.altasherat.features.onBoarding.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

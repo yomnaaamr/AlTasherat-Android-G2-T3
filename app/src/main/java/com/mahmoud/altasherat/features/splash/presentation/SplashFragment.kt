@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.toErrorMessage
-import com.mahmoud.altasherat.features.onBoarding.presentation.viewModel.OnBoardingViewModel
+import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

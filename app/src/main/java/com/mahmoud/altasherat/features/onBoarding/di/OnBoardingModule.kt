@@ -25,14 +25,14 @@ object OnBoardingModule {
         return OnBoardingRepositoryImpl(onBoardingLocalDS)
     }
     @Provides
-    fun provideSaveOnBoardingUseCase(
+    fun provideSetOnBoardingAsShownUC(
         onBoardingRepository: IOnBoardingRepository
     ):SetOnBoardingAsShownUC {
         return SetOnBoardingAsShownUC(onBoardingRepository)
     }
 
     @Provides
-    fun provideGetOnBoardingVisibilityUseCase(
+    fun provideIsFirstTimeToLaunchTheAppUC(
         onBoardingRepository: IOnBoardingRepository
     ): IsFirstTimeToLaunchTheAppUC {
         return IsFirstTimeToLaunchTheAppUC(onBoardingRepository)
