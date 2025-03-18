@@ -29,7 +29,7 @@
         <action
             android:id="@+id/action_languageFragment_to_authFragment"
             app:destination="@id/authFragment"
-            app:popUpTo="@id/languageFragment"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
