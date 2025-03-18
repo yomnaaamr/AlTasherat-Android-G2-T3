@@ -6,5 +6,4 @@ sealed interface ListItem {
     val code: String
     val flag: String
     var isSelected: Boolean
-
 }

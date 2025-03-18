@@ -9,7 +9,7 @@ import com.mahmoud.altasherat.features.splash.data.repository.remote.SplashRemot
 import com.mahmoud.altasherat.features.splash.domain.repository.ISplashRepository
 import com.mahmoud.altasherat.features.splash.domain.repository.local.ISplashLocalDS
 import com.mahmoud.altasherat.features.splash.domain.repository.remote.ISplashRemoteDS
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,8 +44,8 @@ internal object SplashDI {
 
 
     @Provides
-    fun provideGetCountriesUC(repository: ISplashRepository): GetCountriesUC {
-        return GetCountriesUC(repository)
+    fun providefetchCountriesUC(repository: ISplashRepository): FetchCountriesUC {
+        return FetchCountriesUC(repository)
     }
 
 

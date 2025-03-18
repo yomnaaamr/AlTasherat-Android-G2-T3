@@ -4,19 +4,24 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getCountriesUC: GetCountriesUC
+    private val fetchCountriesUC: FetchCountriesUC,
+    private val getLanguageCodeUC: GetLanguageCodeUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
@@ -25,8 +30,12 @@ class SplashViewModel @Inject constructor(
     private val _events = Channel<SplashEvent>()
     val events = _events.receiveAsFlow()
 
+    private val _languageCode = MutableStateFlow<String?>(null)
+    val languageCode: StateFlow<String?> = _languageCode
+
+
     init {
-        getCountriesUC()
+        fetchCountriesUC()
             .onEach { result ->
                 Log.d("SplashResult", result.toString())
                 _state.value = when (result) {
@@ -43,5 +52,19 @@ class SplashViewModel @Inject constructor(
                 }
             }
             .launchIn(viewModelScope)
+
+
+        getLanguageCode()
+
+    }
+
+
+    private fun getLanguageCode() {
+        viewModelScope.launch {
+            getLanguageCodeUC()
+                .onSuccess { languageCode ->
+                    _languageCode.value = languageCode
+                }
+        }
     }
 }

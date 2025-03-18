@@ -63,15 +63,7 @@ class LocalStorageProvider(
         }
     }
 
-    override suspend fun <Model : Any> getFlow(
-        key: IStorageKeyEnum,
-        defaultValue: Model,
-        type: KClass<Model>
-    ): Flow<Model> {
-        val preferencesKey = preferencesKey(key, type)
-        return context.dataStore.data
-            .map { preferences -> preferences[preferencesKey] ?: defaultValue }
-    }
+
 
     override suspend fun clear() {
         context.dataStore.edit { preferences ->
