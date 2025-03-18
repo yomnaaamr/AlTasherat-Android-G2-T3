@@ -13,7 +13,8 @@ import com.mahmoud.altasherat.common.domain.models.ListItem
 
 class CountryPickerBottomSheet(
     private val list: List<ListItem>,
-    private val onCountrySelected: (ListItem) -> Unit) :
+    private val onCountrySelected: (ListItem) -> Unit
+) :
     BottomSheetDialogFragment(), OnItemClickListener {
 
     override fun onCreateView(
@@ -28,7 +29,12 @@ class CountryPickerBottomSheet(
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.country_picker_recycler)
 
-        val adapter = SingleSelectionAdapter(list, this@CountryPickerBottomSheet)
+        val adapter = SingleSelectionAdapter(
+            list,
+            this@CountryPickerBottomSheet,
+
+        )
+
 
         val itemDecoration: RecyclerView.ItemDecoration =
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)

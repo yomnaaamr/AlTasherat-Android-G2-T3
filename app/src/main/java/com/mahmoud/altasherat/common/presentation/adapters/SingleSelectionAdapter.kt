@@ -14,14 +14,15 @@ import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
 
 class SingleSelectionAdapter(
     private val items: List<ListItem>,
-    private val clickListener: OnItemClickListener
+    private val clickListener: OnItemClickListener,
+    private val defaultLanguagePosition:Int = 0
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_COUNTRY = 0
         private const val VIEW_TYPE_LANGUAGE = 1
     }
 
-    var checkedLanguagePosition = 0
+    var checkedLanguagePosition = -1
     var checkedCountryPosition = -1
 
     // ViewHolder for Country Item
@@ -55,6 +56,7 @@ class SingleSelectionAdapter(
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
+            checkedLanguagePosition = defaultLanguagePosition
             itemView.setOnClickListener(this)
         }
 
