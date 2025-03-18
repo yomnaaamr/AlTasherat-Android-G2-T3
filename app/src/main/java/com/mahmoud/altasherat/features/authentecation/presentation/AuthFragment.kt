@@ -60,7 +60,8 @@ class AuthFragment : Fragment() {
     }
 
     private fun setupTab(authTabLayout: TabLayout) {
-        val tabTitles = listOf("SignUp", "SignIn")
+        val tabTitles =
+            listOf(resources.getString(R.string.signup), resources.getString(R.string.sign_in))
 
         for (i in tabTitles.indices) {
             val tab = authTabLayout.newTab()

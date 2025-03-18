@@ -59,11 +59,6 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                             this@LanguageFragment.selectedCountry = selectedCountry as Country
                             binding.countryFlag.text = selectedCountry.flag
                             binding.countryName.text = selectedCountry.name
-                            Toast.makeText(
-                                requireActivity(),
-                                selectedCountry.name,
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
                     }
                 }
@@ -77,7 +72,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         binding.continueBtn.setOnClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
                 viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
-                Toast.makeText(requireContext(), "Selections saved", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
                 Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
@@ -88,7 +83,6 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemSelected(item: ListItem) {
-        Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
         selectedLanguage = item as Language
     }
 
