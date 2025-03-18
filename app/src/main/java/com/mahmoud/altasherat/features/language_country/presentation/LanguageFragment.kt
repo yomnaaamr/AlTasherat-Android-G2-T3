@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.language_country.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +24,11 @@ import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
+import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Locale
+
 
 @AndroidEntryPoint
 class LanguageFragment : Fragment(), OnItemClickListener {
@@ -35,6 +40,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
+    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +49,15 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
+        val languages = LanguageDataSource.getLanguages(requireContext())
+        val defaultLanguageIndex =
+            languages.indexOfFirst { it.code == Locale.getDefault().language }
         languageAdapter =
-            SingleSelectionAdapter(LanguageDataSource.getLanguages(requireContext()), this@LanguageFragment)
+            SingleSelectionAdapter(
+                languages,
+                this@LanguageFragment,
+                defaultLanguageIndex
+                )
 
         binding.languageRecycler.apply {
             adapter = languageAdapter
@@ -71,15 +84,38 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
         binding.continueBtn.setOnClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
-                viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
+                viewModel.onAction(
+                    LanguageAction.SaveSelections(
+                        selectedLanguage!!,
+                        selectedCountry!!
+                    )
+                )
                 findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
-                Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.selection_required),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.continueBtn.setOnClickListener {
+            // add navigation and any validation here
+
+            // set onBoarding visibility to shown
+            Log.d("AITASHERAAT", "Setting onBoarding Visibility To Shown")
+            lifecycleScope.launch {
+                onBoardingViewModel.setOnBoardingVisibilityShown()
+            }
+
+        }
     }
 
     override fun onItemSelected(item: ListItem) {
