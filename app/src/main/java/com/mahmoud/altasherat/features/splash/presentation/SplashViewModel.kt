@@ -6,9 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -18,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getCountriesUC: GetCountriesUC,
+    private val fetchCountriesUC: FetchCountriesUC,
+    private val getLanguageCodeUC: GetLanguageCodeUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
@@ -27,28 +32,41 @@ class SplashViewModel @Inject constructor(
     private val _events = Channel<SplashEvent>()
     val events = _events.receiveAsFlow()
 
+    private val _languageCode = MutableStateFlow<String?>(null)
+    val languageCode: StateFlow<String?> = _languageCode
+
+
     init {
-        viewModelScope.launch {
-            Log.d("AITASHERAAT", "viewModel")
-            getCountriesUC().onEach { result ->
-                    Log.d("AITASHERAAT", "result = $result")
-                    _events.send(SplashEvent.NavigateToHome)
-                    _state.value = when (result) {
-                        is Resource.Error -> {
-                            _events.send(SplashEvent.Error(result.error))
-                            SplashState.Error(result.error)
-                        }
-
-                        is Resource.Success -> {
-                            Log.d("AITASHERAAT", "Succes Splash")
-                            _events.send(SplashEvent.NavigateToHome)
-                            SplashState.Success
-                        }
-
-                        is Resource.Loading -> SplashState.Loading
+        fetchCountriesUC()
+            .onEach { result ->
+                Log.d("SplashResult", result.toString())
+                _state.value = when (result) {
+                    is Resource.Error -> {
+                        _events.send(SplashEvent.Error(result.error))
+                        SplashState.Error(result.error)
                     }
-                }.collect()
 
+                    is Resource.Loading -> SplashState.Loading
+                    is Resource.Success -> {
+                        _events.send(SplashEvent.NavigateToHome)
+                        SplashState.Success
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
+
+
+        getLanguageCode()
+
+    }
+
+
+    private fun getLanguageCode() {
+        viewModelScope.launch {
+            getLanguageCodeUC()
+                .onSuccess { languageCode ->
+                    _languageCode.value = languageCode
+                }
         }
     }
 }

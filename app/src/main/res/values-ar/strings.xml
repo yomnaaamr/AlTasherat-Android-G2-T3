@@ -26,4 +26,6 @@
     <string name="arabic_language">العربية</string>
     <string name="english_language">الانجليزية</string>
 
+    <string name="selection_required">يجب عليك إجراء تحديد.</string>
+
 </resources>

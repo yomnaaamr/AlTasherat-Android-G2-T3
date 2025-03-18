@@ -2,18 +2,19 @@ package com.mahmoud.altasherat.features.splash.presentation
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.presentation.toErrorMessage
+import com.mahmoud.altasherat.common.presentation.utils.changeLocale
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -89,9 +90,28 @@ class SplashFragment : Fragment() {
                     }
 
                 }
-            }
 
+
+            }
         }
+
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    splashViewModel.languageCode.collect { languageCode ->
+                        if (languageCode != null) {
+                            requireContext().changeLocale(languageCode)
+                        } else {
+                            //  Set a default locale
+                            requireContext().changeLocale( "en")
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     private fun showToast(
