@@ -1,6 +1,8 @@
 package com.mahmoud.altasherat.common.di
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +18,9 @@ object AppModule {
     @Singleton
     fun provideContext(@ApplicationContext context: Context): Context = context
 
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().create()!!
+    }
 }
