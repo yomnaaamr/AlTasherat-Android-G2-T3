@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
@@ -15,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch

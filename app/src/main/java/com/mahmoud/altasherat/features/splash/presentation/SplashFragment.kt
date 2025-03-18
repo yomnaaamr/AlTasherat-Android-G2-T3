@@ -63,20 +63,14 @@ class SplashFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     splashViewModel.events.collect { splashEvent ->
-                        Log.d("AITASHERAAT", "event = $splashEvent")
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
                                 lifecycleScope.launch {
-                                    Log.d(
-                                        "AITASHERAAT",
-                                        "Is first Time To Launch? ${onBoardingViewModel.isFirstTimeToLaunchTheApp()}"
-                                    )
+                                    delay(3000)
                                     if (onBoardingViewModel.isFirstTimeToLaunchTheApp())
                                         findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
-                                    else findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
+                                    else findNavController().navigate(R.id.action_splashFragment_to_authFragment)
                                 }
-                                delay(3000)
-                                findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                             }
 
                             is SplashEvent.Error -> {

@@ -14,7 +14,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.common.data.LanguageDataSource
 import com.mahmoud.altasherat.common.domain.models.Country
 import com.mahmoud.altasherat.common.domain.models.Language
@@ -90,6 +89,8 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                         selectedCountry!!
                     )
                 )
+                Toast.makeText(requireContext(), "Selection saved", Toast.LENGTH_SHORT).show()
+                onBoardingViewModel.setOnBoardingVisibilityShown()
                 findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
@@ -102,20 +103,6 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
         }
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.continueBtn.setOnClickListener {
-            // add navigation and any validation here
-
-            // set onBoarding visibility to shown
-            Log.d("AITASHERAAT", "Setting onBoarding Visibility To Shown")
-            lifecycleScope.launch {
-                onBoardingViewModel.setOnBoardingVisibilityShown()
-            }
-
-        }
     }
 
     override fun onItemSelected(item: ListItem) {

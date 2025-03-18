@@ -1,22 +1,30 @@
 package com.mahmoud.altasherat.features.onBoarding.domain.useCase
 
-import androidx.datastore.core.IOException
+import com.mahmoud.altasherat.common.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.Language
+import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
-import javax.inject.Inject
 
 class SetOnBoardingAsShownUC(private val repository: IOnBoardingRepository) {
 
-    suspend operator fun invoke() {
+    suspend operator fun invoke(): Resource<Unit> {
         return try {
-            repository.saveOnBoardingShown()
-        } catch (ioException: IOException) {
-            throw AltasheratException(LocalStorageError.IO_ERROR)
-        } catch (e: Exception) {
-            throw AltasheratException(AltasheratError.UnknownError(e.message!!))
+            Resource.Success(repository.saveOnBoardingShown())
+        } catch (e: java.io.IOException) {
+            Resource.Error(LocalStorageError.IO_ERROR)
+        } catch (e: IllegalStateException) {
+            Resource.Error(LocalStorageError.DATA_CORRUPTION)
+        } catch (throwable: Throwable) {
+            val failureResource = if (throwable is AltasheratException) throwable else
+                AltasheratException(
+                    AltasheratError.UnknownError("Unknown error: $throwable")
+                )
+            Resource.Error(failureResource.error)
         }
     }
 
 }
+
