@@ -24,9 +24,5 @@ object LocalStorageModule {
         return LocalStorageProvider(context)
     }
 
-    @Provides
-    @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder().create()
-    }
+
 }

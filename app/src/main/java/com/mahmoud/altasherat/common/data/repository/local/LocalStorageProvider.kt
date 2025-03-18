@@ -17,9 +17,10 @@ import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 import kotlin.reflect.KClass
 
-class LocalStorageProvider(
+class LocalStorageProvider @Inject constructor(
     private val context: Context
 ) : ILocalStorageProvider {
 
