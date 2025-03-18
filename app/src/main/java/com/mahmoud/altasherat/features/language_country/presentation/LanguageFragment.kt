@@ -6,32 +6,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.mahmoud.altasherat.R
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.common.data.LanguageDataSource
+import com.mahmoud.altasherat.common.domain.models.Country
+import com.mahmoud.altasherat.common.domain.models.Language
 import com.mahmoud.altasherat.common.domain.models.ListItem
-import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
-import com.mahmoud.altasherat.common.presentation.OnItemClickListener
-import com.mahmoud.altasherat.common.presentation.SingleSelectionAdapter
+import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
+import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
+import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LanguageFragment : Fragment(), OnItemClickListener {
 
     private lateinit var binding: FragmentLanguageBinding
     private lateinit var languageAdapter: SingleSelectionAdapter
+    private val viewModel: LanguageViewModel by viewModels()
+    private lateinit var bottomSheet: CountryPickerBottomSheet
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var selectedLanguage: Language? = null
+    private var selectedCountry: Country? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
 
         languageAdapter =
@@ -41,22 +50,47 @@ class LanguageFragment : Fragment(), OnItemClickListener {
             adapter = languageAdapter
             layoutManager = LinearLayoutManager(requireActivity())
         }
-        binding.chooseCountryLayout.setOnClickListener {
-            val bottomSheet = CountryPickerBottomSheet { selectedCountry ->
-                binding.countryFlag.text = selectedCountry.flag
-                binding.countryName.text = selectedCountry.name
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.countries.collect { countries ->
+                        bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
+                            this@LanguageFragment.selectedCountry = selectedCountry as Country
+                            binding.countryFlag.text = selectedCountry.flag
+                            binding.countryName.text = selectedCountry.name
+                            Toast.makeText(
+                                requireActivity(),
+                                selectedCountry.name,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
             }
+        }
+
+        binding.chooseCountryLayout.setOnClickListener {
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_languageFragment_to_authFragment)
+            if (selectedLanguage != null && selectedCountry != null) {
+                viewModel.onAction(LanguageAction.SaveSelections(selectedLanguage!!, selectedCountry!!))
+                Toast.makeText(requireContext(), "Selections saved", Toast.LENGTH_SHORT).show()
+                requireContext().changeLocale(selectedLanguage!!.code)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.selection_required), Toast.LENGTH_SHORT).show()
+            }
+
         }
         return binding.root
     }
 
     override fun onItemSelected(item: ListItem) {
         Toast.makeText(requireActivity(), item.name, Toast.LENGTH_SHORT).show()
+        selectedLanguage = item as Language
     }
+
 
 }

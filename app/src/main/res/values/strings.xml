@@ -21,6 +21,9 @@
     <string name="please_choose_country_txt">Please Choose Country</string>
     <string name="you_can_change_your_country_or_language_any_time_from_menu">You can change your country or language any time from menu</string>
     <string name="choose_country">Choose Country</string>
+
+    <string name="selection_required">You need to make a selection.</string>
+
     <string name="arabic_language">Arabic</string>
     <string name="english_language">English</string>
     <string name="skip_txt">Skip</string>

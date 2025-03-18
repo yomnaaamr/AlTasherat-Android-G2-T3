@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 
-class GetCountriesUC(private val repository: ISplashRepository) {
+class FetchCountriesUC(private val repository: ISplashRepository) {
 
     operator fun invoke(): Flow<Resource<SplashResponse>> =
         flow {
