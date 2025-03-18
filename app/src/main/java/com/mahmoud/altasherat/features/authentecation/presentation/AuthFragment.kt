@@ -102,7 +102,7 @@ class AuthFragment : Fragment() {
                 text?.setTextColor(
                     ContextCompat.getColor(
                         this.requireContext(),
-                        R.color.md_theme_onSurfaceVariant
+                        R.color.md_theme_outline
                     )
                 )
             }
