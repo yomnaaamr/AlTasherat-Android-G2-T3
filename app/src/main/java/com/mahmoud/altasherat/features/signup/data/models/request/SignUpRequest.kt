@@ -3,6 +3,7 @@ package com.mahmoud.altasherat.features.signup.data.models.request
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.features.signup.domain.models.Phone
 import java.util.regex.Pattern
 
 private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
@@ -11,8 +12,6 @@ private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{
 data class SignUpRequest(
     @SerializedName("firstname")
     val firstName: String,
-    @SerializedName("middlename")
-    val middleName: String?,
     @SerializedName("lastname")
     val lastname: String,
     @SerializedName("email")
@@ -21,22 +20,21 @@ data class SignUpRequest(
     val password: String,
     @SerializedName("password_confirmation")
     val passwordConfirmation: String,
-    @SerializedName("phone_number")
-    val phoneNumber: String,
-    @SerializedName("country_code")
-    val countryCode: String
+    @SerializedName("phone")
+    val phone: Phone,
+    @SerializedName("country")
+    val country: String
 ) {
 
     fun validateSignUpRequest(): Resource<Unit> {
 
         validateFirstName().let { if (it is Resource.Error) return it }
-        validateMiddleName().let { if (it is Resource.Error) return it }
         validateLastName().let { if (it is Resource.Error) return it }
         validateEmail().let { if (it is Resource.Error) return it }
         validatePassword().let { if (it is Resource.Error) return it }
         validatePasswordConfirmation().let { if (it is Resource.Error) return it }
-        validatePhoneNumber().let { if (it is Resource.Error) return it }
-        validateCountryCode().let { if (it is Resource.Error) return it }
+        phone.validatePhoneNumberRequest().let { if (it is Resource.Error) return it }
+
         return Resource.Success(Unit)
     }
 
@@ -48,10 +46,6 @@ data class SignUpRequest(
         return Resource.Success(Unit)
     }
 
-    private fun validateMiddleName(): Resource<Unit> {
-        if (middleName != null && middleName.length > 15) return Resource.Error(ValidationError.INVALID_MIDDLENAME)
-        return Resource.Success(Unit)
-    }
 
     private fun validateLastName(): Resource<Unit> {
         if (lastname.isBlank()) return Resource.Error(ValidationError.EMPTY_LASTNAME)
@@ -83,15 +77,4 @@ data class SignUpRequest(
         return Resource.Success(Unit)
     }
 
-    private fun validatePhoneNumber(): Resource<Unit> {
-        if (phoneNumber.isBlank()) return Resource.Error(ValidationError.EMPTY_PHONE_NUMBER)
-        if (phoneNumber.length < 3 || phoneNumber.length > 5) return Resource.Error(ValidationError.INVALID_PHONE_NUMBER)
-        return Resource.Success(Unit)
-    }
-
-    private fun validateCountryCode(): Resource<Unit> {
-        if (countryCode.isBlank()) return Resource.Error(ValidationError.EMPTY_COUNTRY_CODE)
-        if (countryCode.length < 9 || countryCode.length > 15) return Resource.Error(ValidationError.INVALID_COUNTRY_CODE)
-        return Resource.Success(Unit)
-    }
 }
