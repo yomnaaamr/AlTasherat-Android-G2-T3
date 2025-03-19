@@ -35,5 +35,16 @@
 
 
     <string name="selection_required">يجب عليك إجراء تحديد.</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">الاسم الاخير</string>
+    <string name="enter_first_name">ادخل الاسم الاول</string>
+    <string name="enter_last_name">ادخل الاسم الاخير</string>
+    <string name="email">البريد الالكترونى</string>
+    <string name="enter_email_address">ادخل البريد الالكترونى</string>
+    <string name="phone">الجوال</string>
+    <string name="enter_phone_number">ادخل رقم الجوال للمتابعة</string>
+    <string name="password">كلمة المرور</string>
+    <string name="enter_password">ادخل كلمة المرور</string>
+    <string name="forget_password">نسيت كلمة المرور ؟</string>
 
 </resources>

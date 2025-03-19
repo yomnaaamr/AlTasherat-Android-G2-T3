@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
@@ -16,6 +17,7 @@ import com.mahmoud.altasherat.databinding.FragmentAuthBinding
 class AuthFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthBinding
+    private lateinit var authViewmodel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,7 @@ class AuthFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAuthBinding.inflate(inflater, container, false)
+        authViewmodel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
         setupTab(binding.authTabLayout)
 
         parentFragmentManager.beginTransaction()
@@ -55,6 +58,9 @@ class AuthFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
+        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner){ tabIndex ->
+            binding.authTabLayout.getTabAt(tabIndex)?.select()
+        }
 
         return binding.root
     }
@@ -79,7 +85,7 @@ class AuthFragment : Fragment() {
         return view
     }
 
-    private fun updateTabSelection(tabLayout: TabLayout, selectedIndex: Int) {
+    fun updateTabSelection(tabLayout: TabLayout, selectedIndex: Int) {
         for (i in 0 until tabLayout.tabCount) {
             val tab = tabLayout.getTabAt(i)
             val view = tab?.customView
@@ -102,7 +108,7 @@ class AuthFragment : Fragment() {
                 text?.setTextColor(
                     ContextCompat.getColor(
                         this.requireContext(),
-                        R.color.md_theme_onSurfaceVariant
+                        R.color.md_theme_outline
                     )
                 )
             }

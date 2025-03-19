@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        android:src="@drawable/img_on_boarding_background"/>
+        android:src="@drawable/ic_star_background"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"

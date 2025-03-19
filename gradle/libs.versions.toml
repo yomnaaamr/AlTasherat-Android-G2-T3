@@ -1,6 +1,5 @@
 [versions]
 agp = "8.9.0"
-circleindicator = "2.1.4"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -28,7 +27,6 @@ mockitoKotlin = "4.1.0"
 navigationSafeArgsGradlePlugin = "2.8.8"
 coreSplashscreen = "1.0.1"
 loggingInterceptor = "4.9.3"
-mediationTestSuite = "3.0.0"
 
 
 

@@ -94,6 +94,5 @@ dependencies {
     testImplementation(libs.truth)
 
 
-
     implementation(libs.androidx.core.splashscreen)
 }

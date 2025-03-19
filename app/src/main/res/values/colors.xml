@@ -27,8 +27,8 @@
     <color name="md_theme_outline">#787680</color>
     <color name="md_theme_outlineVariant">#C8C5D0</color>
     <color name="md_theme_scrim">#000000</color>
-    <color name="md_theme_inverseSurface">#313036</color>
-    <color name="md_theme_inverseOnSurface">#F3EFF7</color>
+    <color name="md_theme_inverseSurface">#dedcec</color>
+    <color name="md_theme_inverseOnSurface">#313036</color>
     <color name="md_theme_inversePrimary">#C4C0FF</color>
     <color name="md_theme_primaryFixed">#E3DFFF</color>
     <color name="md_theme_onPrimaryFixed">#17134A</color>
@@ -143,6 +143,5 @@
     <color name="md_theme_surfaceContainer_highContrast">#E5E1E9</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#D7D3DB</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#C8C5CD</color>
-    <color name="screen_background">@drawable/blury_light_background</color>
     <color name="splash_screen_background">#FFF</color>
 </resources>
