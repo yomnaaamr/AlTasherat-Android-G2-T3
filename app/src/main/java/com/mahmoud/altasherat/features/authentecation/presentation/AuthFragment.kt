@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
@@ -16,6 +17,7 @@ import com.mahmoud.altasherat.databinding.FragmentAuthBinding
 class AuthFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthBinding
+    private lateinit var authViewmodel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +30,14 @@ class AuthFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAuthBinding.inflate(inflater, container, false)
+        authViewmodel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
         setupTab(binding.authTabLayout)
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.auth_fragment_container, SignupFragment())
             .commit()
 
-        updateTabSelection(0)
+        updateTabSelection(binding.authTabLayout, 0)
 
         binding.authTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -47,7 +50,7 @@ class AuthFragment : Fragment() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)
                     .commit()
-                updateTabSelection(tab?.position ?: 0)
+                updateTabSelection(binding.authTabLayout, tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -55,6 +58,9 @@ class AuthFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
+        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner){ tabIndex ->
+            binding.authTabLayout.getTabAt(tabIndex)?.select()
+        }
 
         return binding.root
     }
@@ -79,9 +85,9 @@ class AuthFragment : Fragment() {
         return view
     }
 
-    fun updateTabSelection(selectedIndex: Int) {
-        for (i in 0 until binding.authTabLayout.tabCount) {
-            val tab = binding.authTabLayout.getTabAt(i)
+    fun updateTabSelection(tabLayout: TabLayout, selectedIndex: Int) {
+        for (i in 0 until tabLayout.tabCount) {
+            val tab = tabLayout.getTabAt(i)
             val view = tab?.customView
             val planeIcon = view?.findViewById<ImageView>(R.id.tab_image)
             val indicator = view?.findViewById<View>(R.id.tab_indicator)
