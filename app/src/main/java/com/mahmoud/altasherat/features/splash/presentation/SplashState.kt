@@ -5,6 +5,6 @@ import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 sealed interface SplashState {
     data object Idle : SplashState
     data object Loading : SplashState
-    data class Success(val isFirstTimeToLaunchTheApp:Boolean ) : SplashState
+    data object Success : SplashState
     data class Error(val error: AltasheratError) : SplashState
 }

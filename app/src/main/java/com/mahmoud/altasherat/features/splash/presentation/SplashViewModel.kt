@@ -50,32 +50,33 @@ class SplashViewModel @Inject constructor(
 
                     is Resource.Loading -> SplashState.Loading
                     is Resource.Success -> {
-                        _events.send(SplashEvent.NavigateToHome)
-                        SplashState.Success(isFirstTimeToLaunchTheApp())
+                        SplashState.Success
                     }
                 }
             }
             .launchIn(viewModelScope)
-
-
         getLanguageCode()
 
-    }
+        viewModelScope.launch {
+            _state.value = when (val result = isFirstTimeToLaunchTheAppUC()) {
+                is Resource.Error -> {
+                    _events.send(SplashEvent.Error(result.error))
+                    SplashState.Error(result.error)
+                }
 
-    private suspend fun isFirstTimeToLaunchTheApp():Boolean {
-        _state.value = when (val result = isFirstTimeToLaunchTheAppUC()) {
-            is Resource.Error -> {
-               SplashState.Error(result.error)
-                return false
-            }
-            Resource.Loading -> SplashState.Loading
-            is Resource.Success-> {
-                SplashState.Success(result.data)
-                return true
+                is Resource.Loading -> SplashState.Loading
+                is Resource.Success -> {
+                    Log.d("AITASHERAT", "if First time to launch? $result")
+                    if (result.data) {
+                        _events.send(SplashEvent.NavigateToOnBoarding)
+                    } else
+                        _events.send(SplashEvent.NavigateToHome)
+                    SplashState.Success
 
+                }
             }
         }
-        return false
+
     }
 
 

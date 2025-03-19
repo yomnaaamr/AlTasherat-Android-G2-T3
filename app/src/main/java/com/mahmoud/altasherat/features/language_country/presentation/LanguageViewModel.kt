@@ -1,12 +1,15 @@
 package com.mahmoud.altasherat.features.language_country.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.models.Country
 import com.mahmoud.altasherat.common.domain.models.Language
+import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetCountriesUC
 import com.mahmoud.altasherat.features.language_country.domain.usecase.SaveSelectionsUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingAsShownUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,11 +21,26 @@ import javax.inject.Inject
 class LanguageViewModel @Inject constructor(
     private val getCountriesUC: GetCountriesUC,
     private val saveSelectionsUC: SaveSelectionsUC,
-): ViewModel() {
+    private val saveOnBoardingVisibilityUC: SetOnBoardingAsShownUC,
+
+    ): ViewModel() {
 
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val countries: StateFlow<List<Country>> = _countries.asStateFlow()
 
+
+
+    fun setOnBoardingVisibilityShown() {
+        viewModelScope.launch {
+            when (val result = saveOnBoardingVisibilityUC()) {
+                is Resource.Error -> TODO()
+                is Resource.Loading -> TODO()
+                is Resource.Success-> {
+                    Log.d("AITASHERAT", "setOnBoardingVisibilityShown $result")
+                }
+            }
+        }
+    }
 
     fun onAction(action: LanguageAction) {
         when (action) {
