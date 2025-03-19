@@ -56,6 +56,15 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.recyclerview)
+
+
+    implementation(libs.ssp.android)
+    implementation(libs.sdp.android)
+
+
+
 
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
@@ -83,7 +92,6 @@ dependencies {
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.turbine)
     testImplementation(libs.truth)
-
 
 
     implementation(libs.androidx.core.splashscreen)

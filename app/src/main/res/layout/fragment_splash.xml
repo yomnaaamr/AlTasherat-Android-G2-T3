@@ -26,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:trackThickness="6dp"
-        app:indicatorColor="@color/md_theme_primary"
-        app:trackColor="@color/md_theme_tertiary"
+        app:indicatorColor="?colorPrimary"
+        app:trackColor="?colorTertiary"
         android:layout_gravity="center_horizontal|bottom"
         android:indeterminate="true"/>
 

@@ -1,4 +1,6 @@
 <resources>
+    <color name="tabColor">#8EE7AD</color>
+    <color name="cardViewBackground">#20255F</color>
     <color name="md_theme_primary">#4426F5</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#434078</color>
@@ -14,6 +16,7 @@
     <color name="md_theme_error">#FFB4AB</color>
     <color name="md_theme_onError">#690005</color>
     <color name="md_theme_errorContainer">#93000A</color>
+    <color name="textColor">#FFFFFF</color>
     <color name="md_theme_onErrorContainer">#FFDAD6</color>
     <color name="md_theme_background">#131318</color>
     <color name="md_theme_onBackground">#E5E1E9</color>
@@ -24,7 +27,7 @@
     <color name="md_theme_outline">#928F99</color>
     <color name="md_theme_outlineVariant">#47464F</color>
     <color name="md_theme_scrim">#000000</color>
-    <color name="md_theme_inverseSurface">#E5E1E9</color>
+    <color name="md_theme_inverseSurface">#dedcec</color>
     <color name="md_theme_inverseOnSurface">#313036</color>
     <color name="md_theme_inversePrimary">#5B5891</color>
     <color name="md_theme_primaryFixed">#E3DFFF</color>
@@ -140,6 +143,5 @@
     <color name="md_theme_surfaceContainer_highContrast">#313036</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#3C3B41</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#47464C</color>
-    <color name="screen_background">#010533</color>
     <color name="splash_screen_background">#010533</color>
 </resources>

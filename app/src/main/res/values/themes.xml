@@ -106,7 +106,8 @@
     </style>
 
     <style name="TextAppearance.AlTasherat.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
-        <item name="fontFamily">@font/app_font_plain</item>
+        <item name="fontFamily">@font/app_font_extrabold</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
     </style>
 
     <style name="TextAppearance.AlTasherat.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
@@ -148,6 +149,7 @@
     <style name="CustomButton">
         <item name="android:background">@drawable/ic_button_bg</item>
         <item name="backgroundTint">@null</item>
+        <item name="android:textAppearance">?textAppearanceTitleMedium</item>
         <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:drawablePadding">10dp</item>
         <item name="android:paddingHorizontal">54dp</item>
