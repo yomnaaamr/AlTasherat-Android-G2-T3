@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.domain.models.Country
 import com.mahmoud.altasherat.databinding.FragmentSignupBinding
 import com.mahmoud.altasherat.features.signup.presentation.SignUpAction
 import com.mahmoud.altasherat.features.signup.presentation.SignUpEvent
@@ -39,6 +41,35 @@ class SignupFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSignupBinding.inflate(inflater, container, false)
         authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
+
+        //Use Original country list from local instead of this.
+        val countryList = listOf(
+            Country(1, "Saudi Arabia", "SAR", "sa", "00966", "🇸🇦"),
+            Country(2, "Egypt", "EGP", "eg", "0020", "🇪🇬"),
+            Country(3, "Afghanistan", "AFN", "af", "0093", "🇦🇫")
+        )
+        val countryDisplayList = countryList.map { "${it.flag} (${it.phoneCode})" }
+        val adapter = ArrayAdapter(
+            this.requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            countryDisplayList
+        )
+        binding.phoneCodePicker.apply {
+            setText(countryDisplayList[0], false)
+            setOnClickListener {
+                setAdapter(adapter)
+                showDropDown()
+            }
+            //Handle item click
+            setOnItemClickListener { parent, _, position, _ ->
+
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                val selectedCountry = countryList[position]  // Get the selected country object
+
+                setText(selectedItem, false)
+            }
+
+        }
 
         binding.signInTxt.setOnClickListener {
             parentFragmentManager.beginTransaction()
