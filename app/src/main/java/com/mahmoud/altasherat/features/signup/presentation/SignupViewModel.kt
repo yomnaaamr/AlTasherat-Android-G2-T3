@@ -1,11 +1,10 @@
 package com.mahmoud.altasherat.features.signup.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.features.signup.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.models.Phone
 import com.mahmoud.altasherat.features.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -14,6 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 
@@ -28,33 +28,38 @@ class SignupViewModel @Inject constructor(
     private val _events = Channel<SignUpEvent>()
     val events = _events.receiveAsFlow()
 
+    private val _signUpUiState = MutableStateFlow(SignUpUiState())
+    private val signUpUiState = _signUpUiState.asStateFlow()
+
 
     fun onAction(signupAction: SignUpAction) {
         when (signupAction) {
-            SignUpAction.SignUp -> signUp()
+            is SignUpAction.SignUp -> signUp()
+            is SignUpAction.UpdateCountryCode -> updateCountryCode(signupAction.countryCode)
+            is SignUpAction.UpdateCountryID -> updateCountryID(signupAction.countryId)
+            is SignUpAction.UpdateEmail -> updateEmail(signupAction.value)
+            is SignUpAction.UpdateFirstName -> updateFirstName(signupAction.value)
+            is SignUpAction.UpdateLastName -> updateLastName(signupAction.value)
+            is SignUpAction.UpdatePassword -> updatePassword(signupAction.value)
+            is SignUpAction.UpdatePhoneNumber -> updatePhoneNumber(signupAction.phone)
         }
     }
 
     private fun signUp() {
 
-        val phone = Phone(
-//            should we generate this id using random class or what?
-            id = 0,
+        val phone = PhoneRequest(
+//            countryCode = signUpUiState.value.countryCode,
+            number = signUpUiState.value.phoneNumber,
             countryCode = "0020",
-            number = "1279411825",
-            extension = "",
-            type = "",
-            holderName = ""
         )
 
         val signupRequest = SignUpRequest(
-            firstName = "menna",
-            lastname = "ahmed",
-            email = "yomna12345@gmail.com",
-            password = "12345678",
-            passwordConfirmation = "12345678",
+            firstName = signUpUiState.value.firstName,
+            lastname = signUpUiState.value.lastName,
+            email = signUpUiState.value.email,
+            password = signUpUiState.value.password,
+            passwordConfirmation = signUpUiState.value.password,
             phone = phone,
-//            selectedCountryId
             country = "1"
         )
 
@@ -63,17 +68,57 @@ class SignupViewModel @Inject constructor(
             .onEach { result ->
                 _state.value = when (result) {
                     is Resource.Error -> {
-                        Log.d("SignupViewModel", "signUp: ${result.error}")
                         _events.send(SignUpEvent.Error(result.error))
                         SignUpState.Error(result.error)
                     }
 
                     is Resource.Loading -> SignUpState.Loading
                     is Resource.Success -> {
-                        Log.d("SignupViewModel", "signUp: ${result.data}")
+                        _events.send(SignUpEvent.NavigationToHome)
                         SignUpState.Success(result.data)
                     }
                 }
             }.launchIn(viewModelScope)
     }
+
+
+
+    private fun updateFirstName(value: String) {
+        _signUpUiState.update { it.copy(firstName = value) }
+    }
+
+    private fun updateLastName(value: String) {
+        _signUpUiState.update { it.copy(lastName = value) }
+    }
+
+    private fun updateEmail(value: String) {
+        _signUpUiState.update { it.copy(email = value) }
+    }
+
+    private fun updatePassword(value: String) {
+        _signUpUiState.update { it.copy(password = value) }
+    }
+
+    private fun updatePhoneNumber(value: String) {
+        _signUpUiState.update { it.copy(phoneNumber = value) }
+    }
+
+    private fun updateCountryID(countryId: String) {
+        _signUpUiState.update { it.copy(selectedCountryId = countryId) }
+    }
+
+    private fun updateCountryCode(countryCode: String) {
+        _signUpUiState.update { it.copy(countryCode = countryCode) }
+    }
 }
+
+
+data class SignUpUiState(
+    val firstName: String = "",
+    val lastName: String = "",
+    val email: String = "",
+    val password: String = "",
+    val countryCode: String = "",
+    val phoneNumber: String = "",
+    val selectedCountryId: String = "",
+)

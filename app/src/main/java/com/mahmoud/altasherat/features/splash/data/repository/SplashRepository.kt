@@ -21,4 +21,8 @@ internal class SplashRepository(
         localDS.savaCountry(result)
     }
 
+    override suspend fun getUserAccessToken(): String {
+        return localDS.getUserAccessToken()
+    }
+
 }

@@ -3,7 +3,7 @@ package com.mahmoud.altasherat.features.signup.data.models.request
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
-import com.mahmoud.altasherat.features.signup.domain.models.Phone
+import com.mahmoud.altasherat.common.domain.util.onError
 import java.util.regex.Pattern
 
 private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
@@ -21,7 +21,7 @@ data class SignUpRequest(
     @SerializedName("password_confirmation")
     val passwordConfirmation: String,
     @SerializedName("phone")
-    val phone: Phone,
+    val phone: PhoneRequest,
     @SerializedName("country")
     val country: String
 ) {
@@ -32,7 +32,7 @@ data class SignUpRequest(
         validateLastName().let { if (it is Resource.Error) return it }
         validateEmail().let { if (it is Resource.Error) return it }
         validatePassword().let { if (it is Resource.Error) return it }
-        validatePasswordConfirmation().let { if (it is Resource.Error) return it }
+//        validatePasswordConfirmation().let { if (it is Resource.Error) return it }
         phone.validatePhoneNumberRequest().let { if (it is Resource.Error) return it }
 
         return Resource.Success(Unit)
@@ -68,13 +68,13 @@ data class SignUpRequest(
         return Resource.Success(Unit)
     }
 
-    private fun validatePasswordConfirmation(): Resource<Unit> {
-        if (passwordConfirmation.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD_CONFIRMATION)
-        if (passwordConfirmation.length < 8 || passwordConfirmation.length > 50) return Resource.Error(
-            ValidationError.INVALID_PASSWORD_CONFIRMATION
-        )
-        if (password != passwordConfirmation) return Resource.Error(ValidationError.PASSWORD_MISMATCH)
-        return Resource.Success(Unit)
-    }
+//    private fun validatePasswordConfirmation(): Resource<Unit> {
+//        if (passwordConfirmation.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD_CONFIRMATION)
+//        if (passwordConfirmation.length < 8 || passwordConfirmation.length > 50) return Resource.Error(
+//            ValidationError.INVALID_PASSWORD_CONFIRMATION
+//        )
+//        if (password != passwordConfirmation) return Resource.Error(ValidationError.PASSWORD_MISMATCH)
+//        return Resource.Success(Unit)
+//    }
 
 }
