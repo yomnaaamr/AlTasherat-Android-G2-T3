@@ -46,7 +46,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundColor="#f1f4fb"
+                    app:boxBackgroundColor="?colorSurfaceInverse"
                     app:boxCornerRadiusBottomEnd="26dp"
                     app:boxCornerRadiusBottomStart="26dp"
                     app:boxCornerRadiusTopEnd="26dp"
@@ -62,24 +62,39 @@
                         android:id="@+id/phone_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingEnd="100dp"
+                        android:paddingStart="100dp"
                         android:inputType="phone"
                         android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.hbb20.CountryCodePicker
+                <AutoCompleteTextView
                     android:id="@+id/phone_code_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="53dp"
+                    android:minWidth="100dp"
                     android:layout_gravity="end|bottom"
+                    tools:text="(+966) 🇸🇦"
+                    android:textColor="@android:color/white"
+                    android:inputType="none"
+                    android:paddingHorizontal="8dp"
+                    style="?textAppearanceTitleMedium"
                     android:background="@drawable/custom_phone_end_icon"
-                    android:gravity="center_vertical"
-                    android:layoutDirection="rtl"
-                    app:ccp_contentColor="@android:color/white"
-                    app:ccp_showArrow="false"
-                    app:ccp_showNameCode="false"
-                    app:ccp_autoFormatNumber="true"
-                    app:ccp_defaultNameCode="SA"/>
+                    android:clickable="true"/>
+<!--                <com.hbb20.CountryCodePicker-->
+<!--                    android:id="@+id/phone_code_picker"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="53dp"-->
+<!--                    android:layout_gravity="end|bottom"-->
+<!--                    android:background="@drawable/custom_phone_end_icon"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:layoutDirection="rtl"-->
+<!--                    app:ccp_contentColor="@android:color/white"-->
+<!--                    app:ccp_showArrow="false"-->
+<!--                    app:ccp_showNameCode="false"-->
+<!--                    app:ccp_autoFormatNumber="true"-->
+<!--                    app:ccp_defaultNameCode="SA"/>-->
             </FrameLayout>
 
             <TextView
@@ -97,7 +112,7 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:boxBackgroundColor="#f1f4fb"
+                app:boxBackgroundColor="?colorSurfaceInverse"
                 app:boxCornerRadiusBottomEnd="26dp"
                 app:boxCornerRadiusBottomStart="26dp"
                 app:boxCornerRadiusTopEnd="26dp"
