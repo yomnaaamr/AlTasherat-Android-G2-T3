@@ -45,5 +45,6 @@
     <string name="enter_phone_number">ادخل رقم الجوال للمتابعة</string>
     <string name="password">كلمة المرور</string>
     <string name="enter_password">ادخل كلمة المرور</string>
+    <string name="forget_password">نسيت كلمة المرور ؟</string>
 
 </resources>
