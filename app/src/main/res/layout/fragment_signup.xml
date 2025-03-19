@@ -185,29 +185,19 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/phone_code_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="53dp"
                     android:layout_gravity="end|bottom"
-                    android:background="@drawable/phone_end_icon"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="6dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="(+966)"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        style="@style/TextAppearance.AlTasherat.TitleLarge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="8dp"
-                        android:text="🇸🇦" />
-                </LinearLayout>
+                    android:background="@drawable/custom_phone_end_icon"
+                    android:gravity="center_vertical"
+                    android:layoutDirection="rtl"
+                    app:ccp_contentColor="@android:color/white"
+                    app:ccp_showArrow="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_autoFormatNumber="true"
+                    app:ccp_defaultNameCode="SA"/>
             </FrameLayout>
 
             <TextView
