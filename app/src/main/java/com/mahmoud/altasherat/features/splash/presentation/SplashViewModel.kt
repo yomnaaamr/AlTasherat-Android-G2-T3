@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -22,8 +23,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val fetchCountriesUC: FetchCountriesUC,
-    private val getLanguageCodeUC: GetLanguageCodeUC
-) : ViewModel() {
+    private val getLanguageCodeUC: GetLanguageCodeUC,
+    private val isFirstTimeToLaunchTheAppUC: IsFirstTimeToLaunchTheAppUC,
+
+    ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
     val state = _state.asStateFlow()
@@ -48,7 +51,7 @@ class SplashViewModel @Inject constructor(
                     is Resource.Loading -> SplashState.Loading
                     is Resource.Success -> {
                         _events.send(SplashEvent.NavigateToHome)
-                        SplashState.Success
+                        SplashState.Success(isFirstTimeToLaunchTheApp())
                     }
                 }
             }
@@ -57,6 +60,22 @@ class SplashViewModel @Inject constructor(
 
         getLanguageCode()
 
+    }
+
+    private suspend fun isFirstTimeToLaunchTheApp():Boolean {
+        _state.value = when (val result = isFirstTimeToLaunchTheAppUC()) {
+            is Resource.Error -> {
+               SplashState.Error(result.error)
+                return false
+            }
+            Resource.Loading -> SplashState.Loading
+            is Resource.Success-> {
+                SplashState.Success(result.data)
+                return true
+
+            }
+        }
+        return false
     }
 
 
