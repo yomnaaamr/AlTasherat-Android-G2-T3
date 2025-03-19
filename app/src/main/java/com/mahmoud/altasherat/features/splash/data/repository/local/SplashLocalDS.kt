@@ -12,7 +12,8 @@ internal class SplashLocalDS(
 ) : ISplashLocalDS {
 
     override suspend fun savaCountry(splashEntity: SplashEntity) {
-        val countryJson = gson.toJson(splashEntity.data)
+        val countryJson = gson.toJson(splashEntity)
         localStorageProvider.save(StorageKeyEnum.COUNTRIES, countryJson, String::class)
     }
+
 }

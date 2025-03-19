@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.splash.domain.usecase
 
+import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 
-class GetCountriesUC(private val repository: ISplashRepository) {
+class FetchCountriesUC(private val repository: ISplashRepository) {
 
     operator fun invoke(): Flow<Resource<SplashResponse>> =
         flow {
