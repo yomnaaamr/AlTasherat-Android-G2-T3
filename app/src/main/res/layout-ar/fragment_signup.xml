@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/first_name_txt"
-                style="@style/TextAppearance.AlTasherat.TitleMedium"
+                style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/first_name"
@@ -43,14 +43,14 @@
                 app:boxCornerRadiusBottomStart="26dp"
                 app:boxCornerRadiusTopEnd="26dp"
                 app:boxCornerRadiusTopStart="26dp"
-                app:boxStrokeColor="@color/md_theme_primary"
+                app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toStartOf="@id/last_name_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/first_name_txt"
                 app:placeholderText="@string/enter_first_name"
-                app:placeholderTextAppearance="@style/TextAppearance.AlTasherat.BodySmall"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_user">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +64,7 @@
 
             <TextView
                 android:id="@+id/last_name_txt"
-                style="@style/TextAppearance.AlTasherat.TitleMedium"
+                style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/last_name"
@@ -82,14 +82,14 @@
                 app:boxCornerRadiusBottomStart="26dp"
                 app:boxCornerRadiusTopEnd="26dp"
                 app:boxCornerRadiusTopStart="26dp"
-                app:boxStrokeColor="@color/md_theme_primary"
+                app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/first_name_layout"
                 app:layout_constraintTop_toBottomOf="@id/first_name_txt"
                 app:placeholderText="@string/enter_last_name"
-                app:placeholderTextAppearance="@style/TextAppearance.AlTasherat.BodySmall"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_user">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -104,7 +104,7 @@
 
             <TextView
                 android:id="@+id/email_txt"
-                style="@style/TextAppearance.AlTasherat.TitleMedium"
+                style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -122,14 +122,14 @@
                 app:boxCornerRadiusBottomStart="26dp"
                 app:boxCornerRadiusTopEnd="26dp"
                 app:boxCornerRadiusTopStart="26dp"
-                app:boxStrokeColor="@color/md_theme_primary"
+                app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/email_txt"
                 app:placeholderText="@string/enter_email_address"
-                app:placeholderTextAppearance="@style/TextAppearance.AlTasherat.BodySmall"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -143,7 +143,7 @@
 
             <TextView
                 android:id="@+id/phone_txt"
-                style="@style/TextAppearance.AlTasherat.TitleMedium"
+                style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -169,11 +169,11 @@
                     app:boxCornerRadiusBottomStart="26dp"
                     app:boxCornerRadiusTopEnd="26dp"
                     app:boxCornerRadiusTopStart="26dp"
-                    app:boxStrokeColor="@color/md_theme_primary"
+                    app:boxStrokeColor="?colorPrimary"
                     app:boxStrokeWidth="0dp"
                     app:expandedHintEnabled="false"
                     app:placeholderText="@string/enter_phone_number"
-                    app:placeholderTextAppearance="@style/TextAppearance.AlTasherat.BodySmall"
+                    app:placeholderTextAppearance="?textAppearanceBodySmall"
                     app:startIconDrawable="@drawable/ic_phone">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -202,7 +202,7 @@
 
             <TextView
                 android:id="@+id/password_txt"
-                style="@style/TextAppearance.AlTasherat.TitleMedium"
+                style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -220,7 +220,7 @@
                 app:boxCornerRadiusBottomStart="26dp"
                 app:boxCornerRadiusTopEnd="26dp"
                 app:boxCornerRadiusTopStart="26dp"
-                app:boxStrokeColor="@color/md_theme_primary"
+                app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
                 app:endIconMode="password_toggle"
                 app:expandedHintEnabled="false"
@@ -228,7 +228,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password_txt"
                 app:placeholderText="@string/enter_password"
-                app:placeholderTextAppearance="@style/TextAppearance.AlTasherat.BodySmall"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -259,7 +259,7 @@
 
     <TextView
         android:id="@+id/have_account_txt"
-        style="@style/TextAppearance.AlTasherat.TitleMedium"
+        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -272,7 +272,7 @@
 
     <TextView
         android:id="@+id/sign_in_txt"
-        style="@style/TextAppearance.AlTasherat.TitleMedium"
+        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -281,7 +281,7 @@
         android:paddingEnd="8dp"
         android:text="@string/sign_in"
         android:textAlignment="textStart"
-        android:textColor="@color/md_theme_secondary"
+        android:textColor="?colorSecondary"
         app:layout_constraintBottom_toBottomOf="@id/have_account_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

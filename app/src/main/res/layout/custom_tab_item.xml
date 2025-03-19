@@ -17,11 +17,11 @@
         android:id="@+id/tab_indicator"
         android:layout_width="100dp"
         android:layout_height="4dp"
-        android:background="@color/md_theme_tertiary" />
+        android:background="?colorTertiary" />
 
     <TextView
         android:id="@+id/tab_text"
-        style="@style/TextAppearance.AlTasherat.TitleLarge"
+        style="?textAppearanceTitleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

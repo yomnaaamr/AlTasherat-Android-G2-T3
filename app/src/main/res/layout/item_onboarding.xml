@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/onBoardingTitle"
-        style="@style/TextAppearance.AlTasherat.TitleMedium" />
+        style="?textAppearanceTitleSmall" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/onBoardingSubTitle"
@@ -51,7 +51,7 @@
         android:layout_height="132dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        style="@style/TextAppearance.AlTasherat.BodyMedium"
+        style="?textAppearanceBodyMedium"
         tools:text="@string/onBoarding1_SubTitle" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
