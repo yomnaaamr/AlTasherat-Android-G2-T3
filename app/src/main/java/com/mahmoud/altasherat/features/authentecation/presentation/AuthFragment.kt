@@ -34,7 +34,7 @@ class AuthFragment : Fragment() {
             .replace(R.id.auth_fragment_container, SignupFragment())
             .commit()
 
-        updateTabSelection(binding.authTabLayout, 0)
+        updateTabSelection(0)
 
         binding.authTabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -47,7 +47,7 @@ class AuthFragment : Fragment() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)
                     .commit()
-                updateTabSelection(binding.authTabLayout, tab?.position ?: 0)
+                updateTabSelection(tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -79,9 +79,9 @@ class AuthFragment : Fragment() {
         return view
     }
 
-    private fun updateTabSelection(tabLayout: TabLayout, selectedIndex: Int) {
-        for (i in 0 until tabLayout.tabCount) {
-            val tab = tabLayout.getTabAt(i)
+    fun updateTabSelection(selectedIndex: Int) {
+        for (i in 0 until binding.authTabLayout.tabCount) {
+            val tab = binding.authTabLayout.getTabAt(i)
             val view = tab?.customView
             val planeIcon = view?.findViewById<ImageView>(R.id.tab_image)
             val indicator = view?.findViewById<View>(R.id.tab_indicator)

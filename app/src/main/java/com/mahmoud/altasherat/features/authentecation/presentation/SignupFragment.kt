@@ -29,6 +29,12 @@ class SignupFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSignupBinding.inflate(inflater, container, false)
 
+        binding.signInTxt.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.auth_fragment_container, LoginFragment())
+                .commit()
+
+        }
 
         return binding.root
     }

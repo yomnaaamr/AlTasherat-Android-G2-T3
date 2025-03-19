@@ -80,29 +80,6 @@
                     app:ccp_autoFormatNumber="true"
                     android:layout_gravity="end|bottom"
                     app:ccp_showArrow="false"/>
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="53dp"-->
-<!--                    android:layout_gravity="end|bottom"-->
-<!--                    android:background="@drawable/phone_end_icon"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingHorizontal="6dp">-->
-
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:text="(+966)"-->
-<!--                        android:textColor="@android:color/white" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/TextAppearance.AlTasherat.TitleLarge"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        android:paddingHorizontal="8dp"-->
-<!--                        android:text="🇸🇦" />-->
-<!--                </LinearLayout>-->
             </FrameLayout>
 
             <TextView
@@ -181,13 +158,13 @@
         android:layout_marginTop="16dp"
         android:text="@string/not_have_account"
         android:textAlignment="textEnd"
-        app:layout_constraintEnd_toStartOf="@id/sign_in_txt"
+        app:layout_constraintEnd_toStartOf="@id/create_new_acc_txt"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup_btn" />
 
     <TextView
-        android:id="@+id/sign_in_txt"
+        android:id="@+id/create_new_acc_txt"
         style="@style/TextAppearance.AlTasherat.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
