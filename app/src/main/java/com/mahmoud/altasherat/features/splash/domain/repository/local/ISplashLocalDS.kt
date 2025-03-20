@@ -4,4 +4,6 @@ import com.mahmoud.altasherat.features.splash.data.models.entity.SplashEntity
 
 internal interface ISplashLocalDS {
     suspend fun savaCountry(splashEntity: SplashEntity)
+    suspend fun getUserAccessToken(): String
+
 }

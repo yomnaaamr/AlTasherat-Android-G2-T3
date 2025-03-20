@@ -6,5 +6,6 @@ enum class NetworkError : AltasheratError {
     BAD_REQUEST,
     UNAUTHORIZED,
     FORBIDDEN,
-    NOT_FOUND
+    NOT_FOUND,
+    InvalidCredentials,
 }

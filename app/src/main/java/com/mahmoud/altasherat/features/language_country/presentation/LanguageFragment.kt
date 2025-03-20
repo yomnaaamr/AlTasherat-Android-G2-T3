@@ -23,7 +23,6 @@ import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
-import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -39,7 +38,6 @@ class LanguageFragment : Fragment(), OnItemClickListener {
 
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
-    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,7 +88,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                     )
                 )
                 Toast.makeText(requireContext(), "Selection saved", Toast.LENGTH_SHORT).show()
-                onBoardingViewModel.setOnBoardingVisibilityShown()
+                viewModel.setOnBoardingVisibilityShown()
                 findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
