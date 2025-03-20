@@ -9,7 +9,7 @@ import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingR
 class GetOnBoardingStateUC(private val repository: IOnBoardingRepository) {
     suspend operator fun invoke(): Resource<Boolean> {
         return try {
-            Resource.Success(repository.isFirstTimeToLaunchTheApp())
+            Resource.Success(repository.getOnBoardingState())
         } catch (e: java.io.IOException) {
             Resource.Error(LocalStorageError.IO_ERROR)
         } catch (throwable: Throwable) {

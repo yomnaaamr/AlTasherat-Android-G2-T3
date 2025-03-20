@@ -10,7 +10,7 @@ class SetOnBoardingStateUC(private val repository: IOnBoardingRepository) {
 
     suspend operator fun invoke(): Resource<Unit> {
         return try {
-            Resource.Success(repository.saveOnBoardingShown())
+            Resource.Success(repository.saveOnBoardingState())
         } catch (e: java.io.IOException) {
             Resource.Error(LocalStorageError.IO_ERROR)
         } catch (e: IllegalStateException) {

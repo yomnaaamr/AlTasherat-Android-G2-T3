@@ -8,4 +8,6 @@ sealed interface LanguageAction {
     data class SaveSelections(val selectedLanguage: Language, val selectedCountry: Country) :
         LanguageAction
 
+    data object SetOnBoardingState : LanguageAction
+
 }

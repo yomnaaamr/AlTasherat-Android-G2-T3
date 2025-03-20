@@ -8,11 +8,11 @@ class OnBoardingLocalDS(
     private val localStorageProvider: ILocalStorageProvider,
 ) : IOnBoardingLocalDS {
 
-    override suspend fun setOnBoardingShown() {
-        localStorageProvider.save(StorageKeyEnum.ONBOARDING, false, Boolean::class)
+    override suspend fun setOnBoardingState() {
+        localStorageProvider.save(StorageKeyEnum.ONBOARDING, true, Boolean::class)
     }
 
-    override suspend fun isFirstTimeToLaunchTheApp(): Boolean {
-        return localStorageProvider.get(StorageKeyEnum.ONBOARDING, true, Boolean::class)
+    override suspend fun getOnBoardingState(): Boolean {
+        return localStorageProvider.get(StorageKeyEnum.ONBOARDING, false, Boolean::class)
     }
 }

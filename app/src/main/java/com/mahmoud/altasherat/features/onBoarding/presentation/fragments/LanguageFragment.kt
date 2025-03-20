@@ -10,18 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
-import androidx.navigation.fragment.findNavController
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageAction
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,12 +50,13 @@ class LanguageFragment : Fragment(), OnItemClickListener {
         val languages = LanguageDataSource.getLanguages(requireContext())
         val defaultLanguageIndex =
             languages.indexOfFirst { it.code == Locale.getDefault().language }
+        selectedLanguage = languages[defaultLanguageIndex]
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
                 this@LanguageFragment,
                 defaultLanguageIndex
-                )
+            )
 
         binding.languageRecycler.apply {
             adapter = languageAdapter
@@ -89,7 +90,9 @@ class LanguageFragment : Fragment(), OnItemClickListener {
                     )
                 )
                 Toast.makeText(requireContext(), "Selection saved", Toast.LENGTH_SHORT).show()
-                viewModel.setOnBoardingVisibilityShown()
+                viewModel.onAction(
+                    LanguageAction.SetOnBoardingState
+                )
                 findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
