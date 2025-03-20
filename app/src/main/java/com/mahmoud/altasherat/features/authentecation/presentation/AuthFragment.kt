@@ -13,7 +13,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentAuthBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthBinding

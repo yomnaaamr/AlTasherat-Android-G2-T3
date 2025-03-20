@@ -31,6 +31,27 @@
 
     <string name="arabic_language">Arabic</string>
     <string name="english_language">English</string>
+
+
+    <string name="error_invalid_email">Invalid email address.</string>
+    <string name="error_empty_email">Email cannot be empty.</string>
+    <string name="error_invalid_password">Invalid password.</string>
+    <string name="error_empty_password">Password cannot be empty.</string>
+    <string name="error_empty_username">Username cannot be empty</string>
+    <string name="error_invalid_username">Username must be 3–20 characters long and contain only letters, numbers, or underscores</string>
+    <string name="error_empty_firstname">First name is required.</string>
+    <string name="error_invalid_firstname">First name must be between 3 and 15 characters.</string>
+    <string name="error_invalid_middlename">Middle name cannot exceed 15 characters.</string>
+    <string name="error_empty_lastname">Last name is required.</string>
+    <string name="error_invalid_lastname">Last name must be between 3 and 15 characters.</string>
+    <string name="error_empty_password_confirmation">Password confirmation is required.</string>
+    <string name="error_invalid_password_confirmation">Password confirmation must be between 8 and 50 characters.</string>
+    <string name="error_password_mismatch">Passwords do not match.</string>
+    <string name="error_empty_phone_number">Phone number is required.</string>
+    <string name="error_invalid_phone_number">Phone number must be between 3 and 5 digits.</string>
+    <string name="error_empty_country_code">Country code is required.</string>
+    <string name="error_invalid_country_code">Country code must be between 9 and 15 characters.</string>
+
     <string name="skip_txt">Skip</string>
     <string name="signup">Sign up</string>
     <string name="already_have_account">Already have account?</string>

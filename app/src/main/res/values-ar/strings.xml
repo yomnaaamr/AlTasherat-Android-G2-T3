@@ -47,4 +47,24 @@
     <string name="enter_password">ادخل كلمة المرور</string>
     <string name="forget_password">نسيت كلمة المرور ؟</string>
 
+    <string name="error_invalid_email">بريد إلكتروني غير صالح.</string>
+    <string name="error_empty_email">البريد الإلكتروني لا يمكن أن يكون فارغًا.</string>
+    <string name="error_invalid_password">كلمة مرور غير صالحة.</string>
+    <string name="error_empty_password">كلمة المرور لا يمكن أن تكون فارغة.</string>
+    <string name="error_empty_username">اسم المستخدم لا يمكن أن يكون فارغًا</string>
+    <string name="error_invalid_username">يجب أن يكون اسم المستخدم بين 3_20 حرفًا ويحتوي على أحرف أو أرقام أو شرطات سفلية فقط</string>
+    <string name="error_empty_firstname">الاسم الأول مطلوب.</string>
+    <string name="error_invalid_firstname">يجب أن يتكون الاسم الأول من 3 إلى 15 حرفًا.</string>
+    <string name="error_invalid_middlename">لا يمكن أن يتجاوز الاسم الأوسط 15 حرفًا.</string>
+    <string name="error_empty_lastname">اسم العائلة مطلوب.</string>
+    <string name="error_invalid_lastname">يجب أن يتكون اسم العائلة من 3 إلى 15 حرفًا.</string>
+    <string name="error_empty_password_confirmation">تأكيد كلمة المرور مطلوب.</string>
+    <string name="error_invalid_password_confirmation">يجب أن يتكون تأكيد كلمة المرور من 8 إلى 50 حرفًا.</string>
+    <string name="error_password_mismatch">كلمات المرور غير متطابقة.</string>
+    <string name="error_empty_phone_number">رقم الهاتف مطلوب.</string>
+    <string name="error_invalid_phone_number">يجب أن يتكون رقم الهاتف من 3 إلى 5 أرقام.</string>
+    <string name="error_empty_country_code">رمز الدولة مطلوب.</string>
+    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
+
+
 </resources>

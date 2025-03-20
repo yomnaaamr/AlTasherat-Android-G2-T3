@@ -16,4 +16,8 @@ internal class SplashLocalDS(
         localStorageProvider.save(StorageKeyEnum.COUNTRIES, countryJson, String::class)
     }
 
+    override suspend fun getUserAccessToken(): String {
+        return localStorageProvider.get(StorageKeyEnum.ACCESS_TOKEN, "", String::class)
+    }
+
 }
