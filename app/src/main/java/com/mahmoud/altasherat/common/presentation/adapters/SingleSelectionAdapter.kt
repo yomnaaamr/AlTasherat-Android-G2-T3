@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.domain.models.Country
-import com.mahmoud.altasherat.common.domain.models.Language
-import com.mahmoud.altasherat.common.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 import com.mahmoud.altasherat.databinding.ItemCountryBinding
 import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
 

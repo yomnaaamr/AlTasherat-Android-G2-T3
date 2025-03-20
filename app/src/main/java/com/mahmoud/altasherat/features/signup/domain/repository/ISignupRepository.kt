@@ -1,9 +1,0 @@
-package com.mahmoud.altasherat.features.signup.domain.repository
-
-import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.models.SignUp
-
-interface ISignupRepository {
-    suspend fun signup(signupRequest: SignUpRequest): SignUp
-    suspend fun saveSignup(signup: SignUp)
-}

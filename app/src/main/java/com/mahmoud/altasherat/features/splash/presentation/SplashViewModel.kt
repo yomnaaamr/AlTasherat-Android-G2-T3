@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
-import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val fetchCountriesUC: FetchCountriesUC,
+    private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
     private val isFirstTimeToLaunchTheAppUC: IsFirstTimeToLaunchTheAppUC,
     private val hasUserLoggedInUC: HasUserLoggedInUC
@@ -70,7 +70,7 @@ class SplashViewModel @Inject constructor(
 
 
     private fun fetchCountries() {
-        fetchCountriesUC()
+        getCountriesFromRemoteUC()
             .onEach { result ->
                 Log.d("SplashResult", result.toString())
                 _state.value = when (result) {

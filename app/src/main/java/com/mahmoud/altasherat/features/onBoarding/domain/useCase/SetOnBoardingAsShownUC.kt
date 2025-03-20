@@ -1,7 +1,5 @@
 package com.mahmoud.altasherat.features.onBoarding.domain.useCase
 
-import com.mahmoud.altasherat.common.domain.models.Country
-import com.mahmoud.altasherat.common.domain.models.Language
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError

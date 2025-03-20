@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 
 class CountryPickerBottomSheet(
     private val list: List<ListItem>,

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/screen_background"
-    tools:context=".features.authentecation.presentation.AuthFragment">
+    tools:context=".features.authentication.AuthFragment">
 
     <TextView
         android:id="@+id/skip_txt"

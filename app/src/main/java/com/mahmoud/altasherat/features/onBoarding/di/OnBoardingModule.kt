@@ -1,9 +1,9 @@
 package com.mahmoud.altasherat.features.onBoarding.di
 
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.features.onBoarding.data.local.OnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.data.repository.local.OnBoardingLocalDS
 import com.mahmoud.altasherat.features.onBoarding.data.repository.OnBoardingRepositoryImpl
-import com.mahmoud.altasherat.features.onBoarding.domain.local.IOnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.domain.repository.local.IOnBoardingLocalDS
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingAsShownUC

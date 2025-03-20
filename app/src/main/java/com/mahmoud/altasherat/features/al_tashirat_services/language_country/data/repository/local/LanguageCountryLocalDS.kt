@@ -1,0 +1,41 @@
+package com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.repository.local
+
+import com.google.gson.Gson
+import com.mahmoud.altasherat.common.data.repository.local.StorageKeyEnum
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
+import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.local.ILanguageCountryLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.models.entity.CountriesEntity
+
+internal class LanguageCountryLocalDS(
+    private val localStorageProvider: ILocalStorageProvider,
+    private val gson: Gson
+): ILanguageCountryLocalDS {
+
+    override suspend fun savaCountries(countriesEntity: CountriesEntity) {
+        val countryJson = gson.toJson(countriesEntity)
+        localStorageProvider.save(StorageKeyEnum.COUNTRIES, countryJson, String::class)
+    }
+
+    override suspend fun getCountries(): CountriesEntity {
+        val countriesJson = localStorageProvider.get(StorageKeyEnum.COUNTRIES, "", String::class)
+        return gson.fromJson(countriesJson, CountriesEntity::class.java)
+    }
+
+    override suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
+        val selectedLanguageJson = gson.toJson(selectedLanguage)
+        val selectedCountryJson = gson.toJson(selectedCountry)
+        localStorageProvider.save(StorageKeyEnum.SELECTED_LANGUAGE, selectedLanguageJson, String::class)
+        localStorageProvider.save(StorageKeyEnum.SELECTED_COUNTRY, selectedCountryJson, String::class)
+    }
+
+    override suspend fun getLanguageCode(): String? {
+        val selectedLanguageJson = localStorageProvider.get(StorageKeyEnum.SELECTED_LANGUAGE, "", String::class)
+        if (selectedLanguageJson.isNotEmpty()) {
+            val selectedLanguage = gson.fromJson(selectedLanguageJson, Language::class.java)
+            return selectedLanguage.code
+        }
+        return null
+    }
+}
