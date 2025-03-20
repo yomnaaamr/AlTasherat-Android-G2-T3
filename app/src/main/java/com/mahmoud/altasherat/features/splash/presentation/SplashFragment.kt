@@ -12,10 +12,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
-import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
