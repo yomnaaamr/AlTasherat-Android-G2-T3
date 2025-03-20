@@ -41,8 +41,8 @@
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" >
         <action
-            android:id="@+id/action_authFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_authFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment2"
@@ -53,8 +53,8 @@
             app:destination="@id/languageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.mahmoud.altasherat.features.authentecation.presentation.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/profileFragment"
+        android:name="com.mahmoud.altasherat.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

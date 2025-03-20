@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.common.data.repository.remote
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
@@ -12,12 +13,13 @@ import retrofit2.Response
 import java.net.UnknownHostException
 import java.nio.channels.UnresolvedAddressException
 import kotlin.coroutines.coroutineContext
+import kotlin.math.log
 import kotlin.reflect.KClass
 
 
 class RetrofitRestApiNetworkProvider(
     private val apiService: RetrofitApiService,
-    private val gson: Gson
+    private val gson: Gson,
 ) : IRestApiNetworkProvider {
 
 
@@ -25,7 +27,7 @@ class RetrofitRestApiNetworkProvider(
         endpoint: String,
         headers: Map<String, Any>?,
         queryParams: Map<String, Any>?,
-        responseType: KClass<T>
+        responseType: KClass<T>,
     ): T = safeApiCall(responseType) {
         apiService.get(
             endpoint = endpoint,
@@ -39,7 +41,7 @@ class RetrofitRestApiNetworkProvider(
         body: Any?,
         headers: Map<String, Any>?,
         queryParams: Map<String, Any>?,
-        responseType: KClass<T>
+        responseType: KClass<T>,
     ): T = safeApiCall(responseType) {
         apiService.post(
             endpoint = endpoint,
@@ -54,7 +56,7 @@ class RetrofitRestApiNetworkProvider(
         body: Any?,
         headers: Map<String, Any>?,
         queryParams: Map<String, Any>?,
-        responseType: KClass<T>
+        responseType: KClass<T>,
     ): T = safeApiCall(responseType) {
         apiService.put(
             endpoint = endpoint,
@@ -69,7 +71,7 @@ class RetrofitRestApiNetworkProvider(
         body: Any?,
         headers: Map<String, Any>?,
         queryParams: Map<String, Any>?,
-        responseType: KClass<T>
+        responseType: KClass<T>,
     ): T = safeApiCall(responseType) {
         apiService.delete(
             endpoint = endpoint,
@@ -82,7 +84,7 @@ class RetrofitRestApiNetworkProvider(
 
     private suspend inline fun <T : Any> safeApiCall(
         responseType: KClass<T>,
-        execute: () -> Response<ResponseBody>
+        execute: () -> Response<ResponseBody>,
     ): T {
         val response = try {
             execute()
@@ -102,7 +104,7 @@ class RetrofitRestApiNetworkProvider(
 
     private fun <T : Any> handleResponse(
         response: Response<ResponseBody>,
-        responseType: KClass<T>
+        responseType: KClass<T>,
     ): T {
         return if (response.isSuccessful) {
             val responseString =
@@ -114,11 +116,13 @@ class RetrofitRestApiNetworkProvider(
             gson.fromJson(responseString.string(), responseType.java)
 
         } else {
+            Log.d("AITASHERAT", "error code = ${response.code()}")
             when (response.code()) {
-                400 -> throw AltasheratException(NetworkError.BAD_REQUEST)
+                400-> throw AltasheratException(NetworkError.BAD_REQUEST)
                 401 -> throw AltasheratException(NetworkError.UNAUTHORIZED)
                 403 -> throw AltasheratException(NetworkError.FORBIDDEN)
                 404 -> throw AltasheratException(NetworkError.NOT_FOUND)
+                422 -> throw AltasheratException(NetworkError.InvalidCredentials)
                 else -> throw AltasheratException(AltasheratError.UnknownServerError(response.code()))
             }
         }
