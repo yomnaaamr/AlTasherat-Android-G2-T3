@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,8 +15,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.databinding.FragmentSignupBinding
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.presentation.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +28,6 @@ class SignupFragment : Fragment() {
     private lateinit var binding: FragmentSignupBinding
     private lateinit var authViewModel: AuthViewModel
     private val viewModel: SignupViewModel by viewModels()
-
 
 
     override fun onCreateView(
@@ -89,13 +87,12 @@ class SignupFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.state.collect { signupState ->
-                        val message = when(signupState){
+                        val message = when (signupState) {
                             is SignUpState.Error -> "Error"
                             is SignUpState.Idle -> {}
                             is SignUpState.Loading -> "Loading"
                             is SignUpState.Success -> "Success"
                         }
-                        Toast.makeText(requireContext(), message.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -106,11 +103,12 @@ class SignupFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.events.collect { signupEvent ->
-                        when(signupEvent){
+                        when (signupEvent) {
                             is SignUpEvent.Error -> {
-                                val errorMessage = signupEvent.error.toErrorMessage(requireContext())
-                                Toast.makeText(requireContext(),errorMessage, Toast.LENGTH_SHORT).show()
+                                val errorMessage =
+                                    signupEvent.error.toErrorMessage(requireContext())
                             }
+
                             is SignUpEvent.NavigationToHome -> {
                                 findNavController().navigate(R.id.action_authFragment_to_homeFragment)
                             }
@@ -123,20 +121,40 @@ class SignupFragment : Fragment() {
 
 
     private fun setupListeners() {
-        binding.firstNameEdit.addTextChangedListener{
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateFirstName(it.toString()))
+        binding.firstNameEdit.addTextChangedListener {
+            viewModel.onAction(
+                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateFirstName(
+                    it.toString()
+                )
+            )
         }
-        binding.lastNameEdit.addTextChangedListener{
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateLastName(it.toString()))
+        binding.lastNameEdit.addTextChangedListener {
+            viewModel.onAction(
+                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateLastName(
+                    it.toString()
+                )
+            )
         }
-        binding.emailEdit.addTextChangedListener{
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateEmail(it.toString()))
+        binding.emailEdit.addTextChangedListener {
+            viewModel.onAction(
+                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateEmail(
+                    it.toString()
+                )
+            )
         }
         binding.passwordEdit.addTextChangedListener {
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePassword(it.toString()))
+            viewModel.onAction(
+                SignUpAction.UpdatePassword(
+                    it.toString()
+                )
+            )
         }
         binding.phoneEdit.addTextChangedListener {
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePhoneNumber(it.toString()))
+            viewModel.onAction(
+                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePhoneNumber(
+                    it.toString()
+                )
+            )
         }
         binding.signupBtn.setOnClickListener {
             viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.SignUp)

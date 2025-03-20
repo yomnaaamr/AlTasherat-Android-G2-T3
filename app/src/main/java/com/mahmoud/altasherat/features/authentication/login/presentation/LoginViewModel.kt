@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.authentication.login.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -34,7 +33,6 @@ class LoginViewModel @Inject constructor(
 
     private fun loginWithPhone(loginRequest: LoginRequest) {
         loginUC(loginRequest).onEach { resource ->
-            Log.d("AITASHERAT", "login result: $resource ")
             when (resource) {
                 is Resource.Loading -> _state.value = LoginContract.LoginState.Loading
                 is Resource.Error -> _state.value =

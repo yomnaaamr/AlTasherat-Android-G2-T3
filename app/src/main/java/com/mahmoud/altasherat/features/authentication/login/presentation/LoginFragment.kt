@@ -86,7 +86,6 @@ class LoginFragment : Fragment() {
         binding.loginBtn?.setOnClickListener {
             val phoneNumber = binding.phoneEdit.text.toString()
             val password = binding.passwordEdit.text.toString()
-            Log.d("AITASHERAT", "Login Clicked : # $phoneNumber password = $password")
             loginViewModel.onActionTrigger(
                 LoginContract.LoginAction.LoginWithPhone(
                     LoginRequest(
@@ -142,7 +141,6 @@ class LoginFragment : Fragment() {
     private fun handleError(altasheratError: AltasheratError) {
         val errorMessages: String = altasheratError.toErrorMessage(requireContext())
         Log.d("AITASHERAT", "errormsgs = $errorMessages")
-        Toast.makeText(requireContext(), errorMessages, Toast.LENGTH_LONG).show()
 
     }
 
