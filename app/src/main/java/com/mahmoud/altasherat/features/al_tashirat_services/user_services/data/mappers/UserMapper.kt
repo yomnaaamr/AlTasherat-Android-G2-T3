@@ -1,9 +1,10 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers
 
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.PhoneDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.UserDto
-import com.mahmoud.altasherat.features.signup.data.models.dto.PhoneDto
-import com.mahmoud.altasherat.features.signup.data.models.entity.UserEntity
-import com.mahmoud.altasherat.features.signup.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.entity.UserEntity
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+
 
 internal object UserMapper {
     fun dtoToDomain(model: UserDto): User {

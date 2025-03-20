@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.ksp)
     id("kotlin-parcelize")
 
 }
@@ -73,7 +73,7 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     //Serialization
     implementation (libs.kotlinx.serialization.json)

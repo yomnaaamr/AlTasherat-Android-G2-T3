@@ -13,7 +13,7 @@ class GetCountriesFromLocalUC(private val repository: ILanguageCountryRepository
     suspend operator fun invoke(): Resource<List<Country>> {
 
         return try {
-            Resource.Success(repository.getCountries())
+            Resource.Success(repository.getCountriesFromLocal())
         } catch (e: IOException) {
             Resource.Error(LocalStorageError.IO_ERROR)
         } catch (e: IllegalStateException) {

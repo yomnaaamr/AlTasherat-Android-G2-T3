@@ -13,8 +13,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentAuthBinding
-import com.mahmoud.altasherat.features.login.presentation.LoginFragment
-import com.mahmoud.altasherat.features.signup.presentation.SignupFragment
+import com.mahmoud.altasherat.features.authentication.login.presentation.LoginFragment
+import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupFragment
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
