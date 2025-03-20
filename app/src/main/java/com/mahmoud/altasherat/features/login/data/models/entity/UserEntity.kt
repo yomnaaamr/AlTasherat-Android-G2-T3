@@ -9,7 +9,7 @@ data class UserEntity(
     val email_verified: Boolean,
     val firstname: String,
     val id: Int,
-    val image: Any,
+    val image: Any? = null,
     val lastname: String,
     val middlename: String,
     val phone: PhoneEntity,

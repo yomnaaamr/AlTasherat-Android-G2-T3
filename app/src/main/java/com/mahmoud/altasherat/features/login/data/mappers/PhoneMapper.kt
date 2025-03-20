@@ -7,9 +7,9 @@ import com.mahmoud.altasherat.features.login.domain.models.Phone
 object PhoneMapper:Mapper<PhoneDto , Phone , PhoneEntity> {
     override fun dtoToEntity(input: PhoneDto): PhoneEntity {
         return PhoneEntity(
-            country_code = input.country_code,
+            country_code = input.countryCode,
             extension = input.extension,
-            holder_name = input.holder_name,
+            holder_name = input.holderName,
             id = input.id,
             number = input.number,
             type = input.type
@@ -18,9 +18,9 @@ object PhoneMapper:Mapper<PhoneDto , Phone , PhoneEntity> {
 
     override fun dtoToDomain(input: PhoneDto): Phone {
         return Phone(
-            country_code = input.country_code,
+            countryCode = input.countryCode,
             extension = input.extension,
-            holder_name = input.holder_name,
+            holderName = input.holderName,
             id = input.id,
             number = input.number,
             type = input.type
@@ -29,9 +29,9 @@ object PhoneMapper:Mapper<PhoneDto , Phone , PhoneEntity> {
 
     override fun domainToEntity(input: Phone): PhoneEntity {
         return PhoneEntity(
-            country_code = input.country_code,
+            country_code = input.countryCode,
             extension = input.extension,
-            holder_name = input.holder_name,
+            holder_name = input.holderName,
             id = input.id,
             number = input.number,
             type = input.type

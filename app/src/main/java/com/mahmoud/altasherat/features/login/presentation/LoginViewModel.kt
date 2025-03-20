@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.login.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val phoneLoginUC: PhoneLoginUC) : ViewModel() {
 
-    private val _state = MutableStateFlow(LoginContract.LoginState.initial())
+    private val _state = MutableStateFlow<LoginContract.LoginState>(LoginContract.LoginState.Idle)
     val state = _state.asStateFlow()
 
     private val _event = MutableSharedFlow<LoginContract.LoginEvent>()
@@ -32,13 +33,11 @@ class LoginViewModel @Inject constructor(private val phoneLoginUC: PhoneLoginUC)
 
     private fun loginWithPhone(loginRequest: LoginRequest) {
         phoneLoginUC(loginRequest).onEach { resource ->
+            Log.d("AITASHERAT", "login result: $resource ")
             when (resource) {
-                is Resource.Loading -> _state.update { oldViewState -> oldViewState.copy(isLoading = true) }
-                is Resource.Error -> _state.update { oldViewState ->
-                    oldViewState.copy(
-                        altasheratError = resource.error
-                    )
-                }
+                is Resource.Loading -> _state.value = LoginContract.LoginState.Loading
+                is Resource.Error -> _state.value =
+                    LoginContract.LoginState.Exception(resource.error)
 
                 is Resource.Success -> _event.emit(LoginContract.LoginEvent.NavigateToHome(resource.data.user))
             }

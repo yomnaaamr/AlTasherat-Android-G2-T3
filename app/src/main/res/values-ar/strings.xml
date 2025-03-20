@@ -46,5 +46,8 @@
     <string name="password">كلمة المرور</string>
     <string name="enter_password">ادخل كلمة المرور</string>
     <string name="forget_password">نسيت كلمة المرور ؟</string>
+    <string name="invalid_password_length">كلمة المرور يجب أن تكون بين 8 إلى 50 حرف</string>
+    <string name="invalid_phone_or_password">رقم التليفون أو كلمة مرور غير صالحة</string>
+
 
 </resources>

@@ -1,5 +1,9 @@
 package com.mahmoud.altasherat.features.login.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
 data class User(
     val all_permissions: List<String>,
     val birthdate: String,
@@ -9,10 +13,10 @@ data class User(
     val email_verified: Boolean,
     val firstname: String,
     val id: Int,
-    val image: Any,
+    val image: Any? = null,
     val lastname: String,
     val middlename: String,
     val phone: Phone,
     val phone_verified: Boolean,
-    val username: String
+    val username: String,
 )

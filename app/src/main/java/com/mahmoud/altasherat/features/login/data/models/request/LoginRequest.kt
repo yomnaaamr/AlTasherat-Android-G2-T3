@@ -1,18 +1,16 @@
 package com.mahmoud.altasherat.features.login.data.models.request
 
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginRequest(
-    @SerialName("phone[country_code]")
-    val countryCode: String,
-    @SerialName("phone[number]")
-    val phone: String,
+    @SerializedName("phone") val phone: PhoneRequest,
     val password: String,
 ) {
-    fun validatePassword(): Boolean {
-        return !(password.isBlank() || password.length < 8 || password.length > 50)
+    fun isPasswordValid(): Boolean {
+        return password.isNotBlank() && password.length in 8..50
     }
+
 
 }

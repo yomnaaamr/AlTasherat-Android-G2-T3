@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.login.data.repository
 
+import android.util.Log
 import com.mahmoud.altasherat.features.login.data.mappers.LoginMapper
 import com.mahmoud.altasherat.features.login.data.models.entity.LoginEntity
 import com.mahmoud.altasherat.features.login.data.models.request.LoginRequest
@@ -13,7 +14,9 @@ class LoginRepositoryImpl(
     private val loginLocalDS: ILoginLocalDS,
 ) : ILoginRepository {
     override suspend fun phoneLogin(loginRequest: LoginRequest): Login {
+        Log.d("AITASHERAT", "phoneLogin  = $loginRequest ")
         val loginResponse = loginRemoteDS.phoneLogin(loginRequest)
+        Log.d("AITASHERAT", "LoginRepo response = $loginResponse ")
         return LoginMapper.dtoToDomain(loginResponse)
     }
 
