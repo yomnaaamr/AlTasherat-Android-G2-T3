@@ -19,12 +19,12 @@
             android:indeterminate="true" />
 
         <TextView
-            style="@style/MediumFont"
+            android:textAppearance="?textAppearanceTitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:text="@string/loading"
-            android:textSize="16sp" />
+             />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
