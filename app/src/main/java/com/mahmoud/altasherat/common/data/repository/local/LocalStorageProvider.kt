@@ -14,22 +14,22 @@ import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvid
 import com.mahmoud.altasherat.common.domain.repository.local.IStorageKeyEnum
 import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 import kotlin.reflect.KClass
 
-class LocalStorageProvider(
-    private val context: Context
-) : ILocalStorageProvider {
+private val Context.dataStore by preferencesDataStore(name = "Altasherat_preferences")
 
-    private val Context.dataStore by preferencesDataStore(name = "Altasherat_preferences")
+class LocalStorageProvider @Inject constructor(
+    private val context: Context,
+) : ILocalStorageProvider {
 
 
     override suspend fun <Model : Any> save(
         key: IStorageKeyEnum,
         value: Model,
-        type: KClass<Model>
+        type: KClass<Model>,
     ) {
         val preferencesKey = preferencesKey(key, type)
         context.dataStore.edit { preferences ->
@@ -40,7 +40,7 @@ class LocalStorageProvider(
     override suspend fun <Model : Any> get(
         key: IStorageKeyEnum,
         defaultValue: Model,
-        type: KClass<Model>
+        type: KClass<Model>,
     ): Model {
         val preferencesKey = preferencesKey(key, type)
         return context.dataStore.data
@@ -51,7 +51,7 @@ class LocalStorageProvider(
     override suspend fun <Model : Any> update(
         key: IStorageKeyEnum,
         value: Model,
-        type: KClass<Model>
+        type: KClass<Model>,
     ) {
         save(key, value, type)
     }
@@ -64,7 +64,6 @@ class LocalStorageProvider(
     }
 
 
-
     override suspend fun clear() {
         context.dataStore.edit { preferences ->
             preferences.clear()
@@ -75,7 +74,7 @@ class LocalStorageProvider(
     @Suppress("UNCHECKED_CAST")
     private fun <Model : Any> preferencesKey(
         key: IStorageKeyEnum,
-        type: KClass<Model>
+        type: KClass<Model>,
     ): Preferences.Key<Model> {
         return when (type) {
             Boolean::class -> booleanPreferencesKey(key.keyValue)

@@ -64,7 +64,7 @@ class SplashFragment : Fragment() {
                     splashViewModel.events.collect { splashEvent ->
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
-                                findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+                                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                             }
 
                             is SplashEvent.Error -> {
@@ -73,7 +73,14 @@ class SplashFragment : Fragment() {
                                 showToast(errorMessage)
                             }
 
-                            SplashEvent.NavigateToOnBoarding -> findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
+                            SplashEvent.NavigateToOnBoarding -> {
+                                findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
+                            }
+
+                            SplashEvent.NavigateToAuth -> {
+                                findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+
+                            }
                         }
                     }
 

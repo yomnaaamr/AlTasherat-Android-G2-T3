@@ -4,16 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.FetchCountriesUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -25,8 +26,8 @@ class SplashViewModel @Inject constructor(
     private val fetchCountriesUC: FetchCountriesUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
     private val isFirstTimeToLaunchTheAppUC: IsFirstTimeToLaunchTheAppUC,
-
-    ) : ViewModel() {
+    private val hasUserLoggedInUC: HasUserLoggedInUC
+) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
     val state = _state.asStateFlow()
@@ -39,6 +40,36 @@ class SplashViewModel @Inject constructor(
 
 
     init {
+
+        viewModelScope.launch {
+            isFirstTimeToLaunchTheAppUC()
+                .onSuccess {
+                    if (it) {
+                        fetchCountries()
+                    } else {
+//                        check if user is logged in
+                        if (hasUserLoggedInUC()) {
+                            _events.send(SplashEvent.NavigateToHome)
+                            _state.value = SplashState.Success
+                        }else{
+                            _events.send(SplashEvent.NavigateToAuth)
+                            _state.value = SplashState.Success
+                        }
+                    }
+                }
+                .onError {
+                    _events.send(SplashEvent.Error(it))
+                    _state.value = SplashState.Error(it)
+                }
+        }
+
+
+        getLanguageCode()
+
+    }
+
+
+    private fun fetchCountries() {
         fetchCountriesUC()
             .onEach { result ->
                 Log.d("SplashResult", result.toString())
@@ -50,6 +81,7 @@ class SplashViewModel @Inject constructor(
 
                     is Resource.Loading -> SplashState.Loading
                     is Resource.Success -> {
+                        _events.send(SplashEvent.NavigateToOnBoarding)
                         SplashState.Success
                     }
                 }
@@ -79,12 +111,14 @@ class SplashViewModel @Inject constructor(
 
     }
 
-
     private fun getLanguageCode() {
         viewModelScope.launch {
             getLanguageCodeUC()
                 .onSuccess { languageCode ->
                     _languageCode.value = languageCode
+                }
+                .onError {
+                    _events.send(SplashEvent.Error(it))
                 }
         }
     }
