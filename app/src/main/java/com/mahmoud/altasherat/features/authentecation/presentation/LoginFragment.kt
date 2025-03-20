@@ -104,7 +104,7 @@ class LoginFragment : Fragment() {
                         is LoginContract.LoginEvent.NavigateToHome -> {
                             //Navigate to home
                             Log.d("AITASHERAT", "Navigate To Profile ")
-                            findNavController().navigate(R.id.action_authFragment_to_profileFragment)
+                            findNavController().navigate(R.id.action_authFragment_to_homeFragment)
                             Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_LONG)
                                 .show()
                         }

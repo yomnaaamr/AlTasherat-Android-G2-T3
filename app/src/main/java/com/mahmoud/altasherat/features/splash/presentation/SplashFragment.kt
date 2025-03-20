@@ -62,6 +62,7 @@ class SplashFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     splashViewModel.events.collect { splashEvent ->
+//                        delay(2000)
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
                                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)

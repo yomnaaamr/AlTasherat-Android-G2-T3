@@ -33,8 +33,8 @@ class LanguageViewModel @Inject constructor(
     fun setOnBoardingVisibilityShown() {
         viewModelScope.launch {
             when (val result = saveOnBoardingVisibilityUC()) {
-                is Resource.Error -> TODO()
-                is Resource.Loading -> TODO()
+                is Resource.Error -> Log.e("OnBoardingError", result.error.toString())
+                is Resource.Loading -> Log.d("onBoardingLoading", "loading...")
                 is Resource.Success-> {
                     Log.d("AITASHERAT", "setOnBoardingVisibilityShown $result")
                 }

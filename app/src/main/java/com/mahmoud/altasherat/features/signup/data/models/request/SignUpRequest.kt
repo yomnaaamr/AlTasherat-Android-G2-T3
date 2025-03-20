@@ -31,9 +31,10 @@ data class SignUpRequest(
         validateFirstName().let { if (it is Resource.Error) return it }
         validateLastName().let { if (it is Resource.Error) return it }
         validateEmail().let { if (it is Resource.Error) return it }
+        phone.validatePhoneNumberRequest().let { if (it is Resource.Error) return it }
         validatePassword().let { if (it is Resource.Error) return it }
 //        validatePasswordConfirmation().let { if (it is Resource.Error) return it }
-        phone.validatePhoneNumberRequest().let { if (it is Resource.Error) return it }
+
 
         return Resource.Success(Unit)
     }

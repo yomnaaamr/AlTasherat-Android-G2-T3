@@ -30,7 +30,7 @@
         android:layout_height="16dp"
         android:background="@color/md_theme_primary"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/cardView"
         app:layout_constraintTop_toBottomOf="@id/guideLine"
 />
     <androidx.cardview.widget.CardView
