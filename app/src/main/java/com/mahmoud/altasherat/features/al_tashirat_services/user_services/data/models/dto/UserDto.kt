@@ -1,15 +1,15 @@
-package com.mahmoud.altasherat.features.authentication.signup.data.models.dto
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 
-internal data class UserDto(
+data class UserDto(
     @SerializedName("id") val id: Int? = null,
     @SerializedName("username") val userName: String? = null,
     @SerializedName("firstname") val firstName: String? = null,
     @SerializedName("middlename") val middleName: String? = null,
     @SerializedName("lastname") val lastName: String? = null,
     @SerializedName("email") val email: String? = null,
-    @SerializedName("phone") val phone: com.mahmoud.altasherat.features.authentication.signup.data.models.dto.PhoneDto? = null,
+    @SerializedName("phone") val phone: PhoneDto? = null,
     @SerializedName("image") val image: String? = null,
     @SerializedName("birth_date") val birthDate: String? = null,
     @SerializedName("email_verified") val emailVerified: Boolean? = null,

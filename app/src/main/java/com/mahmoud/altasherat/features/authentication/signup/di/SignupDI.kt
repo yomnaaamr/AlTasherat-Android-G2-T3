@@ -3,12 +3,13 @@ package com.mahmoud.altasherat.features.authentication.signup.di
 import com.google.gson.Gson
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
-import com.mahmoud.altasherat.features.signup.data.repository.local.SignupLocalDS
-import com.mahmoud.altasherat.features.signup.data.repository.remote.SignupRemoteDS
-import com.mahmoud.altasherat.features.signup.domain.repository.ISignupRepository
-import com.mahmoud.altasherat.features.signup.domain.repository.local.ISignupLocalDS
-import com.mahmoud.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
-import com.mahmoud.altasherat.features.signup.domain.usecase.SignupUC
+import com.mahmoud.altasherat.features.authentication.signup.data.repository.SignupRepository
+import com.mahmoud.altasherat.features.authentication.signup.data.repository.local.SignupLocalDS
+import com.mahmoud.altasherat.features.authentication.signup.data.repository.remote.SignupRemoteDS
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.ISignupRepository
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.local.ISignupLocalDS
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.remote.ISignupRemoteDS
+import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +40,7 @@ internal object SignupDI {
         remoteDataSource: ISignupRemoteDS,
         localDataSource: ISignupLocalDS
     ): ISignupRepository {
-        return com.mahmoud.altasherat.features.authentication.signup.data.repository.SignupRepository(
+        return SignupRepository(
             remoteDataSource,
             localDataSource
         )

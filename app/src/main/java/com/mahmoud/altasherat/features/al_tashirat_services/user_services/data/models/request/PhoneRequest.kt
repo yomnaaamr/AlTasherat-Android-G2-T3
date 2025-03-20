@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.authentication.signup.data.models.request
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request
 
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource

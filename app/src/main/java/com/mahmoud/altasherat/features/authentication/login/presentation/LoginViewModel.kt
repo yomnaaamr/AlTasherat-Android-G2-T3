@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.login.data.models.request.LoginRequest
-import com.mahmoud.altasherat.features.login.domain.useCases.PhoneLoginUC
+import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
+import com.mahmoud.altasherat.features.authentication.login.domain.useCases.LoginUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +13,11 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val phoneLoginUC: PhoneLoginUC) : ViewModel() {
+class LoginViewModel(
+    private val loginUC: LoginUC
+) : ViewModel() {
 
     private val _state = MutableStateFlow<LoginContract.LoginState>(LoginContract.LoginState.Idle)
     val state = _state.asStateFlow()
@@ -31,7 +32,7 @@ class LoginViewModel @Inject constructor(private val phoneLoginUC: PhoneLoginUC)
     }
 
     private fun loginWithPhone(loginRequest: LoginRequest) {
-        phoneLoginUC(loginRequest).onEach { resource ->
+        loginUC(loginRequest).onEach { resource ->
             Log.d("AITASHERAT", "login result: $resource ")
             when (resource) {
                 is Resource.Loading -> _state.value = LoginContract.LoginState.Loading

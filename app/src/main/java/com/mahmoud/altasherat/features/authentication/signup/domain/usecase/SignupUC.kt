@@ -4,9 +4,9 @@ import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.common.domain.util.onError
-import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.models.SignUp
-import com.mahmoud.altasherat.features.signup.domain.repository.ISignupRepository
+import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
+import com.mahmoud.altasherat.features.authentication.signup.domain.models.SignUp
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.ISignupRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

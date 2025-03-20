@@ -1,10 +1,11 @@
 package com.mahmoud.altasherat.features.authentication.login.domain.repository.remote
 
-import com.mahmoud.altasherat.features.login.data.models.dto.LoginResponseDto
-import com.mahmoud.altasherat.features.login.data.models.request.LoginRequest
+import com.mahmoud.altasherat.features.authentication.login.data.models.dto.LoginResponseDto
+import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
+
 
 interface ILoginRemoteDS {
-    suspend fun phoneLogin(
+    suspend fun login(
         loginRequest: LoginRequest,
     ): LoginResponseDto
 }

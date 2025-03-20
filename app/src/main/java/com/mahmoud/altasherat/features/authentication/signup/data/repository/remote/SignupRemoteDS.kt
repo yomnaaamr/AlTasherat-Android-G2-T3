@@ -1,9 +1,10 @@
 package com.mahmoud.altasherat.features.authentication.signup.data.repository.remote
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
-import com.mahmoud.altasherat.features.signup.data.models.dto.SignUpResponseDto
-import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
+import com.mahmoud.altasherat.features.authentication.signup.data.models.dto.SignUpResponseDto
+import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.remote.ISignupRemoteDS
+
 
 internal class SignupRemoteDS(
     private val restApiNetworkProvider: IRestApiNetworkProvider

@@ -1,11 +1,12 @@
-package com.mahmoud.altasherat.features.authentication.signup.data.mappers
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers
 
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.UserDto
 import com.mahmoud.altasherat.features.signup.data.models.dto.PhoneDto
 import com.mahmoud.altasherat.features.signup.data.models.entity.UserEntity
 import com.mahmoud.altasherat.features.signup.domain.models.User
 
 internal object UserMapper {
-    fun dtoToDomain(model: com.mahmoud.altasherat.features.authentication.signup.data.models.dto.UserDto): User {
+    fun dtoToDomain(model: UserDto): User {
         return User(
             id = model.id ?: -1,
             username = model.userName.orEmpty(),

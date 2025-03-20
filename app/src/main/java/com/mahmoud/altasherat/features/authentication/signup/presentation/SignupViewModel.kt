@@ -3,9 +3,9 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.signup.data.models.request.PhoneRequest
-import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.usecase.SignupUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
+import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,16 +32,16 @@ class SignupViewModel @Inject constructor(
     private val signUpUiState = _signUpUiState.asStateFlow()
 
 
-    fun onAction(signupAction: com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction) {
+    fun onAction(signupAction: SignUpAction) {
         when (signupAction) {
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.SignUp -> signUp()
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateCountryCode -> updateCountryCode(signupAction.countryCode)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateCountryID -> updateCountryID(signupAction.countryId)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateEmail -> updateEmail(signupAction.value)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateFirstName -> updateFirstName(signupAction.value)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateLastName -> updateLastName(signupAction.value)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePassword -> updatePassword(signupAction.value)
-            is com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePhoneNumber -> updatePhoneNumber(signupAction.phone)
+            is SignUpAction.SignUp -> signUp()
+            is SignUpAction.UpdateCountryCode -> updateCountryCode(signupAction.countryCode)
+            is SignUpAction.UpdateCountryID -> updateCountryID(signupAction.countryId)
+            is SignUpAction.UpdateEmail -> updateEmail(signupAction.value)
+            is SignUpAction.UpdateFirstName -> updateFirstName(signupAction.value)
+            is SignUpAction.UpdateLastName -> updateLastName(signupAction.value)
+            is SignUpAction.UpdatePassword -> updatePassword(signupAction.value)
+            is SignUpAction.UpdatePhoneNumber -> updatePhoneNumber(signupAction.phone)
         }
     }
 
@@ -111,14 +111,3 @@ class SignupViewModel @Inject constructor(
         _signUpUiState.update { it.copy(countryCode = countryCode) }
     }
 }
-
-
-data class SignUpUiState(
-    val firstName: String = "",
-    val lastName: String = "",
-    val email: String = "",
-    val password: String = "",
-    val countryCode: String = "",
-    val phoneNumber: String = "",
-    val selectedCountryId: String = "",
-)

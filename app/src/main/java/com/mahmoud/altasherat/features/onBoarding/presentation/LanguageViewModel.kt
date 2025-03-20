@@ -9,7 +9,7 @@ import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectionsUC
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingAsShownUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingStateUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class LanguageViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val saveSelectionsUC: SaveSelectionsUC,
-    private val saveOnBoardingVisibilityUC: SetOnBoardingAsShownUC,
+    private val saveOnBoardingVisibilityUC: SetOnBoardingStateUC,
 
     ): ViewModel() {
 

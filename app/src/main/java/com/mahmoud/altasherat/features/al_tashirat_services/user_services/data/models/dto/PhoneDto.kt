@@ -1,8 +1,8 @@
-package com.mahmoud.altasherat.features.authentication.signup.data.models.dto
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 
-internal data class PhoneDto(
+data class PhoneDto(
     @SerializedName("id") val id: Int? = null,
     @SerializedName("country_code") val countryCode: String? = null,
     @SerializedName("number") val number: String? = null,

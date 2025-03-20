@@ -1,15 +1,17 @@
 package com.mahmoud.altasherat.features.authentication.signup.data.mappers
 
-import com.mahmoud.altasherat.features.signup.data.models.dto.SignUpResponseDto
-import com.mahmoud.altasherat.features.signup.data.models.entity.SignUpEntity
-import com.mahmoud.altasherat.features.signup.domain.models.SignUp
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.UserDto
+import com.mahmoud.altasherat.features.authentication.signup.data.models.dto.SignUpResponseDto
+import com.mahmoud.altasherat.features.authentication.signup.data.models.entity.SignUpEntity
+import com.mahmoud.altasherat.features.authentication.signup.domain.models.SignUp
 
 internal object SignUpResponseMapper {
     fun dtoToDomain(model: SignUpResponseDto): SignUp {
         return SignUp(
             message = model.message.orEmpty(),
             token = model.token.orEmpty(),
-            user = UserMapper.dtoToDomain(model.user ?: com.mahmoud.altasherat.features.authentication.signup.data.models.dto.UserDto())
+            user = UserMapper.dtoToDomain(model.user ?: UserDto())
         )
     }
 

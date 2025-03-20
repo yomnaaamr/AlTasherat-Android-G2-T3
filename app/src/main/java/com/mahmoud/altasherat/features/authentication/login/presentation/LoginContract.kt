@@ -1,8 +1,7 @@
 package com.mahmoud.altasherat.features.authentication.login.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.features.login.data.models.request.LoginRequest
-import com.mahmoud.altasherat.features.login.domain.models.User
+import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
 
 class LoginContract {
     sealed interface LoginAction {

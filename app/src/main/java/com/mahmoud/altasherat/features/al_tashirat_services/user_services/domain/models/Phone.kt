@@ -1,6 +1,6 @@
-package com.mahmoud.altasherat.features.authentication.signup.data.models.entity
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models
 
-internal data class PhoneEntity(
+data class Phone(
     val id: Int,
     val countryCode: String,
     val number: String,

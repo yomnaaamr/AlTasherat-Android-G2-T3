@@ -6,7 +6,7 @@ import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
 
-class IsFirstTimeToLaunchTheAppUC(private val repository: IOnBoardingRepository) {
+class GetOnBoardingStateUC(private val repository: IOnBoardingRepository) {
     suspend operator fun invoke(): Resource<Boolean> {
         return try {
             Resource.Success(repository.isFirstTimeToLaunchTheApp())

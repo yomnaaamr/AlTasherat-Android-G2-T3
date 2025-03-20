@@ -7,7 +7,7 @@ import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.IsFirstTimeToLaunchTheAppUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +25,7 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
-    private val isFirstTimeToLaunchTheAppUC: IsFirstTimeToLaunchTheAppUC,
+    private val getOnBoardingStateUC: GetOnBoardingStateUC,
     private val hasUserLoggedInUC: HasUserLoggedInUC
 ) : ViewModel() {
 
@@ -42,7 +42,7 @@ class SplashViewModel @Inject constructor(
     init {
 
         viewModelScope.launch {
-            isFirstTimeToLaunchTheAppUC()
+            getOnBoardingStateUC()
                 .onSuccess {
                     if (it) {
                         fetchCountries()

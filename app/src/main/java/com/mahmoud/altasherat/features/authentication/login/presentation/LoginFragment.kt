@@ -21,7 +21,6 @@ import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentLoginBinding
 import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
-import com.mahmoud.altasherat.features.authentication.login.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

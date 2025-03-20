@@ -1,11 +1,11 @@
 package com.mahmoud.altasherat.features.authentication.signup.data.repository
 
-import com.mahmoud.altasherat.features.signup.data.mappers.SignUpResponseMapper
-import com.mahmoud.altasherat.features.signup.data.models.request.SignUpRequest
-import com.mahmoud.altasherat.features.signup.domain.models.SignUp
-import com.mahmoud.altasherat.features.signup.domain.repository.ISignupRepository
-import com.mahmoud.altasherat.features.signup.domain.repository.local.ISignupLocalDS
-import com.mahmoud.altasherat.features.signup.domain.repository.remote.ISignupRemoteDS
+import com.mahmoud.altasherat.features.authentication.signup.data.mappers.SignUpResponseMapper
+import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
+import com.mahmoud.altasherat.features.authentication.signup.domain.models.SignUp
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.ISignupRepository
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.local.ISignupLocalDS
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.remote.ISignupRemoteDS
 
 internal class SignupRepository(
     private val remoteDS: ISignupRemoteDS,

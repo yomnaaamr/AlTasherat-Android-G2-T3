@@ -1,13 +1,13 @@
-package com.mahmoud.altasherat.features.authentication.signup.domain.models
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.entity
 
-data class User(
+data class UserEntity(
     val id: Int,
     val username: String,
     val firstname: String,
-    val middleName: String,
+    val middlename: String,
     val lastname: String,
     val email: String,
-    val phone: Phone,
+    val phone: PhoneEntity,
     val image: String,
     val birthDate: String,
     val emailVerified: Boolean,

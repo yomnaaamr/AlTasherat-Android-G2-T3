@@ -1,8 +1,8 @@
 package com.mahmoud.altasherat.features.authentication.login.domain.repository.local
 
-import com.mahmoud.altasherat.features.login.data.models.entity.LoginEntity
+import com.mahmoud.altasherat.features.authentication.login.data.models.entity.LoginEntity
+
 
 interface ILoginLocalDS {
-    suspend fun saveLogin(loginEntity:LoginEntity)
-    suspend fun getLogin():LoginEntity
+    suspend fun saveLogin(loginEntity: LoginEntity)
 }
