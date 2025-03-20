@@ -82,19 +82,6 @@
                     style="?textAppearanceTitleMedium"
                     android:background="@drawable/custom_phone_end_icon"
                     android:clickable="true"/>
-<!--                <com.hbb20.CountryCodePicker-->
-<!--                    android:id="@+id/phone_code_picker"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="53dp"-->
-<!--                    android:layout_gravity="end|bottom"-->
-<!--                    android:background="@drawable/custom_phone_end_icon"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:layoutDirection="rtl"-->
-<!--                    app:ccp_contentColor="@android:color/white"-->
-<!--                    app:ccp_showArrow="false"-->
-<!--                    app:ccp_showNameCode="false"-->
-<!--                    app:ccp_autoFormatNumber="true"-->
-<!--                    app:ccp_defaultNameCode="SA"/>-->
             </FrameLayout>
 
             <TextView
