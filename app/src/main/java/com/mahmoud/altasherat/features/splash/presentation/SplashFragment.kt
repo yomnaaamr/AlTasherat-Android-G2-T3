@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 class SplashFragment : Fragment() {
 
     private val splashViewModel: SplashViewModel by viewModels()
-    private val onBoardingViewModel: OnBoardingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,12 +64,7 @@ class SplashFragment : Fragment() {
                     splashViewModel.events.collect { splashEvent ->
                         when (splashEvent) {
                             is SplashEvent.NavigateToHome -> {
-                                lifecycleScope.launch {
-                                    delay(3000)
-                                    if (onBoardingViewModel.isFirstTimeToLaunchTheApp())
-                                        findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
-                                    else findNavController().navigate(R.id.action_splashFragment_to_authFragment)
-                                }
+                                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                             }
 
                             is SplashEvent.Error -> {
@@ -79,7 +73,14 @@ class SplashFragment : Fragment() {
                                 showToast(errorMessage)
                             }
 
-                            SplashEvent.NavigateToOnBoarding -> TODO()
+                            SplashEvent.NavigateToOnBoarding -> {
+                                findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
+                            }
+
+                            SplashEvent.NavigateToAuth -> {
+                                findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+
+                            }
                         }
                     }
 
