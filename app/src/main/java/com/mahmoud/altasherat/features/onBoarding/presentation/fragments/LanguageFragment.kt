@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.onBoarding.presentation.fragments
 
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -106,7 +105,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                         selectedCountry!!
                     )
                 )
-                Toast.makeText(requireContext(), "Selection saved", Toast.LENGTH_SHORT).show()
+                showMessage("Selection saved", MessageType.TOAST, this)
                 viewModel.onAction(
                     LanguageContract.LanguageAction.SetOnBoardingState
                 )
