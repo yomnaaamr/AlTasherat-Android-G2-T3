@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentSignupBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
@@ -26,19 +28,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignupFragment : Fragment() {
+class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate){
 
-    private lateinit var binding: FragmentSignupBinding
     private lateinit var authViewModel: AuthViewModel
     private val viewModel: SignupViewModel by viewModels()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentSignupBinding.inflate(inflater, container, false)
+    override fun FragmentSignupBinding.initialize() {
+
         authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
 
         //Use Original country list from local instead of this.
@@ -49,7 +46,7 @@ class SignupFragment : Fragment() {
         )
         val countryDisplayList = countryList.map { "${it.flag} (${it.phoneCode})" }
         val adapter = ArrayAdapter(
-            this.requireContext(),
+            requireContext(),
             android.R.layout.simple_dropdown_item_1line,
             countryDisplayList
         )
@@ -79,62 +76,50 @@ class SignupFragment : Fragment() {
 
         }
 
+
         setupObservers()
         setupListeners()
-
-        return binding.root
     }
 
+
+
     private fun setupObservers() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.state.collect { signupState ->
-                        val message = when (signupState) {
-                            is SignUpState.Error -> "Error"
-                            is SignUpState.Idle -> {}
-                            is SignUpState.Loading -> "Loading"
-                            is SignUpState.Success -> "Success"
-                        }
-                    }
-                }
+
+        collectFlow(viewModel.state){ state ->
+            when(state) {
+                is SignUpState.Error -> hideLoading()
+                is SignUpState.Idle -> {}
+                is SignUpState.Loading -> showLoading()
+                is SignUpState.Success -> hideLoading()
             }
         }
 
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.events.collect { signupEvent ->
-                        when (signupEvent) {
-                            is SignUpEvent.Error -> {
-                                when (signupEvent.error) {
-                                    is AltasheratError.ValidationErrors -> {
-                                        displayValidationErrors(signupEvent.error.errors)
-                                    }
+        collectFlow(viewModel.events){signupEvent->
+            when (signupEvent) {
+                is SignUpEvent.Error -> {
+                    when (signupEvent.error) {
+                        is AltasheratError.ValidationErrors -> {
+                            displayValidationErrors(signupEvent.error.errors)
+                        }
 
-                                    else -> {
-                                        val errorMessage =
-                                            signupEvent.error.toErrorMessage(requireContext())
-                                        Toast.makeText(
-                                            requireContext(),
-                                            errorMessage,
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                            }
-
-                            is SignUpEvent.NavigationToHome -> {
-                                findNavController().navigate(R.id.action_authFragment_to_homeFragment)
-                            }
-
-
+                        else -> {
+                            val errorMessage =
+                                signupEvent.error.toErrorMessage(requireContext())
+                            showMessage(errorMessage,MessageType.SNACKBAR,this)
                         }
                     }
                 }
+
+                is SignUpEvent.NavigationToHome -> {
+                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                }
+
+
             }
+
         }
+
     }
 
 
