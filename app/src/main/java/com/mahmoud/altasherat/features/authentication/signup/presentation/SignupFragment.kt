@@ -1,18 +1,9 @@
 package com.mahmoud.altasherat.features.authentication.signup.presentation
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
@@ -25,7 +16,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.presentation.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate){
@@ -87,17 +77,17 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
         collectFlow(viewModel.state){ state ->
             when(state) {
-                is SignUpState.Error -> hideLoading()
-                is SignUpState.Idle -> {}
-                is SignUpState.Loading -> showLoading()
-                is SignUpState.Success -> hideLoading()
+                is SignupContract.SignUpState.Error -> hideLoading()
+                is SignupContract.SignUpState.Idle -> {}
+                is SignupContract.SignUpState.Loading -> showLoading()
+                is SignupContract.SignUpState.Success -> hideLoading()
             }
         }
 
 
         collectFlow(viewModel.events){signupEvent->
             when (signupEvent) {
-                is SignUpEvent.Error -> {
+                is SignupContract.SignUpEvent.Error -> {
                     when (signupEvent.error) {
                         is AltasheratError.ValidationErrors -> {
                             displayValidationErrors(signupEvent.error.errors)
@@ -111,7 +101,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                     }
                 }
 
-                is SignUpEvent.NavigationToHome -> {
+                is SignupContract.SignUpEvent.NavigationToHome -> {
                     findNavController().navigate(R.id.action_authFragment_to_homeFragment)
                 }
 
@@ -126,41 +116,41 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private fun setupListeners() {
         binding.firstNameEdit.addTextChangedListener {
             viewModel.onAction(
-                SignUpAction.UpdateFirstName(
+                SignupContract.SignUpAction.UpdateFirstName(
                     it.toString()
                 )
             )
         }
         binding.lastNameEdit.addTextChangedListener {
             viewModel.onAction(
-                SignUpAction.UpdateLastName(
+                SignupContract.SignUpAction.UpdateLastName(
                     it.toString()
                 )
             )
         }
         binding.emailEdit.addTextChangedListener {
             viewModel.onAction(
-                SignUpAction.UpdateEmail(
+                SignupContract.SignUpAction.UpdateEmail(
                     it.toString()
                 )
             )
         }
         binding.passwordEdit.addTextChangedListener {
             viewModel.onAction(
-                SignUpAction.UpdatePassword(
+                SignupContract.SignUpAction.UpdatePassword(
                     it.toString()
                 )
             )
         }
         binding.phoneEdit.addTextChangedListener {
             viewModel.onAction(
-                SignUpAction.UpdatePhoneNumber(
+                SignupContract.SignUpAction.UpdatePhoneNumber(
                     it.toString()
                 )
             )
         }
         binding.signupBtn.setOnClickListener {
-            viewModel.onAction(SignUpAction.SignUp)
+            viewModel.onAction(SignupContract.SignUpAction.SignUp)
         }
 
     }

@@ -3,8 +3,6 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
@@ -24,26 +22,26 @@ class SignupViewModel @Inject constructor(
     private val signupUC: SignupUC
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SignUpState>(SignUpState.Idle)
+    private val _state = MutableStateFlow<SignupContract.SignUpState>(SignupContract.SignUpState.Idle)
     val state = _state.asStateFlow()
 
-    private val _events = Channel<SignUpEvent>()
+    private val _events = Channel<SignupContract.SignUpEvent>()
     val events = _events.receiveAsFlow()
 
     private val _signUpUiState = MutableStateFlow(SignUpUiState())
     private val signUpUiState = _signUpUiState.asStateFlow()
 
 
-    fun onAction(signupAction: SignUpAction) {
+    fun onAction(signupAction: SignupContract.SignUpAction) {
         when (signupAction) {
-            is SignUpAction.SignUp -> signUp()
-            is SignUpAction.UpdateCountryCode -> updateCountryCode(signupAction.countryCode)
-            is SignUpAction.UpdateCountryID -> updateCountryID(signupAction.countryId)
-            is SignUpAction.UpdateEmail -> updateEmail(signupAction.value)
-            is SignUpAction.UpdateFirstName -> updateFirstName(signupAction.value)
-            is SignUpAction.UpdateLastName -> updateLastName(signupAction.value)
-            is SignUpAction.UpdatePassword -> updatePassword(signupAction.value)
-            is SignUpAction.UpdatePhoneNumber -> updatePhoneNumber(signupAction.phone)
+            is SignupContract.SignUpAction.SignUp -> signUp()
+            is SignupContract.SignUpAction.UpdateCountryCode -> updateCountryCode(signupAction.countryCode)
+            is SignupContract.SignUpAction.UpdateCountryID -> updateCountryID(signupAction.countryId)
+            is SignupContract.SignUpAction.UpdateEmail -> updateEmail(signupAction.value)
+            is SignupContract.SignUpAction.UpdateFirstName -> updateFirstName(signupAction.value)
+            is SignupContract.SignUpAction.UpdateLastName -> updateLastName(signupAction.value)
+            is SignupContract.SignUpAction.UpdatePassword -> updatePassword(signupAction.value)
+            is SignupContract.SignUpAction.UpdatePhoneNumber -> updatePhoneNumber(signupAction.phone)
         }
     }
 
@@ -70,14 +68,14 @@ class SignupViewModel @Inject constructor(
             .onEach { result ->
                 _state.value = when (result) {
                     is Resource.Error -> {
-                        _events.send(SignUpEvent.Error(result.error))
-                        SignUpState.Error(result.error)
+                        _events.send(SignupContract.SignUpEvent.Error(result.error))
+                        SignupContract.SignUpState.Error(result.error)
                     }
 
-                    is Resource.Loading -> SignUpState.Loading
+                    is Resource.Loading -> SignupContract.SignUpState.Loading
                     is Resource.Success -> {
-                        _events.send(SignUpEvent.NavigationToHome)
-                        SignUpState.Success(result.data)
+                        _events.send(SignupContract.SignUpEvent.NavigationToHome)
+                        SignupContract.SignUpState.Success(result.data)
                     }
                 }
             }.launchIn(viewModelScope)
