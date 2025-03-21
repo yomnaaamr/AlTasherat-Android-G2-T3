@@ -33,7 +33,6 @@
     <string name="create_new_acc">تسجيل حساب جديد</string>
 
 
-
     <string name="selection_required">يجب عليك إجراء تحديد.</string>
     <string name="first_name">الاسم الاول</string>
     <string name="last_name">الاسم الاخير</string>
@@ -68,6 +67,7 @@
     <string name="error_invalid_phone_number">يجب أن يتكون رقم الهاتف من 3 إلى 5 أرقام.</string>
     <string name="error_empty_country_code">رمز الدولة مطلوب.</string>
     <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
+    <string name="loading">جارى التحميل…</string>
 
 
 </resources>

@@ -1,12 +1,11 @@
 package com.mahmoud.altasherat.common.presentation
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.Window
-import com.mahmoud.solutionx.R
+import androidx.core.graphics.drawable.toDrawable
+import com.mahmoud.altasherat.R
 
 class LoadingDialog {
     private var dialog: Dialog? = null
@@ -17,7 +16,7 @@ class LoadingDialog {
                 requestWindowFeature(Window.FEATURE_NO_TITLE)
                 setContentView(R.layout.dialog_loading)
                 setCancelable(false)
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
             }
         }
         dialog?.show()

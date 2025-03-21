@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
@@ -40,6 +40,7 @@ class LanguageFragment : Fragment(), OnItemClickListener {
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
 
+    private var countriesList: List<Country> = emptyList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,17 +68,27 @@ class LanguageFragment : Fragment(), OnItemClickListener {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.countries.collect { countries ->
-                        bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                            this@LanguageFragment.selectedCountry = selectedCountry as Country
-                            binding.countryFlag.text = selectedCountry.flag
-                            binding.countryName.text = selectedCountry.name
+                        if (countries.isNotEmpty()) {
+                            countriesList = countries
+                            selectedCountry = countries[countries.indexOfFirst { it.id == 1 }]
+                            binding.countryFlag.text = selectedCountry?.flag
+                            binding.countryName.text = selectedCountry?.name
                         }
+
                     }
                 }
             }
         }
 
         binding.chooseCountryLayout.setOnClickListener {
+            bottomSheet = CountryPickerBottomSheet(
+                countriesList,
+                selectedCountry?.id?.minus(1) ?: 0
+            ) { newSelectedCountry ->
+                this@LanguageFragment.selectedCountry = newSelectedCountry as Country
+                binding.countryFlag.text = newSelectedCountry.flag
+                binding.countryName.text = newSelectedCountry.name
+            }
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
