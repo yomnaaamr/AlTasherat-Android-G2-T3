@@ -29,10 +29,10 @@ class SplashViewModel @Inject constructor(
     private val hasUserLoggedInUC: HasUserLoggedInUC
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashState>(SplashState.Idle)
+    private val _state = MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
     val state = _state.asStateFlow()
 
-    private val _events = Channel<SplashEvent>()
+    private val _events = Channel<SplashContract.SplashEvent>()
     val events = _events.receiveAsFlow()
 
     private val _languageCode = MutableStateFlow<String?>(null)
@@ -43,23 +43,23 @@ class SplashViewModel @Inject constructor(
 
         viewModelScope.launch {
             getOnBoardingStateUC()
-                .onSuccess {
-                    if (!it) {
+                .onSuccess { isFirstTime->
+                    if (!isFirstTime) {
                         fetchCountries()
                     } else {
-//                        check if user is logged in
-                        if (hasUserLoggedInUC()) {
-                            _events.send(SplashEvent.NavigateToHome)
-                            _state.value = SplashState.Success
+                        val hasUser = hasUserLoggedInUC()
+                        if (hasUser) {
+                            _events.send(SplashContract.SplashEvent.NavigateToHome)
+                            _state.value = SplashContract.SplashState.Success
                         } else {
-                            _events.send(SplashEvent.NavigateToAuth)
-                            _state.value = SplashState.Success
+                            _events.send(SplashContract.SplashEvent.NavigateToAuth)
+                            _state.value = SplashContract.SplashState.Success
                         }
                     }
                 }
                 .onError {
-                    _events.send(SplashEvent.Error(it))
-                    _state.value = SplashState.Error(it)
+                    _events.send(SplashContract.SplashEvent.Error(it))
+                    _state.value = SplashContract.SplashState.Error(it)
                 }
         }
 
@@ -70,44 +70,24 @@ class SplashViewModel @Inject constructor(
 
 
     private fun fetchCountries() {
+
         getCountriesFromRemoteUC()
             .onEach { result ->
                 Log.d("SplashResult", result.toString())
                 _state.value = when (result) {
                     is Resource.Error -> {
-                        _events.send(SplashEvent.Error(result.error))
-                        SplashState.Error(result.error)
+                        _events.send(SplashContract.SplashEvent.Error(result.error))
+                        SplashContract.SplashState.Error(result.error)
                     }
 
-                    is Resource.Loading -> SplashState.Loading
+                    is Resource.Loading -> SplashContract.SplashState.Loading
                     is Resource.Success -> {
-                        _events.send(SplashEvent.NavigateToOnBoarding)
-                        SplashState.Success
+                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        SplashContract.SplashState.Success
                     }
                 }
             }
             .launchIn(viewModelScope)
-        getLanguageCode()
-
-//        viewModelScope.launch {
-//            _state.value = when (val result = isFirstTimeToLaunchTheAppUC()) {
-//                is Resource.Error -> {
-//                    _events.send(SplashEvent.Error(result.error))
-//                    SplashState.Error(result.error)
-//                }
-//
-//                is Resource.Loading -> SplashState.Loading
-//                is Resource.Success -> {
-//                    Log.d("AITASHERAT", "if First time to launch? $result")
-//                    if (result.data) {
-//                        _events.send(SplashEvent.NavigateToOnBoarding)
-//                    } else
-//                        _events.send(SplashEvent.NavigateToHome)
-//                    SplashState.Success
-//
-//                }
-//            }
-//        }
 
     }
 
@@ -118,7 +98,7 @@ class SplashViewModel @Inject constructor(
                     _languageCode.value = languageCode
                 }
                 .onError {
-                    _events.send(SplashEvent.Error(it))
+                    _events.send(SplashContract.SplashEvent.Error(it))
                 }
         }
     }
