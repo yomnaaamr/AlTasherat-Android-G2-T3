@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentSignupBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
@@ -105,13 +108,28 @@ class SignupFragment : Fragment() {
                     viewModel.events.collect { signupEvent ->
                         when (signupEvent) {
                             is SignUpEvent.Error -> {
-                                val errorMessage =
-                                    signupEvent.error.toErrorMessage(requireContext())
+                                when (signupEvent.error) {
+                                    is AltasheratError.ValidationErrors -> {
+                                        displayValidationErrors(signupEvent.error.errors)
+                                    }
+
+                                    else -> {
+                                        val errorMessage =
+                                            signupEvent.error.toErrorMessage(requireContext())
+                                        Toast.makeText(
+                                            requireContext(),
+                                            errorMessage,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
                             }
 
                             is SignUpEvent.NavigationToHome -> {
                                 findNavController().navigate(R.id.action_authFragment_to_homeFragment)
                             }
+
+
                         }
                     }
                 }
@@ -123,21 +141,21 @@ class SignupFragment : Fragment() {
     private fun setupListeners() {
         binding.firstNameEdit.addTextChangedListener {
             viewModel.onAction(
-                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateFirstName(
+                SignUpAction.UpdateFirstName(
                     it.toString()
                 )
             )
         }
         binding.lastNameEdit.addTextChangedListener {
             viewModel.onAction(
-                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateLastName(
+                SignUpAction.UpdateLastName(
                     it.toString()
                 )
             )
         }
         binding.emailEdit.addTextChangedListener {
             viewModel.onAction(
-                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdateEmail(
+                SignUpAction.UpdateEmail(
                     it.toString()
                 )
             )
@@ -151,15 +169,56 @@ class SignupFragment : Fragment() {
         }
         binding.phoneEdit.addTextChangedListener {
             viewModel.onAction(
-                com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.UpdatePhoneNumber(
+                SignUpAction.UpdatePhoneNumber(
                     it.toString()
                 )
             )
         }
         binding.signupBtn.setOnClickListener {
-            viewModel.onAction(com.mahmoud.altasherat.features.authentication.signup.presentation.SignUpAction.SignUp)
+            viewModel.onAction(SignUpAction.SignUp)
         }
 
     }
 
+
+    private fun displayValidationErrors(errors: List<ValidationError>) {
+        val errorFields = mapOf(
+            setOf(
+                ValidationError.EMPTY_FIRSTNAME,
+                ValidationError.INVALID_FIRSTNAME
+            ) to binding.firstNameEdit,
+            setOf(
+                ValidationError.EMPTY_LASTNAME,
+                ValidationError.INVALID_LASTNAME
+            ) to binding.lastNameEdit,
+            setOf(ValidationError.EMPTY_EMAIL, ValidationError.INVALID_EMAIL) to binding.emailEdit,
+            setOf(
+                ValidationError.EMPTY_PASSWORD,
+                ValidationError.INVALID_PASSWORD
+            ) to binding.passwordEdit,
+            setOf(
+                ValidationError.EMPTY_PHONE_NUMBER,
+                ValidationError.INVALID_PHONE_NUMBER
+            ) to binding.phoneEdit,
+            setOf(
+                ValidationError.INVALID_COUNTRY_CODE,
+                ValidationError.EMPTY_COUNTRY_CODE
+            ) to binding.phoneCodePicker
+        )
+
+        binding.firstNameEdit.error = null
+        binding.lastNameEdit.error = null
+        binding.emailEdit.error = null
+        binding.passwordEdit.error = null
+        binding.phoneEdit.error = null
+        binding.phoneCodePicker.error = null
+
+        errors.forEach { error ->
+            errorFields.entries.find { it.key.contains(error) }?.value?.error =
+                error.toErrorMessage(requireContext())
+        }
+
+
+    }
 }
+

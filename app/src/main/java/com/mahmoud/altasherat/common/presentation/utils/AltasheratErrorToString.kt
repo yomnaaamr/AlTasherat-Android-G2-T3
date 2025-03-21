@@ -41,8 +41,6 @@ fun ValidationError.toResourceId(): Int {
         ValidationError.EMPTY_EMAIL -> R.string.error_empty_email
         ValidationError.INVALID_PASSWORD -> R.string.error_invalid_password
         ValidationError.EMPTY_PASSWORD -> R.string.error_empty_password
-        ValidationError.EMPTY_USERNAME -> R.string.error_empty_username
-        ValidationError.INVALID_USERNAME -> R.string.error_invalid_username
         ValidationError.EMPTY_FIRSTNAME -> R.string.error_empty_firstname
         ValidationError.INVALID_FIRSTNAME -> R.string.error_invalid_firstname
         ValidationError.EMPTY_LASTNAME -> R.string.error_empty_lastname

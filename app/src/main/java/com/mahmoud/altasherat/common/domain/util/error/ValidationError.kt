@@ -5,8 +5,6 @@ enum class ValidationError : AltasheratError {
     EMPTY_EMAIL,
     INVALID_PASSWORD,
     EMPTY_PASSWORD,
-    EMPTY_USERNAME,
-    INVALID_USERNAME,
     EMPTY_FIRSTNAME,
     INVALID_FIRSTNAME,
     EMPTY_LASTNAME,

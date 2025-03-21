@@ -3,6 +3,8 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
