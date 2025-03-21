@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.authentication.signup.presentation
 
-import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
@@ -22,50 +22,12 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
     private lateinit var authViewModel: AuthViewModel
     private val viewModel: SignupViewModel by viewModels()
+    private lateinit var bottomSheet: CountryPickerBottomSheet
 
 
     override fun FragmentSignupBinding.initialize() {
 
         authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
-
-        //Use Original country list from local instead of this.
-        val countryList = listOf(
-            Country(1, "Saudi Arabia", "SAR", "sa", "00966", "🇸🇦"),
-            Country(2, "Egypt", "EGP", "eg", "0020", "🇪🇬"),
-            Country(3, "Afghanistan", "AFN", "af", "0093", "🇦🇫")
-        )
-        val countryDisplayList = countryList.map { "${it.flag} (${it.phoneCode})" }
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            countryDisplayList
-        )
-        binding.phoneCodePicker.apply {
-            setText(countryDisplayList[0], false)
-            setOnClickListener {
-                setAdapter(adapter)
-                showDropDown()
-            }
-            //Handle item click
-            setOnItemClickListener { parent, _, position, _ ->
-
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                val selectedCountry = countryList[position]  // Get the selected country object
-
-                setText(selectedItem, false)
-            }
-
-        }
-
-        binding.signInTxt.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.auth_fragment_container, LoginFragment())
-                .commit()
-
-            authViewModel.switchToTab(1)
-
-        }
-
 
         setupObservers()
         setupListeners()
@@ -110,6 +72,23 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
         }
 
+
+        collectFlow(viewModel.countries) { countries ->
+            if (countries.isEmpty()) return@collectFlow
+            val firstItem = countries.first()
+            val initialSelect = firstItem.flag + " (" + firstItem.phoneCode + ")"
+            binding.phoneCodePicker.apply {
+                setText(initialSelect)
+                bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
+                    val country = selectedCountry as Country
+                    setText(country.flag + " (" + country.phoneCode + ")")
+                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
+                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
+                }
+            }
+        }
+
+
     }
 
 
@@ -149,8 +128,23 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 )
             )
         }
+
+        binding.phoneCodePicker.setOnClickListener {
+            bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
+        }
+
         binding.signupBtn.setOnClickListener {
             viewModel.onAction(SignupContract.SignUpAction.SignUp)
+        }
+
+
+        binding.signInTxt.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.auth_fragment_container, LoginFragment())
+                .commit()
+
+            authViewModel.switchToTab(1)
+
         }
 
     }

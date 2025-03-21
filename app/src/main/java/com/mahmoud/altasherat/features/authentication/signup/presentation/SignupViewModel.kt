@@ -3,6 +3,10 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.onError
+import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
@@ -14,12 +18,14 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(
-    private val signupUC: SignupUC
+    private val signupUC: SignupUC,
+    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SignupContract.SignUpState>(SignupContract.SignUpState.Idle)
@@ -27,6 +33,9 @@ class SignupViewModel @Inject constructor(
 
     private val _events = Channel<SignupContract.SignUpEvent>()
     val events = _events.receiveAsFlow()
+
+    private val _countries = MutableStateFlow<List<Country>>(emptyList())
+    val countries = _countries.asStateFlow()
 
     private val _signUpUiState = MutableStateFlow(SignUpUiState())
     private val signUpUiState = _signUpUiState.asStateFlow()
@@ -45,12 +54,23 @@ class SignupViewModel @Inject constructor(
         }
     }
 
+    init {
+        viewModelScope.launch {
+            getCountriesFromLocalUC()
+                .onSuccess { countries->
+                    _countries.value = countries
+                }
+                .onError {
+                    _events.send(SignupContract.SignUpEvent.Error(it))
+                }
+        }
+    }
+
     private fun signUp() {
 
         val phone = PhoneRequest(
-//            countryCode = signUpUiState.value.countryCode,
+            countryCode = signUpUiState.value.countryCode,
             number = signUpUiState.value.phoneNumber,
-            countryCode = "0020",
         )
 
         val signupRequest = SignUpRequest(
@@ -60,7 +80,7 @@ class SignupViewModel @Inject constructor(
             password = signUpUiState.value.password,
             passwordConfirmation = signUpUiState.value.password,
             phone = phone,
-            country = "1"
+            country = signUpUiState.value.selectedCountryId
         )
 
 

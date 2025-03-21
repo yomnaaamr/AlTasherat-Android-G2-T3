@@ -67,7 +67,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     val countries = state.data
                     binding.countryFlag.text = countries[0].flag
                     binding.countryName.text = countries[0].name
-                    bottomSheet = CountryPickerBottomSheet(state.data) { selectedCountry ->
+                    bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
                         this@LanguageFragment.selectedCountry = selectedCountry as Country
                         binding.countryFlag.text = selectedCountry.flag
                         binding.countryName.text = selectedCountry.name
