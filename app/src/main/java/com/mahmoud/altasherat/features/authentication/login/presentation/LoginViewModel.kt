@@ -65,7 +65,10 @@ class LoginViewModel @Inject constructor(
                     _event.emit(LoginContract.LoginEvent.Error(resource.error))
                 }
 
-                is Resource.Success -> _event.emit(LoginContract.LoginEvent.NavigateToHome(resource.data.user))
+                is Resource.Success -> {
+                    _event.emit(LoginContract.LoginEvent.NavigateToHome(resource.data.user))
+                    _state.value = LoginContract.LoginState.Success
+                }
             }
         }.launchIn(viewModelScope)
     }
