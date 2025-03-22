@@ -11,7 +11,12 @@ class LoginLocalDS(
     private val gson: Gson
 ) : ILoginLocalDS {
     override suspend fun saveLogin(loginEntity: LoginEntity) {
-        val loginEntityAsGson = gson.toJson(loginEntity)
-        localStorageProvider.save(StorageKeyEnum.LOGIN, loginEntityAsGson, String::class)
+        localStorageProvider.save(
+            StorageKeyEnum.ACCESS_TOKEN,
+            loginEntity.token,
+            String::class
+        )
+        val userJson = gson.toJson(loginEntity.user)
+        localStorageProvider.save(StorageKeyEnum.USER, userJson, String::class)
     }
 }

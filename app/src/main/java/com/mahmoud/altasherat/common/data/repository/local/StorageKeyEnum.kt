@@ -9,6 +9,4 @@ enum class StorageKeyEnum(override val keyValue: String) : IStorageKeyEnum {
     SELECTED_LANGUAGE("selected_language"),
     SELECTED_COUNTRY("selected_country"),
     ONBOARDING("onboarding"),
-    LOGIN("login"),
-
 }
