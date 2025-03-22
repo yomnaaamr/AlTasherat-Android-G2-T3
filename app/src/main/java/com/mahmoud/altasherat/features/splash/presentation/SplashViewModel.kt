@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
@@ -25,8 +26,8 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
-    private val getOnBoardingStateUC: GetOnBoardingStateUC,
-    private val hasUserLoggedInUC: HasUserLoggedInUC
+    private val hasUserLoggedInUC: HasUserLoggedInUC,
+    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
@@ -42,9 +43,10 @@ class SplashViewModel @Inject constructor(
     init {
 
         viewModelScope.launch {
-            getOnBoardingStateUC()
-                .onSuccess { isFirstTime->
-                    if (!isFirstTime) {
+            getCountriesFromLocalUC()
+                .onSuccess { countriesList->
+                    val hasCountries = countriesList.isNotEmpty()
+                    if (!hasCountries) {
                         fetchCountries()
                     } else {
                         val hasUser = hasUserLoggedInUC()
