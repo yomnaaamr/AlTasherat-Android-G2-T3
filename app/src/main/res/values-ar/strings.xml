@@ -76,7 +76,6 @@
     <string name="language">اللغة</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
     <string name="logout">تسجيل الخروج</string>
-    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
     <string name="loading">جارى التحميل…</string>
 
 
