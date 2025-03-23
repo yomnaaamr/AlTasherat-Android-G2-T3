@@ -42,7 +42,6 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initLoadingDialog()
     }
 
     override fun onDestroyView() {
@@ -54,6 +53,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
 
 
     fun showLoading() {
+        initLoadingDialog()
         loadingDialog?.show()
     }
 
@@ -87,7 +87,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
             }
 
             is NetworkError -> {
-                handleNetworkError(error)
+                showMessage(error.toErrorMessage(requireContext()), MessageType.SNACKBAR, this)
             }
 
             else -> {
@@ -96,11 +96,5 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
         }
     }
 
-    private fun handleNetworkError(error: NetworkError) {
-        when (error) {
-            NetworkError.UNAUTHORIZED -> TODO()
-            else -> showMessage(error.toErrorMessage(requireContext()), MessageType.SNACKBAR, this)
-        }
-    }
 
 }
