@@ -3,10 +3,9 @@ package com.mahmoud.altasherat.features.authentication.signup.data.models.reques
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.common.util.Constants.EMAIL_PATTERN
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import java.util.regex.Pattern
-
-private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 
 
 data class SignUpRequest(
@@ -44,7 +43,6 @@ data class SignUpRequest(
 
         return Resource.Success(errors)
     }
-
 
 
     private fun validateFirstName(): Resource<Unit> {

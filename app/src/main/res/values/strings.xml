@@ -81,6 +81,7 @@
     <string name="language">Language</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="logout">Logout</string>
+    <string name="loading">Loading…</string>
 
 
 </resources>

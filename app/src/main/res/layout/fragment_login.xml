@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.signup.presentation.SignupFragment">
+    tools:context=".features.authentication.signup.presentation.SignupFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_background"
@@ -62,9 +62,9 @@
                         android:id="@+id/phone_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="phone"
                         android:paddingEnd="100dp"
                         android:paddingStart="100dp"
-                        android:inputType="phone"
                         android:maxLines="1" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -75,13 +75,14 @@
                     android:layout_height="53dp"
                     android:minWidth="100dp"
                     android:layout_gravity="end|bottom"
-                    tools:text="(+966) 🇸🇦"
+                    tools:text="🇸🇦 (+966)"
+                    android:focusable="true"
                     android:textColor="@android:color/white"
                     android:inputType="none"
                     android:paddingHorizontal="8dp"
                     style="?textAppearanceTitleMedium"
                     android:background="@drawable/custom_phone_end_icon"
-                    android:clickable="true"/>
+                    android:clickable="true" />
             </FrameLayout>
 
             <TextView
@@ -163,7 +164,7 @@
         app:layout_constraintEnd_toStartOf="@id/create_new_acc_txt"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_btn" />
+        app:layout_constraintTop_toBottomOf="@id/login_btn" />
 
     <TextView
         android:id="@+id/create_new_acc_txt"

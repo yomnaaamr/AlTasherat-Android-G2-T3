@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
@@ -47,6 +48,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                 is SplashContract.SplashEvent.Error -> {
                     val errorMessage =
                         splashEvent.error.toErrorMessage(requireContext())
+                    Log.e("Splash error", errorMessage)
                     showMessage(errorMessage, MessageType.SNACKBAR, this)
                 }
 

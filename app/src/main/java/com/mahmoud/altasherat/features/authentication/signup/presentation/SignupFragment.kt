@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
-import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
@@ -18,7 +18,7 @@ import com.mahmoud.altasherat.features.authentication.login.presentation.LoginFr
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate){
+class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
 
     private lateinit var authViewModel: AuthViewModel
     private val viewModel: SignupViewModel by viewModels()
@@ -34,11 +34,10 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     }
 
 
-
     private fun setupObservers() {
 
-        collectFlow(viewModel.state){ state ->
-            when(state) {
+        collectFlow(viewModel.state) { state ->
+            when (state) {
                 is SignupContract.SignUpState.Error -> hideLoading()
                 is SignupContract.SignUpState.Idle -> {}
                 is SignupContract.SignUpState.Loading -> showLoading()
@@ -47,7 +46,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         }
 
 
-        collectFlow(viewModel.events){signupEvent->
+        collectFlow(viewModel.events) { signupEvent ->
             when (signupEvent) {
                 is SignupContract.SignUpEvent.Error -> {
                     when (signupEvent.error) {
@@ -58,7 +57,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                         else -> {
                             val errorMessage =
                                 signupEvent.error.toErrorMessage(requireContext())
-                            showMessage(errorMessage,MessageType.SNACKBAR,this)
+                            showMessage(errorMessage, MessageType.SNACKBAR, this)
                         }
                     }
                 }

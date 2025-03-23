@@ -11,8 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        app:cardBackgroundColor="?colorSurfaceVariant"
         app:cardCornerRadius="18dp"
+        app:cardBackgroundColor="?colorSurfaceVariant"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +58,7 @@
                     android:id="@+id/first_name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AlTasherat.TitleSmall"
                     android:inputType="text"
                     android:maxLines="1" />
 
@@ -97,6 +98,7 @@
                     android:id="@+id/last_name_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AlTasherat.TitleSmall"
                     android:inputType="text"
                     android:maxLines="1" />
 
@@ -137,6 +139,7 @@
                     android:id="@+id/email_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AlTasherat.TitleSmall"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
 
@@ -181,26 +184,29 @@
                         android:id="@+id/phone_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingEnd="100dp"
-                        android:paddingStart="100dp"
+                        style="@style/TextAppearance.AlTasherat.TitleSmall"
                         android:inputType="phone"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:paddingStart="100dp"
+                        android:paddingEnd="100dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <AutoCompleteTextView
                     android:id="@+id/phone_code_picker"
                     android:layout_width="wrap_content"
-                    android:layout_height="53dp"
+                    android:layout_height="51dp"
                     android:minWidth="100dp"
                     android:layout_gravity="end|bottom"
-                    tools:text="(+966) 🇸🇦"
+                    tools:text="🇸🇦 (+966)"
+                    android:focusedByDefault="true"
+                    android:focusableInTouchMode="true"
                     android:textColor="@android:color/white"
                     android:inputType="none"
                     android:paddingHorizontal="8dp"
                     style="?textAppearanceTitleMedium"
                     android:background="@drawable/custom_phone_end_icon"
-                    android:clickable="true"/>
+                    android:clickable="true" />
             </FrameLayout>
 
             <TextView
@@ -238,6 +244,7 @@
                     android:id="@+id/password_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AlTasherat.TitleSmall"
                     android:inputType="textPassword"
                     android:maxLines="1" />
 

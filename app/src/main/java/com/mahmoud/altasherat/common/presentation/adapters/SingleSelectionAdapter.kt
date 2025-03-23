@@ -6,21 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_COUNTRY
+import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_LANGUAGE
+import com.mahmoud.altasherat.databinding.ItemCountryBinding
+import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
-import com.mahmoud.altasherat.databinding.ItemCountryBinding
-import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
 
 class SingleSelectionAdapter(
     private val items: List<ListItem>,
     private val clickListener: OnItemClickListener,
-    private val defaultLanguagePosition:Int = 0
+    private val defaultLanguagePosition: Int = 0,
+    private val selectedCountryPosition: Int = 0
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    companion object {
-        private const val VIEW_TYPE_COUNTRY = 0
-        private const val VIEW_TYPE_LANGUAGE = 1
-    }
 
     var checkedLanguagePosition = -1
     var checkedCountryPosition = -1
@@ -30,12 +29,12 @@ class SingleSelectionAdapter(
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            checkedCountryPosition = -1
+            checkedCountryPosition = selectedCountryPosition
             itemView.setOnClickListener(this)
         }
 
         fun bind(item: ListItem) {
-            val isItemSelected = checkedCountryPosition == adapterPosition
+            val isItemSelected = checkedCountryPosition == absoluteAdapterPosition
             binding.countryName.text = item.name
             item.isSelected = isItemSelected
             Log.d("IsItemSelected?", isItemSelected.toString())
