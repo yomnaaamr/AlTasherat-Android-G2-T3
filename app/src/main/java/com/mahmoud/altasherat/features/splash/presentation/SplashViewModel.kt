@@ -9,7 +9,6 @@ import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -30,7 +29,8 @@ class SplashViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
+    private val _state =
+        MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
     val state = _state.asStateFlow()
 
     private val _events = Channel<SplashContract.SplashEvent>()
@@ -44,9 +44,10 @@ class SplashViewModel @Inject constructor(
 
         viewModelScope.launch {
             getCountriesFromLocalUC()
-                .onSuccess { countriesList->
+                .onSuccess { countriesList ->
                     val hasCountries = countriesList.isNotEmpty()
                     if (!hasCountries) {
+                        Log.d("Fetching list from remote", hasCountries.toString())
                         fetchCountries()
                     } else {
                         val hasUser = hasUserLoggedInUC()

@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
-import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
@@ -29,7 +29,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private lateinit var bottomSheet: CountryPickerBottomSheet
 
 
-
     override fun FragmentLoginBinding.initialize() {
         authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
 
@@ -38,7 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
 
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.createNewAccTxt.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.auth_fragment_container, SignupFragment())
@@ -67,7 +66,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
 
 
         collectFlow(loginViewModel.countries) { countries ->
@@ -84,7 +83,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
 
-        collectFlow(loginViewModel.event){ event ->
+        collectFlow(loginViewModel.event) { event ->
             when (event) {
                 is LoginContract.LoginEvent.NavigateToHome -> {
                     //Navigate to home
@@ -111,7 +110,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
 
-        collectFlow(loginViewModel.state){ state ->
+        collectFlow(loginViewModel.state) { state ->
             when (state) {
                 is LoginContract.LoginState.Loading -> {
                     showLoading()
@@ -132,7 +131,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
     }
-
 
 
     private fun displayValidationErrors(errors: List<ValidationError>) {

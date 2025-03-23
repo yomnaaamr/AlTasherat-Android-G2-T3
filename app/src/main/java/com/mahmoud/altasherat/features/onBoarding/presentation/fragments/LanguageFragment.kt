@@ -23,7 +23,8 @@ import java.util.Locale
 
 
 @AndroidEntryPoint
-class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageBinding::inflate), OnItemClickListener {
+class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageBinding::inflate),
+    OnItemClickListener {
 
     private lateinit var languageAdapter: SingleSelectionAdapter
     private val viewModel: LanguageViewModel by viewModels()
@@ -55,45 +56,33 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     }
 
 
-    private fun setupObservers(){
+    private fun setupObservers() {
 
-        collectFlow(viewModel.state){ state ->
-            when(state) {
+        collectFlow(viewModel.state) { state ->
+            when (state) {
                 is LanguageContract.LanguageState.Error -> {}
                 is LanguageContract.LanguageState.Idle -> {}
                 is LanguageContract.LanguageState.Loading -> {}
                 is LanguageContract.LanguageState.Success -> {
                     val countries = state.data
-                    binding.countryFlag.text = countries[0].flag
-                    binding.countryName.text = countries[0].name
-                    bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                        this@LanguageFragment.selectedCountry = selectedCountry as Country
-                        binding.countryFlag.text = selectedCountry.flag
-                        binding.countryName.text = selectedCountry.name
+                    if (countries.isNotEmpty()) {
+                        countriesList = countries
+                        selectedCountry =
+                            countries[countries.indexOfFirst { it.id == 1 }]
+                        binding.countryFlag.text = selectedCountry?.flag
+                        binding.countryName.text = selectedCountry?.name
                     }
                 }
             }
         }
 
-
-        collectFlow(viewModel.events){ event ->
-            when(event){
+        collectFlow(viewModel.events) { event ->
+            when (event) {
                 is LanguageContract.LanguageEvent.Error -> {
                     val error = event.error.toErrorMessage(requireContext())
-                    showMessage(error, MessageType.TOAST,this)
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.countries.collect { countries ->
-                        if (countries.isNotEmpty()) {
-                            countriesList = countries
-                            selectedCountry = countries[countries.indexOfFirst { it.id == 1 }]
-                            binding.countryFlag.text = selectedCountry?.flag
-                            binding.countryName.text = selectedCountry?.name
-                        }
-
-                    }
+                    showMessage(error, MessageType.TOAST, this)
                 }
+
                 is LanguageContract.LanguageEvent.NavigationToAuth -> {
                     findNavController().navigate(R.id.action_languageFragment_to_authFragment)
                 }
@@ -101,9 +90,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
         }
     }
 
-
     private fun setupListeners() {
-
 
         binding.chooseCountryLayout.setOnClickListener {
             bottomSheet = CountryPickerBottomSheet(
@@ -131,7 +118,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                 )
                 requireContext().changeLocale(selectedLanguage!!.code)
             } else {
-                showMessage(getString(R.string.selection_required), MessageType.TOAST, this)
+                showMessage(
+                    getString(R.string.selection_required),
+                    MessageType.TOAST,
+                    this
+                )
             }
 
 
@@ -141,6 +132,5 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     override fun onItemSelected(item: ListItem) {
         selectedLanguage = item as Language
     }
-
-
 }
+
