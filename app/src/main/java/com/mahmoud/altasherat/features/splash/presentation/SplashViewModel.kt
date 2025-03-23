@@ -9,6 +9,7 @@ import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -26,7 +27,8 @@ class SplashViewModel @Inject constructor(
     private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
     private val hasUserLoggedInUC: HasUserLoggedInUC,
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
+    private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
+    private val getOnBoardingStateUC: GetOnBoardingStateUC
 ) : ViewModel() {
 
     private val _state =
@@ -46,18 +48,27 @@ class SplashViewModel @Inject constructor(
             getCountriesFromLocalUC()
                 .onSuccess { countriesList ->
                     val hasCountries = countriesList.isNotEmpty()
-                    if (!hasCountries) {
-                        Log.d("Fetching list from remote", hasCountries.toString())
-                        fetchCountries()
+                    if (hasCountries) {
+                        getOnBoardingStateUC()
+                            .onSuccess {
+                                if (it) {
+                                    val hasUser = hasUserLoggedInUC()
+                                    if (hasUser) {
+                                        _events.send(SplashContract.SplashEvent.NavigateToHome)
+                                        _state.value = SplashContract.SplashState.Success
+                                    } else {
+                                        _events.send(SplashContract.SplashEvent.NavigateToAuth)
+                                        _state.value = SplashContract.SplashState.Success
+                                    }
+                                } else {
+                                    _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                                    _state.value = SplashContract.SplashState.Success
+                                }
+                            }
+
                     } else {
-                        val hasUser = hasUserLoggedInUC()
-                        if (hasUser) {
-                            _events.send(SplashContract.SplashEvent.NavigateToHome)
-                            _state.value = SplashContract.SplashState.Success
-                        } else {
-                            _events.send(SplashContract.SplashEvent.NavigateToAuth)
-                            _state.value = SplashContract.SplashState.Success
-                        }
+                        Log.d("Fetching list from remote", "")
+                        fetchCountries()
                     }
                 }
                 .onError {
