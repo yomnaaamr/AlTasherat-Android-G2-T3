@@ -68,6 +68,9 @@
     <string name="error_empty_country_code">رمز الدولة مطلوب.</string>
     <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
     <string name="loading">جارى التحميل…</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="requests">طلبات التأشيرات</string>
+    <string name="altasherat">منصة التأشيرات</string>
 
 
 </resources>
