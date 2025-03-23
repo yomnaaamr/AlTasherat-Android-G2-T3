@@ -25,17 +25,23 @@ data class SignUpRequest(
     val country: String
 ) {
 
-    fun validateSignUpRequest(): Resource<Unit> {
+    fun validateSignUpRequest(): Resource<MutableList<ValidationError>> {
 
-        validateFirstName().let { if (it is Resource.Error) return it }
-        validateLastName().let { if (it is Resource.Error) return it }
-        validateEmail().let { if (it is Resource.Error) return it }
-        phone.validatePhoneNumberRequest().let { if (it is Resource.Error) return it }
-        validatePassword().let { if (it is Resource.Error) return it }
-//        validatePasswordConfirmation().let { if (it is Resource.Error) return it }
+        val errors = mutableListOf<ValidationError>()
 
+        listOf(
+            validateFirstName(),
+            validateLastName(),
+            validateEmail(),
+            phone.validatePhoneNumberRequest(),
+            validatePassword()
+        ).forEach { result ->
+            if (result is Resource.Error) {
+                errors.add(result.error as ValidationError)
+            }
+        }
 
-        return Resource.Success(Unit)
+        return Resource.Success(errors)
     }
 
 
@@ -66,14 +72,5 @@ data class SignUpRequest(
         if (password.length < 8 || password.length > 50) return Resource.Error(ValidationError.INVALID_PASSWORD)
         return Resource.Success(Unit)
     }
-
-//    private fun validatePasswordConfirmation(): Resource<Unit> {
-//        if (passwordConfirmation.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD_CONFIRMATION)
-//        if (passwordConfirmation.length < 8 || passwordConfirmation.length > 50) return Resource.Error(
-//            ValidationError.INVALID_PASSWORD_CONFIRMATION
-//        )
-//        if (password != passwordConfirmation) return Resource.Error(ValidationError.PASSWORD_MISMATCH)
-//        return Resource.Success(Unit)
-//    }
 
 }

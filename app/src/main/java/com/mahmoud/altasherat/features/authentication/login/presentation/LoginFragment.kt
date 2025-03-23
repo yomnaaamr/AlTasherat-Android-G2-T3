@@ -1,21 +1,16 @@
 package com.mahmoud.altasherat.features.authentication.login.presentation
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.common.presentation.adapters.CountryPickerBottomSheet
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentLoginBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
@@ -24,52 +19,26 @@ import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
 import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private lateinit var binding: FragmentLoginBinding
     private lateinit var authViewModel: AuthViewModel
     private val loginViewModel: LoginViewModel by viewModels()
     private var selectedCountry: Country? = null
+    private lateinit var bottomSheet: CountryPickerBottomSheet
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-        authViewModel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
 
-        //Use Original country list from local instead of this.
-        val countryList = listOf(
-            Country(1, "Saudi Arabia", "SAR", "sa", "00966", "🇸🇦"),
-            Country(2, "Egypt", "EGP", "eg", "0020", "🇪🇬"),
-            Country(3, "Afghanistan", "AFN", "af", "0093", "🇦🇫")
-        )
-        val countryDisplayList = countryList.map { "${it.flag} (${it.phoneCode})" }
-        val adapter = ArrayAdapter(
-            this.requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            countryDisplayList
-        )
-        binding.phoneCodePicker.apply {
-            setText(countryDisplayList[0], false)
-            setOnClickListener {
-                setAdapter(adapter)
-                showDropDown()
-            }
-            //Handle item click
-            setOnItemClickListener { parent, _, position, _ ->
 
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                selectedCountry = countryList[position]  // Get the selected country object
+    override fun FragmentLoginBinding.initialize() {
+        authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
 
-                setText(selectedItem, false)
-            }
+        setupObservers()
+        setupListeners()
+    }
 
-        }
+
+    private fun setupListeners(){
         binding.createNewAccTxt.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.auth_fragment_container, SignupFragment())
@@ -77,11 +46,7 @@ class LoginFragment : Fragment() {
 
             authViewModel.switchToTab(0)
         }
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding.loginBtn?.setOnClickListener {
             val phoneNumber = binding.phoneEdit.text.toString()
@@ -96,53 +61,99 @@ class LoginFragment : Fragment() {
                 )
             )
         }
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.event.collect() { event ->
-                    when (event) {
-                        is LoginContract.LoginEvent.NavigateToHome -> {
-                            //Navigate to home
-                            Log.d("AITASHERAT", "Navigate To Profile ")
-                            findNavController().navigate(R.id.action_authFragment_to_homeFragment)
-                            Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_LONG)
-                                .show()
+
+        binding.phoneCodePicker.setOnClickListener {
+            bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
+        }
+    }
+
+    private fun setupObservers(){
+
+
+        collectFlow(loginViewModel.countries) { countries ->
+            if (countries.isEmpty()) return@collectFlow
+            val firstItem = countries.first()
+            val initialSelect = firstItem.flag + " (" + firstItem.phoneCode + ")"
+            binding.phoneCodePicker.apply {
+                setText(initialSelect)
+                bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
+                    this@LoginFragment.selectedCountry = selectedCountry as Country
+                    setText(selectedCountry.flag + " (" + selectedCountry.phoneCode + ")")
+
+                }
+            }
+        }
+
+        collectFlow(loginViewModel.event){ event ->
+            when (event) {
+                is LoginContract.LoginEvent.NavigateToHome -> {
+                    //Navigate to home
+                    Log.d("AITASHERAT", "Navigate To Profile ")
+                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                    Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                is LoginContract.LoginEvent.Error -> {
+                    when (event.error) {
+                        is AltasheratError.ValidationErrors -> {
+                            displayValidationErrors(event.error.errors)
+                        }
+
+                        else -> {
+                            val errorMessage = event.error.toErrorMessage(requireContext())
+                            showMessage(errorMessage, MessageType.SNACKBAR, this)
+
                         }
                     }
                 }
             }
         }
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.state.collect { state ->
-                    when (state) {
-                        is LoginContract.LoginState.Loading -> {
-                            //Show loading
-                        }
 
-                        is LoginContract.LoginState.Success -> {
-                            //Navigate to home
-                        }
+        collectFlow(loginViewModel.state){ state ->
+            when (state) {
+                is LoginContract.LoginState.Loading -> {
+                    showLoading()
+                }
 
-                        is LoginContract.LoginState.Exception -> {
-                            //Show error
-                            handleError(state.altasheratError)
-                        }
+                is LoginContract.LoginState.Success -> {
+                    hideLoading()
+                }
 
-                        LoginContract.LoginState.Idle -> {
+                is LoginContract.LoginState.Exception -> {
+                    hideLoading()
+                }
 
-                        }
-                    }
+                is LoginContract.LoginState.Idle -> {
+
                 }
             }
         }
-    }
-
-    private fun handleError(altasheratError: AltasheratError) {
-        val errorMessages: String = altasheratError.toErrorMessage(requireContext())
-        Log.d("AITASHERAT", "errormsgs = $errorMessages")
 
     }
 
+
+
+    private fun displayValidationErrors(errors: List<ValidationError>) {
+        val errorFields = mapOf(
+            setOf(
+                ValidationError.EMPTY_PHONE_NUMBER,
+                ValidationError.INVALID_PHONE_NUMBER
+            ) to binding.phoneEdit,
+            setOf(
+                ValidationError.EMPTY_PASSWORD,
+                ValidationError.INVALID_PASSWORD
+            ) to binding.passwordEdit,
+        )
+
+        binding.phoneEdit.error = null
+        binding.passwordEdit.error = null
+
+        errors.forEach { error ->
+            errorFields.entries.find { it.key.contains(error) }?.value?.error =
+                error.toErrorMessage(requireContext())
+        }
+    }
 
 }

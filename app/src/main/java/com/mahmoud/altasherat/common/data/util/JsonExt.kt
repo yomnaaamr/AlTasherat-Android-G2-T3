@@ -3,7 +3,6 @@ package com.mahmoud.altasherat.common.data.util
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mahmoud.altasherat.common.di.AppModule
 import java.lang.reflect.Type
 
 fun <M> String.getModelFromJSON(tokenType: Type): M = Gson().fromJson(this, tokenType)
@@ -20,8 +19,3 @@ inline fun <reified T> parseJsonFile(context: Context, fileName: String): List<T
         emptyList()
     }
 }
-
-fun <Model> String.getModelFromJson(modelType: Type): Model =
-    AppModule.provideGson().fromJson(this, modelType)
-
-fun Any.toJson(): String = AppModule.provideGson().toJson(this)

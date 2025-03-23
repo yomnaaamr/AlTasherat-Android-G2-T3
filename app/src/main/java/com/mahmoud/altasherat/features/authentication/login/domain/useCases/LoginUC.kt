@@ -1,10 +1,9 @@
 package com.mahmoud.altasherat.features.authentication.login.domain.useCases
 
-import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.common.domain.util.error.DataInputError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
+import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
 import com.mahmoud.altasherat.features.authentication.login.domain.models.Login
 import com.mahmoud.altasherat.features.authentication.login.domain.repository.ILoginRepository
@@ -20,13 +19,17 @@ class LoginUC(
     operator fun invoke(loginRequest: LoginRequest): Flow<Resource<Login>> {
         return flow {
             emit(Resource.Loading)
-            if (!loginRequest.isPasswordValid()) {
-                throw AltasheratException(DataInputError.INVALID_PASSWORD_LENGTH)
-            } else {
-                val loginResponse: Login = loginRepository.login(loginRequest)
-                loginRepository.saveLogin(loginResponse)
-                emit(Resource.Success(loginResponse))
-            }
+
+            loginRequest.validateLoginRequest()
+                .onSuccess { errors ->
+                    if (errors.isNotEmpty())
+                        throw AltasheratException(AltasheratError.ValidationErrors(errors))
+                }
+
+            val loginResponse: Login = loginRepository.login(loginRequest)
+            loginRepository.saveLogin(loginResponse)
+            emit(Resource.Success(loginResponse))
+
         }.catch { throwable ->
             val failureResource =
                 if (throwable is AltasheratException) throwable else AltasheratException(

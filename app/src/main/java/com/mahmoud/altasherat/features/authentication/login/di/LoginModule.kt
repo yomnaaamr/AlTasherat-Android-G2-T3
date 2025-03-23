@@ -1,6 +1,8 @@
 package com.mahmoud.altasherat.features.authentication.login.di
 
+import com.google.gson.Gson
 import com.mahmoud.altasherat.common.data.repository.local.LocalStorageProvider
+import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.authentication.login.data.repository.LoginRepository
 import com.mahmoud.altasherat.features.authentication.login.data.repository.local.LoginLocalDS
@@ -9,14 +11,18 @@ import com.mahmoud.altasherat.features.authentication.login.domain.repository.IL
 import com.mahmoud.altasherat.features.authentication.login.domain.repository.local.ILoginLocalDS
 import com.mahmoud.altasherat.features.authentication.login.domain.repository.remote.ILoginRemoteDS
 import com.mahmoud.altasherat.features.authentication.login.domain.useCases.LoginUC
+import com.mahmoud.altasherat.features.authentication.signup.data.repository.local.SignupLocalDS
+import com.mahmoud.altasherat.features.authentication.signup.domain.repository.local.ISignupLocalDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object LoginModule {
+
     @Provides
     fun provideLoginRemoteDS(
         apiNetworkProvider: IRestApiNetworkProvider
@@ -27,8 +33,11 @@ object LoginModule {
     }
 
     @Provides
-    fun provideLoginLocalDS(localStorageProvider: LocalStorageProvider): ILoginLocalDS {
-        return LoginLocalDS(localStorageProvider)
+    fun provideLoginLocalDS(
+        localStorageProvider: ILocalStorageProvider,
+        gson: Gson
+    ): ILoginLocalDS {
+        return LoginLocalDS(localStorageProvider, gson)
     }
 
     @Provides
