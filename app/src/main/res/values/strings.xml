@@ -72,6 +72,13 @@
     <string name="invalid_password_length">Password length must be more than 8 and less than 50</string>
     <string name="invalid_phone_or_password">Invalid Phone Number or Password</string>
     <string name="loading">Loading</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="change_password">Change Password</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="language">Language</string>
 
 
 </resources>
