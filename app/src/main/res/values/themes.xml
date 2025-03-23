@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Base.Theme.AlTasherat" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -78,7 +79,6 @@
     <style name="Theme.AlTasherat" parent="Base.Theme.AlTasherat" />
 
 
-
     <!-- region TextView -->
 
     <style name="TextAppearance.AlTasherat.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
@@ -154,6 +154,14 @@
         <item name="android:drawablePadding">10dp</item>
         <item name="android:paddingHorizontal">54dp</item>
 
+    </style>
+
+    <style name="BottomNavTextActive">
+        <item name="android:textColor">?colorPrimary</item> <!-- Active color -->
+    </style>
+
+    <style name="BottomNavTextInactive">
+        <item name="android:textColor">#b2aecc</item> <!-- Gray for inactive -->
     </style>
 
 </resources>
