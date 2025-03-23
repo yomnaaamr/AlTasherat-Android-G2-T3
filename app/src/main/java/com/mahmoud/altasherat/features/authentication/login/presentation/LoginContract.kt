@@ -11,6 +11,7 @@ class LoginContract {
 
     sealed class LoginEvent {
         data class NavigateToHome(val user: User) : LoginEvent()
+        data class Error(val error: AltasheratError) : LoginEvent()
     }
 
     sealed interface LoginState {

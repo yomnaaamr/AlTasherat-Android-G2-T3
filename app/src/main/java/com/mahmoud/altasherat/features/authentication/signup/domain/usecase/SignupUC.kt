@@ -3,7 +3,7 @@ package com.mahmoud.altasherat.features.authentication.signup.domain.usecase
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import com.mahmoud.altasherat.common.domain.util.onError
+import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.models.SignUp
 import com.mahmoud.altasherat.features.authentication.signup.domain.repository.ISignupRepository
@@ -22,8 +22,9 @@ class SignupUC(
             emit(Resource.Loading)
 
             signupRequest.validateSignUpRequest()
-                .onError { validationError ->
-                    throw AltasheratException(validationError)
+                .onSuccess { errors->
+                    if (errors.isNotEmpty())
+                        throw AltasheratException(AltasheratError.ValidationErrors(errors))
                 }
 
             val response = repository.signup(signupRequest)

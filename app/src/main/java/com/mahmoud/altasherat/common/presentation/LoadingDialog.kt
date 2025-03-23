@@ -1,23 +1,23 @@
 package com.mahmoud.altasherat.common.presentation
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.Window
-import com.mahmoud.solutionx.R
+import com.mahmoud.altasherat.R
+import androidx.core.graphics.drawable.toDrawable
 
-class LoadingDialog {
+class LoadingDialog(private val context: Context) {
+
     private var dialog: Dialog? = null
 
-    fun show(context: Context) {
+    fun show() {
         if (dialog == null) {
             dialog = Dialog(context).apply {
                 requestWindowFeature(Window.FEATURE_NO_TITLE)
                 setContentView(R.layout.dialog_loading)
                 setCancelable(false)
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
             }
         }
         dialog?.show()

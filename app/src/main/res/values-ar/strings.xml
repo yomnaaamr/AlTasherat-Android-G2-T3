@@ -65,9 +65,9 @@
     <string name="error_invalid_password_confirmation">يجب أن يتكون تأكيد كلمة المرور من 8 إلى 50 حرفًا.</string>
     <string name="error_password_mismatch">كلمات المرور غير متطابقة.</string>
     <string name="error_empty_phone_number">رقم الهاتف مطلوب.</string>
-    <string name="error_invalid_phone_number">يجب أن يتكون رقم الهاتف من 3 إلى 5 أرقام.</string>
+    <string name="error_invalid_phone_number">يجب أن يتكون رقم الهاتف من 9 إلى 15 أرقام.</string>
     <string name="error_empty_country_code">رمز الدولة مطلوب.</string>
-    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
+    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 3 إلى 5 حرفًا.</string>
 
 
 </resources>
