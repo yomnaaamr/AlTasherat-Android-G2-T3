@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.menu.presentation
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
@@ -22,24 +23,30 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
         binding.menuRecyclerView.adapter = adapter
         val menuItems = MenuDataSource.getNavigationItems(requireContext())
 
-        collectFlow(viewModel.state){ isUserAuthenticated->
-           when(isUserAuthenticated){
-               is MenuContract.MenuState.Error -> {}
-               is MenuContract.MenuState.Idle -> {}
-               is MenuContract.MenuState.Loading -> {}
-               is MenuContract.MenuState.Success -> {
-                   val filteredItems = if (isUserAuthenticated.isAuthenticated) {
-                       menuItems
-                   }else{
-                       menuItems.filter { !it.requiresAuth }
-                   }
+        collectFlow(viewModel.state) { isUserAuthenticated ->
+            when (isUserAuthenticated) {
+                is MenuContract.MenuState.Error -> {}
+                is MenuContract.MenuState.Idle -> {}
+                is MenuContract.MenuState.Loading -> {}
+                is MenuContract.MenuState.Success -> {
+                    val hasUserLoggedIn = isUserAuthenticated.isAuthenticated
+                    val filteredItems = if (hasUserLoggedIn) {
+                        menuItems
+                    } else {
+                        menuItems.filter { !it.requiresAuth }
+                    }
 
-                   adapter.submitList(filteredItems)
-               }
-           }
-       }
+                    adapter.submitList(filteredItems)
+
+                    binding.logoutAndVersionLayout.visibility =
+                        if (hasUserLoggedIn) View.VISIBLE else View.GONE
+
+                    binding.userDataLayout.visibility =
+                        if (hasUserLoggedIn) View.VISIBLE else View.GONE
+                }
+            }
+        }
     }
-
 
 
 }

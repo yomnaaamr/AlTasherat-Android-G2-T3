@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/user_data_layout"
         android:gravity="center_horizontal"
         android:padding="16dp">
 
@@ -60,12 +61,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:id="@+id/logout_and_version_layout"
         android:padding="16dp"
         android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/version_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?textAppearanceTitleSmall"
@@ -73,10 +75,9 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logout_button"
-            style="@style/ButtonOutlinedStyle"
+            style="@style/ElevatedButtonStyle"
             android:textAppearance="?textAppearanceTitleSmall"
             android:drawableEnd="@drawable/ic_logout"
-            android:textColor="?colorOnErrorContainer"
             android:text="@string/logout" />
 
     </LinearLayout>
