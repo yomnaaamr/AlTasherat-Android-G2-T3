@@ -75,6 +75,8 @@
     <string name="terms_and_conditions">الشروط والاحكام</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="language">اللغة</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="logout">تسجيل الخروج</string>
 
 
 </resources>

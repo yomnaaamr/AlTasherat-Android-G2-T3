@@ -12,6 +12,7 @@ object MenuDataSource {
             title = context.getString(R.string.sign_in_text),
             iconRes = R.drawable.ic_login,
             destinationId = R.id.authFragment,
+            requiresAuth = true
         ),
         NavigationItem(
             id = 2,
