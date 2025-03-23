@@ -72,6 +72,9 @@
     <string name="invalid_password_length">Password length must be more than 8 and less than 50</string>
     <string name="invalid_phone_or_password">Invalid Phone Number or Password</string>
     <string name="loading">Loading…</string>
+    <string name="profile">Profile</string>
+    <string name="requests">Requests</string>
+    <string name="altasherat">Altasherat</string>
 
 
 </resources>
