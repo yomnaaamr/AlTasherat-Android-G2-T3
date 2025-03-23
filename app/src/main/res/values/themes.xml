@@ -156,12 +156,4 @@
 
     </style>
 
-    <style name="BottomNavTextActive">
-        <item name="android:textColor">?colorPrimary</item> <!-- Active color -->
-    </style>
-
-    <style name="BottomNavTextInactive">
-        <item name="android:textColor">#b2aecc</item> <!-- Gray for inactive -->
-    </style>
-
 </resources>
