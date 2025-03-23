@@ -71,6 +71,13 @@
     <string name="profile">الملف الشخصي</string>
     <string name="requests">طلبات التأشيرات</string>
     <string name="altasherat">منصة التأشيرات</string>
+    <string name="middle_name">الاسم الاوسط</string>
+    <string name="enter_middle_name">ادخل الاسم الاوسط</string>
+    <string name="birthday">تاريخ الميلاد</string>
+    <string name="enter_your_country">ادخل دولتك</string>
+    <string name="country">الدولة</string>
+    <string name="enter_birthday">ادخل تاريخ الميلاد</string>
+    <string name="save">حفظ</string>
 
 
 </resources>
