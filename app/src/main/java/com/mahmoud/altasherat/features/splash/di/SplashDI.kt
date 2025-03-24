@@ -22,7 +22,6 @@ import dagger.hilt.android.components.ViewModelComponent
 internal object SplashDI {
 
 
-
     @Provides
     fun provideLocalDataSource(
         localStorageProvider: ILocalStorageProvider

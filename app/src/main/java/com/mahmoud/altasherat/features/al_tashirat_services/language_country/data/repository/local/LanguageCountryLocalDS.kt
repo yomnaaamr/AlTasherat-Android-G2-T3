@@ -38,4 +38,8 @@ internal class LanguageCountryLocalDS(
         }
         return null
     }
+
+    override suspend fun hasCountries(): Boolean {
+        return localStorageProvider.contains(StorageKeyEnum.COUNTRIES, String::class)
+    }
 }

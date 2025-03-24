@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.common.domain.repository.local
 
-import kotlinx.coroutines.flow.Flow
 import kotlin.reflect.KClass
 
 interface ILocalStorageProvider {
@@ -14,4 +13,5 @@ interface ILocalStorageProvider {
     suspend fun <Model : Any> update(key: IStorageKeyEnum, value: Model, type: KClass<Model>)
     suspend fun <Model : Any> delete(key: IStorageKeyEnum, type: KClass<Model>)
     suspend fun clear()
+    suspend fun<Model: Any> contains(key: IStorageKeyEnum,type: KClass<Model>): Boolean
 }

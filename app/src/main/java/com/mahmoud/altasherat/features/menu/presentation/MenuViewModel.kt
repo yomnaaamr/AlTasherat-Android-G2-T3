@@ -2,6 +2,8 @@ package com.mahmoud.altasherat.features.menu.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mahmoud.altasherat.common.domain.util.onError
+import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -26,8 +28,14 @@ class MenuViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val isUserAuthenticated = hasUserLoggedInUC()
-            _state.value = MenuContract.MenuState.Success(isUserAuthenticated)
+             hasUserLoggedInUC()
+                 .onSuccess { hasUser ->
+                     _state.value = MenuContract.MenuState.Success(hasUser)
+                 }
+                 .onError {
+                     _events.send(MenuContract.MenuEvent.Error(it))
+                     _state.value = MenuContract.MenuState.Error(it)
+                 }
         }
     }
 }

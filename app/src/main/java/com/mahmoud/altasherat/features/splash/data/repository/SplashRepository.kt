@@ -10,4 +10,8 @@ internal class SplashRepository(
         return localDS.getUserAccessToken()
     }
 
+    override suspend fun hasUserLoggedIn(): Boolean {
+        return localDS.hasUserLoggedIn()
+    }
+
 }

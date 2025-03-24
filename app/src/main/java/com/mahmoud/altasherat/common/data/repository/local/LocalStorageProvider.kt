@@ -70,6 +70,13 @@ class LocalStorageProvider(
         }
     }
 
+    override suspend fun<Model : Any> contains(key: IStorageKeyEnum,type: KClass<Model>): Boolean {
+        val preferencesKey = preferencesKey(key, type)
+        val preferences = context.dataStore.data.first()
+        return preferences.contains(preferencesKey)
+    }
+
+
 
     @Suppress("UNCHECKED_CAST")
     private fun <Model : Any> preferencesKey(
