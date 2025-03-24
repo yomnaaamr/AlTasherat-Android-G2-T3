@@ -77,6 +77,9 @@
     <string name="edit_profile">تعديل الملف الشخصي</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="loading">جارى التحميل…</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="requests">طلبات التأشيرات</string>
+    <string name="altasherat">منصة التأشيرات</string>
 
 
 </resources>

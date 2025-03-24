@@ -7,26 +7,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-class HomeFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView = view.findViewById<TextView>(R.id.home_text)
-       textView.setOnClickListener {
-           findNavController().navigate(R.id.action_homeFragment_to_menuNavigation)
-       }
-        return view.rootView
+    override fun FragmentHomeBinding.initialize() {
+        val navController =
+            childFragmentManager.findFragmentById(R.id.home_fragment_container)?.findNavController()
+        if (navController != null) {
+            binding.bottomNav.setupWithNavController(navController)
+        }
     }
 }
