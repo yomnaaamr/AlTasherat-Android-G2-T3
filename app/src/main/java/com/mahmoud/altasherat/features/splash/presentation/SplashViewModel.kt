@@ -1,14 +1,14 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.HasCountriesUC
+import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -26,7 +26,8 @@ class SplashViewModel @Inject constructor(
     private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     private val getLanguageCodeUC: GetLanguageCodeUC,
     private val hasUserLoggedInUC: HasUserLoggedInUC,
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
+    private val hasCountriesUC: HasCountriesUC,
+    private val getOnBoardingStateUC: GetOnBoardingStateUC
 ) : ViewModel() {
 
     private val _state =
@@ -43,21 +44,12 @@ class SplashViewModel @Inject constructor(
     init {
 
         viewModelScope.launch {
-            getCountriesFromLocalUC()
-                .onSuccess { countriesList ->
-                    val hasCountries = countriesList.isNotEmpty()
-                    if (!hasCountries) {
-                        Log.d("Fetching list from remote", hasCountries.toString())
-                        fetchCountries()
+            hasCountriesUC()
+                .onSuccess { hasCountries ->
+                    if (hasCountries) {
+                        isUserFirstTime()
                     } else {
-                        val hasUser = hasUserLoggedInUC()
-                        if (hasUser) {
-                            _events.send(SplashContract.SplashEvent.NavigateToHome)
-                            _state.value = SplashContract.SplashState.Success
-                        } else {
-                            _events.send(SplashContract.SplashEvent.NavigateToAuth)
-                            _state.value = SplashContract.SplashState.Success
-                        }
+                        fetchCountries()
                     }
                 }
                 .onError {
@@ -72,11 +64,44 @@ class SplashViewModel @Inject constructor(
     }
 
 
+    private fun isUserFirstTime() {
+        viewModelScope.launch {
+            getOnBoardingStateUC()
+                .onSuccess { notFirstTime ->
+                    if (notFirstTime) {
+                        hasLoggedInUser()
+                    } else {
+                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        _state.value = SplashContract.SplashState.Success
+                    }
+                }
+        }
+    }
+
+
+    private fun hasLoggedInUser() {
+        viewModelScope.launch {
+            hasUserLoggedInUC()
+                .onSuccess { hasUser ->
+                    if (hasUser) {
+                        _events.send(SplashContract.SplashEvent.NavigateToHome)
+                    } else {
+                        _events.send(SplashContract.SplashEvent.NavigateToAuth)
+                    }
+                    _state.value = SplashContract.SplashState.Success
+                }
+                .onError {
+                    _events.send(SplashContract.SplashEvent.Error(it))
+                    _state.value = SplashContract.SplashState.Error(it)
+                }
+        }
+    }
+
+
     private fun fetchCountries() {
 
         getCountriesFromRemoteUC()
             .onEach { result ->
-                Log.d("SplashResult", result.toString())
                 _state.value = when (result) {
                     is Resource.Error -> {
                         _events.send(SplashContract.SplashEvent.Error(result.error))

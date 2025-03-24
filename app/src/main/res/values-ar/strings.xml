@@ -66,7 +66,16 @@
     <string name="error_empty_phone_number">رقم الهاتف مطلوب.</string>
     <string name="error_invalid_phone_number">يجب أن يتكون رقم الهاتف من 9 إلى 15 أرقام.</string>
     <string name="error_empty_country_code">رمز الدولة مطلوب.</string>
-    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 9 إلى 15 حرفًا.</string>
+    <string name="error_invalid_country_code">يجب أن يتكون رمز الدولة من 3 إلى 5 حرفًا.</string>
+    <string name="sign_in_text">تسجيل دخول</string>
+    <string name="change_password">تعديل كلمة المرور</string>
+    <string name="about_us">من نحن</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="terms_and_conditions">الشروط والاحكام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="language">اللغة</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="logout">تسجيل الخروج</string>
     <string name="loading">جارى التحميل…</string>
     <string name="profile">الملف الشخصي</string>
     <string name="requests">طلبات التأشيرات</string>

@@ -35,4 +35,8 @@ internal class LanguageCountryRepository(
     override suspend fun getLanguageCode(): String? {
         return localDS.getLanguageCode()
     }
+
+    override suspend fun hasCountries(): Boolean {
+        return localDS.hasCountries()
+    }
 }

@@ -6,11 +6,6 @@
     app:startDestination="@id/dashboardFragment">
 
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.mahmoud.altasherat.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
         android:id="@+id/requestsFragment"
         android:name="com.mahmoud.altasherat.features.home.RequestsFragment"
         android:label="fragment_requests"
@@ -20,4 +15,42 @@
         android:name="com.mahmoud.altasherat.features.home.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <navigation
+        android:id="@+id/menuNavigation"
+        app:startDestination="@id/menuFragment">
+        <fragment
+            android:id="@+id/menuFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
+            android:label="MenuFragment" />
+        <fragment
+            android:id="@+id/changePasswordFragment"
+            android:name="com.mahmoud.altasherat.ChangePasswordFragment"
+            android:label="fragment_change_password"
+            tools:layout="@layout/fragment_change_password" />
+        <fragment
+            android:id="@+id/aboutUsFragment"
+            android:name="com.mahmoud.altasherat.AboutUsFragment"
+            android:label="fragment_about_us"
+            tools:layout="@layout/fragment_about_us" />
+        <fragment
+            android:id="@+id/changeLanguageFragment"
+            android:name="com.mahmoud.altasherat.ChangeLanguageFragment"
+            android:label="fragment_change_language"
+            tools:layout="@layout/fragment_change_language" />
+        <fragment
+            android:id="@+id/contactUsFragment"
+            android:name="com.mahmoud.altasherat.ContactUsFragment"
+            android:label="fragment_contact_us"
+            tools:layout="@layout/fragment_contact_us" />
+        <fragment
+            android:id="@+id/privacyPolicyFragment"
+            android:name="com.mahmoud.altasherat.PrivacyPolicyFragment"
+            android:label="fragment_privacy_policy"
+            tools:layout="@layout/fragment_privacy_policy" />
+        <fragment
+            android:id="@+id/termsAndConditionsFragment"
+            android:name="com.mahmoud.altasherat.TermsAndConditionsFragment"
+            android:label="fragment_terms_and_conditions"
+            tools:layout="@layout/fragment_terms_and_conditions" />
+    </navigation>
 </navigation>

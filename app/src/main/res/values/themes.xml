@@ -161,4 +161,12 @@
         <item name="cornerSize">50%</item>
     </style>
 
+
+    <style name="ElevatedButtonStyle" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?colorError</item>
+
+    </style>
+
 </resources>

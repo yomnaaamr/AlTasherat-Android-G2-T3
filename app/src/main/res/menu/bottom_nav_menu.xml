@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_requests"
         android:title="@string/requests" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/menuFragment"
         android:icon="@drawable/ic_user"
         android:title="@string/profile" />
 </menu>

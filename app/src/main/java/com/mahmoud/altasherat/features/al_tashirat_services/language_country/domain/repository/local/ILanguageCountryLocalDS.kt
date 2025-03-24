@@ -9,5 +9,6 @@ internal interface ILanguageCountryLocalDS {
     suspend fun getCountries(): CountriesEntity
     suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country)
     suspend fun getLanguageCode(): String?
+    suspend fun hasCountries(): Boolean
 
 }
