@@ -48,9 +48,9 @@
     <string name="error_invalid_password_confirmation">Password confirmation must be between 8 and 50 characters.</string>
     <string name="error_password_mismatch">Passwords do not match.</string>
     <string name="error_empty_phone_number">Phone number is required.</string>
-    <string name="error_invalid_phone_number">Phone number must be between 3 and 5 digits.</string>
+    <string name="error_invalid_phone_number">Phone number must be between 9 and 15 digits.</string>
     <string name="error_empty_country_code">Country code is required.</string>
-    <string name="error_invalid_country_code">Country code must be between 9 and 15 characters.</string>
+    <string name="error_invalid_country_code">Country code must be between 3 and 5 characters.</string>
 
     <string name="skip_txt">Skip</string>
     <string name="signup">Sign up</string>
@@ -71,6 +71,15 @@
     <string name="forget_password">Forget Password?</string>
     <string name="invalid_password_length">Password length must be more than 8 and less than 50</string>
     <string name="invalid_phone_or_password">Invalid Phone Number or Password</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="change_password">Change Password</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="language">Language</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
     <string name="loading">Loading…</string>
 
 

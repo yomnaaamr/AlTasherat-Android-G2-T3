@@ -14,11 +14,7 @@ class GetCountriesFromLocalUC(private val repository: ILanguageCountryRepository
 
         return try {
             val countries = repository.getCountriesFromLocal()
-            if (countries != null) {
-                Resource.Success(countries)
-            } else {
-                Resource.Success(emptyList())
-            }
+             Resource.Success(countries)
         } catch (e: IOException) {
             Resource.Error(LocalStorageError.IO_ERROR)
         } catch (e: IllegalStateException) {

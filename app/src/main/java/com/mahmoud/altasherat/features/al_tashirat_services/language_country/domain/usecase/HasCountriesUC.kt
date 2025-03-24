@@ -1,22 +1,22 @@
-package com.mahmoud.altasherat.features.splash.domain.usecase
+package com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase
 
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import com.mahmoud.altasherat.features.splash.domain.repository.ISplashRepository
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.ILanguageCountryRepository
 
-class HasUserLoggedInUC(
-    private val repository: ISplashRepository
-) {
+class HasCountriesUC(private val repository: ILanguageCountryRepository) {
+
     suspend operator fun invoke(): Resource<Boolean> {
         return try {
-            Resource.Success(repository.hasUserLoggedIn())
+            Resource.Success(repository.hasCountries())
         } catch (throwable: Throwable) {
             val failureResource = if (throwable is AltasheratException) throwable else
                 AltasheratException(
-                    AltasheratError.UnknownError("Unknown error in HasUserLoggedInUC: $throwable")
+                    AltasheratError.UnknownError("Unknown error in HasCountriesUC: $throwable")
                 )
             Resource.Error(failureResource.error)
         }
     }
+
 }

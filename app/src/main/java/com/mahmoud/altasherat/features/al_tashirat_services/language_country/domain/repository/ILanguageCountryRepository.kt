@@ -11,5 +11,7 @@ interface ILanguageCountryRepository {
     suspend fun getCountriesFromLocal(): List<Country>
     suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country)
     suspend fun getLanguageCode(): String?
+    suspend fun hasCountries(): Boolean
+
 
 }

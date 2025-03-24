@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
@@ -65,6 +66,11 @@ class AuthFragment : Fragment() {
         })
         authViewmodel.switchTabLiveData.observe(viewLifecycleOwner){ tabIndex ->
             binding.authTabLayout.getTabAt(tabIndex)?.select()
+        }
+
+
+        binding.skipTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_authFragment_to_menuNavigation)
         }
 
         return binding.root
