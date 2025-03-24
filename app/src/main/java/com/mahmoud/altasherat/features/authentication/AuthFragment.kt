@@ -64,13 +64,13 @@ class AuthFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
-        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner){ tabIndex ->
+        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner) { tabIndex ->
             binding.authTabLayout.getTabAt(tabIndex)?.select()
         }
 
 
         binding.skipTxt.setOnClickListener {
-            findNavController().navigate(R.id.action_authFragment_to_menuNavigation)
+            findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
         }
 
         return binding.root
