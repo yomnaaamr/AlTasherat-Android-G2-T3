@@ -35,7 +35,6 @@
 
 
         <ImageView
-            android:id="@+id/about_img"
             android:layout_width="match_parent"
             android:layout_height="124dp"
             android:contentDescription="@string/terms_and_conditions"

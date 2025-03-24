@@ -44,7 +44,7 @@
             tools:layout="@layout/fragment_contact_us" />
         <fragment
             android:id="@+id/privacyPolicyFragment"
-            android:name="com.mahmoud.altasherat.PrivacyPolicyFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.PrivacyPolicyFragment"
             android:label="fragment_privacy_policy"
             tools:layout="@layout/fragment_privacy_policy" />
         <fragment
