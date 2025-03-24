@@ -49,7 +49,7 @@
             tools:layout="@layout/fragment_privacy_policy" />
         <fragment
             android:id="@+id/termsAndConditionsFragment"
-            android:name="com.mahmoud.altasherat.TermsAndConditionsFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.TermsAndConditionsFragment"
             android:label="fragment_terms_and_conditions"
             tools:layout="@layout/fragment_terms_and_conditions" />
     </navigation>
