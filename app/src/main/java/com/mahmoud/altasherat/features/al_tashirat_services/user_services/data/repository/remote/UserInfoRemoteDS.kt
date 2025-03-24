@@ -1,4 +1,10 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.remote
 
-class UserInfoRemoteDS {
+import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
+
+class UserInfoRemoteDS(
+    private val restApiNetworkProvider: IRestApiNetworkProvider
+) : IUserInfoRemoteDS {
+
 }
