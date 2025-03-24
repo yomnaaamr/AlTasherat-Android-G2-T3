@@ -8,6 +8,7 @@ import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileInfoViewModel @Inject constructor(
     private val getUserInfoUC: GetUserInfoUC,
-    private val getCountriesFromLocalUC: GetCountriesFromLocalUC
+    private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
+    private val getCountryUC: GetCountryUC
 ) : ViewModel() {
 
     private val _state =
@@ -33,9 +35,13 @@ class ProfileInfoViewModel @Inject constructor(
     private val _countries = MutableStateFlow<List<Country>>(emptyList())
     val countries = _countries.asStateFlow()
 
+    private val _userCountry = MutableStateFlow<Country?>(null)
+    val userCountry = _userCountry.asStateFlow()
+
     init {
         getCountries()
         getUserData()
+        getUserCountry()
 
     }
 
@@ -68,4 +74,17 @@ class ProfileInfoViewModel @Inject constructor(
             }
         }
     }
+
+    private fun getUserCountry() {
+        viewModelScope.launch {
+            getCountryUC()
+                .onSuccess { result ->
+                    _userCountry.value = result
+                }
+                .onError {
+                    _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+                }
+        }
+    }
+
 }

@@ -1,9 +1,8 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository
 
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Countries
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.models.dto.CountriesDto
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Countries
 
 interface ILanguageCountryRepository {
     suspend fun getCountriesFromRemote(): Countries
@@ -12,6 +11,7 @@ interface ILanguageCountryRepository {
     suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country)
     suspend fun getLanguageCode(): String?
     suspend fun hasCountries(): Boolean
+    suspend fun getCountry(): Country
 
 
 }

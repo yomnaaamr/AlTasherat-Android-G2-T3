@@ -12,10 +12,10 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.remote.ILanguageCountryRemoteDS
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.HasCountriesUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectionsUC
-import com.mahmoud.altasherat.features.splash.domain.repository.ISplashRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,6 +74,11 @@ internal object LanguageCountryDI {
     @Provides
     fun provideHasCountriesUC(repository: ILanguageCountryRepository): HasCountriesUC {
         return HasCountriesUC(repository)
+    }
+
+    @Provides
+    fun provideGetCountryUC(repository: ILanguageCountryRepository): GetCountryUC {
+        return GetCountryUC(repository)
     }
 
 

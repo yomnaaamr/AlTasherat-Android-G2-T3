@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
 import android.app.DatePickerDialog
+import android.util.Log
 import androidx.fragment.app.viewModels
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
@@ -30,6 +31,19 @@ class ProfileInfoFragment :
 
     private fun setupListeners() {
         binding.phoneCodePicker.setOnClickListener {
+            val initialSelect = phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")"
+            binding.phoneCodePicker.apply {
+                setText(initialSelect)
+                bottomSheet = CountryPickerBottomSheet(
+                    _countries as List<ListItem>, phoneCountry!!.id.minus(1)
+                ) { selectedCountry ->
+                    phoneCountry = selectedCountry as Country
+                    setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
+//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
+//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
+
+                }
+            }
             bottomSheet.show(childFragmentManager, "PhonePickerBottomSheet")
         }
 
@@ -40,8 +54,7 @@ class ProfileInfoFragment :
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
-                this.requireContext(),
-                { _, selectedYear, selectedMonth, selectedDay ->
+                this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                     val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
                     binding.birthdayEdit.setText(formattedDate)
                 }, year, month, day
@@ -50,17 +63,15 @@ class ProfileInfoFragment :
         }
 
         binding.countryEdit.setOnClickListener {
-            bottomSheet =
-                CountryPickerBottomSheet(
-                    _countries as List<ListItem>,
-                    userCountry!!.id.minus(1)
-                ) { selectedCountry ->
-                    userCountry = selectedCountry as Country
-                    binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.phoneCode)
+            bottomSheet = CountryPickerBottomSheet(
+                _countries as List<ListItem>, userCountry!!.id.minus(1)
+            ) { selectedCountry ->
+                userCountry = selectedCountry as Country
+                binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
 //                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
 //                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
 
-                }
+            }
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
     }
@@ -82,19 +93,14 @@ class ProfileInfoFragment :
         collectFlow(viewModel.countries) { countries ->
             if (countries.isEmpty()) return@collectFlow
             phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
-            userCountry = phoneCountry
-            val initialSelect = phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")"
             _countries = countries
-            binding.phoneCodePicker.apply {
-                setText(initialSelect)
-                bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                    phoneCountry = selectedCountry as Country
-                    setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
 
-                }
-            }
+        }
+        collectFlow(viewModel.userCountry) { userCountry ->
+            this.userCountry = userCountry
+            Log.d("USER_COUNTRY", userCountry.toString())
+            binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
+
         }
     }
 
