@@ -33,7 +33,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                     val hasUserLoggedIn = isUserAuthenticated.isAuthenticated
                     val filteredItems = if (hasUserLoggedIn) {
 //                        exclude auth fragment from menu
-                        menuItems.filter { it.destinationId == R.id.authFragment }
+                        menuItems.filter { it.destinationId != R.id.authFragment }
                     } else {
                         menuItems.filter { !it.requiresAuth }
                     }
