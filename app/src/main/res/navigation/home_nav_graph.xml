@@ -24,7 +24,7 @@
             android:label="MenuFragment" />
         <fragment
             android:id="@+id/changePasswordFragment"
-            android:name="com.mahmoud.altasherat.ChangePasswordFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
             android:label="fragment_change_password"
             tools:layout="@layout/fragment_change_password" />
         <fragment
@@ -34,12 +34,12 @@
             tools:layout="@layout/fragment_about_us" />
         <fragment
             android:id="@+id/changeLanguageFragment"
-            android:name="com.mahmoud.altasherat.ChangeLanguageFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangeLanguageFragment"
             android:label="fragment_change_language"
             tools:layout="@layout/fragment_change_language" />
         <fragment
             android:id="@+id/contactUsFragment"
-            android:name="com.mahmoud.altasherat.ContactUsFragment"
+            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ContactUsFragment"
             android:label="fragment_contact_us"
             tools:layout="@layout/fragment_contact_us" />
         <fragment
