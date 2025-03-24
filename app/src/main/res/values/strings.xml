@@ -84,6 +84,13 @@
     <string name="profile">Profile</string>
     <string name="requests">Requests</string>
     <string name="altasherat">Altasherat</string>
+    <string name="about_visa_platform">About Altasherat Platform</string>
+    <string name="visa_platform_description">With the Visa Platform, you are always at the heart of our interests and the most important guest. Our goal is to make the travel experience easy and more enjoyable, which is why we gather all available travel options for travelers to Egypt in one place, so that Egypt is on your mobile.</string>
+    <string name="consular_services">Consular Services</string>
+    <string name="embassy_services">Embassy Services</string>
+    <string name="application_for_work_visa">Application for Work Visa</string>
+    <string name="application_for_tourist_visa">Application for Tourist Visa</string>
+    <string name="what_do_you_offer">What do you offer?</string>
 
 
 </resources>

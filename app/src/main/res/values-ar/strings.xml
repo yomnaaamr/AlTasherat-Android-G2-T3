@@ -80,6 +80,13 @@
     <string name="profile">الملف الشخصي</string>
     <string name="requests">طلبات التأشيرات</string>
     <string name="altasherat">منصة التأشيرات</string>
+    <string name="about_visa_platform">عن منصة التأشيرات</string>
+    <string name="visa_platform_description">مع منصة التأشيرات  أنت دائمًا صميم اهتماماتنا والضيف الأهم. هدفنا جعل تجربة السفر سهلة وأكثر سعادةً، ولهذا نجمع جميع خيارات الرحلات المتاحة أمام المسافرين إلى مصر في مكانٍ واحدٍ، لتكون مصر على جوالك.\nإن مصر هي أحد أشهر الوجهات السياحية على قائمة المسافرين إلى السعادة منذ الزيارة الأولى وإلى الأبد. مصر هي الوجهة السياحية الوحيدة في العالم التي لا تعترف بتأشيرة الخروج النهائي دون عودة، فهي أيقونة الجاذبية في الشرق الأوسط. ولا يوجد تفسير منطقي لتعدد وتكرار زيارة المسافرين إلى مصر وسيظل هذا السر مدفون في رمال مصر الذهبية وليس له علاقة بمياه النيل كما يقول المصريون.</string>
+    <string name="consular_services">خدمات القنصـــليات</string>
+    <string name="embassy_services">خدمـــات السفارات</string>
+    <string name="application_for_work_visa">طلب الحصول علي تأشيرة وظيفة</string>
+    <string name="application_for_tourist_visa">طلب الحصول علي تأشيرة سياحية</string>
+    <string name="what_do_you_offer">ماذا تقدم؟</string>
 
 
 </resources>
