@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flowOn
 class GetUserInfoUC(
     private val userRepository: IUserInfoRepository
 ) {
-    suspend operator fun invoke(): Flow<Resource<User>> =
+    operator fun invoke(): Flow<Resource<User>> =
         flow {
             emit(Resource.Loading)
             val userResponse = userRepository.getUserInfo()

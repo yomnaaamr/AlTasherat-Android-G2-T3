@@ -208,8 +208,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:maxLines="1"
-                    android:paddingStart="100dp"
-                    android:paddingEnd="100dp" />
+                    android:paddingStart="110dp"
+                    android:paddingEnd="110dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,8 +221,6 @@
                 android:layout_gravity="end|bottom"
                 android:background="@drawable/custom_phone_end_icon"
                 android:clickable="true"
-                android:focusableInTouchMode="true"
-                android:focusedByDefault="true"
                 android:inputType="none"
                 android:minWidth="100dp"
                 android:paddingHorizontal="8dp"
@@ -292,6 +290,7 @@
             app:boxCornerRadiusTopStart="26dp"
             app:boxStrokeColor="?colorPrimary"
             app:boxStrokeWidth="0dp"
+
             app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -305,7 +304,10 @@
                 style="?textAppearanceTitleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:clickable="true"
+                android:focusable="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:inputType="none"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -331,6 +333,8 @@
             app:boxCornerRadiusTopStart="26dp"
             app:boxStrokeColor="?colorPrimary"
             app:boxStrokeWidth="0dp"
+            app:endIconDrawable="@drawable/ic_arrow_down"
+            app:endIconMode="custom"
             app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -344,22 +348,26 @@
                 style="?textAppearanceTitleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:clickable="true"
+                android:focusable="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:inputType="none"
                 android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/save_btn"
             style="@style/CustomButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="24dp"
+            android:layout_marginTop="24dp"
             android:drawableEnd="@drawable/ic_save"
             android:drawablePadding="4dp"
             android:gravity="center"
             android:paddingHorizontal="140dp"
             android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/country_layout" />

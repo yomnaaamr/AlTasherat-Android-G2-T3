@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -12,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,14 +34,16 @@ class ProfileInfoViewModel @Inject constructor(
     val countries = _countries.asStateFlow()
 
     init {
-        getUserData()
         getCountries()
+        getUserData()
+
     }
 
     private fun getCountries() {
         viewModelScope.launch {
             getCountriesFromLocalUC()
                 .onSuccess { countries ->
+                    Log.d("USER_VIEW_MODEL", countries.toString())
                     _countries.value = countries
                 }
                 .onError {
@@ -52,7 +54,8 @@ class ProfileInfoViewModel @Inject constructor(
 
     private fun getUserData() {
         viewModelScope.launch {
-            getUserInfoUC().onEach { result ->
+            getUserInfoUC().collect { result ->
+                Log.d("USER_VIEW_MODEL", result.toString())
                 _state.value = when (result) {
                     is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
                     is Resource.Success -> ProfileInfoContract.ProfileInfoState.Success(result.data)
@@ -65,5 +68,4 @@ class ProfileInfoViewModel @Inject constructor(
             }
         }
     }
-
 }
