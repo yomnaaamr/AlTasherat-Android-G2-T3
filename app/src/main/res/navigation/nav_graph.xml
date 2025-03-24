@@ -61,7 +61,11 @@
         android:id="@+id/homeFragment"
         android:name="com.mahmoud.altasherat.features.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_menuNavigation"
+            app:destination="@id/menuNavigation" />
+    </fragment>
     <navigation android:id="@+id/menuNavigation"
         app:startDestination="@id/menuFragment">
         <fragment

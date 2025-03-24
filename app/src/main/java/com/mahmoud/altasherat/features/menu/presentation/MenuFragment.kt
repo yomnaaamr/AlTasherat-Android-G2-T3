@@ -3,6 +3,7 @@ package com.mahmoud.altasherat.features.menu.presentation
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.menu.data.MenuDataSource
@@ -31,7 +32,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                 is MenuContract.MenuState.Success -> {
                     val hasUserLoggedIn = isUserAuthenticated.isAuthenticated
                     val filteredItems = if (hasUserLoggedIn) {
-                        menuItems
+//                        exclude auth fragment from menu
+                        menuItems.filter { it.destinationId == R.id.authFragment }
                     } else {
                         menuItems.filter { !it.requiresAuth }
                     }

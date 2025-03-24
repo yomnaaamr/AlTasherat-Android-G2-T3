@@ -64,6 +64,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.phoneCodePicker.setOnClickListener {
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
+
     }
 
     private fun setupObservers() {
