@@ -7,6 +7,7 @@ import com.mahmoud.altasherat.common.util.Constants.HEADER_CONTENT_TYPE
 import com.mahmoud.altasherat.common.util.Constants.UPDATE_ACCOUNT_ENDPOINT
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.createPartMap
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toImagePart
 import com.mahmoud.altasherat.features.profile_info.data.models.dto.UpdateAccDto
 import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
 
@@ -17,6 +18,7 @@ class UserInfoRemoteDS(
         val requestMap = createPartMap(updateRequest)
         return restApiNetworkProvider.updateAccount(
             endpoint = UPDATE_ACCOUNT_ENDPOINT,
+            image = updateRequest.image?.toImagePart(),
             data = requestMap,
             headers = mapOf(
                 HEADER_ACCEPT to CONTENT_TYPE_JSON,

@@ -5,7 +5,7 @@ import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.util.Constants.EMAIL_PATTERN
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
-import okhttp3.MultipartBody
+import java.io.File
 import java.util.regex.Pattern
 
 
@@ -23,7 +23,7 @@ data class UpdateAccRequest(
     @SerializedName("phone")
     val phone: PhoneRequest,
     @SerializedName("image")
-    val image: MultipartBody.Part?,
+    val image: File?,
     @SerializedName("country")
     val country: String
 ) {
@@ -37,6 +37,8 @@ data class UpdateAccRequest(
             validateMiddleName(),
             validateLastName(),
             validateEmail(),
+            validateImageExtension(),
+            validateImageSize(),
             phone.validatePhoneNumberRequest(),
         ).forEach { result ->
             if (result is Resource.Error) {
@@ -72,6 +74,24 @@ data class UpdateAccRequest(
                 .matches()
         ) return Resource.Error(ValidationError.INVALID_EMAIL)
         if (email.length > 50) return Resource.Error(ValidationError.INVALID_EMAIL)
+        return Resource.Success(Unit)
+    }
+
+    private fun validateImageExtension(): Resource<Unit> {
+        val allowedExtensions = listOf("jpg", "jpeg", "png")
+        val extension = image?.extension?.lowercase()
+
+        if (extension !in allowedExtensions) {
+            return Resource.Error(ValidationError.INVALID_IMAGE_EXTENSION)
+        }
+        return Resource.Success(Unit)
+    }
+
+    private fun validateImageSize(): Resource<Unit> {
+        val maxSize = 512 * 1024 // 512 KB
+        if (image?.length()!! > maxSize) {
+            return Resource.Error(ValidationError.INVALID_IMAGE_SIZE)
+        }
         return Resource.Success(Unit)
     }
 
