@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -32,6 +33,7 @@
         android:layout_height="26dp"
         android:background="?colorPrimary"
         android:scaleType="center"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         app:shapeAppearanceOverlay="@style/RoundedImage"
         app:layout_constraintStart_toStartOf="@id/profile_card_view"

@@ -1,7 +1,12 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
@@ -73,6 +78,12 @@ class ProfileInfoFragment :
             }
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
+
+        binding.profileImg.editIcon.setOnClickListener {
+            openImagePicker()
+        }
+
+
     }
 
     private fun setupObservers() {
@@ -125,6 +136,26 @@ class ProfileInfoFragment :
 
         }
 
+    }
+
+    private val pickImageLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageUri = result.data?.data
+                binding.profileImg.profileImg.setImageURI(imageUri)
+            }
+        }
+
+    private fun openImagePicker() {
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Intent(MediaStore.ACTION_PICK_IMAGES)
+        } else {
+            Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "image/*"
+            }
+        }
+        pickImageLauncher.launch(intent)
     }
 
 
