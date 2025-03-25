@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.profile_info.di
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.di
 
 import com.google.gson.Gson
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
@@ -6,10 +6,10 @@ import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkPro
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.UserInfoRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.local.UserInfoLocalDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.remote.UserInfoRemoteDS
-import com.mahmoud.altasherat.features.profile_info.domain.repository.IUserInfoRepository
-import com.mahmoud.altasherat.features.profile_info.domain.repository.local.IUserInfoLocalDS
-import com.mahmoud.altasherat.features.profile_info.domain.repository.remote.IUserInfoRemoteDS
-import com.mahmoud.altasherat.features.profile_info.domain.usecase.GetUserInfoUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

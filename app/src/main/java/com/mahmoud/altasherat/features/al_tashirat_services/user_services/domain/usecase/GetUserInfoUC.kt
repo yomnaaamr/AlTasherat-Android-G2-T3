@@ -1,10 +1,10 @@
-package com.mahmoud.altasherat.features.profile_info.domain.usecase
+package com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase
 
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
-import com.mahmoud.altasherat.features.profile_info.domain.repository.IUserInfoRepository
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
