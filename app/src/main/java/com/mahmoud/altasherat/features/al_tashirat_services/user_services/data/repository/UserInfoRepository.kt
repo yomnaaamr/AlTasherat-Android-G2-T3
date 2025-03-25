@@ -2,9 +2,9 @@ package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.
 
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
+import com.mahmoud.altasherat.features.profile_info.domain.repository.IUserInfoRepository
+import com.mahmoud.altasherat.features.profile_info.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.profile_info.domain.repository.remote.IUserInfoRemoteDS
 
 class UserInfoRepository(
     private val userRemoteDS: IUserInfoRemoteDS,
