@@ -11,6 +11,8 @@
         android:layout_height="84dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="50dp"
+        app:strokeColor="?colorPrimary"
+        app:strokeWidth="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +22,8 @@
             android:id="@+id/profile_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:background="@drawable/profile_bg"
-            app:contentPadding="6dp"
             android:src="@drawable/profile_place_holder" />
 
     </com.google.android.material.card.MaterialCardView>

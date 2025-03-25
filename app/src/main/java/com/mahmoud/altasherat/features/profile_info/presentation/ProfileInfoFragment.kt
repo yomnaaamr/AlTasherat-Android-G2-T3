@@ -7,7 +7,9 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentProfileInfoBinding
@@ -133,6 +135,13 @@ class ProfileInfoFragment :
                 }
             }
             binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
+            binding.profileImg.profileImg.apply {
+                if (user.image.isNotEmpty()) {
+                    setImageURI(user.image.toUri())
+                } else {
+                    setImageDrawable(resources.getDrawable(R.drawable.profile_place_holder))
+                }
+            }
 
         }
 
