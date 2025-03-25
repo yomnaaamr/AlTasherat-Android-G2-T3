@@ -1,12 +1,6 @@
 package com.mahmoud.altasherat.features.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mahmoud.altasherat.R
@@ -21,7 +15,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         val navController =
             childFragmentManager.findFragmentById(R.id.home_fragment_container)?.findNavController()
         if (navController != null) {
+
             binding.bottomNav.setupWithNavController(navController)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.requestsFragment,R.id.dashboardFragment,
+                    R.id.menuFragment -> {
+                        binding.bottomNav.visibility = View.VISIBLE
+                    }
+                    else -> binding.bottomNav.visibility = View.GONE
+                }
+            }
         }
+
+
     }
 }
