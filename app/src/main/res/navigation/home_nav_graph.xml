@@ -15,42 +15,48 @@
         android:name="com.mahmoud.altasherat.features.home.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
-    <navigation
-        android:id="@+id/menuNavigation"
-        app:startDestination="@id/menuFragment">
-        <fragment
-            android:id="@+id/menuFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
-            android:label="MenuFragment" />
-        <fragment
-            android:id="@+id/changePasswordFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
-            android:label="fragment_change_password"
-            tools:layout="@layout/fragment_change_password" />
-        <fragment
-            android:id="@+id/aboutUsFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.AboutUsFragment"
-            android:label="fragment_about_us"
-            tools:layout="@layout/fragment_about_us" />
-        <fragment
-            android:id="@+id/changeLanguageFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangeLanguageFragment"
-            android:label="fragment_change_language"
-            tools:layout="@layout/fragment_change_language" />
-        <fragment
-            android:id="@+id/contactUsFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ContactUsFragment"
-            android:label="fragment_contact_us"
-            tools:layout="@layout/fragment_contact_us" />
-        <fragment
-            android:id="@+id/privacyPolicyFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.PrivacyPolicyFragment"
-            android:label="fragment_privacy_policy"
-            tools:layout="@layout/fragment_privacy_policy" />
-        <fragment
-            android:id="@+id/termsAndConditionsFragment"
-            android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.TermsAndConditionsFragment"
-            android:label="fragment_terms_and_conditions"
-            tools:layout="@layout/fragment_terms_and_conditions" />
-    </navigation>
+
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/changeLanguageFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangeLanguageFragment"
+        android:label="fragment_change_language"
+        tools:layout="@layout/fragment_change_language" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.TermsAndConditionsFragment"
+        android:label="fragment_terms_and_conditions"
+        tools:layout="@layout/fragment_terms_and_conditions" />
+
+
+<!--    <navigation-->
+<!--        android:id="@+id/menuNavigation"-->
+<!--        app:startDestination="@id/menuFragment">-->
+<!--        -->
+<!--    </navigation>-->
 </navigation>

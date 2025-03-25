@@ -28,9 +28,6 @@ internal class LanguageCountryRepository(
         return CountriesMapper.entityToDomain(result).data
     }
 
-    override suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
-        localDS.saveSelections(selectedLanguage, selectedCountry)
-    }
 
     override suspend fun getLanguageCode(): String? {
         return localDS.getLanguageCode()
@@ -38,5 +35,13 @@ internal class LanguageCountryRepository(
 
     override suspend fun hasCountries(): Boolean {
         return localDS.hasCountries()
+    }
+
+    override suspend fun saveSelectedLanguage(selectedLanguage: Language) {
+        localDS.saveSelectedLanguage(selectedLanguage)
+    }
+
+    override suspend fun saveSelectedCountry(selectedCountry: Country) {
+        localDS.saveSelectedCountry(selectedCountry)
     }
 }

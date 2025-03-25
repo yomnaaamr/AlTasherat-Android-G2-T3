@@ -57,7 +57,8 @@
     <fragment
         android:id="@+id/onBoardingFragment2"
         android:name="com.mahmoud.altasherat.features.onBoarding.presentation.fragments.OnBoardingFragment"
-        android:label="OnBoardingFragment">
+        android:label="OnBoardingFragment"
+        tools:layout="@layout/fragment_on_boarding">
         <action
             android:id="@+id/action_onBoardingFragment2_to_languageFragment"
             app:destination="@id/languageFragment"

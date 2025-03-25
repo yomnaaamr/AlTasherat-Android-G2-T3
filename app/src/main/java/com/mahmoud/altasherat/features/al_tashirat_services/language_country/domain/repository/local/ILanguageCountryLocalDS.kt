@@ -7,8 +7,9 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dat
 internal interface ILanguageCountryLocalDS {
     suspend fun savaCountries(countriesEntity: CountriesEntity)
     suspend fun getCountries(): CountriesEntity
-    suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country)
     suspend fun getLanguageCode(): String?
     suspend fun hasCountries(): Boolean
+    suspend fun saveSelectedLanguage(selectedLanguage: Language)
+    suspend fun saveSelectedCountry(selectedCountry: Country)
 
 }
