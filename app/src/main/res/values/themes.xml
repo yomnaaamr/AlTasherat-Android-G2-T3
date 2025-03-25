@@ -123,14 +123,20 @@
 
     <style name="TextAppearance.AlTasherat.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
     <style name="TextAppearance.AlTasherat.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
     <style name="TextAppearance.AlTasherat.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
 
