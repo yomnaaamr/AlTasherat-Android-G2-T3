@@ -16,7 +16,7 @@ fun createPartMap(request: UpdateAccRequest): Map<String, RequestBody> {
 
     request.middlename?.takeIf { it.isNotEmpty() }?.let {
         map["middlename"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
-    } ?: ""
+    }
 
     request.lastname.takeIf { it.isNotEmpty() }?.let {
         map["lastname"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -28,7 +28,7 @@ fun createPartMap(request: UpdateAccRequest): Map<String, RequestBody> {
 
     request.birthDate?.takeIf { it.isNotEmpty() }?.let {
         map["birth_date"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
-    } ?: ""
+    }
 
     request.country.takeIf { it.isNotEmpty() }?.let {
         map["country"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
