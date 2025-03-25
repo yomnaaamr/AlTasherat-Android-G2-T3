@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_stamp"
         android:title="@string/altasherat" />
     <item
-        android:id="@+id/profileInfoFragment"
+        android:id="@+id/requestsFragment"
         android:icon="@drawable/ic_requests"
         android:title="@string/requests" />
     <item

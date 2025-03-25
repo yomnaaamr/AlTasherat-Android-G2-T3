@@ -48,6 +48,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                 }
             }
         }
+        binding.editProfileButton.setOnClickListener {
+            findNavController().navigate(R.id.action_menuFragment_to_profileInfoFragment)
+        }
     }
 
 
