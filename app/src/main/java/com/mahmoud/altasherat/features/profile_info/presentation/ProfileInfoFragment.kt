@@ -31,9 +31,7 @@ class ProfileInfoFragment :
 
     private fun setupListeners() {
         binding.phoneCodePicker.setOnClickListener {
-            val initialSelect = phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")"
             binding.phoneCodePicker.apply {
-                setText(initialSelect)
                 bottomSheet = CountryPickerBottomSheet(
                     _countries as List<ListItem>, phoneCountry!!.id.minus(1)
                 ) { selectedCountry ->
@@ -46,6 +44,7 @@ class ProfileInfoFragment :
             }
             bottomSheet.show(childFragmentManager, "PhonePickerBottomSheet")
         }
+
 
         binding.birthdayEdit.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -93,6 +92,7 @@ class ProfileInfoFragment :
         collectFlow(viewModel.countries) { countries ->
             if (countries.isEmpty()) return@collectFlow
             phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
+            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
             _countries = countries
 
         }
@@ -114,7 +114,7 @@ class ProfileInfoFragment :
             }
             binding.lastNameEdit.setText(user.lastname)
             binding.phoneEdit.setText(user.phone.number)
-            binding.phoneCodePicker.setText(userCountry?.flag + " (" + user.phone.countryCode + ")")
+            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + user.phone.countryCode + ")")
             binding.emailEdit.setText(user.email)
             binding.birthdayEdit.apply {
                 if (user.birthDate.isNotEmpty()) {
