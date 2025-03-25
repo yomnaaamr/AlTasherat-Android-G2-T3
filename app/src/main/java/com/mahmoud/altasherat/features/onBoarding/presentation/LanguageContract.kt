@@ -12,7 +12,6 @@ class LanguageContract {
 
         data object SetOnBoardingState : LanguageAction
         data class GetCountriesFromRemote(val languageCode: String) : LanguageAction
-
     }
 
     sealed interface LanguageEvent {

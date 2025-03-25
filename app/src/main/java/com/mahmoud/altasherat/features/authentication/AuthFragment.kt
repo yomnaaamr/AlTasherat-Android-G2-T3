@@ -70,7 +70,7 @@ class AuthFragment : Fragment() {
 
 
         binding.skipTxt.setOnClickListener {
-            findNavController().navigate(R.id.action_authFragment_to_menuFragment)
+            findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
         }
 
         return binding.root

@@ -79,7 +79,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
                         bottomSheet = CountryPickerBottomSheet(
                             countries,
-                            selectedCountry!!.id
+                            selectedCountry!!.id.minus(1)
                         ) { newSelectedCountry ->
                             this@LanguageFragment.selectedCountry = newSelectedCountry as Country
                             binding.countryFlag.text = newSelectedCountry.flag
@@ -112,6 +112,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
         binding.continueBtn.setOnClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
+                if (selectedLanguage!!.code == Constants.LOCALE_AR) {
+                    viewModel.onAction(
+                        LanguageContract.LanguageAction.GetCountriesFromRemote(Constants.LOCALE_AR)
+                    )
+                }
                 viewModel.onAction(
                     LanguageContract.LanguageAction.SaveSelections(
                         selectedLanguage!!,
@@ -123,11 +128,8 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     LanguageContract.LanguageAction.SetOnBoardingState
                 )
                 requireContext().changeLocale(selectedLanguage!!.code)
-                if (selectedLanguage!!.code == Constants.LOCALE_AR) {
-                    viewModel.onAction(
-                        LanguageContract.LanguageAction.GetCountriesFromRemote(Constants.LOCALE_AR)
-                    )
-                }
+                requireActivity().recreate()
+
             } else {
                 showMessage(
                     getString(R.string.selection_required),

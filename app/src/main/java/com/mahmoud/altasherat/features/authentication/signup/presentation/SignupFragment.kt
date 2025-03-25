@@ -63,7 +63,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 }
 
                 is SignupContract.SignUpEvent.NavigationToHome -> {
-                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
                 }
 
 

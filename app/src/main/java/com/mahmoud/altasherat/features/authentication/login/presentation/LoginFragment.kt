@@ -89,7 +89,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 is LoginContract.LoginEvent.NavigateToHome -> {
                     //Navigate to home
                     Log.d("AITASHERAT", "Navigate To Profile ")
-                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
                     Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_LONG)
                         .show()
                 }

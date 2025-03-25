@@ -29,7 +29,7 @@ class LanguageViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val saveSelectionsUC: SaveSelectionsUC,
     private val setOnBoardingStateUC: SetOnBoardingStateUC,
-    private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC
+    private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
     ) : ViewModel() {
 
 
@@ -105,13 +105,14 @@ class LanguageViewModel @Inject constructor(
 
     private fun fetchCountries(languageCode: String) {
         getCountriesFromRemoteUC(languageCode)
-            .onEach { result->
+            .onEach { result ->
                 _state.value = when (result) {
                     is Resource.Loading -> LanguageContract.LanguageState.Loading
                     is Resource.Error -> {
                         _events.send(LanguageContract.LanguageEvent.Error(result.error))
                         LanguageContract.LanguageState.Error(result.error)
                     }
+
                     is Resource.Success -> {
                         LanguageContract.LanguageState.Success(result.data.data)
                     }
