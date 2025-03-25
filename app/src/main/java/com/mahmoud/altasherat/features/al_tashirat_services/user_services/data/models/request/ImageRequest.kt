@@ -6,10 +6,10 @@ import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import java.io.File
 
 class ImageRequest(
-    @SerializedName("id") val id: Int,
-    @SerializedName("type") val type: String,
-    @SerializedName("image") val imageFile: File,
-    @SerializedName("title") val title: String,
+    @SerializedName("id") val id: Int = 0,
+    @SerializedName("type") val type: String = "",
+    @SerializedName("path") val imageFile: File? = null,
+    @SerializedName("title") val title: String = "",
     @SerializedName("description") val description: String? = null,
     @SerializedName("priority") val priority: Int = 0,
     @SerializedName("main") val main: Boolean = false,
@@ -32,7 +32,7 @@ class ImageRequest(
 
     private fun validateImageExtension(): Resource<Unit> {
         val allowedExtensions = listOf("jpg", "jpeg", "png")
-        val extension = imageFile.extension.lowercase()
+        val extension = imageFile?.extension?.lowercase()
 
         if (extension !in allowedExtensions) {
             return Resource.Error(ValidationError.INVALID_IMAGE_EXTENSION)
@@ -42,7 +42,7 @@ class ImageRequest(
 
     private fun validateImageSize(): Resource<Unit> {
         val maxSize = 512 * 1024 // 512 KB
-        if (imageFile.length() > maxSize) {
+        if (imageFile?.length()!! > maxSize) {
             return Resource.Error(ValidationError.INVALID_IMAGE_SIZE)
         }
         return Resource.Success(Unit)

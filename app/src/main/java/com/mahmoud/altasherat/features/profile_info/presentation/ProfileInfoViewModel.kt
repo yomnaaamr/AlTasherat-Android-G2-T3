@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +40,46 @@ class ProfileInfoViewModel @Inject constructor(
     private val _userCountry = MutableStateFlow<Country?>(null)
     val userCountry = _userCountry.asStateFlow()
 
+    private val _profileUiState = MutableStateFlow(ProfileInfoUiState())
+    private val profileUiSate = _profileUiState.asStateFlow()
+
+    fun onAction(profileInfoAction: ProfileInfoContract.ProfileInfoAction) {
+        when (profileInfoAction) {
+            is ProfileInfoContract.ProfileInfoAction.UpdateFirstName -> updateFirstName(
+                profileInfoAction.value
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateMiddleName -> updateFirstName(
+                profileInfoAction.value
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateLastName -> updateLastName(
+                profileInfoAction.value
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateEmail -> updateEmail(profileInfoAction.value)
+            is ProfileInfoContract.ProfileInfoAction.UpdateBirthday -> updateMiddleName(
+                profileInfoAction.value
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdatePhoneNumber -> updatePhoneNumber(
+                profileInfoAction.phone
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateCountryCode -> updateCountryCode(
+                profileInfoAction.countryCode
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateCountryID -> updateCountryID(
+                profileInfoAction.countryId
+            )
+
+            is ProfileInfoContract.ProfileInfoAction.UpdateImage -> updateImage(profileInfoAction.value)
+            is ProfileInfoContract.ProfileInfoAction.SaveChanges -> updateAccount()
+
+        }
+    }
+
     init {
         getCountries()
         getUserData()
@@ -45,16 +87,16 @@ class ProfileInfoViewModel @Inject constructor(
 
     }
 
+    private fun updateAccount() {}
+
     private fun getCountries() {
         viewModelScope.launch {
-            getCountriesFromLocalUC()
-                .onSuccess { countries ->
-                    Log.d("USER_VIEW_MODEL", countries.toString())
-                    _countries.value = countries
-                }
-                .onError {
-                    _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
-                }
+            getCountriesFromLocalUC().onSuccess { countries ->
+                Log.d("USER_VIEW_MODEL", countries.toString())
+                _countries.value = countries
+            }.onError {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+            }
         }
     }
 
@@ -77,14 +119,49 @@ class ProfileInfoViewModel @Inject constructor(
 
     private fun getUserCountry() {
         viewModelScope.launch {
-            getCountryUC()
-                .onSuccess { result ->
-                    _userCountry.value = result
-                }
-                .onError {
-                    _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
-                }
+            getCountryUC().onSuccess { result ->
+                _userCountry.value = result
+            }.onError {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+            }
         }
     }
+
+    private fun updateFirstName(value: String) {
+        _profileUiState.update { it.copy(firstName = value) }
+    }
+
+    private fun updateMiddleName(value: String) {
+        _profileUiState.update { it.copy(middleName = value) }
+    }
+
+    private fun updateLastName(value: String) {
+        _profileUiState.update { it.copy(lastName = value) }
+    }
+
+    private fun updateEmail(value: String) {
+        _profileUiState.update { it.copy(email = value) }
+    }
+
+    private fun updateBirthDate(value: String) {
+        _profileUiState.update { it.copy(birthdate = value) }
+    }
+
+    private fun updatePhoneNumber(value: String) {
+        _profileUiState.update { it.copy(phoneNumber = value) }
+    }
+
+    private fun updateCountryCode(countryCode: String) {
+        _profileUiState.update { it.copy(countryCode = countryCode) }
+    }
+
+    private fun updateImage(value: Uri) {
+        _profileUiState.update { it.copy(image = value) }
+    }
+
+    private fun updateCountryID(countryId: String) {
+        _profileUiState.update { it.copy(selectedCountryId = countryId) }
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
+import android.net.Uri
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
 
@@ -18,7 +19,7 @@ class ProfileInfoContract {
 
         data class UpdateEmail(val value: String) : ProfileInfoAction
 
-        data class UpdateImage(val value: String) : ProfileInfoAction
+        data class UpdateImage(val value: Uri) : ProfileInfoAction
         data class UpdateBirthday(val value: String) : ProfileInfoAction
 
     }

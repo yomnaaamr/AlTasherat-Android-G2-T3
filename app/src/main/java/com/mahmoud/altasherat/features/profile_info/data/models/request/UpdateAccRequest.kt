@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.util.Constants.EMAIL_PATTERN
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.ImageRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import okhttp3.MultipartBody
 import java.util.regex.Pattern
 
 
@@ -13,22 +13,22 @@ data class UpdateAccRequest(
     @SerializedName("firstname")
     val firstName: String,
     @SerializedName("middlename")
-    val middlename: String,
+    val middlename: String?,
     @SerializedName("lastname")
     val lastname: String,
     @SerializedName("email")
     val email: String,
     @SerializedName("birth_date")
-    val birthDate: String,
+    val birthDate: String?,
     @SerializedName("phone")
     val phone: PhoneRequest,
     @SerializedName("image")
-    val image: ImageRequest,
+    val image: MultipartBody.Part?,
     @SerializedName("country")
     val country: String
 ) {
 
-    fun validateSignUpRequest(): Resource<MutableList<ValidationError>> {
+    fun validateUpdateAccRequest(): Resource<MutableList<ValidationError>> {
 
         val errors = mutableListOf<ValidationError>()
 
@@ -38,7 +38,6 @@ data class UpdateAccRequest(
             validateLastName(),
             validateEmail(),
             phone.validatePhoneNumberRequest(),
-            image.validateImageRequest()
         ).forEach { result ->
             if (result is Resource.Error) {
                 errors.add(result.error as ValidationError)
@@ -56,7 +55,7 @@ data class UpdateAccRequest(
     }
 
     private fun validateMiddleName(): Resource<Unit> {
-        if (middlename.length > 15) return Resource.Error(ValidationError.INVALID_MIDDLE_NAME)
+        if (middlename?.length!! > 15) return Resource.Error(ValidationError.INVALID_MIDDLE_NAME)
         return Resource.Success(Unit)
     }
 

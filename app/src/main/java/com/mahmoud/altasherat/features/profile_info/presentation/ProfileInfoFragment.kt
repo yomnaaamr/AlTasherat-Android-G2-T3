@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
@@ -16,6 +17,7 @@ import com.mahmoud.altasherat.databinding.FragmentProfileInfoBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupContract
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 
@@ -83,6 +85,42 @@ class ProfileInfoFragment :
 
         binding.profileImg.editIcon.setOnClickListener {
             openImagePicker()
+        }
+
+        binding.firstNameEdit.addTextChangedListener {
+            viewModel.onAction(
+                SignupContract.SignUpAction.UpdateFirstName(
+                    it.toString()
+                )
+            )
+        }
+        binding.lastNameEdit.addTextChangedListener {
+            viewModel.onAction(
+                SignupContract.SignUpAction.UpdateLastName(
+                    it.toString()
+                )
+            )
+        }
+        binding.emailEdit.addTextChangedListener {
+            viewModel.onAction(
+                SignupContract.SignUpAction.UpdateEmail(
+                    it.toString()
+                )
+            )
+        }
+        binding.passwordEdit.addTextChangedListener {
+            viewModel.onAction(
+                SignupContract.SignUpAction.UpdatePassword(
+                    it.toString()
+                )
+            )
+        }
+        binding.phoneEdit.addTextChangedListener {
+            viewModel.onAction(
+                SignupContract.SignUpAction.UpdatePhoneNumber(
+                    it.toString()
+                )
+            )
         }
 
 
