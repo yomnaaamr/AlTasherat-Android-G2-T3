@@ -8,6 +8,7 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,7 +72,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                 requireContext().changeLocale(languageCode)
             } else {
                 //  Set a default locale
-                requireContext().changeLocale("en")
+                requireContext().changeLocale(Constants.LOCALE_EN)
             }
 
         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.HasCountriesUC
@@ -39,6 +40,7 @@ class SplashViewModel @Inject constructor(
 
     private val _languageCode = MutableStateFlow<String?>(null)
     val languageCode: StateFlow<String?> = _languageCode
+
 
 
     init {
@@ -100,7 +102,7 @@ class SplashViewModel @Inject constructor(
 
     private fun fetchCountries() {
 
-        getCountriesFromRemoteUC()
+        getCountriesFromRemoteUC(Constants.LOCALE_EN)
             .onEach { result ->
                 _state.value = when (result) {
                     is Resource.Error -> {

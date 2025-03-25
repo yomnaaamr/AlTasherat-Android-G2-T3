@@ -20,6 +20,5 @@ class SplashContract {
 
 
     sealed interface SplashAction {
-
     }
 }

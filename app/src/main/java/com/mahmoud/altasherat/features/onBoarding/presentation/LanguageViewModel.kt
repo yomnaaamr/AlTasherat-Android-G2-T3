@@ -9,6 +9,7 @@ import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectionsUC
 import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingStateUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,6 +29,7 @@ class LanguageViewModel @Inject constructor(
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val saveSelectionsUC: SaveSelectionsUC,
     private val setOnBoardingStateUC: SetOnBoardingStateUC,
+    private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC
     ) : ViewModel() {
 
 
@@ -43,6 +47,10 @@ class LanguageViewModel @Inject constructor(
 
             is LanguageContract.LanguageAction.SetOnBoardingState -> {
                 setOnBoardingVisibilityShown()
+            }
+
+            is LanguageContract.LanguageAction.GetCountriesFromRemote -> {
+                fetchCountries(action.languageCode)
             }
         }
     }
@@ -92,6 +100,24 @@ class LanguageViewModel @Inject constructor(
                     _events.send(LanguageContract.LanguageEvent.Error(error))
                 }
         }
+    }
+
+
+    private fun fetchCountries(languageCode: String) {
+        getCountriesFromRemoteUC(languageCode)
+            .onEach { result->
+                _state.value = when (result) {
+                    is Resource.Loading -> LanguageContract.LanguageState.Loading
+                    is Resource.Error -> {
+                        _events.send(LanguageContract.LanguageEvent.Error(result.error))
+                        LanguageContract.LanguageState.Error(result.error)
+                    }
+                    is Resource.Success -> {
+                        LanguageContract.LanguageState.Success(result.data.data)
+                    }
+                }
+            }.launchIn(viewModelScope)
+
     }
 
 }

@@ -11,6 +11,7 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
@@ -19,7 +20,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageContract
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -123,6 +123,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     LanguageContract.LanguageAction.SetOnBoardingState
                 )
                 requireContext().changeLocale(selectedLanguage!!.code)
+                if (selectedLanguage!!.code == Constants.LOCALE_AR) {
+                    viewModel.onAction(
+                        LanguageContract.LanguageAction.GetCountriesFromRemote(Constants.LOCALE_AR)
+                    )
+                }
             } else {
                 showMessage(
                     getString(R.string.selection_required),
