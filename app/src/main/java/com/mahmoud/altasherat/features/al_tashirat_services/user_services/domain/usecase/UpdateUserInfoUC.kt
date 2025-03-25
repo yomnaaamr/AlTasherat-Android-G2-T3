@@ -40,7 +40,6 @@ class UpdateUserInfoUC(
                         "Unknown error in UpdateUserInfoUC: $throwable"
                     )
                 )
-            Log.e("UpdateUserInfo", throwable.stackTraceToString())
             emit(Resource.Error(failureResource.error))
         }.flowOn(Dispatchers.IO)
 

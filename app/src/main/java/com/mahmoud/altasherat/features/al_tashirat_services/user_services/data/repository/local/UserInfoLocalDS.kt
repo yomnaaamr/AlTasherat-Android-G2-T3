@@ -20,4 +20,8 @@ class UserInfoLocalDS(
         val userJson = gson.toJson(updateAccEntity.user)
         localStorageProvider.update(StorageKeyEnum.USER, userJson, String::class)
     }
+
+    override suspend fun getUserAccessToken(): String {
+        return localStorageProvider.get(StorageKeyEnum.ACCESS_TOKEN, "", String::class)
+    }
 }

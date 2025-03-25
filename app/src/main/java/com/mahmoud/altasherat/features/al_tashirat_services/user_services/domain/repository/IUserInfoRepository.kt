@@ -8,4 +8,5 @@ interface IUserInfoRepository {
     suspend fun getUserInfo(): User
     suspend fun updateLocalUserInfo(updateAcc: UpdateAcc)
     suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAcc
+    suspend fun getUserAccessToken(): String
 }

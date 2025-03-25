@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.remote
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
+import com.mahmoud.altasherat.common.util.Constants.AUTHORIZATION
 import com.mahmoud.altasherat.common.util.Constants.CONTENT_TYPE_JSON
 import com.mahmoud.altasherat.common.util.Constants.HEADER_ACCEPT
 import com.mahmoud.altasherat.common.util.Constants.HEADER_CONTENT_TYPE
@@ -14,7 +15,10 @@ import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAc
 class UserInfoRemoteDS(
     private val restApiNetworkProvider: IRestApiNetworkProvider
 ) : IUserInfoRemoteDS {
-    override suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAccDto {
+    override suspend fun updateRemoteUserInfo(
+        updateRequest: UpdateAccRequest,
+        token: String
+    ): UpdateAccDto {
         val requestMap = createPartMap(updateRequest)
         return restApiNetworkProvider.updateAccount(
             endpoint = UPDATE_ACCOUNT_ENDPOINT,
@@ -22,7 +26,8 @@ class UserInfoRemoteDS(
             data = requestMap,
             headers = mapOf(
                 HEADER_ACCEPT to CONTENT_TYPE_JSON,
-                HEADER_CONTENT_TYPE to CONTENT_TYPE_JSON
+                HEADER_CONTENT_TYPE to CONTENT_TYPE_JSON,
+                AUTHORIZATION to "Bearer $token"
             ),
             responseType = UpdateAccDto::class
         )

@@ -127,6 +127,7 @@ class ProfileInfoViewModel @Inject constructor(
 
                     is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
                     is Resource.Success -> {
+                        Log.d("SUCCESS_RESULT", result.data.user.toString())
                         _events.send(ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu)
                         ProfileInfoContract.ProfileInfoState.Success(result.data.user)
                     }

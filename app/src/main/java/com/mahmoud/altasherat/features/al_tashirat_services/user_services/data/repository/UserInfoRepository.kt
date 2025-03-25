@@ -26,9 +26,13 @@ class UserInfoRepository(
 
     override suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAcc {
         Log.d("UserInfoRepository", "Enter repo")
-        val response = userRemoteDS.updateRemoteUserInfo(updateRequest)
+        val response =
+            userRemoteDS.updateRemoteUserInfo(updateRequest, userLocalDS.getUserAccessToken())
         return UpdateAccMapper.dtoToDomain(response)
     }
 
+    override suspend fun getUserAccessToken(): String {
+        return userLocalDS.getUserAccessToken()
+    }
 
 }

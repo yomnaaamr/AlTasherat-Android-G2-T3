@@ -6,4 +6,5 @@ import com.mahmoud.altasherat.features.profile_info.data.models.entity.UpdateAcc
 interface IUserInfoLocalDS {
     suspend fun getUserInfo(): UserEntity
     suspend fun updateLocalUserInfo(updateAccEntity: UpdateAccEntity)
+    suspend fun getUserAccessToken(): String
 }
