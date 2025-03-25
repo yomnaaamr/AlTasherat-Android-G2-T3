@@ -88,6 +88,9 @@
     <string name="enter_birthday">ادخل تاريخ الميلاد</string>
     <string name="save">حفظ</string>
     <string name="more">المزيد</string>
+    <string name="invalid_middle_name">Invalid Middle name</string>
+    <string name="invalid_image_extension">Invalid Image Extension</string>
+    <string name="invalid_image_size">Invalid Image Size</string>
 
 
 </resources>

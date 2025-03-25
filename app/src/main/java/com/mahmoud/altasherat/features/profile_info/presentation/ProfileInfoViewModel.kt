@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,21 +9,28 @@ import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.UpdateUserInfoUC
+import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileInfoViewModel @Inject constructor(
     private val getUserInfoUC: GetUserInfoUC,
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
-    private val getCountryUC: GetCountryUC
+    private val getCountryUC: GetCountryUC,
+    private val updateUserInfoUC: UpdateUserInfoUC
 ) : ViewModel() {
 
     private val _state =
@@ -49,7 +55,7 @@ class ProfileInfoViewModel @Inject constructor(
                 profileInfoAction.value
             )
 
-            is ProfileInfoContract.ProfileInfoAction.UpdateMiddleName -> updateFirstName(
+            is ProfileInfoContract.ProfileInfoAction.UpdateMiddleName -> updateMiddleName(
                 profileInfoAction.value
             )
 
@@ -58,7 +64,7 @@ class ProfileInfoViewModel @Inject constructor(
             )
 
             is ProfileInfoContract.ProfileInfoAction.UpdateEmail -> updateEmail(profileInfoAction.value)
-            is ProfileInfoContract.ProfileInfoAction.UpdateBirthday -> updateMiddleName(
+            is ProfileInfoContract.ProfileInfoAction.UpdateBirthday -> updateBirthDate(
                 profileInfoAction.value
             )
 
@@ -74,7 +80,13 @@ class ProfileInfoViewModel @Inject constructor(
                 profileInfoAction.countryId
             )
 
-            is ProfileInfoContract.ProfileInfoAction.UpdateImage -> updateImage(profileInfoAction.value)
+            is ProfileInfoContract.ProfileInfoAction.UpdateImage -> {
+                Log.e("UPDATE_IMAGE_ACTION", "called")
+                updateImage(
+                    profileInfoAction.value
+                )
+            }
+
             is ProfileInfoContract.ProfileInfoAction.SaveChanges -> updateAccount()
 
         }
@@ -87,12 +99,45 @@ class ProfileInfoViewModel @Inject constructor(
 
     }
 
-    private fun updateAccount() {}
+    private fun updateAccount() {
+        val phone = PhoneRequest(
+            countryCode = profileUiSate.value.countryCode,
+            number = profileUiSate.value.phoneNumber,
+        )
+        val updateAccRequest = UpdateAccRequest(
+            firstName = profileUiSate.value.firstName,
+            middlename = profileUiSate.value.middleName,
+            lastname = profileUiSate.value.lastName,
+            email = profileUiSate.value.email,
+            birthDate = profileUiSate.value.birthdate,
+            phone = phone,
+            image = profileUiSate.value.image,
+            country = profileUiSate.value.selectedCountryId
+        )
+        Log.d("UPDATE_REQUEST", updateAccRequest.toString())
+
+        updateUserInfoUC(updateAccRequest)
+            .onEach { result ->
+                Log.d("usecaseResult", result.toString())
+                _state.value = when (result) {
+                    is Resource.Error -> {
+                        _events.send(ProfileInfoContract.ProfileInfoEvent.Error(result.error))
+                        ProfileInfoContract.ProfileInfoState.Error(result.error)
+                    }
+
+                    is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
+                    is Resource.Success -> {
+                        _events.send(ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu)
+                        ProfileInfoContract.ProfileInfoState.Success(result.data.user)
+                    }
+                }
+            }.launchIn(viewModelScope)
+
+    }
 
     private fun getCountries() {
         viewModelScope.launch {
             getCountriesFromLocalUC().onSuccess { countries ->
-                Log.d("USER_VIEW_MODEL", countries.toString())
                 _countries.value = countries
             }.onError {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
@@ -103,7 +148,6 @@ class ProfileInfoViewModel @Inject constructor(
     private fun getUserData() {
         viewModelScope.launch {
             getUserInfoUC().collect { result ->
-                Log.d("USER_VIEW_MODEL", result.toString())
                 _state.value = when (result) {
                     is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
                     is Resource.Success -> ProfileInfoContract.ProfileInfoState.Success(result.data)
@@ -155,7 +199,8 @@ class ProfileInfoViewModel @Inject constructor(
         _profileUiState.update { it.copy(countryCode = countryCode) }
     }
 
-    private fun updateImage(value: Uri) {
+    private fun updateImage(value: File?) {
+        Log.d("IMAGE_FILE", value.toString())
         _profileUiState.update { it.copy(image = value) }
     }
 

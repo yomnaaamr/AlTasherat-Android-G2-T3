@@ -11,13 +11,17 @@ import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentProfileInfoBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
-import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupContract
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 
@@ -46,8 +50,11 @@ class ProfileInfoFragment :
                 ) { selectedCountry ->
                     phoneCountry = selectedCountry as Country
                     setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
+                    viewModel.onAction(
+                        ProfileInfoContract.ProfileInfoAction.UpdateCountryCode(
+                            selectedCountry.phoneCode
+                        )
+                    )
 
                 }
             }
@@ -65,6 +72,11 @@ class ProfileInfoFragment :
                 this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                     val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
                     binding.birthdayEdit.setText(formattedDate)
+                    viewModel.onAction(
+                        ProfileInfoContract.ProfileInfoAction.UpdateBirthday(
+                            formattedDate
+                        )
+                    )
                 }, year, month, day
             )
             datePickerDialog.show()
@@ -76,8 +88,11 @@ class ProfileInfoFragment :
             ) { selectedCountry ->
                 userCountry = selectedCountry as Country
                 binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
-//                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
+                viewModel.onAction(
+                    ProfileInfoContract.ProfileInfoAction.UpdateCountryID(
+                        selectedCountry.id.toString()
+                    )
+                )
 
             }
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
@@ -89,37 +104,46 @@ class ProfileInfoFragment :
 
         binding.firstNameEdit.addTextChangedListener {
             viewModel.onAction(
-                SignupContract.SignUpAction.UpdateFirstName(
+                ProfileInfoContract.ProfileInfoAction.UpdateFirstName(
+                    it.toString()
+                )
+            )
+        }
+        binding.middleNameEdit.addTextChangedListener {
+            viewModel.onAction(
+                ProfileInfoContract.ProfileInfoAction.UpdateMiddleName(
                     it.toString()
                 )
             )
         }
         binding.lastNameEdit.addTextChangedListener {
             viewModel.onAction(
-                SignupContract.SignUpAction.UpdateLastName(
+                ProfileInfoContract.ProfileInfoAction.UpdateLastName(
                     it.toString()
                 )
             )
         }
         binding.emailEdit.addTextChangedListener {
             viewModel.onAction(
-                SignupContract.SignUpAction.UpdateEmail(
+                ProfileInfoContract.ProfileInfoAction.UpdateEmail(
                     it.toString()
                 )
             )
         }
-        binding.passwordEdit.addTextChangedListener {
-            viewModel.onAction(
-                SignupContract.SignUpAction.UpdatePassword(
-                    it.toString()
-                )
-            )
-        }
+
         binding.phoneEdit.addTextChangedListener {
             viewModel.onAction(
-                SignupContract.SignUpAction.UpdatePhoneNumber(
+                ProfileInfoContract.ProfileInfoAction.UpdatePhoneNumber(
                     it.toString()
                 )
+            )
+        }
+        binding.saveBtn.setOnClickListener {
+
+            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryCode(phoneCountry?.phoneCode!!))
+            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryID(userCountry?.id.toString()))
+            viewModel.onAction(
+                ProfileInfoContract.ProfileInfoAction.SaveChanges
             )
         }
 
@@ -152,6 +176,29 @@ class ProfileInfoFragment :
             Log.d("USER_COUNTRY", userCountry.toString())
             binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
 
+        }
+
+        collectFlow(viewModel.events) { profileInfoEvent ->
+            when (profileInfoEvent) {
+                is ProfileInfoContract.ProfileInfoEvent.Error -> {
+                    when (profileInfoEvent.error) {
+                        is AltasheratError.ValidationErrors -> {
+                            displayValidationErrors(profileInfoEvent.error.errors)
+                        }
+
+                        else -> {
+                            val errorMessage =
+                                profileInfoEvent.error.toErrorMessage(requireContext())
+                            showMessage(errorMessage, MessageType.SNACKBAR, this)
+                        }
+                    }
+                }
+
+                is ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu -> {
+                    showMessage("Saved Successfully", MessageType.SNACKBAR, this)
+                }
+
+            }
         }
     }
 
@@ -189,6 +236,8 @@ class ProfileInfoFragment :
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri = result.data?.data
+                Log.d("IMAGE_URI", imageUri?.toFile(this.requireContext()).toString())
+                ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
                 binding.profileImg.profileImg.setImageURI(imageUri)
             }
         }
@@ -203,6 +252,47 @@ class ProfileInfoFragment :
             }
         }
         pickImageLauncher.launch(intent)
+    }
+
+    private fun displayValidationErrors(errors: List<ValidationError>) {
+        val errorFields = mapOf(
+            setOf(
+                ValidationError.EMPTY_FIRSTNAME,
+                ValidationError.INVALID_FIRSTNAME
+            ) to binding.firstNameEdit,
+            setOf(
+                ValidationError.INVALID_MIDDLE_NAME,
+            ) to binding.middleNameEdit,
+            setOf(
+                ValidationError.EMPTY_LASTNAME,
+                ValidationError.INVALID_LASTNAME
+            ) to binding.lastNameEdit,
+            setOf(
+                ValidationError.EMPTY_EMAIL,
+                ValidationError.INVALID_EMAIL
+            ) to binding.emailEdit,
+            setOf(
+                ValidationError.EMPTY_PHONE_NUMBER,
+                ValidationError.INVALID_PHONE_NUMBER
+            ) to binding.phoneEdit,
+            setOf(
+                ValidationError.INVALID_COUNTRY_CODE,
+                ValidationError.EMPTY_COUNTRY_CODE
+            ) to binding.phoneCodePicker
+        )
+
+        binding.firstNameEdit.error = null
+        binding.lastNameEdit.error = null
+        binding.emailEdit.error = null
+        binding.phoneEdit.error = null
+        binding.phoneCodePicker.error = null
+
+        errors.forEach { error ->
+            errorFields.entries.find { it.key.contains(error) }?.value?.error =
+                error.toErrorMessage(requireContext())
+        }
+
+
     }
 
 

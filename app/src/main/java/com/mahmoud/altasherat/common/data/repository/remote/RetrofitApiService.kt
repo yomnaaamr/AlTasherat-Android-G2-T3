@@ -53,7 +53,7 @@ interface RetrofitApiService {
     ): Response<ResponseBody>
 
     @Multipart
-    @POST("path")
+    @POST("{path}")
     suspend fun updateAccount(
         @Path("path", encoded = true) endpoint: String,
         @Part image: MultipartBody.Part?,

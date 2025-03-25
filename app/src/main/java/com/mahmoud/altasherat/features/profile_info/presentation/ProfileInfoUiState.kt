@@ -1,9 +1,9 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
-import android.net.Uri
+import java.io.File
 
 data class ProfileInfoUiState(
-    val image: Uri? = null,
+    val image: File? = null,
     val firstName: String = "",
     val middleName: String? = "",
     val lastName: String = "",

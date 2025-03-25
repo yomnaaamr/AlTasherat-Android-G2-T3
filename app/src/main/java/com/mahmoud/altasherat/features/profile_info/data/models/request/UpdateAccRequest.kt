@@ -28,10 +28,8 @@ data class UpdateAccRequest(
     val country: String
 ) {
 
-    fun validateUpdateAccRequest(): Resource<MutableList<ValidationError>> {
-
+    fun validateRequest(): Resource<MutableList<ValidationError>> {
         val errors = mutableListOf<ValidationError>()
-
         listOf(
             validateFirstName(),
             validateMiddleName(),
@@ -45,7 +43,6 @@ data class UpdateAccRequest(
                 errors.add(result.error as ValidationError)
             }
         }
-
         return Resource.Success(errors)
     }
 
@@ -79,18 +76,21 @@ data class UpdateAccRequest(
 
     private fun validateImageExtension(): Resource<Unit> {
         val allowedExtensions = listOf("jpg", "jpeg", "png")
-        val extension = image?.extension?.lowercase()
-
-        if (extension !in allowedExtensions) {
-            return Resource.Error(ValidationError.INVALID_IMAGE_EXTENSION)
+        if (image != null) {
+            val extension = image.extension.lowercase()
+            if (extension !in allowedExtensions) {
+                return Resource.Error(ValidationError.INVALID_IMAGE_EXTENSION)
+            }
         }
         return Resource.Success(Unit)
     }
 
     private fun validateImageSize(): Resource<Unit> {
         val maxSize = 512 * 1024 // 512 KB
-        if (image?.length()!! > maxSize) {
-            return Resource.Error(ValidationError.INVALID_IMAGE_SIZE)
+        if (image != null) {
+            if (image.length() > maxSize) {
+                return Resource.Error(ValidationError.INVALID_IMAGE_SIZE)
+            }
         }
         return Resource.Success(Unit)
     }

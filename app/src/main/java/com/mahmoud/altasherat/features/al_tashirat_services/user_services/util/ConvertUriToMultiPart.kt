@@ -7,6 +7,15 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
+fun Uri.toFile(context: Context): File? {
+    val inputStream = context.contentResolver.openInputStream(this) ?: return null
+    val tempFile = File.createTempFile("upload", ".jpg", context.cacheDir)
+    tempFile.outputStream().use { outputStream ->
+        inputStream.copyTo(outputStream)
+    }
+    return tempFile
+}
+
 fun Context.getFileFromUri(uri: Uri): File? {
     val inputStream = contentResolver.openInputStream(uri) ?: return null
     val tempFile = File.createTempFile("upload", ".jpg", cacheDir)

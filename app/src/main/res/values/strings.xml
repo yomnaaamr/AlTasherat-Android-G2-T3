@@ -92,6 +92,9 @@
     <string name="enter_birthday">Enter Birthday</string>
     <string name="save">Save</string>
     <string name="more">More</string>
+    <string name="invalid_middle_name">Invalid Middle name</string>
+    <string name="invalid_image_extension">Invalid Image Extension</string>
+    <string name="invalid_image_size">Invalid Image Size</string>
 
 
 </resources>
