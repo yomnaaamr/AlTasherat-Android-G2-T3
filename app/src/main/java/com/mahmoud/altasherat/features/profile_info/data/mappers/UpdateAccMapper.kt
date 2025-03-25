@@ -17,14 +17,14 @@ internal object UpdateAccMapper {
     fun entityToDomain(model: UpdateAccEntity): UpdateAcc {
         return UpdateAcc(
             message = model.message,
-            user = model.user
+            user = UserMapper.entityToDomain(model.user)
         )
     }
 
     fun domainToEntity(model: UpdateAcc): UpdateAccEntity {
         return UpdateAccEntity(
             message = model.message,
-            user = model.user
+            user = UserMapper.domainToEntity(model.user)
         )
     }
 }
