@@ -1,9 +1,9 @@
-package com.mahmoud.altasherat.features.profile_info.data.mappers
+package com.mahmoud.altasherat.features.update_account.data.mappers
 
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
-import com.mahmoud.altasherat.features.profile_info.data.models.dto.UpdateAccDto
-import com.mahmoud.altasherat.features.profile_info.data.models.entity.UpdateAccEntity
-import com.mahmoud.altasherat.features.profile_info.domain.models.UpdateAcc
+import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccDto
+import com.mahmoud.altasherat.features.update_account.data.models.entity.UpdateAccEntity
+import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc
 
 internal object UpdateAccMapper {
     fun dtoToDomain(model: UpdateAccDto): UpdateAcc {

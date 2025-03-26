@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.profile_info.data.models.entity
+package com.mahmoud.altasherat.features.update_account.data.models.entity
 
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.entity.UserEntity
 

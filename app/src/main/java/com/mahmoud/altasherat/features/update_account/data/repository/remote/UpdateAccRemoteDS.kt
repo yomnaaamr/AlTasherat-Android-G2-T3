@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.remote
+package com.mahmoud.altasherat.features.update_account.data.repository.remote
 
 import android.util.Log
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
@@ -7,21 +7,20 @@ import com.mahmoud.altasherat.common.util.Constants.CONTENT_TYPE_JSON
 import com.mahmoud.altasherat.common.util.Constants.HEADER_ACCEPT
 import com.mahmoud.altasherat.common.util.Constants.HEADER_CONTENT_TYPE
 import com.mahmoud.altasherat.common.util.Constants.UPDATE_ACCOUNT_ENDPOINT
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.createPartMap
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.mapToUpdateAccRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toImagePart
-import com.mahmoud.altasherat.features.profile_info.data.models.dto.UpdateAccDto
-import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccDto
+import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS
 
-class UserInfoRemoteDS(
+class UpdateAccRemoteDS(
     private val restApiNetworkProvider: IRestApiNetworkProvider
-) : IUserInfoRemoteDS {
+) : IUpdateAccRemoteDS {
     override suspend fun updateRemoteUserInfo(
         updateRequest: UpdateAccRequest, token: String
     ): UpdateAccDto {
         Log.d("REQUEST_DS", updateRequest.toString())
-        val requestMap = createPartMap(updateRequest)
+        val requestMap = updateRequest.createPartMap()
         Log.d("REQUEST_MODEL", mapToUpdateAccRequest(requestMap).toString())
         Log.d(
             "RESPONSE_DTO", restApiNetworkProvider.updateAccount(

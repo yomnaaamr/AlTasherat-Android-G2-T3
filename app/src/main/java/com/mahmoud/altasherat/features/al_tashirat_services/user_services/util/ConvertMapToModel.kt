@@ -1,7 +1,7 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.util
 
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
-import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import okhttp3.RequestBody
 import okio.Buffer
 

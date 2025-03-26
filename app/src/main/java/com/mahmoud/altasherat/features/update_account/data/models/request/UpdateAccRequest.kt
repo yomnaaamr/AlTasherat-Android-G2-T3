@@ -1,10 +1,14 @@
-package com.mahmoud.altasherat.features.profile_info.data.models.request
+package com.mahmoud.altasherat.features.update_account.data.models.request
 
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.util.Constants.EMAIL_PATTERN
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.regex.Pattern
 
@@ -94,5 +98,43 @@ data class UpdateAccRequest(
         }
         return Resource.Success(Unit)
     }
+
+    fun createPartMap(): Map<String, RequestBody> {
+        val map = mutableMapOf<String, RequestBody>()
+
+        // Convert text fields to RequestBody (handling nullable fields)
+        this.firstName.takeIf { it.isNotEmpty() }?.let {
+            map["firstname"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        this.middlename?.takeIf { it.isNotEmpty() }?.let {
+            map["middlename"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        this.lastname.takeIf { it.isNotEmpty() }?.let {
+            map["lastname"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        this.email.takeIf { it.isNotEmpty() }?.let {
+            map["email"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        this.birthDate?.takeIf { it.isNotEmpty() }?.let {
+            map["birth_date"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        this.country.takeIf { it.isNotEmpty() }?.let {
+            map["country"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+
+        // Convert PhoneRequest to JSON
+        val phoneCountryJson = Gson().toJson(this.phone.countryCode)
+        val phoneNumberJson = Gson().toJson(this.phone.number)
+        map["number"] = phoneNumberJson.toRequestBody("application/json".toMediaTypeOrNull())
+        map["country_code"] = phoneCountryJson.toRequestBody("application/json".toMediaTypeOrNull())
+
+        return map
+    }
+
 
 }

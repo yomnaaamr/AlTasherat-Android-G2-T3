@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.profile_info.presentation
+package com.mahmoud.altasherat.features.update_account.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -12,8 +12,8 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.UpdateUserInfoUC
-import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.domain.usecase.UpdateAccountUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +31,7 @@ class ProfileInfoViewModel @Inject constructor(
     private val getUserInfoUC: GetUserInfoUC,
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val getCountryUC: GetCountryUC,
-    private val updateUserInfoUC: UpdateUserInfoUC,
+    private val updateAccountUC: UpdateAccountUC,
     private val saveSelectedCountryUC: SaveSelectedCountryUC,
 
     ) : ViewModel() {
@@ -121,7 +121,7 @@ class ProfileInfoViewModel @Inject constructor(
         )
         Log.d("UPDATE_REQUEST", updateAccRequest.toString())
 
-        updateUserInfoUC(updateAccRequest)
+        updateAccountUC(updateAccRequest)
             .onEach { result ->
                 Log.d("usecaseResult", result.toString())
                 _state.value = when (result) {

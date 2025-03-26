@@ -2,16 +2,13 @@ package com.mahmoud.altasherat.features.al_tashirat_services.user_services.di
 
 import com.google.gson.Gson
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.UserInfoRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.local.UserInfoLocalDS
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.remote.UserInfoRemoteDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.remote.IUserInfoRemoteDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserAccessToken
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.UpdateUserInfoUC
+import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,12 +25,12 @@ internal object UserInfoDI {
         return GetUserInfoUC(userRepository)
     }
 
-    @Provides
-    fun provideUserRemoteDS(
-        restApiNetworkProvider: IRestApiNetworkProvider
-    ): IUserInfoRemoteDS {
-        return UserInfoRemoteDS(restApiNetworkProvider)
-    }
+//    @Provides
+//    fun provideUserRemoteDS(
+//        restApiNetworkProvider: IRestApiNetworkProvider
+//    ): {
+//        return UpdateAccRemoteDS(restApiNetworkProvider)
+//    }
 
     @Provides
     fun provideUserLocalDS(
@@ -46,14 +43,9 @@ internal object UserInfoDI {
     @Provides
     fun provideUserRepository(
         localDataSource: IUserInfoLocalDS,
-        remoteDataSource: IUserInfoRemoteDS
+        remoteDataSource: IUpdateAccRemoteDS
     ): IUserInfoRepository {
         return UserInfoRepository(remoteDataSource, localDataSource)
-    }
-
-    @Provides
-    fun provideUpdateUserInfoUC(repository: IUserInfoRepository): UpdateUserInfoUC {
-        return UpdateUserInfoUC(repository)
     }
 
     @Provides

@@ -1,21 +1,21 @@
-package com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase
+package com.mahmoud.altasherat.features.update_account.domain.usecase
 
 import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
-import com.mahmoud.altasherat.features.profile_info.data.models.request.UpdateAccRequest
-import com.mahmoud.altasherat.features.profile_info.domain.models.UpdateAcc
+import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
+import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc
+import com.mahmoud.altasherat.features.update_account.domain.repository.IUpdateAccRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class UpdateUserInfoUC(
-    private val repository: IUserInfoRepository
+class UpdateAccountUC(
+    private val repository: IUpdateAccRepository
 ) {
     operator fun invoke(updateAccRequest: UpdateAccRequest): Flow<Resource<UpdateAcc>> =
         flow {
