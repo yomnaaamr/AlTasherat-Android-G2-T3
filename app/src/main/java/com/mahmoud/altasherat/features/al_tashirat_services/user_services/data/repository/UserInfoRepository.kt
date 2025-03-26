@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository
 
+import android.util.Log
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
@@ -24,8 +25,10 @@ class UserInfoRepository(
     }
 
     override suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAcc {
+        Log.d("REQUEST_DOMAIN", updateRequest.toString())
         val response =
             userRemoteDS.updateRemoteUserInfo(updateRequest, userLocalDS.getUserAccessToken())
+        Log.d("RESPONSE_DOMAIN", UpdateAccMapper.dtoToDomain(response).toString())
         return UpdateAccMapper.dtoToDomain(response)
     }
 

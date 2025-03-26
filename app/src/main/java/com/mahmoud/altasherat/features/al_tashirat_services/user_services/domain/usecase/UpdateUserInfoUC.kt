@@ -30,6 +30,7 @@ class UpdateUserInfoUC(
                 }
 
             val response = repository.updateRemoteUserInfo(updateAccRequest)
+            Log.d("USECASE_RESPONSE", response.toString())
             repository.updateLocalUserInfo(response)
             emit(Resource.Success(response))
 

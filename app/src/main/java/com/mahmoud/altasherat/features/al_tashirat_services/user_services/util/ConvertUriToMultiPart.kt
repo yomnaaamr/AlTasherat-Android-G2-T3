@@ -16,14 +16,6 @@ fun Uri.toFile(context: Context): File? {
     return tempFile
 }
 
-fun Context.getFileFromUri(uri: Uri): File? {
-    val inputStream = contentResolver.openInputStream(uri) ?: return null
-    val tempFile = File.createTempFile("upload", ".jpg", cacheDir)
-    tempFile.outputStream().use { outputStream ->
-        inputStream.copyTo(outputStream)
-    }
-    return tempFile
-}
 
 fun File.toImagePart(paramName: String = "image"): MultipartBody.Part {
     val requestFile = this.asRequestBody("image/*".toMediaTypeOrNull())

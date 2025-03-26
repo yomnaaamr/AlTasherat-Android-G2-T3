@@ -35,8 +35,10 @@ fun createPartMap(request: UpdateAccRequest): Map<String, RequestBody> {
     }
 
     // Convert PhoneRequest to JSON
-    val phoneJson = Gson().toJson(request.phone)
-    map["phone"] = phoneJson.toRequestBody("application/json".toMediaTypeOrNull())
+    val phoneCountryJson = Gson().toJson(request.phone.countryCode)
+    val phoneNumberJson = Gson().toJson(request.phone.number)
+    map["number"] = phoneNumberJson.toRequestBody("application/json".toMediaTypeOrNull())
+    map["country_code"] = phoneCountryJson.toRequestBody("application/json".toMediaTypeOrNull())
 
     return map
 }

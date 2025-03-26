@@ -239,7 +239,9 @@ class ProfileInfoFragment :
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri = result.data?.data
                 Log.d("IMAGE_URI", imageUri?.toFile(this.requireContext()).toString())
-                ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
+                viewModel.onAction(
+                    ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
+                )
                 binding.profileImg.profileImg.setImageURI(imageUri)
             }
         }
