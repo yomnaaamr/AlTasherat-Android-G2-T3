@@ -9,6 +9,7 @@ import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.UpdateUserInfoUC
@@ -30,8 +31,10 @@ class ProfileInfoViewModel @Inject constructor(
     private val getUserInfoUC: GetUserInfoUC,
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
     private val getCountryUC: GetCountryUC,
-    private val updateUserInfoUC: UpdateUserInfoUC
-) : ViewModel() {
+    private val updateUserInfoUC: UpdateUserInfoUC,
+    private val saveSelectedCountryUC: SaveSelectedCountryUC,
+
+    ) : ViewModel() {
 
     private val _state =
         MutableStateFlow<ProfileInfoContract.ProfileInfoState>(ProfileInfoContract.ProfileInfoState.Idle)
@@ -88,7 +91,9 @@ class ProfileInfoViewModel @Inject constructor(
             }
 
             is ProfileInfoContract.ProfileInfoAction.SaveChanges -> updateAccount()
-
+            is ProfileInfoContract.ProfileInfoAction.UpdateCountry -> saveSelectedCountry(
+                profileInfoAction.value
+            )
         }
     }
 
@@ -133,7 +138,6 @@ class ProfileInfoViewModel @Inject constructor(
                     }
                 }
             }.launchIn(viewModelScope)
-
     }
 
     private fun getCountries() {
@@ -169,6 +173,14 @@ class ProfileInfoViewModel @Inject constructor(
             }.onError {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
+        }
+    }
+
+    private fun saveSelectedCountry(value: Country) {
+        viewModelScope.launch {
+            saveSelectedCountryUC(value)
+                .onSuccess { }
+                .onError { _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it)) }
         }
     }
 

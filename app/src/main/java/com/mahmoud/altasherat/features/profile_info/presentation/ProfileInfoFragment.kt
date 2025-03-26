@@ -142,6 +142,8 @@ class ProfileInfoFragment :
 
             viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryCode(phoneCountry?.phoneCode!!))
             viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryID(userCountry?.id.toString()))
+            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountry(userCountry!!))
+
             viewModel.onAction(
                 ProfileInfoContract.ProfileInfoAction.SaveChanges
             )

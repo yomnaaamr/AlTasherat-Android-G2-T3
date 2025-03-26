@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.profile_info.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
 import java.io.File
 
@@ -21,6 +22,7 @@ class ProfileInfoContract {
 
         data class UpdateImage(val value: File?) : ProfileInfoAction
         data class UpdateBirthday(val value: String) : ProfileInfoAction
+        data class UpdateCountry(val value: Country) : ProfileInfoAction
 
     }
 

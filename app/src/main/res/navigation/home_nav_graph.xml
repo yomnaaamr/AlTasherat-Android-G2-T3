@@ -21,7 +21,11 @@
         android:id="@+id/menuFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
         android:label="MenuFragment"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_profileInfoFragment"
+            app:destination="@id/profileInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
@@ -52,11 +56,16 @@
         android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.TermsAndConditionsFragment"
         android:label="fragment_terms_and_conditions"
         tools:layout="@layout/fragment_terms_and_conditions" />
+    <fragment
+        android:id="@+id/profileInfoFragment"
+        android:name="com.mahmoud.altasherat.features.profile_info.presentation.ProfileInfoFragment"
+        android:label="ProfileInfoFragment"
+        tools:layout="@layout/fragment_profile_info" />
 
 
-<!--    <navigation-->
-<!--        android:id="@+id/menuNavigation"-->
-<!--        app:startDestination="@id/menuFragment">-->
-<!--        -->
-<!--    </navigation>-->
+    <!--    <navigation-->
+    <!--        android:id="@+id/menuNavigation"-->
+    <!--        app:startDestination="@id/menuFragment">-->
+    <!--        -->
+    <!--    </navigation>-->
 </navigation>
