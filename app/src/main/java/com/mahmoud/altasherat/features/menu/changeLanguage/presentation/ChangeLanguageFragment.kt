@@ -24,20 +24,21 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
 
 
     private lateinit var languageAdapter: SingleSelectionAdapter
-    private lateinit var defaultLanguageCode: String
     private val viewModel: ChangeLanguageViewModel by viewModels()
-    private var selectedLanguage: Language? = null
+    private lateinit var selectedLanguage: Language
+    private lateinit var languages: List<Language>
 
 
     override fun FragmentChangeLanguageBinding.initialize() {
 
-        val languages = LanguageDataSource.getLanguages(requireContext())
-        val defaultLanguageIndex = languages.indexOfFirst { it.code == defaultLanguageCode }
+        languages = LanguageDataSource.getLanguages(requireContext())
+        selectedLanguage = languages.first()
+
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
                 this@ChangeLanguageFragment,
-                defaultLanguageIndex
+                selectedLanguage.id
             )
 
         binding.languageRecycler.apply {
@@ -47,25 +48,17 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
 
 
         binding.saveButton.setOnClickListener {
-            if (selectedLanguage != null) {
-
-                viewModel.onAction(
-                    ChangeLanguageContract.ChangeLanguageAction.SaveSelectedLanguage(
-                        selectedLanguage!!
-                    )
+            viewModel.onAction(
+                ChangeLanguageContract.ChangeLanguageAction.SaveSelectedLanguage(
+                    selectedLanguage
                 )
-                requireContext().changeLocale(selectedLanguage!!.code)
-            }else {
-                showMessage(
-                    getString(R.string.selection_required),
-                    MessageType.TOAST,
-                    this@ChangeLanguageFragment
-                )
-            }
+            )
+            requireContext().changeLocale(selectedLanguage.code)
         }
 
 
         setupObservers()
+
     }
 
 
@@ -84,8 +77,8 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
         }
 
         collectFlow(viewModel.languageCode){ languageCode ->
-            defaultLanguageCode = languageCode ?: Constants.LOCALE_AR
-
+           val defaultLanguageCode = languageCode ?: Constants.LOCALE_AR
+            selectedLanguage = languages.first { it.code == defaultLanguageCode }
         }
     }
 

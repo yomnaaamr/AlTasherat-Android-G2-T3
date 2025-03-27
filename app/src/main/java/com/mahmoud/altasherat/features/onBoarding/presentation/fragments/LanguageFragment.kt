@@ -32,16 +32,14 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
+    private var countries: List<Country> = emptyList()
 
-//    private var countriesList: List<Country> = emptyList()
 
     override fun FragmentLanguageBinding.initialize() {
 
         val languages = LanguageDataSource.getLanguages(requireContext())
-        val defaultLanguageIndex = languages[1].id
-//        val defaultLanguageIndex =
-//            languages.indexOfFirst { it.code == Locale.getDefault().language }
-//        selectedLanguage = languages[defaultLanguageIndex]
+        val defaultLanguageIndex = languages.first().id
+
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
@@ -70,21 +68,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                 is LanguageContract.LanguageState.Success -> {
                     val countries = state.data
                     if (countries.isNotEmpty()) {
-                         val defaultCountry = countries[0]
-//                        selectedCountry = countries[countries.indexOfFirst { it.id == 1 }]
+                        this.countries = countries
+                         val defaultCountry = countries.first()
                         binding.countryFlag.text = defaultCountry.flag
                         binding.countryName.text = defaultCountry.name
-
                         selectedCountry = defaultCountry
-
-                        bottomSheet = CountryPickerBottomSheet(
-                            countries,
-                            selectedCountry!!.id
-                        ) { newSelectedCountry ->
-                            this@LanguageFragment.selectedCountry = newSelectedCountry as Country
-                            binding.countryFlag.text = newSelectedCountry.flag
-                            binding.countryName.text = newSelectedCountry.name
-                        }
                     }
                 }
             }
@@ -107,6 +95,16 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     private fun setupListeners() {
 
         binding.chooseCountryLayout.setOnClickListener {
+
+            bottomSheet = CountryPickerBottomSheet(
+                countries,
+                selectedCountry!!.id.minus(1)
+            ) { newSelectedCountry ->
+                this@LanguageFragment.selectedCountry = newSelectedCountry as Country
+                binding.countryFlag.text = newSelectedCountry.flag
+                binding.countryName.text = newSelectedCountry.name
+            }
+
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
