@@ -152,7 +152,10 @@ class ProfileInfoViewModel @Inject constructor(
             getUserInfoUC().collect { result ->
                 _state.value = when (result) {
                     is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
-                    is Resource.Success -> ProfileInfoContract.ProfileInfoState.Success(result.data)
+                    is Resource.Success -> {
+                        ProfileInfoContract.ProfileInfoState.Success(result.data)
+                    }
+
                     is Resource.Error -> {
                         _events.send(ProfileInfoContract.ProfileInfoEvent.Error(result.error))
                         ProfileInfoContract.ProfileInfoState.Error(result.error)
