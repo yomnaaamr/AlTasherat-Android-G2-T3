@@ -79,7 +79,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
                         bottomSheet = CountryPickerBottomSheet(
                             countries,
-                            selectedCountry!!.id.minus(1)
+                            selectedCountry!!.id
                         ) { newSelectedCountry ->
                             this@LanguageFragment.selectedCountry = newSelectedCountry as Country
                             binding.countryFlag.text = newSelectedCountry.flag

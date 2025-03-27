@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_menuFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
+
+        <action
+            android:id="@+id/action_menu_to_authFragment"
+            app:destination="@id/authFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"

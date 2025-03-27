@@ -3,6 +3,7 @@ package com.mahmoud.altasherat.features.menu.presentation
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.mahmoud.altasherat.MainActivity
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
@@ -14,10 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::inflate) {
 
 
+//    val mainActivity = requireActivity() as? MainActivity
     private val viewModel: MenuViewModel by viewModels()
     private val adapter = MenuNavigationAdapter { destination ->
         findNavController().navigate(destination.destinationId)
+//        mainActivity?.navController?.navigate(destination.destinationId)
     }
+
+
 
     override fun FragmentMenuBinding.initialize() {
 
@@ -33,7 +38,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                     val hasUserLoggedIn = isUserAuthenticated.isAuthenticated
                     val filteredItems = if (hasUserLoggedIn) {
 //                        exclude auth fragment from menu
-                        menuItems.filter { it.destinationId != R.id.authFragment }
+                        menuItems.filter { it.id != 1 }
                     } else {
                         menuItems.filter { !it.requiresAuth }
                     }
