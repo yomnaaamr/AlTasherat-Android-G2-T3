@@ -14,11 +14,6 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_onBoardingFragment2"
-            app:destination="@id/onBoardingFragment2"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_splashFragment_to_authFragment"
             app:destination="@id/authFragment"
             app:popUpTo="@id/splashFragment"
@@ -28,17 +23,19 @@
             app:destination="@id/home_nav_graph"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
         android:name="com.mahmoud.altasherat.features.onBoarding.presentation.fragments.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language">
+
         <action
-            android:id="@+id/action_languageFragment_to_authFragment"
-            app:destination="@id/authFragment"
-            app:popUpTo="@id/languageFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_languageFragment_to_onBoardingFragment2"
+            app:destination="@id/onBoardingFragment2" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -58,11 +55,10 @@
         android:name="com.mahmoud.altasherat.features.onBoarding.presentation.fragments.OnBoardingFragment"
         android:label="OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding">
+
         <action
-            android:id="@+id/action_onBoardingFragment2_to_languageFragment"
-            app:destination="@id/languageFragment"
-            app:popUpTo="@id/onBoardingFragment2"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_onBoardingFragment2_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
 
 

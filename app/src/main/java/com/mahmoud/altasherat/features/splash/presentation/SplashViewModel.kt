@@ -73,7 +73,7 @@ class SplashViewModel @Inject constructor(
                     if (notFirstTime) {
                         hasLoggedInUser()
                     } else {
-                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        _events.send(SplashContract.SplashEvent.NavigateToLanguage)
                         _state.value = SplashContract.SplashState.Success
                     }
                 }
@@ -112,7 +112,7 @@ class SplashViewModel @Inject constructor(
 
                     is Resource.Loading -> SplashContract.SplashState.Loading
                     is Resource.Success -> {
-                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        _events.send(SplashContract.SplashEvent.NavigateToLanguage)
                         SplashContract.SplashState.Success
                     }
                 }

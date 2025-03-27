@@ -64,7 +64,7 @@ class LanguageViewModel @Inject constructor(
         viewModelScope.launch {
             saveSelectionsUC(selectedLanguage, selectedCountry)
                 .onSuccess {
-                    _events.send(LanguageContract.LanguageEvent.NavigationToAuth)
+                    _events.send(LanguageContract.LanguageEvent.NavigationToOnBoarding)
                 }
                 .onError {
                     _events.send(LanguageContract.LanguageEvent.Error(it))

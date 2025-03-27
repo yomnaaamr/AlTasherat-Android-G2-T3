@@ -16,7 +16,7 @@ class LanguageContract {
 
     sealed interface LanguageEvent {
         data class Error(val error: AltasheratError) : LanguageEvent
-        data object NavigationToAuth : LanguageEvent
+        data object NavigationToOnBoarding : LanguageEvent
 
     }
 

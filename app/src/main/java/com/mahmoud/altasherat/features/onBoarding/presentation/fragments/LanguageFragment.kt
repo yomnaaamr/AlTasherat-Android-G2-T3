@@ -85,8 +85,8 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     showMessage(error, MessageType.TOAST, this)
                 }
 
-                is LanguageContract.LanguageEvent.NavigationToAuth -> {
-                    findNavController().navigate(R.id.action_languageFragment_to_authFragment)
+                is LanguageContract.LanguageEvent.NavigationToOnBoarding -> {
+                    findNavController().navigate(R.id.action_languageFragment_to_onBoardingFragment2)
                 }
             }
         }

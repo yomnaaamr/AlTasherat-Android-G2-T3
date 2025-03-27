@@ -53,8 +53,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                     showMessage(errorMessage, MessageType.SNACKBAR, this)
                 }
 
-                SplashContract.SplashEvent.NavigateToOnBoarding -> {
-                    findNavController().navigate(R.id.action_splashFragment_to_onBoardingFragment2)
+                SplashContract.SplashEvent.NavigateToLanguage -> {
+                    findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
                 }
 
                 SplashContract.SplashEvent.NavigateToAuth -> {
