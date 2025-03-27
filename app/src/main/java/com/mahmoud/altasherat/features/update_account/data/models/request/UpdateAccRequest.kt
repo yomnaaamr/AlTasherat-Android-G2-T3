@@ -1,11 +1,9 @@
 package com.mahmoud.altasherat.features.update_account.data.models.request
 
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.util.Constants.EMAIL_PATTERN
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -22,10 +20,14 @@ data class UpdateAccRequest(
     val lastname: String,
     @SerializedName("email")
     val email: String,
-    @SerializedName("birth_date")
+    @SerializedName("birthdate")
     val birthDate: String?,
-    @SerializedName("phone")
-    val phone: PhoneRequest,
+    @SerializedName("phone[country_code]")
+    val countryCode: String,
+    @SerializedName("phone[number]")
+    val number: String,
+//    @SerializedName("phone")
+//    val phone: PhoneRequest,
     @SerializedName("image")
     val image: File?,
     @SerializedName("country")
@@ -41,7 +43,8 @@ data class UpdateAccRequest(
             validateEmail(),
             validateImageExtension(),
             validateImageSize(),
-            phone.validatePhoneNumberRequest(),
+            validatePhoneNumber(),
+            validatePhoneCountryCode()
         ).forEach { result ->
             if (result is Resource.Error) {
                 errors.add(result.error as ValidationError)
@@ -50,6 +53,17 @@ data class UpdateAccRequest(
         return Resource.Success(errors)
     }
 
+    private fun validatePhoneNumber(): Resource<Unit> {
+        if (number.isBlank()) return Resource.Error(ValidationError.EMPTY_PHONE_NUMBER)
+        if (number.length < 9 || number.length > 15) return Resource.Error(ValidationError.INVALID_PHONE_NUMBER)
+        return Resource.Success(Unit)
+    }
+
+    private fun validatePhoneCountryCode(): Resource<Unit> {
+        if (countryCode.isBlank()) return Resource.Error(ValidationError.EMPTY_COUNTRY_CODE)
+        if (countryCode.length < 3 || countryCode.length > 5) return Resource.Error(ValidationError.INVALID_COUNTRY_CODE)
+        return Resource.Success(Unit)
+    }
 
     private fun validateFirstName(): Resource<Unit> {
         if (firstName.isBlank()) return Resource.Error(ValidationError.EMPTY_FIRSTNAME)
@@ -104,34 +118,35 @@ data class UpdateAccRequest(
 
         // Convert text fields to RequestBody (handling nullable fields)
         this.firstName.takeIf { it.isNotEmpty() }?.let {
-            map["firstname"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["firstname"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.middlename?.takeIf { it.isNotEmpty() }?.let {
-            map["middlename"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["middlename"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.lastname.takeIf { it.isNotEmpty() }?.let {
-            map["lastname"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["lastname"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.email.takeIf { it.isNotEmpty() }?.let {
-            map["email"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["email"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.birthDate?.takeIf { it.isNotEmpty() }?.let {
-            map["birth_date"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["birthdate"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.country.takeIf { it.isNotEmpty() }?.let {
-            map["country"] = it.toRequestBody("text/plain".toMediaTypeOrNull())
+            map["country"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
-        // Convert PhoneRequest to JSON
-        val phoneCountryJson = Gson().toJson(this.phone.countryCode)
-        val phoneNumberJson = Gson().toJson(this.phone.number)
-        map["number"] = phoneNumberJson.toRequestBody("application/json".toMediaTypeOrNull())
-        map["country_code"] = phoneCountryJson.toRequestBody("application/json".toMediaTypeOrNull())
+        this.number.takeIf { it.isNotEmpty() }?.let {
+            map["phone[number]"] = it.toRequestBody("application/json".toMediaTypeOrNull())
+        }
+        this.countryCode.takeIf { it.isNotEmpty() }?.let {
+            map["phone[country_code]"] = it.toRequestBody("application/json".toMediaTypeOrNull())
+        }
 
         return map
     }

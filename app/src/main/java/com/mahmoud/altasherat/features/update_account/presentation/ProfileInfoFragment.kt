@@ -153,6 +153,7 @@ class ProfileInfoFragment :
     }
 
     private fun setupObservers() {
+
         collectFlow(viewModel.state) { state ->
             when (state) {
                 is ProfileInfoContract.ProfileInfoState.Error -> hideLoading()
@@ -160,19 +161,22 @@ class ProfileInfoFragment :
                 is ProfileInfoContract.ProfileInfoState.Loading -> showLoading()
                 is ProfileInfoContract.ProfileInfoState.Success -> {
                     user = state.userResponse
+                    collectFlow(viewModel.countries) { countries ->
+                        if (countries.isEmpty()) return@collectFlow
+                        phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
+                        if (phoneCountry != null) {
+                            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
+                        }
+                        _countries = countries
+
+                    }
                     fillFields(user)
                     hideLoading()
                 }
             }
         }
 
-        collectFlow(viewModel.countries) { countries ->
-            if (countries.isEmpty()) return@collectFlow
-            phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
-            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
-            _countries = countries
 
-        }
         collectFlow(viewModel.userCountry) { userCountry ->
             this.userCountry = userCountry
             Log.d("USER_COUNTRY", userCountry.toString())
@@ -214,13 +218,9 @@ class ProfileInfoFragment :
             }
             binding.lastNameEdit.setText(user.lastname)
             binding.phoneEdit.setText(user.phone.number)
-            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + user.phone.countryCode + ")")
+//            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + user.phone.countryCode + ")")
             binding.emailEdit.setText(user.email)
-            binding.birthdayEdit.apply {
-                if (user.birthDate.isNotEmpty()) {
-                    setText(user.birthDate)
-                }
-            }
+            binding.birthdayEdit.setText(user.birthDate)
             binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
             binding.profileImg.profileImg.apply {
                 if (user.image.isNotEmpty()) {

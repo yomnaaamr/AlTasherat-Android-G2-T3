@@ -10,7 +10,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedCountryUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.usecase.UpdateAccountUC
@@ -105,17 +104,14 @@ class ProfileInfoViewModel @Inject constructor(
     }
 
     private fun updateAccount() {
-        val phone = PhoneRequest(
-            countryCode = profileUiSate.value.countryCode,
-            number = profileUiSate.value.phoneNumber,
-        )
         val updateAccRequest = UpdateAccRequest(
             firstName = profileUiSate.value.firstName,
             middlename = profileUiSate.value.middleName,
             lastname = profileUiSate.value.lastName,
             email = profileUiSate.value.email,
             birthDate = profileUiSate.value.birthdate,
-            phone = phone,
+            countryCode = profileUiSate.value.countryCode,
+            number = profileUiSate.value.phoneNumber,
             image = profileUiSate.value.image,
             country = profileUiSate.value.selectedCountryId
         )
@@ -144,6 +140,7 @@ class ProfileInfoViewModel @Inject constructor(
         viewModelScope.launch {
             getCountriesFromLocalUC().onSuccess { countries ->
                 _countries.value = countries
+//                getUserData()
             }.onError {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
