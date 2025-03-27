@@ -70,7 +70,9 @@ class ProfileInfoFragment :
 
             val datePickerDialog = DatePickerDialog(
                 this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+                    val monthFormatted = String.format("%02d", selectedMonth + 1)
+                    val dayFormatted = String.format("%02d", selectedDay)
+                    val formattedDate = "$selectedYear-${monthFormatted}-$dayFormatted"
                     binding.birthdayEdit.setText(formattedDate)
                     viewModel.onAction(
                         ProfileInfoContract.ProfileInfoAction.UpdateBirthday(

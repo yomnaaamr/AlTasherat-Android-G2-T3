@@ -49,7 +49,7 @@ class ProfileInfoViewModel @Inject constructor(
     val userCountry = _userCountry.asStateFlow()
 
     private val _profileUiState = MutableStateFlow(ProfileInfoUiState())
-    private val profileUiSate = _profileUiState.asStateFlow()
+    val profileUiSate = _profileUiState.asStateFlow()
 
     fun onAction(profileInfoAction: ProfileInfoContract.ProfileInfoAction) {
         when (profileInfoAction) {
