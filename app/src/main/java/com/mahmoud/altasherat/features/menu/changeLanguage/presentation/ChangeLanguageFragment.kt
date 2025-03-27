@@ -10,6 +10,7 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentChangeLanguageBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
@@ -23,6 +24,7 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
 
 
     private lateinit var languageAdapter: SingleSelectionAdapter
+    private lateinit var defaultLanguageCode: String
     private val viewModel: ChangeLanguageViewModel by viewModels()
     private var selectedLanguage: Language? = null
 
@@ -30,7 +32,7 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
     override fun FragmentChangeLanguageBinding.initialize() {
 
         val languages = LanguageDataSource.getLanguages(requireContext())
-        val defaultLanguageIndex = languages[1].id
+        val defaultLanguageIndex = languages.indexOfFirst { it.code == defaultLanguageCode }
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
@@ -53,7 +55,6 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
                     )
                 )
                 requireContext().changeLocale(selectedLanguage!!.code)
-                requireActivity().recreate()
             }else {
                 showMessage(
                     getString(R.string.selection_required),
@@ -80,6 +81,11 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
                 }
 
             }
+        }
+
+        collectFlow(viewModel.languageCode){ languageCode ->
+            defaultLanguageCode = languageCode ?: Constants.LOCALE_AR
+
         }
     }
 

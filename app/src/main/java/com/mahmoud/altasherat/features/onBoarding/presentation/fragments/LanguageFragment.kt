@@ -128,8 +128,6 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     LanguageContract.LanguageAction.SetOnBoardingState
                 )
                 requireContext().changeLocale(selectedLanguage!!.code)
-                requireActivity().recreate()
-
             } else {
                 showMessage(
                     getString(R.string.selection_required),
