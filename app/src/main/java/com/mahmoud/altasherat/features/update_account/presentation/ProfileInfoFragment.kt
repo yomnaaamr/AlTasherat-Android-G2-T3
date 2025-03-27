@@ -46,7 +46,7 @@ class ProfileInfoFragment :
         binding.phoneCodePicker.setOnClickListener {
             binding.phoneCodePicker.apply {
                 bottomSheet = CountryPickerBottomSheet(
-                    _countries as List<ListItem>, phoneCountry!!.id.minus(1)
+                    _countries!!, phoneCountry!!.id.minus(1)
                 ) { selectedCountry ->
                     phoneCountry = selectedCountry as Country
                     setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
