@@ -33,6 +33,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
+        android:scrollbars="none"
         android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/relativeLayout">
@@ -283,6 +284,7 @@
                             android:focusableInTouchMode="true"
                             android:focusedByDefault="true"
                             android:inputType="none"
+                            android:text="🇸🇦 (+966)"
                             android:minWidth="100dp"
                             android:paddingHorizontal="8dp"
                             android:textColor="@android:color/white"
