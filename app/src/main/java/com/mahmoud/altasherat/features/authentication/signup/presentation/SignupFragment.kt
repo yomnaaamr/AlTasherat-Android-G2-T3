@@ -77,12 +77,22 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         collectFlow(viewModel.countries) { countries ->
             if (countries.isEmpty()) return@collectFlow
             val firstItem = countries.first()
-            val initialSelect = firstItem.flag + " (" + firstItem.phoneCode + ")"
+            val initialSelect = resources.getString(
+                R.string.country_picker_display,
+                firstItem.flag,
+                formatCountryCode(firstItem.phoneCode)
+            )
             binding.phoneCodePicker.apply {
                 setText(initialSelect)
                 bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
                     val country = selectedCountry as Country
-                    setText(country.flag + " (" + country.phoneCode + ")")
+                    setText(
+                        resources.getString(
+                            R.string.country_picker_display,
+                            country.flag,
+                            formatCountryCode(country.phoneCode)
+                        )
+                    )
                     viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
                     viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
                 }

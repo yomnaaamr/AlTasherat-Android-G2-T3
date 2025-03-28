@@ -124,4 +124,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="Contact_Message_text">Write your contact message</string>
 
 
+    <string name="country_picker_display" translatable="false">%1$s %2$s</string>
+
 </resources>

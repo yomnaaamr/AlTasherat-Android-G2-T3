@@ -75,12 +75,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         collectFlow(loginViewModel.countries) { countries ->
             if (countries.isEmpty()) return@collectFlow
             val firstItem = countries.first()
-            val initialSelect = firstItem.flag + " (" + firstItem.phoneCode + ")"
+            val initialSelect = resources.getString(
+                R.string.country_picker_display,
+                firstItem.flag,
+                formatCountryCode(firstItem.phoneCode)
+            )
             binding.phoneCodePicker.apply {
                 setText(initialSelect)
                 bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
                     this@LoginFragment.selectedCountry = selectedCountry as Country
-                    setText(selectedCountry.flag + " (" + selectedCountry.phoneCode + ")")
+                    setText(
+                        resources.getString(
+                            R.string.country_picker_display,
+                            selectedCountry.flag,
+                            formatCountryCode(selectedCountry.phoneCode)
+                        )
+                    )
 
                 }
             }
@@ -167,5 +177,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
     }
+
 
 }
