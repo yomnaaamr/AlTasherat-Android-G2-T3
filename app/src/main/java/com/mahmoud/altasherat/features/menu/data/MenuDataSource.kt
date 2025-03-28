@@ -41,7 +41,7 @@ object MenuDataSource {
         NavigationItem(
             id = 6,
             title = context.getString(R.string.privacy_policy),
-            iconRes = R.drawable.ic_policy,
+            iconRes = R.drawable.ic_privacy,
             destinationId = R.id.privacyPolicyFragment,
         ),
         NavigationItem(
