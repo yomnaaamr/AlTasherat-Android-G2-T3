@@ -49,8 +49,8 @@ class AuthFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 val fragment = when (tab?.position) {
-                    0 -> SignupFragment()
-                    1 -> LoginFragment()
+                    0 -> LoginFragment()
+                    1 -> SignupFragment()
                     else -> SignupFragment()
                 }
                 parentFragmentManager.beginTransaction()

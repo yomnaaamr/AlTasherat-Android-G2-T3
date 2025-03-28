@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -143,15 +145,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             setOf(
                 ValidationError.EMPTY_PASSWORD,
                 ValidationError.INVALID_PASSWORD
-            ) to binding.passwordEdit,
+            ) to binding.passwordLayout,
         )
 
         binding.phoneEdit.error = null
-        binding.passwordEdit.error = null
+        binding.passwordLayout.isErrorEnabled = false
+        binding.passwordLayout.error = null
 
         errors.forEach { error ->
-            errorFields.entries.find { it.key.contains(error) }?.value?.error =
-                error.toErrorMessage(requireContext())
+            errorFields.entries.find { it.key.contains(error) }?.value?.let { view ->
+                when (view) {
+                    is TextInputLayout -> {
+                        view.isErrorEnabled = true
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+
+                    is TextInputEditText -> {
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+                }
+            }
         }
     }
 
