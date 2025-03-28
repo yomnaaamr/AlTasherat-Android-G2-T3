@@ -1,22 +1,17 @@
 package com.mahmoud.altasherat.features.menu.presentation.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.mahmoud.altasherat.R
+import androidx.navigation.fragment.findNavController
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.databinding.FragmentAboutUsBinding
 
 
-class AboutUsFragment : Fragment() {
+class AboutUsFragment : BaseFragment<FragmentAboutUsBinding>(FragmentAboutUsBinding::inflate) {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_us, container, false)
+    override fun FragmentAboutUsBinding.initialize() {
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
 

@@ -57,6 +57,12 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
         }
 
 
+
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+
         setupObservers()
 
     }
