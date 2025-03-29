@@ -11,7 +11,7 @@ object MenuDataSource {
             id = 1,
             title = context.getString(R.string.sign_in_text),
             iconRes = R.drawable.ic_login,
-            destinationId = R.id.authFragment,
+            destinationId = R.id.action_menu_to_authFragment,
         ),
         NavigationItem(
             id = 2,
@@ -41,7 +41,7 @@ object MenuDataSource {
         NavigationItem(
             id = 6,
             title = context.getString(R.string.privacy_policy),
-            iconRes = R.drawable.ic_policy,
+            iconRes = R.drawable.ic_privacy,
             destinationId = R.id.privacyPolicyFragment,
         ),
         NavigationItem(

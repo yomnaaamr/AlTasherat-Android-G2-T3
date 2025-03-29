@@ -11,6 +11,7 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
@@ -19,7 +20,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageContract
 import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -32,16 +32,14 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
+    private var countries: List<Country> = emptyList()
 
-//    private var countriesList: List<Country> = emptyList()
 
     override fun FragmentLanguageBinding.initialize() {
 
         val languages = LanguageDataSource.getLanguages(requireContext())
-        val defaultLanguageIndex = languages[1].id
-//        val defaultLanguageIndex =
-//            languages.indexOfFirst { it.code == Locale.getDefault().language }
-//        selectedLanguage = languages[defaultLanguageIndex]
+        val defaultLanguageIndex = languages.first().id
+
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
@@ -70,21 +68,11 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                 is LanguageContract.LanguageState.Success -> {
                     val countries = state.data
                     if (countries.isNotEmpty()) {
-                         val defaultCountry = countries[0]
-//                        selectedCountry = countries[countries.indexOfFirst { it.id == 1 }]
+                        this.countries = countries
+                         val defaultCountry = countries.first()
                         binding.countryFlag.text = defaultCountry.flag
                         binding.countryName.text = defaultCountry.name
-
                         selectedCountry = defaultCountry
-
-                        bottomSheet = CountryPickerBottomSheet(
-                            countries,
-                            selectedCountry!!.id
-                        ) { newSelectedCountry ->
-                            this@LanguageFragment.selectedCountry = newSelectedCountry as Country
-                            binding.countryFlag.text = newSelectedCountry.flag
-                            binding.countryName.text = newSelectedCountry.name
-                        }
                     }
                 }
             }
@@ -97,8 +85,8 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     showMessage(error, MessageType.TOAST, this)
                 }
 
-                is LanguageContract.LanguageEvent.NavigationToAuth -> {
-                    findNavController().navigate(R.id.action_languageFragment_to_authFragment)
+                is LanguageContract.LanguageEvent.NavigationToOnBoarding -> {
+                    findNavController().navigate(R.id.action_languageFragment_to_onBoardingFragment2)
                 }
             }
         }
@@ -107,11 +95,26 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     private fun setupListeners() {
 
         binding.chooseCountryLayout.setOnClickListener {
+
+            bottomSheet = CountryPickerBottomSheet(
+                countries,
+                selectedCountry!!.id.minus(1)
+            ) { newSelectedCountry ->
+                this@LanguageFragment.selectedCountry = newSelectedCountry as Country
+                binding.countryFlag.text = newSelectedCountry.flag
+                binding.countryName.text = newSelectedCountry.name
+            }
+
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
         binding.continueBtn.setOnClickListener {
             if (selectedLanguage != null && selectedCountry != null) {
+                if (selectedLanguage!!.code == Constants.LOCALE_AR) {
+                    viewModel.onAction(
+                        LanguageContract.LanguageAction.GetCountriesFromRemote(Constants.LOCALE_AR)
+                    )
+                }
                 viewModel.onAction(
                     LanguageContract.LanguageAction.SaveSelections(
                         selectedLanguage!!,

@@ -175,4 +175,15 @@
 
     </style>
 
+    <style name="textInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">?colorSurfaceInverse</item>
+        <item name="boxCornerRadiusBottomEnd">26dp</item>
+        <item name="boxCornerRadiusBottomStart">26dp</item>
+        <item name="boxCornerRadiusTopEnd">26dp</item>
+        <item name="boxCornerRadiusTopStart">26dp</item>
+        <item name="boxStrokeColor">?colorPrimary</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="expandedHintEnabled">false</item>
+    </style>
+
 </resources>

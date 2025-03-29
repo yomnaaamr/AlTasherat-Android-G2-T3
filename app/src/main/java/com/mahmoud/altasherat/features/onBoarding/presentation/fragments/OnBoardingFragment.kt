@@ -48,7 +48,7 @@ class OnBoardingFragment : Fragment() {
             if (nextScreen < onBoardingViewPagerAdapter.itemCount) {
                 viewPager2.currentItem = nextScreen
             } else {
-                findNavController().navigate(R.id.action_onBoardingFragment2_to_languageFragment)
+                findNavController().navigate(R.id.action_onBoardingFragment2_to_authFragment)
             }
         }
     }

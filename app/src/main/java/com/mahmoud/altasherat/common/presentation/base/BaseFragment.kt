@@ -97,4 +97,12 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
     }
 
 
+     fun formatCountryCode(countryCode: String): String {
+        return if (countryCode.startsWith("00")) {
+            "(+" + countryCode.substring(2) + ")"
+        } else {
+            "(+$countryCode)"
+        }
+    }
+
 }

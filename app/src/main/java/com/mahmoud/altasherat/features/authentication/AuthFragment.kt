@@ -49,9 +49,9 @@ class AuthFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 val fragment = when (tab?.position) {
-                    0 -> SignupFragment()
-                    1 -> LoginFragment()
-                    else -> SignupFragment()
+                    0 -> LoginFragment()
+                    1 -> SignupFragment()
+                    else -> LoginFragment()
                 }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)
@@ -70,7 +70,7 @@ class AuthFragment : Fragment() {
 
 
         binding.skipTxt.setOnClickListener {
-            findNavController().navigate(R.id.action_authFragment_to_menuFragment)
+            findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
         }
 
         return binding.root
@@ -78,7 +78,7 @@ class AuthFragment : Fragment() {
 
     private fun setupTab(authTabLayout: TabLayout) {
         val tabTitles =
-            listOf(resources.getString(R.string.signup), resources.getString(R.string.sign_in))
+            listOf(resources.getString(R.string.sign_in),resources.getString(R.string.signup))
 
         for (i in tabTitles.indices) {
             val tab = authTabLayout.newTab()
