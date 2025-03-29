@@ -3,6 +3,7 @@ package com.mahmoud.altasherat.features.menu.presentation
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.menu.data.MenuDataSource
@@ -17,7 +18,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
     private val adapter = MenuNavigationAdapter { destination ->
         findNavController().navigate(destination.destinationId)
     }
-
 
 
     override fun FragmentMenuBinding.initialize() {

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:layout_marginBottom="85dp"
     tools:context=".features.menu.presentation.MenuFragment">
 
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             style="@style/CustomButton"
             android:paddingHorizontal="22dp"
-            android:text="@string/edit_profile"/>
+            android:text="@string/edit_profile" />
 
     </LinearLayout>
 
@@ -55,7 +56,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_menu_destination"
         android:orientation="vertical" />
-
 
 
     <LinearLayout
@@ -83,4 +83,4 @@
 
     </LinearLayout>
 
-</LinearLayout >
+</LinearLayout>
