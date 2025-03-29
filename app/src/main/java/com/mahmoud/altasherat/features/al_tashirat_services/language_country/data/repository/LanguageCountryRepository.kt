@@ -13,8 +13,8 @@ internal class LanguageCountryRepository(
     private val localDS: ILanguageCountryLocalDS
 ) : ILanguageCountryRepository {
 
-    override suspend fun getCountriesFromRemote(): Countries {
-        val response = remoteDS.getCountries()
+    override suspend fun getCountriesFromRemote(languageCode: String): Countries {
+        val response = remoteDS.getCountries(languageCode)
         return CountriesMapper.dtoToDomain(response)
     }
 

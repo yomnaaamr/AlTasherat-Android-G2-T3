@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.HasCountriesUC
@@ -41,6 +42,7 @@ class SplashViewModel @Inject constructor(
     val languageCode: StateFlow<String?> = _languageCode
 
 
+
     init {
 
         viewModelScope.launch {
@@ -71,7 +73,7 @@ class SplashViewModel @Inject constructor(
                     if (notFirstTime) {
                         hasLoggedInUser()
                     } else {
-                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        _events.send(SplashContract.SplashEvent.NavigateToLanguage)
                         _state.value = SplashContract.SplashState.Success
                     }
                 }
@@ -100,7 +102,7 @@ class SplashViewModel @Inject constructor(
 
     private fun fetchCountries() {
 
-        getCountriesFromRemoteUC()
+        getCountriesFromRemoteUC(Constants.LOCALE_EN)
             .onEach { result ->
                 _state.value = when (result) {
                     is Resource.Error -> {
@@ -110,7 +112,7 @@ class SplashViewModel @Inject constructor(
 
                     is Resource.Loading -> SplashContract.SplashState.Loading
                     is Resource.Success -> {
-                        _events.send(SplashContract.SplashEvent.NavigateToOnBoarding)
+                        _events.send(SplashContract.SplashEvent.NavigateToLanguage)
                         SplashContract.SplashState.Success
                     }
                 }

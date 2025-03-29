@@ -11,6 +11,7 @@ object Constants {
     const val CONTENT_TYPE_JSON = "application/json"
     const val HEADER_X_LOCALE = "X-locale"
     const val LOCALE_EN = "en"
+    const val LOCALE_AR = "ar"
 
     const val COUNTRIES_ENDPOINT = "countries"
     const val LOGIN_ENDPOINT = "login"

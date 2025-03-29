@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/menuFragment">
+
 
     <fragment
         android:id="@+id/requestsFragment"
@@ -21,7 +22,17 @@
         android:id="@+id/menuFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
         android:label="MenuFragment"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+
+        <action
+            android:id="@+id/action_menu_to_authFragment"
+            app:destination="@id/authFragment" />
+
+
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
@@ -34,9 +45,13 @@
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/changeLanguageFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangeLanguageFragment"
+        android:name="com.mahmoud.altasherat.features.menu.changeLanguage.presentation.ChangeLanguageFragment"
         android:label="fragment_change_language"
-        tools:layout="@layout/fragment_change_language" />
+        tools:layout="@layout/fragment_change_language" >
+        <action
+            android:id="@+id/action_changeLanguageFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ContactUsFragment"
@@ -53,10 +68,4 @@
         android:label="fragment_terms_and_conditions"
         tools:layout="@layout/fragment_terms_and_conditions" />
 
-
-<!--    <navigation-->
-<!--        android:id="@+id/menuNavigation"-->
-<!--        app:startDestination="@id/menuFragment">-->
-<!--        -->
-<!--    </navigation>-->
 </navigation>

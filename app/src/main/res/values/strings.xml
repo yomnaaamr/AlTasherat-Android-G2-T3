@@ -110,6 +110,20 @@ Disclaimer: No party shall be liable for the existence of loss, damage, delay, o
 No Waiver: The waiver of any provision in these terms of use shall not constitute a waiver of any other provisions (similar or dissimilar), nor shall any other waiver constitute a continuing waiver of any relevant provisions, unless expressly stated in writing.
 Communication: You can contact us via email, through our social media sites, or through live chat on the website, or by contacting our call center.
 Survival: All provisions that are stated to remain in force or that, by their nature, continue to apply after the termination of the contract shall remain in effect after the termination or suspension of your membership on the website.</string>
+    <string name="save">Save</string>
+    <string name="Contact_info">Contact Information</string>
+    <string name="Contact_phone">( +20) 1011777751 - (+966) 550440787</string>
+    <string name="Contact_us_email_text">Travel@altaherat.com  -  Info@altasherat.com</string>
+    <string name="location_text">السعودية - الرياض\n القاهرة - جاردن سيتي</string>
+    <string name="name_text">Name</string>
+    <string name="send">Send</string>
+    <string name="Contact_name_input">Enter name to contact</string>
+    <string name="Contact_Subject">Subject</string>
+    <string name="enter_subject_text">Choose contact subject</string>
+    <string name="Contact_Message">Message</string>
+    <string name="Contact_Message_text">Write your contact message</string>
 
+
+    <string name="country_picker_display" translatable="false">%1$s %2$s</string>
 
 </resources>

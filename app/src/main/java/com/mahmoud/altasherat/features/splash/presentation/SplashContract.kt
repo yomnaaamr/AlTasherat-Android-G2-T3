@@ -7,7 +7,7 @@ class SplashContract {
     sealed interface SplashEvent {
         data class Error(val error: AltasheratError) : SplashEvent
         data object NavigateToHome : SplashEvent
-        data object NavigateToOnBoarding : SplashEvent
+        data object NavigateToLanguage : SplashEvent
         data object NavigateToAuth : SplashEvent
     }
 
@@ -20,6 +20,5 @@ class SplashContract {
 
 
     sealed interface SplashAction {
-
     }
 }
