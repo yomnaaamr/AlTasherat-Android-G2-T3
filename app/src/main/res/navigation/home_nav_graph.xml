@@ -22,7 +22,7 @@
         android:id="@+id/menuFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
         android:label="MenuFragment"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
@@ -34,6 +34,7 @@
         <action
             android:id="@+id/action_menuFragment_to_profileInfoFragment"
             app:destination="@id/profileInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
@@ -48,7 +49,7 @@
         android:id="@+id/changeLanguageFragment"
         android:name="com.mahmoud.altasherat.features.menu.changeLanguage.presentation.ChangeLanguageFragment"
         android:label="fragment_change_language"
-        tools:layout="@layout/fragment_change_language" >
+        tools:layout="@layout/fragment_change_language">
         <action
             android:id="@+id/action_changeLanguageFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
@@ -73,11 +74,4 @@
         android:name="com.mahmoud.altasherat.features.update_account.presentation.ProfileInfoFragment"
         android:label="ProfileInfoFragment"
         tools:layout="@layout/fragment_profile_info" />
-
-
-    <!--    <navigation-->
-    <!--        android:id="@+id/menuNavigation"-->
-    <!--        app:startDestination="@id/menuFragment">-->
-    <!--        -->
-    <!--    </navigation>-->
 </navigation>
