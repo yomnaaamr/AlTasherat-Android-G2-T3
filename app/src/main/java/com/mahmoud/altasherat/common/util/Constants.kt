@@ -9,6 +9,7 @@ object Constants {
     const val HEADER_ACCEPT = "Accept"
     const val HEADER_CONTENT_TYPE = "Content-Type"
     const val CONTENT_TYPE_JSON = "application/json"
+    const val CONTENT_TYPE_MULTIPART = "multipart/form-data"
     const val HEADER_X_LOCALE = "X-locale"
     const val LOCALE_EN = "en"
     const val LOCALE_AR = "ar"

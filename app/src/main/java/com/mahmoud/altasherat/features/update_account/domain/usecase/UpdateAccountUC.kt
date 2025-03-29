@@ -41,6 +41,8 @@ class UpdateAccountUC(
                         "Unknown error in UpdateUserInfoUC: $throwable"
                     )
                 )
+            Log.d("USECASE_RESPONSE", failureResource.error.toString())
+
             emit(Resource.Error(failureResource.error))
         }.flowOn(Dispatchers.IO)
 
