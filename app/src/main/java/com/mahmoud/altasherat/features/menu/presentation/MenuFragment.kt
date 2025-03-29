@@ -3,8 +3,6 @@ package com.mahmoud.altasherat.features.menu.presentation
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.mahmoud.altasherat.MainActivity
-import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.menu.data.MenuDataSource
@@ -15,11 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::inflate) {
 
 
-//    val mainActivity = requireActivity() as? MainActivity
     private val viewModel: MenuViewModel by viewModels()
     private val adapter = MenuNavigationAdapter { destination ->
         findNavController().navigate(destination.destinationId)
-//        mainActivity?.navController?.navigate(destination.destinationId)
     }
 
 

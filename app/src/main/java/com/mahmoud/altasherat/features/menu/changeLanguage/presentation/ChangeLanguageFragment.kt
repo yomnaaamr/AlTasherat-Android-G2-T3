@@ -20,32 +20,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
-    FragmentChangeLanguageBinding::inflate), OnItemClickListener {
+    FragmentChangeLanguageBinding::inflate
+), OnItemClickListener {
 
 
     private lateinit var languageAdapter: SingleSelectionAdapter
     private val viewModel: ChangeLanguageViewModel by viewModels()
     private lateinit var selectedLanguage: Language
-    private lateinit var languages: List<Language>
 
 
     override fun FragmentChangeLanguageBinding.initialize() {
 
-        languages = LanguageDataSource.getLanguages(requireContext())
-        selectedLanguage = languages.first()
 
-        languageAdapter =
-            SingleSelectionAdapter(
-                languages,
-                this@ChangeLanguageFragment,
-                selectedLanguage.id
-            )
-
-        binding.languageRecycler.apply {
-            adapter = languageAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-        }
-
+        setupObservers()
 
         binding.saveButton.setOnClickListener {
             viewModel.onAction(
@@ -56,24 +43,21 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
             requireContext().changeLocale(selectedLanguage.code)
         }
 
-
-
         binding.backButton.setOnClickListener {
             findNavController().navigateUp()
         }
 
 
-        setupObservers()
-
     }
 
 
-    private fun setupObservers(){
-        collectFlow(viewModel.events){ event ->
-            when(event){
+    private fun setupObservers() {
+        collectFlow(viewModel.events) { event ->
+            when (event) {
                 is ChangeLanguageContract.ChangeLanguageEvent.NavigationToProfile -> {
                     findNavController().navigate(R.id.action_changeLanguageFragment_to_menuFragment)
                 }
+
                 is ChangeLanguageContract.ChangeLanguageEvent.Error -> {
                     val error = event.error.toErrorMessage(requireContext())
                     showMessage(error, MessageType.SNACKBAR, this)
@@ -82,9 +66,22 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
             }
         }
 
-        collectFlow(viewModel.languageCode){ languageCode ->
-           val defaultLanguageCode = languageCode ?: Constants.LOCALE_AR
-            selectedLanguage = languages.first { it.code == defaultLanguageCode }
+        collectFlow(viewModel.languageCode) { languageCode ->
+            val userLanguageCode = languageCode ?: Constants.LOCALE_AR
+            val languages = LanguageDataSource.getLanguages(requireContext())
+            selectedLanguage = languages.find { it.code == userLanguageCode }!!
+
+            languageAdapter =
+                SingleSelectionAdapter(
+                    languages,
+                    this@ChangeLanguageFragment,
+                    selectedLanguage.id
+                )
+
+            binding.languageRecycler.apply {
+                adapter = languageAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
+            }
         }
     }
 

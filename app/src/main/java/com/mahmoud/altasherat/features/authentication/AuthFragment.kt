@@ -51,7 +51,7 @@ class AuthFragment : Fragment() {
                 val fragment = when (tab?.position) {
                     0 -> LoginFragment()
                     1 -> SignupFragment()
-                    else -> SignupFragment()
+                    else -> LoginFragment()
                 }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)
@@ -78,7 +78,7 @@ class AuthFragment : Fragment() {
 
     private fun setupTab(authTabLayout: TabLayout) {
         val tabTitles =
-            listOf(resources.getString(R.string.signup), resources.getString(R.string.sign_in))
+            listOf(resources.getString(R.string.sign_in),resources.getString(R.string.signup))
 
         for (i in tabTitles.indices) {
             val tab = authTabLayout.newTab()
