@@ -25,8 +25,7 @@
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:background="@drawable/profile_bg"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_place_holder" />
+            android:scaleType="centerCrop" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -49,7 +49,7 @@ class ProfileInfoViewModel @Inject constructor(
     val userCountry = _userCountry.asStateFlow()
 
     private val _profileUiState = MutableStateFlow(ProfileInfoUiState())
-    val profileUiSate = _profileUiState.asStateFlow()
+    val profileUiState = _profileUiState.asStateFlow()
 
     fun onAction(profileInfoAction: ProfileInfoContract.ProfileInfoAction) {
         when (profileInfoAction) {
@@ -105,15 +105,15 @@ class ProfileInfoViewModel @Inject constructor(
 
     private fun updateAccount() {
         val updateAccRequest = UpdateAccRequest(
-            firstName = profileUiSate.value.firstName,
-            middlename = profileUiSate.value.middleName,
-            lastname = profileUiSate.value.lastName,
-            email = profileUiSate.value.email,
-            birthDate = profileUiSate.value.birthdate,
-            countryCode = profileUiSate.value.countryCode,
-            number = profileUiSate.value.phoneNumber,
-            image = profileUiSate.value.image,
-            country = profileUiSate.value.selectedCountryId
+            firstName = _profileUiState.value.firstName,
+            middlename = _profileUiState.value.middleName,
+            lastname = _profileUiState.value.lastName,
+            email = _profileUiState.value.email,
+            birthDate = _profileUiState.value.birthdate,
+            countryCode = _profileUiState.value.countryCode,
+            number = _profileUiState.value.phoneNumber,
+            image = _profileUiState.value.image,
+            country = _profileUiState.value.selectedCountryId
         )
         Log.d("UPDATE_REQUEST", updateAccRequest.toString())
 
