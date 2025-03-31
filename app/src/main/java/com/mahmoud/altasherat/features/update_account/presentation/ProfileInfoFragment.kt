@@ -164,25 +164,19 @@ class ProfileInfoFragment :
                     collectFlow(viewModel.countries) { countries ->
                         if (countries.isEmpty()) return@collectFlow
                         phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
-                        if (phoneCountry != null) {
-                            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
-                        }
                         _countries = countries
-
+                        collectFlow(viewModel.userCountry) { userCountry ->
+                            this.userCountry = userCountry
+                            fillFields(user)
+                            hideLoading()
+                        }
                     }
-                    fillFields(user)
-                    hideLoading()
                 }
             }
         }
 
 
-        collectFlow(viewModel.userCountry) { userCountry ->
-            this.userCountry = userCountry
-            Log.d("USER_COUNTRY", userCountry.toString())
-            binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
 
-        }
 
         collectFlow(viewModel.events) { profileInfoEvent ->
             when (profileInfoEvent) {
@@ -218,10 +212,14 @@ class ProfileInfoFragment :
             }
             binding.lastNameEdit.setText(user.lastname)
             binding.phoneEdit.setText(user.phone.number)
-//            binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + user.phone.countryCode + ")")
+            if (phoneCountry != null) {
+                binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
+            }
             binding.emailEdit.setText(user.email)
             binding.birthdayEdit.setText(user.birthDate)
-            binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
+            if (userCountry != null) {
+                binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
+            }
 //            binding.profileImg.profileImg.apply {
 //                if (user.image.isNotEmpty()) {
 //                    setImageURI(user.image.toUri())
@@ -261,27 +259,17 @@ class ProfileInfoFragment :
     private fun displayValidationErrors(errors: List<ValidationError>) {
         val errorFields = mapOf(
             setOf(
-                ValidationError.EMPTY_FIRSTNAME,
-                ValidationError.INVALID_FIRSTNAME
-            ) to binding.firstNameEdit,
-            setOf(
+                ValidationError.EMPTY_FIRSTNAME, ValidationError.INVALID_FIRSTNAME
+            ) to binding.firstNameEdit, setOf(
                 ValidationError.INVALID_MIDDLE_NAME,
-            ) to binding.middleNameEdit,
-            setOf(
-                ValidationError.EMPTY_LASTNAME,
-                ValidationError.INVALID_LASTNAME
-            ) to binding.lastNameEdit,
-            setOf(
-                ValidationError.EMPTY_EMAIL,
-                ValidationError.INVALID_EMAIL
-            ) to binding.emailEdit,
-            setOf(
-                ValidationError.EMPTY_PHONE_NUMBER,
-                ValidationError.INVALID_PHONE_NUMBER
-            ) to binding.phoneEdit,
-            setOf(
-                ValidationError.INVALID_COUNTRY_CODE,
-                ValidationError.EMPTY_COUNTRY_CODE
+            ) to binding.middleNameEdit, setOf(
+                ValidationError.EMPTY_LASTNAME, ValidationError.INVALID_LASTNAME
+            ) to binding.lastNameEdit, setOf(
+                ValidationError.EMPTY_EMAIL, ValidationError.INVALID_EMAIL
+            ) to binding.emailEdit, setOf(
+                ValidationError.EMPTY_PHONE_NUMBER, ValidationError.INVALID_PHONE_NUMBER
+            ) to binding.phoneEdit, setOf(
+                ValidationError.INVALID_COUNTRY_CODE, ValidationError.EMPTY_COUNTRY_CODE
             ) to binding.phoneCodePicker
         )
 
