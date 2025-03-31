@@ -7,10 +7,8 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
 import com.mahmoud.altasherat.common.presentation.CountryPickerBottomSheet
@@ -214,7 +212,7 @@ class ProfileInfoFragment :
         if (user != null) {
             binding.firstNameEdit.setText(user.firstname)
             binding.middleNameEdit.apply {
-                if (user.middleName.isNotEmpty()) {
+                if (!user.middleName.isNullOrEmpty()) {
                     setText(user.middleName)
                 }
             }
@@ -224,13 +222,13 @@ class ProfileInfoFragment :
             binding.emailEdit.setText(user.email)
             binding.birthdayEdit.setText(user.birthDate)
             binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
-            binding.profileImg.profileImg.apply {
-                if (user.image.isNotEmpty()) {
-                    setImageURI(user.image.toUri())
-                } else {
-                    setImageDrawable(resources.getDrawable(R.drawable.profile_place_holder))
-                }
-            }
+//            binding.profileImg.profileImg.apply {
+//                if (user.image.isNotEmpty()) {
+//                    setImageURI(user.image.toUri())
+//                } else {
+//                    setImageDrawable(resources.getDrawable(R.drawable.profile_place_holder))
+//                }
+//            }
 
         }
 

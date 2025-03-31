@@ -1,13 +1,13 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models
 
 data class Image(
-    val id: Int,
-    val type: String,
-    val path: String,
-    val title: String,
-    val description: String,
-    val priority: Int,
-    val main: Boolean,
-    val createdAt: String,
-    val updatedAt: String
+    val id: Int? = null,
+    val type: String? = null,
+    val path: String? = null,
+    val title: String? = null,
+    val description: String? = null,
+    val priority: Int? = null,
+    val main: Boolean? = null,
+    val createdAt: String? = null,
+    val updatedAt: String? = null
 )

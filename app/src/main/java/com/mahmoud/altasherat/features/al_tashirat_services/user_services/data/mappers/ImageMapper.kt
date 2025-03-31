@@ -35,15 +35,15 @@ internal object ImageMapper {
 
     fun domainToEntity(model: Image): ImageEntity {
         return ImageEntity(
-            id = model.id,
-            type = model.type,
-            path = model.path,
-            title = model.title,
-            description = model.description,
-            priority = model.priority,
-            main = model.main,
-            createdAt = model.createdAt,
-            updatedAt = model.updatedAt
+            id = model.id ?: -1,
+            type = model.type.orEmpty(),
+            path = model.path.orEmpty(),
+            title = model.title.orEmpty(),
+            description = model.description.orEmpty(),
+            priority = model.priority ?: -1,
+            main = model.main ?: false,
+            createdAt = model.createdAt.orEmpty(),
+            updatedAt = model.updatedAt.orEmpty()
         )
     }
 }
