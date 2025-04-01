@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
@@ -241,11 +240,14 @@ class ProfileInfoFragment :
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri = result.data?.data
-                Log.d("IMAGE_URI", imageUri?.toFile(this.requireContext()).toString())
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
                 )
-                binding.profileImg.profileImg.setImageURI(imageUri)
+                Glide.with(requireContext())
+                    .load(imageUri)
+                    .centerCrop()
+                    .placeholder(R.drawable.profile_place_holder)
+                    .into(binding.profileImg.profileImg)
             }
         }
 
