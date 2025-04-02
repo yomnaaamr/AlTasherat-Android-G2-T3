@@ -31,7 +31,7 @@ class ProfileInfoFragment :
 
     private val viewModel: ProfileInfoViewModel by viewModels()
     private lateinit var bottomSheet: CountryPickerBottomSheet
-    private var userCountry: Country? = null
+    private var _userCountry: Country? = null
     private var phoneCountry: Country? = null
     private var user: User? = null
     private var _countries: List<Country>? = null
@@ -86,10 +86,10 @@ class ProfileInfoFragment :
 
         binding.countryEdit.setOnClickListener {
             bottomSheet = CountryPickerBottomSheet(
-                _countries as List<ListItem>, userCountry!!.id.minus(1)
+                _countries as List<ListItem>, _userCountry!!.id.minus(1)
             ) { selectedCountry ->
-                userCountry = selectedCountry as Country
-                binding.countryEdit.setText(userCountry?.flag + " " + userCountry?.name)
+                _userCountry = selectedCountry as Country
+                binding.countryEdit.setText(_userCountry?.flag + " " + _userCountry?.name)
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateCountryID(
                         selectedCountry.id.toString()
@@ -143,8 +143,8 @@ class ProfileInfoFragment :
         binding.saveBtn.setOnClickListener {
 
             viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryCode(phoneCountry?.phoneCode!!))
-            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryID(userCountry?.id.toString()))
-            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountry(userCountry!!))
+            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountryID(_userCountry?.id.toString()))
+            viewModel.onAction(ProfileInfoContract.ProfileInfoAction.UpdateCountry(_userCountry!!))
 
             viewModel.onAction(
                 ProfileInfoContract.ProfileInfoAction.SaveChanges
@@ -167,18 +167,18 @@ class ProfileInfoFragment :
                         if (countries.isEmpty()) return@collectFlow
                         phoneCountry = countries.find { it.phoneCode == user?.phone?.countryCode }
                         _countries = countries
-                        collectFlow(viewModel.userCountry) { userCountry ->
-                            this.userCountry = userCountry
-                            fillFields(user)
-                            hideLoading()
-                        }
+                        fillFields(user)
+                        hideLoading()
                     }
                 }
             }
         }
-
-
-
+        collectFlow(viewModel.userCountry) { userCountry ->
+            _userCountry = userCountry
+            if (userCountry != null) {
+                binding.countryEdit.setText("${_userCountry?.flag} ${_userCountry?.name}")
+            }
+        }
 
         collectFlow(viewModel.events) { profileInfoEvent ->
             when (profileInfoEvent) {
@@ -219,8 +219,8 @@ class ProfileInfoFragment :
             }
             binding.emailEdit.setText(user.email)
             binding.birthdayEdit.setText(user.birthDate)
-            if (userCountry != null) {
-                binding.countryEdit.setText("${userCountry?.flag} ${userCountry?.name}")
+            if (_userCountry != null) {
+                binding.countryEdit.setText("${_userCountry?.flag} ${_userCountry?.name}")
             }
             if (user.image != null) {
                 Glide.with(requireContext())
@@ -230,8 +230,6 @@ class ProfileInfoFragment :
                     .into(binding.profileImg.profileImg)
 
             }
-
-
         }
 
     }
