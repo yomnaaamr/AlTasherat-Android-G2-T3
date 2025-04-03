@@ -43,7 +43,7 @@ fun ValidationError.toResourceId(): Int {
         ValidationError.INVALID_PHONE_NUMBER -> R.string.error_invalid_phone_number
         ValidationError.EMPTY_COUNTRY_CODE -> R.string.error_empty_country_code
         ValidationError.INVALID_COUNTRY_CODE -> R.string.error_invalid_country_code
-        ValidationError.INVALID_MIDDLE_NAME -> R.string.invalid_middle_name
+        ValidationError.INVALID_MIDDLE_NAME -> R.string.error_invalid_middlename
         ValidationError.INVALID_IMAGE_EXTENSION -> R.string.invalid_image_extension
         ValidationError.INVALID_IMAGE_SIZE -> R.string.invalid_image_size
     }

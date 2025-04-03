@@ -296,6 +296,9 @@ class ProfileInfoFragment :
         binding.phoneCodePicker.error = null
 
         errors.forEach { error ->
+            if (error == ValidationError.INVALID_IMAGE_EXTENSION || error == ValidationError.INVALID_IMAGE_SIZE) {
+                showMessage(error.toErrorMessage(requireContext()), MessageType.SNACKBAR, this)
+            }
             errorFields.entries.find { it.key.contains(error) }?.value?.error =
                 error.toErrorMessage(requireContext())
         }

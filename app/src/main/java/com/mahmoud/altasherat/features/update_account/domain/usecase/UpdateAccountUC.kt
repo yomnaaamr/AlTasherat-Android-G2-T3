@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.update_account.domain.usecase
 
-import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
@@ -24,13 +23,11 @@ class UpdateAccountUC(
             updateAccRequest.validateRequest()
                 .onSuccess { errors ->
                     if (errors.isNotEmpty()) {
-                        Log.e("VALIDATION_ERRORS", errors.toString())
                         throw AltasheratException(AltasheratError.ValidationErrors(errors))
                     }
                 }
 
             val response = repository.updateRemoteUserInfo(updateAccRequest)
-            Log.d("USECASE_RESPONSE", response.toString())
             repository.updateLocalUserInfo(response)
             emit(Resource.Success(response))
 
@@ -41,7 +38,6 @@ class UpdateAccountUC(
                         "Unknown error in UpdateUserInfoUC: $throwable"
                     )
                 )
-            Log.d("USECASE_RESPONSE", failureResource.error.toString())
 
             emit(Resource.Error(failureResource.error))
         }.flowOn(Dispatchers.IO)
