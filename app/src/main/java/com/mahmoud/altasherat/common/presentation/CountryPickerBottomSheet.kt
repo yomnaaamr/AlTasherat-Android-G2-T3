@@ -35,7 +35,7 @@ class CountryPickerBottomSheet(
         val adapter = SingleSelectionAdapter(
             list,
             this@CountryPickerBottomSheet,
-            selectedCountryPosition = selectedCountryIndex
+            defaultPosition = selectedCountryIndex
         )
 
 

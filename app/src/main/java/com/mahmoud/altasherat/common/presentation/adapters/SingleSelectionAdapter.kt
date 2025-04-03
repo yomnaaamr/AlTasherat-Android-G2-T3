@@ -17,8 +17,8 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 class SingleSelectionAdapter(
     private val items: List<ListItem>,
     private val clickListener: OnItemClickListener,
-    private val defaultLanguagePosition: Int = 0,
-    private val selectedCountryPosition: Int = 0
+    private val defaultPosition: Int = 0,
+//    private val selectedCountryPosition: Int = 0
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var checkedLanguagePosition = -1
@@ -29,7 +29,7 @@ class SingleSelectionAdapter(
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            checkedCountryPosition = selectedCountryPosition
+            checkedCountryPosition = defaultPosition
             itemView.setOnClickListener(this)
         }
 
@@ -55,7 +55,7 @@ class SingleSelectionAdapter(
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
-            checkedLanguagePosition = defaultLanguagePosition
+            checkedLanguagePosition = defaultPosition
             itemView.setOnClickListener(this)
         }
 
