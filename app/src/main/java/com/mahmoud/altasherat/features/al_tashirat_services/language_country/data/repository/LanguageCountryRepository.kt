@@ -13,8 +13,8 @@ internal class LanguageCountryRepository(
     private val localDS: ILanguageCountryLocalDS
 ) : ILanguageCountryRepository {
 
-    override suspend fun getCountriesFromRemote(): Countries {
-        val response = remoteDS.getCountries()
+    override suspend fun getCountriesFromRemote(languageCode: String): Countries {
+        val response = remoteDS.getCountries(languageCode)
         return CountriesMapper.dtoToDomain(response)
     }
 
@@ -28,11 +28,20 @@ internal class LanguageCountryRepository(
         return CountriesMapper.entityToDomain(result).data
     }
 
-    override suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
-        localDS.saveSelections(selectedLanguage, selectedCountry)
-    }
 
     override suspend fun getLanguageCode(): String? {
         return localDS.getLanguageCode()
+    }
+
+    override suspend fun hasCountries(): Boolean {
+        return localDS.hasCountries()
+    }
+
+    override suspend fun saveSelectedLanguage(selectedLanguage: Language) {
+        localDS.saveSelectedLanguage(selectedLanguage)
+    }
+
+    override suspend fun saveSelectedCountry(selectedCountry: Country) {
+        localDS.saveSelectedCountry(selectedCountry)
     }
 }

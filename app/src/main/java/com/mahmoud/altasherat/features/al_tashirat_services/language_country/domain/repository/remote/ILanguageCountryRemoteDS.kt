@@ -3,5 +3,5 @@ package com.mahmoud.altasherat.features.al_tashirat_services.language_country.do
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.models.dto.CountriesDto
 
 internal interface ILanguageCountryRemoteDS {
-    suspend fun getCountries(): CountriesDto
+    suspend fun getCountries(languageCode: String): CountriesDto
 }

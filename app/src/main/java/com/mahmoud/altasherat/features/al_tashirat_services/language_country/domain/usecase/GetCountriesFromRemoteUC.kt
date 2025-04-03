@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetCountriesFromRemoteUC(private val repository: ILanguageCountryRepository) {
 
-    operator fun invoke(): Flow<Resource<Countries>> =
+    operator fun invoke(languageCode: String): Flow<Resource<Countries>> =
         flow {
             emit(Resource.Loading)
-            val splashResponse = repository.getCountriesFromRemote()
+            val splashResponse = repository.getCountriesFromRemote(languageCode)
             repository.savaCountriesToLocal(splashResponse)
             emit(Resource.Success(splashResponse))
 

@@ -23,13 +23,6 @@ internal class LanguageCountryLocalDS(
         return gson.fromJson(countriesJson, CountriesEntity::class.java)
     }
 
-    override suspend fun saveSelections(selectedLanguage: Language, selectedCountry: Country) {
-        val selectedLanguageJson = gson.toJson(selectedLanguage)
-        val selectedCountryJson = gson.toJson(selectedCountry)
-        localStorageProvider.save(StorageKeyEnum.SELECTED_LANGUAGE, selectedLanguageJson, String::class)
-        localStorageProvider.save(StorageKeyEnum.SELECTED_COUNTRY, selectedCountryJson, String::class)
-    }
-
     override suspend fun getLanguageCode(): String? {
         val selectedLanguageJson = localStorageProvider.get(StorageKeyEnum.SELECTED_LANGUAGE, "", String::class)
         if (selectedLanguageJson.isNotEmpty()) {
@@ -37,5 +30,19 @@ internal class LanguageCountryLocalDS(
             return selectedLanguage.code
         }
         return null
+    }
+
+    override suspend fun hasCountries(): Boolean {
+        return localStorageProvider.contains(StorageKeyEnum.COUNTRIES, String::class)
+    }
+
+    override suspend fun saveSelectedLanguage(selectedLanguage: Language) {
+        val selectedLanguageJson = gson.toJson(selectedLanguage)
+        localStorageProvider.save(StorageKeyEnum.SELECTED_LANGUAGE, selectedLanguageJson, String::class)
+    }
+
+    override suspend fun saveSelectedCountry(selectedCountry: Country) {
+        val selectedCountryJson = gson.toJson(selectedCountry)
+        localStorageProvider.save(StorageKeyEnum.SELECTED_COUNTRY, selectedCountryJson, String::class)
     }
 }

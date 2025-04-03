@@ -18,7 +18,9 @@ class SaveSelectionsUC(
         selectedCountry: Country
     ): Resource<Unit> {
         return try {
-            Resource.Success(repository.saveSelections(selectedLanguage, selectedCountry))
+            repository.saveSelectedLanguage(selectedLanguage)
+            repository.saveSelectedCountry(selectedCountry)
+            Resource.Success(Unit)
         } catch (e: IOException) {
             Resource.Error(LocalStorageError.IO_ERROR)
         } catch (e: IllegalStateException) {

@@ -48,9 +48,9 @@
     <string name="error_invalid_password_confirmation">Password confirmation must be between 8 and 50 characters.</string>
     <string name="error_password_mismatch">Passwords do not match.</string>
     <string name="error_empty_phone_number">Phone number is required.</string>
-    <string name="error_invalid_phone_number">Phone number must be between 3 and 5 digits.</string>
+    <string name="error_invalid_phone_number">Phone number must be between 9 and 15 digits.</string>
     <string name="error_empty_country_code">Country code is required.</string>
-    <string name="error_invalid_country_code">Country code must be between 9 and 15 characters.</string>
+    <string name="error_invalid_country_code">Country code must be between 3 and 5 characters.</string>
 
     <string name="skip_txt">Skip</string>
     <string name="signup">Sign up</string>
@@ -71,7 +71,59 @@
     <string name="forget_password">Forget Password?</string>
     <string name="invalid_password_length">Password length must be more than 8 and less than 50</string>
     <string name="invalid_phone_or_password">Invalid Phone Number or Password</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="change_password">Change Password</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="language">Language</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
     <string name="loading">Loading…</string>
+    <string name="profile">Profile</string>
+    <string name="requests">Requests</string>
+    <string name="altasherat">Altasherat</string>
+    <string name="about_visa_platform">About Altasherat Platform</string>
+    <string name="visa_platform_description">With the Visa Platform, you are always at the heart of our interests and the most important guest. Our goal is to make the travel experience easy and more enjoyable, which is why we gather all available travel options for travelers to Egypt in one place, so that Egypt is on your mobile.</string>
+    <string name="consular_services">Consular Services</string>
+    <string name="embassy_services">Embassy Services</string>
+    <string name="application_for_work_visa">Application for Work Visa</string>
+    <string name="application_for_tourist_visa">Application for Tourist Visa</string>
+    <string name="what_do_you_offer">What do you offer?</string>
 
+    <string name="terms_and_conditions_text">Welcome to the Visa Platform. The following are the terms and conditions that pertain to the terms of use and access to the pages of the Egypt Key website for electronic services, and the words and expressions contained in this agreement are given the following meanings.
+
+The customer\'s use of the website constitutes an express and clear acknowledgment that they have read and understood the terms and conditions of this agreement and the method of using the website. This is considered an express acceptance and approval from them of the terms and conditions of this agreement and their response to it. The customer\'s use of the website is also considered an express acknowledgment from them of their commitment and response to all the terms and conditions of the agreement and all the terms and conditions specific to the Egypt Key application establishment.
+
+General Provisions
+Applicable Law: These terms of use and any related non-contractual rights or obligations shall be subject to and interpreted in accordance with the laws of the Kingdom of Saudi Arabia and the Arab Republic of Egypt.
+Problem Resolution: If you have any problems with our services, please contact us. We will work diligently to resolve the problem you are facing as soon as possible. Any disputes or disagreements related to these terms of use, including any related non-contractual rights or obligations, shall be settled through the Kingdom of Saudi Arabia and the Arab Republic of Egypt.
+Rights of Others: A person who is not a party to these terms of use has no right to enforce any of their terms.
+Relationship of the Parties: Nothing in these terms of use shall be construed or interpreted by the parties or others to interpret the relationship between us as that of partners or agents or to create a joint venture between the parties, but it is understood and clear that all parties to the agreement are independent parties.
+Additional Assurances: The parties shall take the necessary actions or arrangements to take the necessary actions and prepare documents and other matters within their authority in order to enforce these terms of use and verify their implementation, including, but not limited to, assisting each party in complying with the applicable law.
+Waiver: These terms of use are committed to ensuring benefit for the parties and their relevant successors and officially authorized representatives. You agree that you will not assign or transfer these terms of use or any of your rights or obligations related to these terms of use, whether directly or indirectly, without first obtaining prior written consent from us.
+Entire Agreement: These terms of use and the documents referred to or included in the terms of use constitute the entire agreement between the parties with respect to the subject matter of the agreement and supersede and override all prior agreements, negotiations, and representations, whether written or oral, related to the subject matter. Except as specified in these terms of use and the documents referred to or included in these terms of use, there are no other terms, representations, warranties, undertakings, or agreements between the parties, whether direct or indirect, collective or express or implied.
+Amendments: No amendment, addition, or completion may be made to these terms of use. We reserve the right to make any amendment, change, addition, or completion to these terms of use at any time or from time to time. We will publish the current version of the terms of use on the website, and it will be effective upon its publication on the website or based on the date specified by us as the "Effective Date" (if any). Your continued use of the services in the event of any changes constitutes your agreement to be bound by the amended terms of use.
+Severability: If any provision of these terms of use is deemed void by any competent court or is unlawful or unenforceable, that provision shall be severed from these terms of use, and the remaining terms and conditions shall remain in full force and effect as long as the legal and economic essence of the transactions conducted under its terms remains without any adverse effect on its parties.
+Disclaimer: No party shall be liable for the existence of loss, damage, delay, or non-performance resulting from events beyond the control of any party, whether such event is foreseeable (such as acts of God, actions of legislative, judicial, or regulatory authorities of any federal or local government or judicial authorities, or actions by any of our subcontractors or any third-party suppliers of goods or services to us, or labor disputes, or complete power outages, or economic boycotts).
+No Waiver: The waiver of any provision in these terms of use shall not constitute a waiver of any other provisions (similar or dissimilar), nor shall any other waiver constitute a continuing waiver of any relevant provisions, unless expressly stated in writing.
+Communication: You can contact us via email, through our social media sites, or through live chat on the website, or by contacting our call center.
+Survival: All provisions that are stated to remain in force or that, by their nature, continue to apply after the termination of the contract shall remain in effect after the termination or suspension of your membership on the website.</string>
+    <string name="save">Save</string>
+    <string name="Contact_info">Contact Information</string>
+    <string name="Contact_phone">( +20) 1011777751 - (+966) 550440787</string>
+    <string name="Contact_us_email_text">Travel@altaherat.com  -  Info@altasherat.com</string>
+    <string name="location_text">السعودية - الرياض\n القاهرة - جاردن سيتي</string>
+    <string name="name_text">Name</string>
+    <string name="send">Send</string>
+    <string name="Contact_name_input">Enter name to contact</string>
+    <string name="Contact_Subject">Subject</string>
+    <string name="enter_subject_text">Choose contact subject</string>
+    <string name="Contact_Message">Message</string>
+    <string name="Contact_Message_text">Write your contact message</string>
+
+
+    <string name="country_picker_display" translatable="false">%1$s %2$s</string>
 
 </resources>

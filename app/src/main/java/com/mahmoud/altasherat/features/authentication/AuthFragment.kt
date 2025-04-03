@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.mahmoud.altasherat.R
@@ -48,9 +49,9 @@ class AuthFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
                 val fragment = when (tab?.position) {
-                    0 -> SignupFragment()
-                    1 -> LoginFragment()
-                    else -> SignupFragment()
+                    0 -> LoginFragment()
+                    1 -> SignupFragment()
+                    else -> LoginFragment()
                 }
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.auth_fragment_container, fragment)
@@ -63,8 +64,13 @@ class AuthFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
-        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner){ tabIndex ->
+        authViewmodel.switchTabLiveData.observe(viewLifecycleOwner) { tabIndex ->
             binding.authTabLayout.getTabAt(tabIndex)?.select()
+        }
+
+
+        binding.skipTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
         }
 
         return binding.root
@@ -72,7 +78,7 @@ class AuthFragment : Fragment() {
 
     private fun setupTab(authTabLayout: TabLayout) {
         val tabTitles =
-            listOf(resources.getString(R.string.signup), resources.getString(R.string.sign_in))
+            listOf(resources.getString(R.string.sign_in),resources.getString(R.string.signup))
 
         for (i in tabTitles.indices) {
             val tab = authTabLayout.newTab()

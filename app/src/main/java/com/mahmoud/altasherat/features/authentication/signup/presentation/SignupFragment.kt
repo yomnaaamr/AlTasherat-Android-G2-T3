@@ -4,6 +4,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -63,7 +65,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 }
 
                 is SignupContract.SignUpEvent.NavigationToHome -> {
-                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_authFragment_to_home_nav_graph)
                 }
 
 
@@ -75,12 +77,22 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         collectFlow(viewModel.countries) { countries ->
             if (countries.isEmpty()) return@collectFlow
             val firstItem = countries.first()
-            val initialSelect = firstItem.flag + " (" + firstItem.phoneCode + ")"
+            val initialSelect = resources.getString(
+                R.string.country_picker_display,
+                firstItem.flag,
+                formatCountryCode(firstItem.phoneCode)
+            )
             binding.phoneCodePicker.apply {
                 setText(initialSelect)
                 bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
                     val country = selectedCountry as Country
-                    setText(country.flag + " (" + country.phoneCode + ")")
+                    setText(
+                        resources.getString(
+                            R.string.country_picker_display,
+                            country.flag,
+                            formatCountryCode(country.phoneCode)
+                        )
+                    )
                     viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
                     viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
                 }
@@ -163,7 +175,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             setOf(
                 ValidationError.EMPTY_PASSWORD,
                 ValidationError.INVALID_PASSWORD
-            ) to binding.passwordEdit,
+            ) to binding.passwordLayout,
             setOf(
                 ValidationError.EMPTY_PHONE_NUMBER,
                 ValidationError.INVALID_PHONE_NUMBER
@@ -177,13 +189,26 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         binding.firstNameEdit.error = null
         binding.lastNameEdit.error = null
         binding.emailEdit.error = null
-        binding.passwordEdit.error = null
+        binding.passwordLayout.isErrorEnabled = false
+        binding.passwordLayout.error = null
         binding.phoneEdit.error = null
         binding.phoneCodePicker.error = null
 
+
+
         errors.forEach { error ->
-            errorFields.entries.find { it.key.contains(error) }?.value?.error =
-                error.toErrorMessage(requireContext())
+            errorFields.entries.find { it.key.contains(error) }?.value?.let { view ->
+                when (view) {
+                    is TextInputLayout -> {
+                        view.isErrorEnabled = true
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+
+                    is TextInputEditText -> {
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+                }
+            }
         }
 
 

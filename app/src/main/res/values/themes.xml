@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Base.Theme.AlTasherat" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -78,7 +79,6 @@
     <style name="Theme.AlTasherat" parent="Base.Theme.AlTasherat" />
 
 
-
     <!-- region TextView -->
 
     <style name="TextAppearance.AlTasherat.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
@@ -123,14 +123,20 @@
 
     <style name="TextAppearance.AlTasherat.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
     <style name="TextAppearance.AlTasherat.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
     <style name="TextAppearance.AlTasherat.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/app_font_plain</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+
     </style>
 
 
@@ -154,6 +160,25 @@
         <item name="android:drawablePadding">10dp</item>
         <item name="android:paddingHorizontal">54dp</item>
 
+    </style>
+
+
+    <style name="ElevatedButtonStyle" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?colorError</item>
+
+    </style>
+
+    <style name="textInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">?colorSurfaceInverse</item>
+        <item name="boxCornerRadiusBottomEnd">26dp</item>
+        <item name="boxCornerRadiusBottomStart">26dp</item>
+        <item name="boxCornerRadiusTopEnd">26dp</item>
+        <item name="boxCornerRadiusTopStart">26dp</item>
+        <item name="boxStrokeColor">?colorPrimary</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="expandedHintEnabled">false</item>
     </style>
 
 </resources>
