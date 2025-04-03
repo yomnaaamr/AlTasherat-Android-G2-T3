@@ -35,13 +35,15 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     override fun FragmentLanguageBinding.initialize() {
 
         val languages = LanguageDataSource.getLanguages(requireContext())
-        val defaultLanguageIndex = languages.first().id
+        if (languages.isNotEmpty()) {
+            selectedLanguage = languages.first()
+        }
 
         languageAdapter =
             SingleSelectionAdapter(
                 languages,
                 this@LanguageFragment,
-                defaultLanguageIndex
+                selectedLanguage?.id!!
             )
 
         binding.languageRecycler.apply {
