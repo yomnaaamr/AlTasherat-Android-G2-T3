@@ -1,18 +1,18 @@
-package com.mahmoud.altasherat.features.onBoarding.presentation.fragments
+package com.mahmoud.altasherat.features.onBoarding.onboarding.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentOnBoardingBinding
-import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingContent
-import com.mahmoud.altasherat.features.onBoarding.presentation.OnBoardingViewPagerAdapter
+import com.mahmoud.altasherat.features.onBoarding.onboarding.presentation.OnBoardingContent
+import com.mahmoud.altasherat.features.onBoarding.onboarding.presentation.OnBoardingViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

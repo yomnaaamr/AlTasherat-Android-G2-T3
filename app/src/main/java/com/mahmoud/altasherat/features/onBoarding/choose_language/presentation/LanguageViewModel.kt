@@ -11,7 +11,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dom
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectionsUC
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingStateUC
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.SetOnBoardingStateUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -30,10 +30,11 @@ class LanguageViewModel @Inject constructor(
     private val saveSelectionsUC: SaveSelectionsUC,
     private val setOnBoardingStateUC: SetOnBoardingStateUC,
     private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
-    ) : ViewModel() {
+) : ViewModel() {
 
 
-    private val _state = MutableStateFlow<LanguageContract.LanguageState>(LanguageContract.LanguageState.Idle)
+    private val _state =
+        MutableStateFlow<LanguageContract.LanguageState>(LanguageContract.LanguageState.Idle)
     val state = _state.asStateFlow()
 
     private val _events = Channel<LanguageContract.LanguageEvent>()

@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.onBoarding.presentation.fragments
+package com.mahmoud.altasherat.features.onBoarding.presentation
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,10 +17,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dat
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
-import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageContract
-import com.mahmoud.altasherat.features.onBoarding.presentation.LanguageViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageBinding::inflate),
@@ -69,7 +66,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
                     val countries = state.data
                     if (countries.isNotEmpty()) {
                         this.countries = countries
-                         val defaultCountry = countries.first()
+                        val defaultCountry = countries.first()
                         binding.countryFlag.text = defaultCountry.flag
                         binding.countryName.text = defaultCountry.name
                         selectedCountry = defaultCountry
@@ -142,4 +139,3 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
         selectedLanguage = item as Language
     }
 }
-

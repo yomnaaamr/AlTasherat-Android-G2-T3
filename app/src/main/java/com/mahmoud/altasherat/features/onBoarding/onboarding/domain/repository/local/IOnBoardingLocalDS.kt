@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.onBoarding.domain.repository.local
+package com.mahmoud.altasherat.features.onBoarding.onboarding.domain.repository.local
 
 interface IOnBoardingLocalDS {
     suspend fun setOnBoardingState()

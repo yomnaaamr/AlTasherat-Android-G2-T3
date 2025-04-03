@@ -1,12 +1,12 @@
-package com.mahmoud.altasherat.features.onBoarding.di
+package com.mahmoud.altasherat.features.onBoarding.onboarding.di
 
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.features.onBoarding.data.repository.OnBoardingRepositoryImpl
-import com.mahmoud.altasherat.features.onBoarding.data.repository.local.OnBoardingLocalDS
-import com.mahmoud.altasherat.features.onBoarding.domain.repository.IOnBoardingRepository
-import com.mahmoud.altasherat.features.onBoarding.domain.repository.local.IOnBoardingLocalDS
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.GetOnBoardingStateUC
-import com.mahmoud.altasherat.features.onBoarding.domain.useCase.SetOnBoardingStateUC
+import com.mahmoud.altasherat.features.onBoarding.onboarding.data.repository.OnBoardingRepositoryImpl
+import com.mahmoud.altasherat.features.onBoarding.onboarding.data.repository.local.OnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.repository.IOnBoardingRepository
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.repository.local.IOnBoardingLocalDS
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.GetOnBoardingStateUC
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.SetOnBoardingStateUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
