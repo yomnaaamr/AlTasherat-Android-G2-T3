@@ -165,6 +165,10 @@ class ProfileInfoFragment :
             )
         }
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
 
     }
 
