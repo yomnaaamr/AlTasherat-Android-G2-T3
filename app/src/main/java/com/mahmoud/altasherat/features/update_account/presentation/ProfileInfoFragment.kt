@@ -24,6 +24,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ProfileInfoFragment :
@@ -68,11 +69,20 @@ class ProfileInfoFragment :
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+            // Calculate the maximum date (today - 13 years)
+            val maxCalendar = Calendar.getInstance()
+            maxCalendar.add(Calendar.YEAR, -13) // Move 13 years back
+            val maxDate = maxCalendar.timeInMillis // Get time in milliseconds
+
             val datePickerDialog = DatePickerDialog(
                 this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                    val monthFormatted = String.format("%02d", selectedMonth + 1)
-                    val dayFormatted = String.format("%02d", selectedDay)
-                    val formattedDate = "$selectedYear-${monthFormatted}-$dayFormatted"
+                    val formattedDate = String.format(
+                        Locale.US,
+                        "%04d-%02d-%02d",
+                        selectedYear,
+                        selectedMonth + 1,
+                        selectedDay
+                    )
                     binding.birthdayEdit.setText(formattedDate)
                     viewModel.onAction(
                         ProfileInfoContract.ProfileInfoAction.UpdateBirthday(
@@ -81,6 +91,7 @@ class ProfileInfoFragment :
                     )
                 }, year, month, day
             )
+            datePickerDialog.datePicker.maxDate = maxDate
             datePickerDialog.show()
         }
 
