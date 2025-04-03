@@ -91,6 +91,7 @@ class ProfileInfoFragment :
                     )
                 }, year, month, day
             )
+            datePickerDialog.window?.setBackgroundDrawableResource(R.color.splash_screen_background)
             datePickerDialog.datePicker.maxDate = maxDate
             datePickerDialog.show()
         }
