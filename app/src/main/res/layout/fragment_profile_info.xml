@@ -40,6 +40,19 @@
                 android:textColor="?colorPrimary" />
         </androidx.cardview.widget.CardView>
 
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_arrow_back"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/more_button"
+            app:layout_constraintTop_toTopOf="@id/more_button"
+            app:layout_constraintBottom_toBottomOf="@id/more_button"
+            app:layout_constraintHorizontal_bias="0" />
+
         <include
             android:id="@+id/profile_img"
             layout="@layout/profile_image"
@@ -222,8 +235,9 @@
                 android:layout_gravity="end|bottom"
                 android:background="@drawable/custom_phone_end_icon"
                 android:clickable="true"
+                android:gravity="center"
                 android:inputType="none"
-                android:minWidth="100dp"
+                android:minWidth="80dp"
                 android:paddingHorizontal="8dp"
                 android:textColor="@android:color/white"
                 tools:text="🇸🇦 (+966)" />
