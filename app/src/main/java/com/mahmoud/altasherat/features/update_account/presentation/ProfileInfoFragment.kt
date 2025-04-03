@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
@@ -50,7 +51,13 @@ class ProfileInfoFragment :
                     _countries!!, phoneCountry!!.id.minus(1)
                 ) { selectedCountry ->
                     phoneCountry = selectedCountry as Country
-                    setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
+                    setText(
+                        resources.getString(
+                            R.string.country_picker_display,
+                            phoneCountry?.flag,
+                            formatCountryCode(phoneCountry?.phoneCode!!)
+                        )
+                    )
                     viewModel.onAction(
                         ProfileInfoContract.ProfileInfoAction.UpdateCountryCode(
                             selectedCountry.phoneCode
@@ -69,19 +76,14 @@ class ProfileInfoFragment :
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            // Calculate the maximum date (today - 13 years)
             val maxCalendar = Calendar.getInstance()
-            maxCalendar.add(Calendar.YEAR, -13) // Move 13 years back
-            val maxDate = maxCalendar.timeInMillis // Get time in milliseconds
+            maxCalendar.add(Calendar.YEAR, -13)
+            val maxDate = maxCalendar.timeInMillis
 
             val datePickerDialog = DatePickerDialog(
                 this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                     val formattedDate = String.format(
-                        Locale.US,
-                        "%04d-%02d-%02d",
-                        selectedYear,
-                        selectedMonth + 1,
-                        selectedDay
+                        Locale.US, "%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay
                     )
                     binding.birthdayEdit.setText(formattedDate)
                     viewModel.onAction(
@@ -188,7 +190,11 @@ class ProfileInfoFragment :
         collectFlow(viewModel.userCountry) { userCountry ->
             _userCountry = userCountry
             if (userCountry != null) {
-                binding.countryEdit.setText("${_userCountry?.flag} ${_userCountry?.name}")
+                binding.countryEdit.setText(
+                    resources.getString(
+                        R.string.country_picker_display, _userCountry?.flag, _userCountry?.name!!
+                    )
+                )
             }
         }
 
@@ -209,9 +215,13 @@ class ProfileInfoFragment :
                 }
 
                 is ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu -> {
-                    showMessage("Saved Successfully", MessageType.SNACKBAR, this)
+                    showMessage(
+                        resources.getString(R.string.updated_successfully_txt),
+                        MessageType.SNACKBAR,
+                        this
+                    )
+                    findNavController().navigateUp()
                 }
-
             }
         }
     }
@@ -227,17 +237,25 @@ class ProfileInfoFragment :
             binding.lastNameEdit.setText(user.lastname)
             binding.phoneEdit.setText(user.phone.number)
             if (phoneCountry != null) {
-                binding.phoneCodePicker.setText(phoneCountry?.flag + " (" + phoneCountry?.phoneCode + ")")
+                binding.phoneCodePicker.setText(
+                    resources.getString(
+                        R.string.country_picker_display,
+                        phoneCountry?.flag,
+                        formatCountryCode(phoneCountry?.phoneCode!!)
+                    )
+                )
             }
             binding.emailEdit.setText(user.email)
             binding.birthdayEdit.setText(user.birthDate)
             if (_userCountry != null) {
-                binding.countryEdit.setText("${_userCountry?.flag} ${_userCountry?.name}")
+                binding.countryEdit.setText(
+                    resources.getString(
+                        R.string.country_picker_display, _userCountry?.flag, _userCountry?.name!!
+                    )
+                )
             }
             if (user.image != null) {
-                Glide.with(requireContext())
-                    .load(user.image.path!!.toUri())
-                    .centerCrop()
+                Glide.with(requireContext()).load(user.image.path!!.toUri()).centerCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
 
@@ -253,9 +271,7 @@ class ProfileInfoFragment :
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
                 )
-                Glide.with(requireContext())
-                    .load(imageUri)
-                    .centerCrop()
+                Glide.with(requireContext()).load(imageUri).centerCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
             }

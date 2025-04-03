@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.update_account.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -83,7 +82,6 @@ class ProfileInfoViewModel @Inject constructor(
             )
 
             is ProfileInfoContract.ProfileInfoAction.UpdateImage -> {
-                Log.e("UPDATE_IMAGE_ACTION", "called")
                 updateImage(
                     profileInfoAction.value
                 )
@@ -115,11 +113,9 @@ class ProfileInfoViewModel @Inject constructor(
             image = _profileUiState.value.image,
             country = _profileUiState.value.selectedCountryId
         )
-        Log.d("UPDATE_REQUEST", updateAccRequest.toString())
 
         updateAccountUC(updateAccRequest)
             .onEach { result ->
-                Log.d("usecaseResult", result.toString())
                 _state.value = when (result) {
                     is Resource.Error -> {
                         _events.send(ProfileInfoContract.ProfileInfoEvent.Error(result.error))
@@ -128,7 +124,6 @@ class ProfileInfoViewModel @Inject constructor(
 
                     is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
                     is Resource.Success -> {
-                        Log.d("SUCCESS_RESULT", result.data.user.toString())
                         _events.send(ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu)
                         ProfileInfoContract.ProfileInfoState.Success(result.data.user)
                     }
@@ -140,7 +135,6 @@ class ProfileInfoViewModel @Inject constructor(
         viewModelScope.launch {
             getCountriesFromLocalUC().onSuccess { countries ->
                 _countries.value = countries
-//                getUserData()
             }.onError {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
@@ -213,7 +207,6 @@ class ProfileInfoViewModel @Inject constructor(
     }
 
     private fun updateImage(value: File?) {
-        Log.d("IMAGE_FILE", value.toString())
         _profileUiState.update { it.copy(image = value) }
     }
 
