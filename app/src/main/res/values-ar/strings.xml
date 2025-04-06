@@ -137,6 +137,7 @@
     <string name="cancel">إلغاء</string>
     <string name="enter_password_to_confirm">ادخل كلمة المرور للتأكيد</string>
     <string name="delete_account">حــذف الحساب</string>
+    <string name="invalid_credentials">بيانات دخول غير صحيحة</string>
 
 
 </resources>

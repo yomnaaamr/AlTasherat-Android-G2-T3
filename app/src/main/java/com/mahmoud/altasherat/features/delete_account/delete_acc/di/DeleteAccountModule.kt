@@ -1,12 +1,12 @@
-package com.mahmoud.altasherat.features.delete_account.di
+package com.mahmoud.altasherat.features.delete_account.delete_acc.di
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
-import com.mahmoud.altasherat.features.delete_account.data.repository.DeleteAccountRepository
-import com.mahmoud.altasherat.features.delete_account.data.repository.remote.DeleteAccountRemoteDS
-import com.mahmoud.altasherat.features.delete_account.domain.repository.IDeleteAccountRepository
-import com.mahmoud.altasherat.features.delete_account.domain.repository.remote.IDeleteAccountRemoteDS
-import com.mahmoud.altasherat.features.delete_account.domain.usecase.DeleteAccountUC
+import com.mahmoud.altasherat.features.delete_account.delete_acc.data.repository.DeleteAccountRepository
+import com.mahmoud.altasherat.features.delete_account.delete_acc.data.repository.remote.DeleteAccountRemoteDS
+import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.repository.IDeleteAccountRepository
+import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.repository.remote.IDeleteAccountRemoteDS
+import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.usecase.DeleteAccountUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

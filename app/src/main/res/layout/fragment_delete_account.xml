@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".features.delete_account.presentation.DeleteAccountFragment">
+    tools:context=".features.delete_account.delete_acc.presentation.DeleteAccountFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/delete_acc_toolbar"

@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/manageAccountFragment"
-        android:name="com.mahmoud.altasherat.features.delete_account.ManageAccountFragment"
+        android:name="com.mahmoud.altasherat.features.delete_account.manage_account.ManageAccountFragment"
         android:label="fragment_manage_account"
         tools:layout="@layout/fragment_manage_account">
         <action
@@ -89,7 +89,13 @@
     </fragment>
     <fragment
         android:id="@+id/deleteAccountFragment"
-        android:name="com.mahmoud.altasherat.features.delete_account.presentation.DeleteAccountFragment"
+        android:name="com.mahmoud.altasherat.features.delete_account.delete_acc.presentation.DeleteAccountFragment"
         android:label="fragment_delete_account"
-        tools:layout="@layout/fragment_delete_account" />
+        tools:layout="@layout/fragment_delete_account">
+        <action
+            android:id="@+id/action_deleteAccountFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/deleteAccountFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
