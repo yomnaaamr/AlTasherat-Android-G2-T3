@@ -137,5 +137,9 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="updated_successfully_txt">Updated successfully</string>
     <string name="account_settings_delete_account">Account settings, delete account</string>
     <string name="manage_account">Manage Account</string>
+    <string name="permanently_deactivate_the_account">Permanently deactivate the account</string>
+    <string name="all_information_transactions_and_reservations_will_be_lost">All information, transactions and reservations will be lost.</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

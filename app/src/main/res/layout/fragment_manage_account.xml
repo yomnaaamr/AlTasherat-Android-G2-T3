@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/manage_account"
+        app:titleTextAppearance="?textAppearanceTitleMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
