@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.BottomSheetDeleteAccBinding
 
 class ConfirmDeleteBottomSheet(
@@ -59,7 +60,8 @@ class ConfirmDeleteBottomSheet(
     private fun showValidationError() {
         bottomSheetDeleteAccBinding.passwordLayout.isErrorEnabled = true
         bottomSheetDeleteAccBinding.passwordLayout.errorIconDrawable = null
-        bottomSheetDeleteAccBinding.passwordLayout.error = "The password field is required."
+        bottomSheetDeleteAccBinding.passwordLayout.error =
+            resources.getString(R.string.password_required)
     }
 
     private fun hideValidationError() {

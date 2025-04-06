@@ -144,5 +144,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="enter_password_to_confirm">Enter password to confirm</string>
     <string name="delete_account">Delete Account</string>
     <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="password_required">The password field is required.</string>
 
 </resources>
