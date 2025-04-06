@@ -45,7 +45,11 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>(
             when (state) {
                 is DeleteAccountContract.DeleteAccountState.Idle -> {}
                 is DeleteAccountContract.DeleteAccountState.Loading -> showLoading()
-                is DeleteAccountContract.DeleteAccountState.Success -> hideLoading()
+                is DeleteAccountContract.DeleteAccountState.Success -> {
+                    hideLoading()
+                    showMessage(state.message, MessageType.SNACKBAR, this)
+                }
+
                 is DeleteAccountContract.DeleteAccountState.Error -> hideLoading()
             }
         }
