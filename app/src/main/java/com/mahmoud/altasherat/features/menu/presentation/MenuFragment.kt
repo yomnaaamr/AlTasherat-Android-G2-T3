@@ -27,6 +27,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
         binding.menuRecyclerView.adapter = adapter
         val menuItems = MenuDataSource.getNavigationItems(requireContext())
+        viewModel.onAction(MenuContract.MenuAction.GetUserData)
 
         collectFlow(viewModel.state) { state ->
 
@@ -47,10 +48,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
 
             val hasUserLoggedIn = state.isAuthenticated
-            if (hasUserLoggedIn) {
-                viewModel.onAction(MenuContract.MenuAction.GetUserData)
-                updateUserData(state.user)
-            }
             val filteredItems = if (hasUserLoggedIn) {
 //                        exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
@@ -66,6 +63,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             binding.userDataLayout.visibility =
                 if (hasUserLoggedIn) View.VISIBLE else View.GONE
+
+
+            updateUserData(state.user)
 
         }
         binding.editProfileButton.setOnClickListener {

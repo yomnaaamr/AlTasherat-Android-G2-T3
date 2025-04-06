@@ -34,7 +34,6 @@ class MenuViewModel @Inject constructor(
 
     init {
 
-
         viewModelScope.launch {
             hasUserLoggedInUC()
                 .onSuccess { hasUser ->
