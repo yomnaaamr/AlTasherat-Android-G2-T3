@@ -24,6 +24,7 @@
             android:id="@+id/profile_img"
             android:layout_width="84dp"
             android:layout_height="84dp"
+            android:src="@drawable/ic_default_profile"
             android:background="@drawable/profile_bg"
             android:scaleType="centerCrop" />
 

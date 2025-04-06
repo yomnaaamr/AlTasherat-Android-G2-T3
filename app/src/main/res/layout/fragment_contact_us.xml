@@ -282,7 +282,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/phone_edit"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="match_parent" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -367,13 +367,15 @@
                     <Button
                         android:id="@+id/button_send"
                         style="@style/CustomButton"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_marginVertical="16dp"
                         android:text="@string/send"
                         app:icon="@drawable/ic_continue_icon"
                         app:iconGravity="textEnd"
                         app:iconPadding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/input_message" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

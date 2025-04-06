@@ -18,12 +18,12 @@
         android:gravity="center_horizontal"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            android:src="@drawable/ic_default_profile"
-            android:scaleType="centerCrop" />
+        <include
+            android:id="@+id/profile_img"
+            layout="@layout/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
         <TextView
             android:id="@+id/user_name"
@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?textAppearanceTitleMedium"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
             tools:text="نادين محمد السيد" />
 
         <Button
@@ -39,14 +40,18 @@
             android:layout_height="wrap_content"
             style="@style/CustomButton"
             android:paddingHorizontal="22dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/edit_profile" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray" />
+
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="?colorOnBackground" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu_recycler_view"
@@ -68,7 +73,7 @@
 
         <TextView
             android:id="@+id/version_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?textAppearanceTitleSmall"
