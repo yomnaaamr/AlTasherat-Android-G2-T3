@@ -80,6 +80,16 @@
     <string name="profile">الملف الشخصي</string>
     <string name="requests">طلبات التأشيرات</string>
     <string name="altasherat">منصة التأشيرات</string>
+    <string name="middle_name">الاسم الاوسط</string>
+    <string name="enter_middle_name">ادخل الاسم الاوسط</string>
+    <string name="birthday">تاريخ الميلاد</string>
+    <string name="enter_your_country">ادخل دولتك</string>
+    <string name="country">الدولة</string>
+    <string name="enter_birthday">ادخل تاريخ الميلاد</string>
+    <string name="save">حفظ</string>
+    <string name="more">المزيد</string>
+    <string name="invalid_image_extension">إمتداد الصورة غير مدعم</string>
+    <string name="invalid_image_size">حجم الصورة لايجب أن يتجاوز 512 KB</string>
     <string name="about_visa_platform">عن منصة التأشيرات</string>
     <string name="visa_platform_description">مع منصة التأشيرات  أنت دائمًا صميم اهتماماتنا والضيف الأهم. هدفنا جعل تجربة السفر سهلة وأكثر سعادةً، ولهذا نجمع جميع خيارات الرحلات المتاحة أمام المسافرين إلى مصر في مكانٍ واحدٍ، لتكون مصر على جوالك.\nإن مصر هي أحد أشهر الوجهات السياحية على قائمة المسافرين إلى السعادة منذ الزيارة الأولى وإلى الأبد. مصر هي الوجهة السياحية الوحيدة في العالم التي لا تعترف بتأشيرة الخروج النهائي دون عودة، فهي أيقونة الجاذبية في الشرق الأوسط. ولا يوجد تفسير منطقي لتعدد وتكرار زيارة المسافرين إلى مصر وسيظل هذا السر مدفون في رمال مصر الذهبية وليس له علاقة بمياه النيل كما يقول المصريون.</string>
     <string name="consular_services">خدمات القنصـــليات</string>
@@ -107,7 +117,6 @@
 عدم التنازل: إن التنازل عن أي من الأحكام الواردة في شروط الاستخدام لا يُعد تنازلاً عن أي من الأحكام الأخرى (المشابهة أو غير المشابهة)، ولا يعد أي تنازل آخر تنازلاً مستمراً عن أي من الأحكام المعنية، ما لم ينص على ذلك صراحة وخطياً.
 التواصل: يمكنك التواصل معنا عبر البريد الإلكتروني، أو عبر مواقع التواصل الإجتماعي الخاص بنا ، أو المحادثة المباشرة على الموقع، أو الاتصال بمركز الاتصال الخاص بنا.
 استمرار النفاذ: جميع الأحكام التي يُنص على أنها تظل سارية أو التي تسري بطبيعتها بعد إنهاء التعاقد تظل نافذة المفعول بعد إنهاء أو تعليق عضويتك في الموقع.</string>
-    <string name="save">حفظ</string>
     <string name="Contact_info">بيــــانات التواصل</string>
     <string name="Contact_phone">( +20) 1011777751 - (+966) 550440787</string>
     <string name="Contact_us_email_text">Travel@altaherat.com  -  Info@altasherat.com</string>
@@ -119,5 +128,7 @@
     <string name="enter_subject_text">اختر موضوع التواصل</string>
     <string name="Contact_Message">الرسالة</string>
     <string name="Contact_Message_text">اكتب رسالة التواصل</string>
+    <string name="updated_successfully_txt">تم التحديث بنجاح</string>
+
 
 </resources>

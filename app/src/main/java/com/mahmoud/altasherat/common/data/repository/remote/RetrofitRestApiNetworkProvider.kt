@@ -8,12 +8,13 @@ import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.NetworkError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import kotlinx.coroutines.ensureActive
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.net.UnknownHostException
 import java.nio.channels.UnresolvedAddressException
 import kotlin.coroutines.coroutineContext
-import kotlin.math.log
 import kotlin.reflect.KClass
 
 
@@ -81,7 +82,21 @@ class RetrofitRestApiNetworkProvider(
         )
     }
 
-
+    override suspend fun <T : Any> updateAccount(
+        endpoint: String,
+        image: MultipartBody.Part?,
+        data: Map<String, RequestBody>,
+        headers: Map<String, Any>?,
+        responseType: KClass<T>
+    ): T = safeApiCall(responseType) {
+        apiService.updateAccount(
+            endpoint = endpoint,
+            image = image,
+            data = data,
+            headers = headers ?: hashMapOf(),
+        )
+    }
+    
     private suspend inline fun <T : Any> safeApiCall(
         responseType: KClass<T>,
         execute: () -> Response<ResponseBody>,
@@ -118,7 +133,7 @@ class RetrofitRestApiNetworkProvider(
         } else {
             Log.d("AITASHERAT", "error code = ${response.code()}")
             when (response.code()) {
-                400-> throw AltasheratException(NetworkError.BAD_REQUEST)
+                400 -> throw AltasheratException(NetworkError.BAD_REQUEST)
                 401 -> throw AltasheratException(NetworkError.UNAUTHORIZED)
                 403 -> throw AltasheratException(NetworkError.FORBIDDEN)
                 404 -> throw AltasheratException(NetworkError.NOT_FOUND)

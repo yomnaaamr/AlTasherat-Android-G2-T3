@@ -37,6 +37,10 @@ internal class LanguageCountryRepository(
         return localDS.hasCountries()
     }
 
+    override suspend fun getCountry(): Country {
+        return localDS.getCountry()
+    }
+
     override suspend fun saveSelectedLanguage(selectedLanguage: Language) {
         localDS.saveSelectedLanguage(selectedLanguage)
     }

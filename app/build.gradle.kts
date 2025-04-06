@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.ksp)
-    id("kotlin-parcelize")
+    alias(libs.plugins.percelize)
 
 }
 
@@ -21,7 +21,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://intern.api.altashirat.solutionplus.net/api/\"")
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"https://intern.api.altashirat.solutionplus.net/api/\""
+        )
 
     }
 
@@ -41,7 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
         buildConfig = true
     }
@@ -68,15 +72,15 @@ dependencies {
 
 
 
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
     //Serialization
-    implementation (libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.json)
 
     //PreferenceDataStore
     implementation(libs.androidx.datastore.preferences)
@@ -97,4 +101,5 @@ dependencies {
 
 
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.glide)
 }

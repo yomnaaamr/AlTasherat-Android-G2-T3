@@ -8,7 +8,7 @@ data class UserEntity(
     val lastname: String,
     val email: String,
     val phone: PhoneEntity,
-    val image: String,
+    val image: ImageEntity,
     val birthDate: String,
     val emailVerified: Boolean,
     val phoneVerified: Boolean,

@@ -1,8 +1,10 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers
 
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.ImageDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.PhoneDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.dto.UserDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.entity.UserEntity
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.Image
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
 
 
@@ -16,7 +18,7 @@ internal object UserMapper {
             lastname = model.lastName.orEmpty(),
             email = model.email.orEmpty(),
             phone = PhoneMapper.dtoToDomain(model.phone ?: PhoneDto()),
-            image = model.image.orEmpty(),
+            image = ImageMapper.dtoToDomain(model.image ?: ImageDto()),
             birthDate = model.birthDate.orEmpty(),
             emailVerified = model.emailVerified ?: false,
             phoneVerified = model.phoneVerified ?: false,
@@ -33,7 +35,7 @@ internal object UserMapper {
             lastname = model.lastname,
             email = model.email,
             phone = PhoneMapper.entityToDomain(model.phone),
-            image = model.image,
+            image = ImageMapper.entityToDomain(model.image),
             birthDate = model.birthDate,
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
@@ -46,12 +48,12 @@ internal object UserMapper {
             id = model.id,
             username = model.username,
             firstname = model.firstname,
-            middlename = model.middleName,
+            middlename = model.middleName.orEmpty(),
             lastname = model.lastname,
             email = model.email,
             phone = PhoneMapper.domainToEntity(model.phone),
-            image = model.image,
-            birthDate = model.birthDate,
+            image = ImageMapper.domainToEntity(model.image ?: Image()),
+            birthDate = model.birthDate.orEmpty(),
             emailVerified = model.emailVerified,
             phoneVerified = model.phoneVerified,
             isBlocked = model.isBlocked
