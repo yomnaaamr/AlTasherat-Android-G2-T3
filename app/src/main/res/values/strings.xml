@@ -141,5 +141,7 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="all_information_transactions_and_reservations_will_be_lost">All information, transactions and reservations will be lost.</string>
     <string name="confirm_delete">Confirm Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="enter_password_to_confirm">Enter password to confirm</string>
+    <string name="delete_account">Delete Account</string>
 
 </resources>

@@ -20,5 +20,9 @@ class DeleteAccountFragment : BaseFragment<FragmentDeleteAccountBinding>(
         deleteAccToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        confirmDeleteAccBtn.setOnClickListener {
+
+        }
     }
 }
