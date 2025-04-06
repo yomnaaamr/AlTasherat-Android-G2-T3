@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/deleteAccountFragment"
-        android:name="com.mahmoud.altasherat.features.delete_account.DeleteAccountFragment"
+        android:name="com.mahmoud.altasherat.features.delete_account.presentation.DeleteAccountFragment"
         android:label="fragment_delete_account"
         tools:layout="@layout/fragment_delete_account" />
 </navigation>
