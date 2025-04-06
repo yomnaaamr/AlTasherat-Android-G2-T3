@@ -71,7 +71,7 @@
         android:id="@+id/cancel_delete_acc_btn"
         style="?materialButtonOutlinedStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="24dp"
         android:text="@string/cancel"

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:paddingHorizontal="16dp"
-    android:layout_height="wrap_content">
+    android:backgroundTint="@color/splash_screen_background"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="match_parent">
 
     <View
         android:id="@+id/drag_handle"
@@ -72,6 +74,7 @@
         android:drawableEnd="@drawable/ic_delete"
         android:drawablePadding="8dp"
         android:layout_marginTop="40dp"
+        android:textColor="@android:color/white"
         android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="110dp"
         android:text="@string/confirm_delete"
