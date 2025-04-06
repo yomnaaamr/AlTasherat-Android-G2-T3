@@ -169,6 +169,10 @@ class ProfileInfoFragment :
             findNavController().navigateUp()
         }
 
+        binding.moreButton.setOnClickListener {
+            findNavController().navigate(R.id.action_profileInfoFragment_to_manageAccountFragment)
+        }
+
 
     }
 
