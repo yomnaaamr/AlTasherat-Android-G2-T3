@@ -10,8 +10,8 @@ data class UserDto(
     @SerializedName("lastname") val lastName: String? = null,
     @SerializedName("email") val email: String? = null,
     @SerializedName("phone") val phone: PhoneDto? = null,
-    @SerializedName("image") val image: String? = null,
-    @SerializedName("birth_date") val birthDate: String? = null,
+    @SerializedName("image") val image: ImageDto? = null,
+    @SerializedName("birthdate") val birthDate: String? = null,
     @SerializedName("email_verified") val emailVerified: Boolean? = null,
     @SerializedName("phone_verified") val phoneVerified: Boolean? = null,
     @SerializedName("is_blocked") val isBlocked: Int? = null
