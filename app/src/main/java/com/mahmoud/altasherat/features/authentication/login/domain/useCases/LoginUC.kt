@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.authentication.login.domain.useCases
 
+import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
@@ -27,6 +28,7 @@ class LoginUC(
                 }
 
             val loginResponse: Login = loginRepository.login(loginRequest)
+            Log.d("LOGIN_RESPONSE", loginResponse.toString())
             loginRepository.saveLogin(loginResponse)
             emit(Resource.Success(loginResponse))
 
