@@ -10,6 +10,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.language_country.dat
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.ILanguageCountryRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.local.ILanguageCountryLocalDS
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.repository.remote.ILanguageCountryRemoteDS
+import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.DeleteSelectedCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
@@ -91,6 +92,11 @@ internal object LanguageCountryDI {
     @Provides
     fun provideGetCountryUC(repository: ILanguageCountryRepository): GetCountryUC {
         return GetCountryUC(repository)
+    }
+
+    @Provides
+    fun provideDeleteSelectedCountryUC(repository: ILanguageCountryRepository): DeleteSelectedCountryUC {
+        return DeleteSelectedCountryUC(repository)
     }
 
 

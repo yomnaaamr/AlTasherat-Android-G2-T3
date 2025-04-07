@@ -13,6 +13,7 @@ interface ILanguageCountryRepository {
     suspend fun saveSelectedLanguage(selectedLanguage: Language)
     suspend fun saveSelectedCountry(selectedCountry: Country)
     suspend fun getCountry(): Country
+    suspend fun deleteSelectedCountry()
 
 
 }

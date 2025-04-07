@@ -41,6 +41,10 @@ internal class LanguageCountryRepository(
         return localDS.getCountry()
     }
 
+    override suspend fun deleteSelectedCountry() {
+        localDS.deleteSelectedCountry()
+    }
+
     override suspend fun saveSelectedLanguage(selectedLanguage: Language) {
         localDS.saveSelectedLanguage(selectedLanguage)
     }
