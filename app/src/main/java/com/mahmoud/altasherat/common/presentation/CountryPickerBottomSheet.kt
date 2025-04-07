@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.adapters.OnItemClickListener
 import com.mahmoud.altasherat.common.presentation.adapters.SingleSelectionAdapter
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models.ListItem
 
 class CountryPickerBottomSheet(
     private val list: List<ListItem>,
@@ -35,7 +35,7 @@ class CountryPickerBottomSheet(
         val adapter = SingleSelectionAdapter(
             list,
             this@CountryPickerBottomSheet,
-            selectedCountryPosition = selectedCountryIndex
+            defaultPosition = selectedCountryIndex
         )
 
 

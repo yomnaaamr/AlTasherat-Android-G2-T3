@@ -15,8 +15,8 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentLoginBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.data.models.request.LoginRequest
 import com.mahmoud.altasherat.features.authentication.signup.presentation.SignupFragment

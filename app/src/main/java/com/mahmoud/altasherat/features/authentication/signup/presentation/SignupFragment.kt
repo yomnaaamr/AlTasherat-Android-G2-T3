@@ -14,7 +14,7 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentSignupBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
 import com.mahmoud.altasherat.features.authentication.AuthViewModel
 import com.mahmoud.altasherat.features.authentication.login.presentation.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint

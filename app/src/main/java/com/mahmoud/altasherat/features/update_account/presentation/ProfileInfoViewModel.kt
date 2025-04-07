@@ -2,14 +2,14 @@ package com.mahmoud.altasherat.features.update_account.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.common.domain.util.onError
-import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedCountryUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.SaveSelectedCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.usecase.UpdateAccountUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,10 +17,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
@@ -115,67 +113,65 @@ class ProfileInfoViewModel @Inject constructor(
         )
 
         updateAccountUC(updateAccRequest)
-            .onEach { result ->
-                _state.value = when (result) {
-                    is Resource.Error -> {
-                        _events.send(ProfileInfoContract.ProfileInfoEvent.Error(result.error))
-                        ProfileInfoContract.ProfileInfoState.Error(result.error)
-                    }
-
-                    is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
-                    is Resource.Success -> {
-                        _events.send(ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu)
-                        ProfileInfoContract.ProfileInfoState.Success(result.data.user)
-                    }
-                }
+            .onEachSuccessSuspend {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.NavigationToProfileMenu)
+                _state.value = ProfileInfoContract.ProfileInfoState.Success(it.user)
+            }
+            .onEachErrorSuspend {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+                _state.value = ProfileInfoContract.ProfileInfoState.Error(it)
+            }
+            .onEachLoadingSuspend {
+                _state.value = ProfileInfoContract.ProfileInfoState.Loading
             }.launchIn(viewModelScope)
+
     }
 
     private fun getCountries() {
-        viewModelScope.launch {
-            getCountriesFromLocalUC().onSuccess { countries ->
+
+        getCountriesFromLocalUC()
+            .onEachSuccessSuspend { countries ->
                 _countries.value = countries
-            }.onError {
+            }
+            .onEachErrorSuspend {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
-        }
+            .launchIn(viewModelScope)
+
+
     }
 
     private fun getUserData() {
-        viewModelScope.launch {
-            getUserInfoUC().collect { result ->
-                _state.value = when (result) {
-                    is Resource.Loading -> ProfileInfoContract.ProfileInfoState.Loading
-                    is Resource.Success -> {
-                        ProfileInfoContract.ProfileInfoState.Success(result.data)
-                    }
 
-                    is Resource.Error -> {
-                        _events.send(ProfileInfoContract.ProfileInfoEvent.Error(result.error))
-                        ProfileInfoContract.ProfileInfoState.Error(result.error)
-                    }
-
-                }
+        getUserInfoUC()
+            .onEachSuccessSuspend { result ->
+                _state.value = ProfileInfoContract.ProfileInfoState.Success(result)
             }
-        }
+            .onEachErrorSuspend {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+                _state.value = ProfileInfoContract.ProfileInfoState.Error(it)
+            }
+            .launchIn(viewModelScope)
     }
 
     private fun getUserCountry() {
-        viewModelScope.launch {
-            getCountryUC().onSuccess { result ->
+
+        getCountryUC()
+            .onEachSuccessSuspend { result ->
                 _userCountry.value = result
-            }.onError {
-                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
-        }
+            .onEachErrorSuspend {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+            }.launchIn(viewModelScope)
     }
 
     private fun saveSelectedCountry(value: Country) {
-        viewModelScope.launch {
-            saveSelectedCountryUC(value)
-                .onSuccess { }
-                .onError { _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it)) }
-        }
+
+        saveSelectedCountryUC(value)
+            .onEachSuccessSuspend {  }
+            .onEachErrorSuspend {
+                _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
+            }.launchIn(viewModelScope)
     }
 
     private fun updateFirstName(value: String) {
