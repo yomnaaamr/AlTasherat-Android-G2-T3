@@ -1,6 +1,6 @@
 package com.mahmoud.altasherat.features.update_account.data.mappers
 
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
+import com.mahmoud.altasherat.features.al_tashirat_services.user.data.mappers.UserMapper
 import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccDto
 import com.mahmoud.altasherat.features.update_account.data.models.entity.UpdateAccEntity
 import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc

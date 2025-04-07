@@ -1,13 +1,13 @@
 package com.mahmoud.altasherat.features.authentication.login.data.mappers
 
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.mappers.UserMapper
+import com.mahmoud.altasherat.features.al_tashirat_services.user.data.mappers.UserMapper
 import com.mahmoud.altasherat.features.authentication.login.data.models.dto.LoginResponseDto
 import com.mahmoud.altasherat.features.authentication.login.data.models.entity.LoginEntity
 import com.mahmoud.altasherat.features.authentication.login.domain.models.Login
 
-object LoginMapper :Mapper<LoginResponseDto, Login, LoginEntity> {
+object LoginMapper {
 
-    override fun dtoToDomain(input: LoginResponseDto): Login {
+    fun dtoToDomain(input: LoginResponseDto): Login {
         return Login(
             message = input.message,
             token = input.token,
@@ -15,7 +15,7 @@ object LoginMapper :Mapper<LoginResponseDto, Login, LoginEntity> {
         )
     }
 
-    override fun domainToEntity(input: Login): LoginEntity {
+    fun domainToEntity(input: Login): LoginEntity {
         return LoginEntity(
             message = input.message,
             token = input.token,

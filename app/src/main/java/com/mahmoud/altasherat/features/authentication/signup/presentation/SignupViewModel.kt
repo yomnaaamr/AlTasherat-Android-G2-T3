@@ -2,12 +2,12 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.common.domain.util.onError
-import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +15,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -55,15 +53,16 @@ class SignupViewModel @Inject constructor(
     }
 
     init {
-        viewModelScope.launch {
+
             getCountriesFromLocalUC()
-                .onSuccess { countries->
+                .onEachSuccessSuspend { countries ->
                     _countries.value = countries
                 }
-                .onError {
+                .onEachErrorSuspend {
                     _events.send(SignupContract.SignUpEvent.Error(it))
                 }
-        }
+                .launchIn(viewModelScope)
+
     }
 
     private fun signUp() {
@@ -85,20 +84,18 @@ class SignupViewModel @Inject constructor(
 
 
         signupUC(signupRequest)
-            .onEach { result ->
-                _state.value = when (result) {
-                    is Resource.Error -> {
-                        _events.send(SignupContract.SignUpEvent.Error(result.error))
-                        SignupContract.SignUpState.Error(result.error)
-                    }
-
-                    is Resource.Loading -> SignupContract.SignUpState.Loading
-                    is Resource.Success -> {
-                        _events.send(SignupContract.SignUpEvent.NavigationToHome)
-                        SignupContract.SignUpState.Success(result.data)
-                    }
-                }
+            .onEachSuccessSuspend {
+                _events.send(SignupContract.SignUpEvent.NavigationToHome)
+                _state.value = SignupContract.SignUpState.Success(it)
+            }
+            .onEachErrorSuspend {
+                _events.send(SignupContract.SignUpEvent.Error(it))
+                _state.value = SignupContract.SignUpState.Error(it)
+            }
+            .onEachLoadingSuspend {
+                _state.value = SignupContract.SignUpState.Loading
             }.launchIn(viewModelScope)
+
     }
 
 
