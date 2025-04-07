@@ -1,7 +1,7 @@
 package com.mahmoud.altasherat.features.delete_account.delete_acc.di
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
 import com.mahmoud.altasherat.features.delete_account.delete_acc.data.repository.DeleteAccountRepository
 import com.mahmoud.altasherat.features.delete_account.delete_acc.data.repository.remote.DeleteAccountRemoteDS
 import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.repository.IDeleteAccountRepository

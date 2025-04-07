@@ -3,8 +3,8 @@ package com.mahmoud.altasherat.features.delete_account.delete_acc.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserAccessToken
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserInfoUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserAccessTokenUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserInfoUC
 import com.mahmoud.altasherat.features.delete_account.delete_acc.data.models.request.DeleteAccRequest
 import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.usecase.DeleteAccountUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DeleteAccountViewModel @Inject constructor(
     private val deleteAccUC: DeleteAccountUC,
-    private val deleteTokenUC: DeleteUserAccessToken,
+    private val deleteTokenUC: DeleteUserAccessTokenUC,
     private val deleteUserUC: DeleteUserInfoUC,
 ) : ViewModel() {
     private val _state =
