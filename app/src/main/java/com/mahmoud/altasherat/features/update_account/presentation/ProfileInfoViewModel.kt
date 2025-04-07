@@ -3,6 +3,9 @@ package com.mahmoud.altasherat.features.update_account.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
@@ -132,13 +135,20 @@ class ProfileInfoViewModel @Inject constructor(
     }
 
     private fun getCountries() {
-        viewModelScope.launch {
-            getCountriesFromLocalUC().onSuccess { countries ->
+
+        getCountriesFromLocalUC()
+            .onEachLoadingSuspend {
+                _state.value = ProfileInfoContract.ProfileInfoState.Loading
+            }
+            .onEachSuccessSuspend { countries ->
                 _countries.value = countries
-            }.onError {
+            }
+            .onEachErrorSuspend {
                 _events.send(ProfileInfoContract.ProfileInfoEvent.Error(it))
             }
-        }
+            .launchIn(viewModelScope)
+
+
     }
 
     private fun getUserData() {

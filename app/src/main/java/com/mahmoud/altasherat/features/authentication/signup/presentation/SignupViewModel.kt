@@ -3,8 +3,9 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.common.domain.util.onError
-import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.request.PhoneRequest
@@ -55,15 +56,19 @@ class SignupViewModel @Inject constructor(
     }
 
     init {
-        viewModelScope.launch {
+
             getCountriesFromLocalUC()
-                .onSuccess { countries->
+                .onEachLoadingSuspend {
+                    _state.value = SignupContract.SignUpState.Loading
+                }
+                .onEachSuccessSuspend { countries ->
                     _countries.value = countries
                 }
-                .onError {
+                .onEachErrorSuspend {
                     _events.send(SignupContract.SignUpEvent.Error(it))
                 }
-        }
+                .launchIn(viewModelScope)
+
     }
 
     private fun signUp() {

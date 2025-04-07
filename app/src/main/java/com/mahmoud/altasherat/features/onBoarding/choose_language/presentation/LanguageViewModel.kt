@@ -4,14 +4,16 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromRemoteUC
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.SaveSelectionsUC
-import com.mahmoud.altasherat.features.onBoarding.choose_language.presentation.LanguageContract
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.SetOnBoardingStateUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -93,16 +95,31 @@ class LanguageViewModel @Inject constructor(
 
 
     private fun getCountries() {
-        viewModelScope.launch {
-            getCountriesFromLocalUC()
-                .onSuccess { countries ->
-                    _state.value = LanguageContract.LanguageState.Success(countries)
-                }
-                .onError { error ->
-                    _state.value = LanguageContract.LanguageState.Error(error)
-                    _events.send(LanguageContract.LanguageEvent.Error(error))
-                }
-        }
+
+        getCountriesFromLocalUC()
+            .onEachLoadingSuspend {
+                _state.value = LanguageContract.LanguageState.Loading
+            }
+            .onEachSuccessSuspend { countries ->
+                _state.value = LanguageContract.LanguageState.Success(countries)
+            }
+            .onEachErrorSuspend {
+                _state.value = LanguageContract.LanguageState.Error(it)
+                _events.send(LanguageContract.LanguageEvent.Error(it))
+            }
+            .launchIn(viewModelScope)
+
+
+//        viewModelScope.launch {
+//            getCountriesFromLocalUC()
+//                .onSuccess { countries ->
+//                    _state.value = LanguageContract.LanguageState.Success(countries)
+//                }
+//                .onError { error ->
+//                    _state.value = LanguageContract.LanguageState.Error(error)
+//                    _events.send(LanguageContract.LanguageEvent.Error(error))
+//                }
+//        }
     }
 
 

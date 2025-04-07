@@ -2,30 +2,32 @@ package com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usec
 
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.repository.ICountryRepository
-import java.io.IOException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class GetCountriesFromLocalUC(private val repository: ICountryRepository) {
 
-    suspend operator fun invoke(): Resource<List<Country>> {
+    operator fun invoke(): Flow<Resource<List<Country>>> =
 
-        return try {
+        flow {
+            emit(Resource.Loading)
             val countries = repository.getCountriesFromLocal()
-             Resource.Success(countries)
-        } catch (e: IOException) {
-            Resource.Error(LocalStorageError.IO_ERROR)
-        } catch (e: IllegalStateException) {
-            Resource.Error(LocalStorageError.DATA_CORRUPTION)
-        } catch (throwable: Throwable) {
+            emit(Resource.Success(countries))
+
+        }.catch { throwable ->
             val failureResource = if (throwable is AltasheratException) throwable else
                 AltasheratException(
-                    AltasheratError.UnknownError("Unknown error in GetCountriesUC: $throwable")
+                    AltasheratError.UnknownError(
+                        "Unknown error in GetCountriesFromLocalUC: $throwable"
+                    )
                 )
-            Resource.Error(failureResource.error)
-        }
-    }
+            emit(Resource.Error(failureResource.error))
+        }.flowOn(Dispatchers.IO)
 
 }
