@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.delete_account.delete_acc.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.features.delete_account.delete_acc.domain.models.DeleteAcc
 
 class DeleteAccountContract {
     sealed interface DeleteAccountAction {
@@ -15,7 +16,7 @@ class DeleteAccountContract {
     sealed class DeleteAccountState {
         data object Idle : DeleteAccountState()
         data object Loading : DeleteAccountState()
-        data class Success(val message: String) : DeleteAccountState()
+        data class Success(val response: DeleteAcc) : DeleteAccountState()
         data class Error(val error: AltasheratError) : DeleteAccountState()
     }
 }

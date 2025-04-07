@@ -62,6 +62,6 @@ internal class LanguageCountryLocalDS(
     }
 
     override suspend fun deleteSelectedCountry() {
-        localStorageProvider.delete(StorageKeyEnum.SELECTED_COUNTRY, Unit::class)
+        localStorageProvider.delete(StorageKeyEnum.SELECTED_COUNTRY, String::class)
     }
 }

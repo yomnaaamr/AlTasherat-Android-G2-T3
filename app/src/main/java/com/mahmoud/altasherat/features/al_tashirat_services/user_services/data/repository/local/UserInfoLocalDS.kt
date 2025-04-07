@@ -21,10 +21,10 @@ class UserInfoLocalDS(
     }
 
     override suspend fun deleteUserAccessToken() {
-        localStorageProvider.delete(StorageKeyEnum.ACCESS_TOKEN, Unit::class)
+        localStorageProvider.delete(StorageKeyEnum.ACCESS_TOKEN, String::class)
     }
 
     override suspend fun deleteUserInfo() {
-        localStorageProvider.delete(StorageKeyEnum.USER, Unit::class)
+        localStorageProvider.delete(StorageKeyEnum.USER, String::class)
     }
 }
