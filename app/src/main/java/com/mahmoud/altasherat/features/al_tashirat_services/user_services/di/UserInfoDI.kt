@@ -6,6 +6,8 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.r
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.repository.local.UserInfoLocalDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.IUserInfoRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserAccessToken
+import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserInfoUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserAccessToken
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS
@@ -24,13 +26,6 @@ internal object UserInfoDI {
     ): GetUserInfoUC {
         return GetUserInfoUC(userRepository)
     }
-
-//    @Provides
-//    fun provideUserRemoteDS(
-//        restApiNetworkProvider: IRestApiNetworkProvider
-//    ): {
-//        return UpdateAccRemoteDS(restApiNetworkProvider)
-//    }
 
     @Provides
     fun provideUserLocalDS(
@@ -51,6 +46,16 @@ internal object UserInfoDI {
     @Provides
     fun provideGetUserTokenUC(repository: IUserInfoRepository): GetUserAccessToken {
         return GetUserAccessToken(repository)
+    }
+
+    @Provides
+    fun provideDeleteAccessTokenUC(repository: IUserInfoRepository): DeleteUserAccessToken {
+        return DeleteUserAccessToken(repository)
+    }
+
+    @Provides
+    fun provideDeleteUserInfoUC(repository: IUserInfoRepository): DeleteUserInfoUC {
+        return DeleteUserInfoUC(repository)
     }
 
 }

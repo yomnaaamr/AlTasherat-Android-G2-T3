@@ -5,4 +5,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain
 interface IUserInfoRepository {
     suspend fun getUserInfo(): User
     suspend fun getUserAccessToken(): String
+    suspend fun deleteUserAccessToken()
+    suspend fun deleteUserInfo()
 }

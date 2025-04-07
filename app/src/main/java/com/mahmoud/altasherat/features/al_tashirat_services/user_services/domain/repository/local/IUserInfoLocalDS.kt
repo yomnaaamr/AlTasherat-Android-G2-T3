@@ -5,4 +5,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.m
 interface IUserInfoLocalDS {
     suspend fun getUserInfo(): UserEntity
     suspend fun getUserAccessToken(): String
+    suspend fun deleteUserAccessToken()
+    suspend fun deleteUserInfo()
 }
