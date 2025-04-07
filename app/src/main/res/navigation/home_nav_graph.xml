@@ -8,19 +8,19 @@
 
     <fragment
         android:id="@+id/requestsFragment"
-        android:name="com.mahmoud.altasherat.features.home.RequestsFragment"
+        android:name="com.mahmoud.altasherat.features.home.visa_requests.presentation.RequestsFragment"
         android:label="fragment_requests"
         tools:layout="@layout/fragment_requests" />
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.mahmoud.altasherat.features.home.DashboardFragment"
+        android:name="com.mahmoud.altasherat.features.home.visa_dashboard.presentation.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.MenuFragment"
+        android:name="com.mahmoud.altasherat.features.home.menu.presentation.MenuFragment"
         android:label="MenuFragment"
         tools:layout="@layout/fragment_menu">
         <action
@@ -37,17 +37,17 @@
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ChangePasswordFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.change_password.presentation.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.AboutUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.about_us.presentation.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/changeLanguageFragment"
-        android:name="com.mahmoud.altasherat.features.menu.changeLanguage.presentation.ChangeLanguageFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.change_language.presentation.ChangeLanguageFragment"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language">
         <action
@@ -56,17 +56,17 @@
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.ContactUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.contact_us.presentation.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.PrivacyPolicyFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.privacy_policy.presentation.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
     <fragment
         android:id="@+id/termsAndConditionsFragment"
-        android:name="com.mahmoud.altasherat.features.menu.presentation.fragments.TermsAndConditionsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.terms_and_conditions.presentation.TermsAndConditionsFragment"
         android:label="fragment_terms_and_conditions"
         tools:layout="@layout/fragment_terms_and_conditions" />
     <fragment

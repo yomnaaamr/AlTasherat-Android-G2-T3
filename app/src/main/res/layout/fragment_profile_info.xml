@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:background="@color/splash_screen_background"
     android:orientation="vertical"
-    tools:context=".features.home.RequestsFragment">
+    tools:context=".features.home.visa_requests.presentation.RequestsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
