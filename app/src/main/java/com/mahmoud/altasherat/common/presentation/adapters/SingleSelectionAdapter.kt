@@ -10,9 +10,9 @@ import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_COUNTRY
 import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_LANGUAGE
 import com.mahmoud.altasherat.databinding.ItemCountryBinding
 import com.mahmoud.altasherat.databinding.ItemLanguageInputBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 
 class SingleSelectionAdapter(
     private val items: List<ListItem>,
@@ -89,6 +89,7 @@ class SingleSelectionAdapter(
         return when (items[position]) {
             is Country -> VIEW_TYPE_COUNTRY
             is Language -> VIEW_TYPE_LANGUAGE
+            else -> VIEW_TYPE_COUNTRY
         }
     }
 

@@ -12,9 +12,9 @@ import com.mahmoud.altasherat.common.presentation.utils.changeLocale
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentChangeLanguageBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.data.LanguageDataSource
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.language.data.LanguageDataSource
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import dagger.hilt.android.AndroidEntryPoint
 
 

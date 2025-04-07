@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.onBoarding.presentation
+package com.mahmoud.altasherat.features.onBoarding.choose_language.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -6,11 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromRemoteUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectionsUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromRemoteUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.SaveSelectionsUC
+import com.mahmoud.altasherat.features.onBoarding.choose_language.presentation.LanguageContract
 import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.SetOnBoardingStateUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -53,6 +54,7 @@ class LanguageViewModel @Inject constructor(
             is LanguageContract.LanguageAction.GetCountriesFromRemote -> {
                 fetchCountries(action.languageCode)
             }
+
         }
     }
 

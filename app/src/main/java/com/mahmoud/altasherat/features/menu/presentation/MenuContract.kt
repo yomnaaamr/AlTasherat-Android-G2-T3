@@ -1,7 +1,7 @@
 package com.mahmoud.altasherat.features.menu.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 
 class MenuContract {
 

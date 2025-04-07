@@ -1,6 +1,6 @@
 package com.mahmoud.altasherat.features.update_account.data.repository
 
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
 import com.mahmoud.altasherat.features.update_account.data.mappers.UpdateAccMapper
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc

@@ -1,8 +1,8 @@
-package com.mahmoud.altasherat.features.onBoarding.presentation
+package com.mahmoud.altasherat.features.onBoarding.choose_language.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 
 class LanguageContract {
 

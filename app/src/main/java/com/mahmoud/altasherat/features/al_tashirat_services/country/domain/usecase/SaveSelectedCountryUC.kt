@@ -1,0 +1,32 @@
+package com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase
+
+import com.mahmoud.altasherat.common.domain.util.Resource
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
+import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.repository.ICountryRepository
+import java.io.IOException
+
+class SaveSelectedCountryUC(
+    private val repository: ICountryRepository
+) {
+
+    suspend operator fun invoke(
+        selectedCountry: Country
+    ): Resource<Unit> {
+        return try {
+            Resource.Success(repository.saveSelectedCountry(selectedCountry))
+        } catch (e: IOException) {
+            Resource.Error(LocalStorageError.IO_ERROR)
+        } catch (e: IllegalStateException) {
+            Resource.Error(LocalStorageError.DATA_CORRUPTION)
+        } catch (throwable: Throwable) {
+            val failureResource = if (throwable is AltasheratException) throwable else
+                AltasheratException(
+                    AltasheratError.UnknownError("Unknown error in SaveSelectedCountryUC: $throwable")
+                )
+            Resource.Error(failureResource.error)
+        }
+    }
+}

@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountryUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedCountryUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.GetUserInfoUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.SaveSelectedCountryUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.usecase.UpdateAccountUC
 import dagger.hilt.android.lifecycle.HiltViewModel

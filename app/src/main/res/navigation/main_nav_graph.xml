@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.mahmoud.altasherat.features.onBoarding.presentation.LanguageFragment"
+        android:name="com.mahmoud.altasherat.features.onBoarding.choose_language.presentation.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language">
 

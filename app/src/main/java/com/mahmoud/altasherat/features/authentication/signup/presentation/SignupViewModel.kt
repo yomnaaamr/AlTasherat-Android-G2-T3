@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetCountriesFromLocalUC
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.data.models.request.PhoneRequest
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromLocalUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.request.PhoneRequest
 import com.mahmoud.altasherat.features.authentication.signup.data.models.request.SignUpRequest
 import com.mahmoud.altasherat.features.authentication.signup.domain.usecase.SignupUC
 import dagger.hilt.android.lifecycle.HiltViewModel

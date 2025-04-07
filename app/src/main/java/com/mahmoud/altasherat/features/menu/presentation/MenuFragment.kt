@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import com.mahmoud.altasherat.features.menu.data.MenuDataSource
 import com.mahmoud.altasherat.features.menu.presentation.adapters.MenuNavigationAdapter
 import dagger.hilt.android.AndroidEntryPoint

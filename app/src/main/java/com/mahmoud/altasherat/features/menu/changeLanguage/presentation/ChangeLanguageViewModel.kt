@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.onError
 import com.mahmoud.altasherat.common.domain.util.onSuccess
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Language
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.GetLanguageCodeUC
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.SaveSelectedLanguageUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.usecase.SaveSelectedLanguageUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

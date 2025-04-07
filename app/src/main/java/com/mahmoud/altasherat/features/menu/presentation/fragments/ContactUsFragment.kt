@@ -5,7 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.databinding.FragmentContactUsBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
