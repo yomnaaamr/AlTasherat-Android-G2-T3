@@ -1,8 +1,8 @@
 package com.mahmoud.altasherat.features.update_account.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import java.io.File
 
 class ProfileInfoContract {

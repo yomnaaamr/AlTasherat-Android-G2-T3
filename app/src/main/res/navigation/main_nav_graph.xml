@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.mahmoud.altasherat.features.onBoarding.presentation.fragments.LanguageFragment"
+        android:name="com.mahmoud.altasherat.features.onBoarding.choose_language.presentation.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language">
 
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment2"
-        android:name="com.mahmoud.altasherat.features.onBoarding.presentation.fragments.OnBoardingFragment"
+        android:name="com.mahmoud.altasherat.features.onBoarding.onboarding.presentation.OnBoardingFragment"
         android:label="OnBoardingFragment"
         tools:layout="@layout/fragment_on_boarding">
 

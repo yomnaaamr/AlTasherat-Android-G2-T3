@@ -1,6 +1,6 @@
 package com.mahmoud.altasherat.features.authentication.login.domain.models
 
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 
 data class Login(
     val message: String,

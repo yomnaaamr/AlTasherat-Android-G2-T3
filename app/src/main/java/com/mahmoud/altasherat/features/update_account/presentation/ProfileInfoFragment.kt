@@ -19,10 +19,10 @@ import com.mahmoud.altasherat.common.presentation.base.BaseFragment
 import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
 import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentProfileInfoBinding
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.Country
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.models.ListItem
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.models.User
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toFile
+import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models.ListItem
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
+import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Locale

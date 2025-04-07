@@ -5,7 +5,7 @@ import com.mahmoud.altasherat.common.util.Constants.AUTHORIZATION
 import com.mahmoud.altasherat.common.util.Constants.CONTENT_TYPE_JSON
 import com.mahmoud.altasherat.common.util.Constants.HEADER_ACCEPT
 import com.mahmoud.altasherat.common.util.Constants.UPDATE_ACCOUNT_ENDPOINT
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.util.toImagePart
+import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toImagePart
 import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccDto
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS

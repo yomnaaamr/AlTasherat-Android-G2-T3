@@ -3,7 +3,7 @@ package com.mahmoud.altasherat.features.update_account.di
 import com.google.gson.Gson
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
-import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
 import com.mahmoud.altasherat.features.update_account.data.repository.UpdateAccRepository
 import com.mahmoud.altasherat.features.update_account.data.repository.local.UpdateAccLocalDS
 import com.mahmoud.altasherat.features.update_account.data.repository.remote.UpdateAccRemoteDS
