@@ -123,7 +123,7 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="Contact_info">Contact Information</string>
     <string name="Contact_phone">( +20) 1011777751 - (+966) 550440787</string>
     <string name="Contact_us_email_text">Travel@altaherat.com  -  Info@altasherat.com</string>
-    <string name="location_text">السعودية - الرياض\n القاهرة - جاردن سيتي</string>
+    <string name="location_text">Saudi Arabia - Riyadh\nCairo - Garden City</string>
     <string name="name_text">Name</string>
     <string name="send">Send</string>
     <string name="Contact_name_input">Enter name to contact</string>
@@ -145,5 +145,7 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="delete_account">Delete Account</string>
     <string name="invalid_credentials">Invalid Credentials</string>
     <string name="password_required">The password field is required.</string>
+
+    <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
 
 </resources>
