@@ -137,5 +137,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="updated_successfully_txt">Updated successfully</string>
 
     <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
+    <string name="invalid_pass_confirmation">Password and confirmation must be the same</string>
 
 </resources>

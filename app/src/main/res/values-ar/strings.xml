@@ -129,6 +129,7 @@
     <string name="Contact_Message">الرسالة</string>
     <string name="Contact_Message_text">اكتب رسالة التواصل</string>
     <string name="updated_successfully_txt">تم التحديث بنجاح</string>
+    <string name="invalid_pass_confirmation">يجب أن تكون كلمة المرور والتأكيد متساويان</string>
 
 
 </resources>
