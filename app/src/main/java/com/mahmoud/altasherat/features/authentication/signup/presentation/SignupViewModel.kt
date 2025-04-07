@@ -2,7 +2,6 @@ package com.mahmoud.altasherat.features.authentication.signup.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
 import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
 import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
@@ -16,10 +15,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -58,9 +55,6 @@ class SignupViewModel @Inject constructor(
     init {
 
             getCountriesFromLocalUC()
-                .onEachLoadingSuspend {
-                    _state.value = SignupContract.SignUpState.Loading
-                }
                 .onEachSuccessSuspend { countries ->
                     _countries.value = countries
                 }
@@ -90,20 +84,18 @@ class SignupViewModel @Inject constructor(
 
 
         signupUC(signupRequest)
-            .onEach { result ->
-                _state.value = when (result) {
-                    is Resource.Error -> {
-                        _events.send(SignupContract.SignUpEvent.Error(result.error))
-                        SignupContract.SignUpState.Error(result.error)
-                    }
-
-                    is Resource.Loading -> SignupContract.SignUpState.Loading
-                    is Resource.Success -> {
-                        _events.send(SignupContract.SignUpEvent.NavigationToHome)
-                        SignupContract.SignUpState.Success(result.data)
-                    }
-                }
+            .onEachSuccessSuspend {
+                _events.send(SignupContract.SignUpEvent.NavigationToHome)
+                _state.value = SignupContract.SignUpState.Success(it)
+            }
+            .onEachErrorSuspend {
+                _events.send(SignupContract.SignUpEvent.Error(it))
+                _state.value = SignupContract.SignUpState.Error(it)
+            }
+            .onEachLoadingSuspend {
+                _state.value = SignupContract.SignUpState.Loading
             }.launchIn(viewModelScope)
+
     }
 
 

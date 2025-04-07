@@ -2,7 +2,6 @@ package com.mahmoud.altasherat.features.authentication.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
 import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
 import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,9 +36,6 @@ class LoginViewModel @Inject constructor(
     init {
 
         getCountriesFromLocalUC()
-            .onEachLoadingSuspend {
-                _state.value = LoginContract.LoginState.Loading
-            }
             .onEachSuccessSuspend { countries->
                 _countries.value = countries
                 _state.value = LoginContract.LoginState.Success
@@ -51,20 +46,6 @@ class LoginViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
 
-//            .onEach { resource ->
-//                when (resource) {
-//                    is Resource.Loading -> _state.value = LoginContract.LoginState.Loading
-//                    is Resource.Error -> {
-//                        _state.value =
-//                            LoginContract.LoginState.Exception(resource.error)
-//                        _event.emit(LoginContract.LoginEvent.Error(resource.error))
-//                    }
-//                    is Resource.Success -> {
-//                        _countries.value = resource.data
-//                        _state.value = LoginContract.LoginState.Success
-//                    }
-//                }
-//            }.launchIn(viewModelScope)
 
     }
 
@@ -76,20 +57,18 @@ class LoginViewModel @Inject constructor(
 
     private fun loginWithPhone(loginRequest: LoginRequest) {
         loginUC(loginRequest)
-            .onEach { resource ->
-                when (resource) {
-                    is Resource.Loading -> _state.value = LoginContract.LoginState.Loading
-                    is Resource.Error -> {
-                        _state.value =
-                            LoginContract.LoginState.Exception(resource.error)
-                        _event.emit(LoginContract.LoginEvent.Error(resource.error))
-                    }
+            .onEachSuccessSuspend {
+                _event.emit(LoginContract.LoginEvent.NavigateToHome(it.user))
+                _state.value = LoginContract.LoginState.Success
+            }
+            .onEachErrorSuspend {
+                _event.emit(LoginContract.LoginEvent.Error(it))
+                _state.value = LoginContract.LoginState.Exception(it)
+            }
+            .onEachLoadingSuspend {
+                _state.value = LoginContract.LoginState.Loading
+            }
+            .launchIn(viewModelScope)
 
-                    is Resource.Success -> {
-                        _event.emit(LoginContract.LoginEvent.NavigateToHome(resource.data.user))
-                        _state.value = LoginContract.LoginState.Success
-                    }
-                }
-            }.launchIn(viewModelScope)
     }
 }

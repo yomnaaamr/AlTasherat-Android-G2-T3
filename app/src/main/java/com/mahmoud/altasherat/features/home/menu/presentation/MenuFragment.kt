@@ -36,18 +36,21 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                     hideLoading()
                 }
 
-                is MenuContract.MenuScreenState.Idle -> {}
+                is MenuContract.MenuScreenState.Idle -> {
+                    hideLoading()
+                }
                 is MenuContract.MenuScreenState.Loading -> {
                     showLoading()
                 }
 
-                MenuContract.MenuScreenState.Success -> {
+                is MenuContract.MenuScreenState.Success -> {
                     hideLoading()
                 }
             }
 
 
             val hasUserLoggedIn = state.isAuthenticated
+
             val filteredItems = if (hasUserLoggedIn) {
 //                        exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
@@ -63,7 +66,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             binding.userDataLayout.visibility =
                 if (hasUserLoggedIn) View.VISIBLE else View.GONE
-
 
             updateUserData(state.user)
 

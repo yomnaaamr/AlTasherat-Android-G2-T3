@@ -2,31 +2,32 @@ package com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usec
 
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
-import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.repository.ICountryRepository
-import java.io.IOException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class SaveSelectedCountryUC(
     private val repository: ICountryRepository
 ) {
 
-    suspend operator fun invoke(
-        selectedCountry: Country
-    ): Resource<Unit> {
-        return try {
-            Resource.Success(repository.saveSelectedCountry(selectedCountry))
-        } catch (e: IOException) {
-            Resource.Error(LocalStorageError.IO_ERROR)
-        } catch (e: IllegalStateException) {
-            Resource.Error(LocalStorageError.DATA_CORRUPTION)
-        } catch (throwable: Throwable) {
+    operator fun invoke(selectedCountry: Country): Flow<Resource<Unit>> =
+
+        flow {
+            emit(Resource.Loading)
+            emit(Resource.Success(repository.saveSelectedCountry(selectedCountry)))
+        }.catch { throwable ->
             val failureResource = if (throwable is AltasheratException) throwable else
                 AltasheratException(
-                    AltasheratError.UnknownError("Unknown error in SaveSelectedCountryUC: $throwable")
+                    AltasheratError.UnknownError(
+                        "Unknown error in SaveSelectedCountryUC: $throwable"
+                    )
                 )
-            Resource.Error(failureResource.error)
-        }
-    }
+            emit(Resource.Error(failureResource.error))
+        }.flowOn(Dispatchers.IO)
+
 }

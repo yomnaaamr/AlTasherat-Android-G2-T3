@@ -2,8 +2,8 @@ package com.mahmoud.altasherat.features.menu_options.change_language.presentatio
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.onError
-import com.mahmoud.altasherat.common.domain.util.onSuccess
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.usecase.GetLanguageCodeUC
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.usecase.SaveSelectedLanguageUC
@@ -12,8 +12,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -50,26 +50,27 @@ class ChangeLanguageViewModel @Inject constructor(
     }
 
     private fun saveSelectedLanguage(selectedLanguage: Language) {
-        viewModelScope.launch {
-            saveSelectedLanguageUC(selectedLanguage)
-                .onSuccess {
-                    _events.send(ChangeLanguageContract.ChangeLanguageEvent.NavigationToProfile)
-                }
-                .onError {
-                    _events.send(ChangeLanguageContract.ChangeLanguageEvent.Error(it))
-                }
-        }
+
+        saveSelectedLanguageUC(selectedLanguage)
+            .onEachSuccessSuspend {
+
+            }
+            .onEachErrorSuspend {
+                _events.send(ChangeLanguageContract.ChangeLanguageEvent.Error(it))
+            }.launchIn(viewModelScope)
+
+
     }
 
     private fun getLanguageCode() {
-        viewModelScope.launch {
-            getLanguageCodeUC()
-                .onSuccess { languageCode ->
-                    _languageCode.value = languageCode
-                }
-                .onError {
-                    _events.send(ChangeLanguageContract.ChangeLanguageEvent.Error(it))
-                }
-        }
+
+        getLanguageCodeUC()
+            .onEachSuccessSuspend { languageCode ->
+                _languageCode.value = languageCode
+            }
+            .onEachErrorSuspend {
+                _events.send(ChangeLanguageContract.ChangeLanguageEvent.Error(it))
+            }.launchIn(viewModelScope)
+
     }
 }
