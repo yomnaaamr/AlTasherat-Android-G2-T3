@@ -3,7 +3,6 @@ package com.mahmoud.altasherat.features.delete_account.delete_acc.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.al_tashirat_services.language_country.domain.usecase.DeleteSelectedCountryUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserAccessToken
 import com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase.DeleteUserInfoUC
 import com.mahmoud.altasherat.features.delete_account.delete_acc.data.models.request.DeleteAccRequest
@@ -22,7 +21,6 @@ class DeleteAccountViewModel @Inject constructor(
     private val deleteAccUC: DeleteAccountUC,
     private val deleteTokenUC: DeleteUserAccessToken,
     private val deleteUserUC: DeleteUserInfoUC,
-    private val deleteCountryUC: DeleteSelectedCountryUC
 ) : ViewModel() {
     private val _state =
         MutableStateFlow<DeleteAccountContract.DeleteAccountState>(DeleteAccountContract.DeleteAccountState.Idle)
@@ -64,23 +62,7 @@ class DeleteAccountViewModel @Inject constructor(
                     deleteUserUC().onEach { result1 ->
                         when (result1) {
                             is Resource.Success -> {
-                                deleteCountryUC().onEach { result2 ->
-                                    when (result2) {
-                                        is Resource.Success -> {
-                                            _events.send(DeleteAccountContract.DeleteAccountEvent.NavigationToDashboard)
-                                        }
-
-                                        is Resource.Error -> {
-                                            _events.send(
-                                                DeleteAccountContract.DeleteAccountEvent.Error(
-                                                    result2.error
-                                                )
-                                            )
-                                        }
-
-                                        else -> {}
-                                    }
-                                }.launchIn(viewModelScope)
+                                _events.send(DeleteAccountContract.DeleteAccountEvent.NavigationToDashboard)
                             }
 
                             is Resource.Error -> {

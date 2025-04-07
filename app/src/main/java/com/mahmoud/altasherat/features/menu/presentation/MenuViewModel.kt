@@ -65,7 +65,7 @@ class MenuViewModel @Inject constructor(
             .onEach { result ->
                 _state.update {
                     when (result) {
-                        is Resource.Loading -> it.copy(screenState = MenuContract.MenuScreenState.Loading)
+                        is Resource.Loading -> it.copy(screenState = MenuContract.MenuScreenState.Success)
                         is Resource.Success -> it.copy(
                             user = result.data,
                             screenState = MenuContract.MenuScreenState.Success

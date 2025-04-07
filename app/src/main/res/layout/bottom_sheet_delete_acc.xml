@@ -76,7 +76,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@android:color/white"
         android:foreground="?attr/selectableItemBackground"
-        android:paddingHorizontal="110dp"
+        android:paddingHorizontal="100dp"
         android:text="@string/confirm_delete"
         app:layout_constraintTop_toBottomOf="@id/password_layout"
         app:layout_constraintEnd_toEndOf="parent"

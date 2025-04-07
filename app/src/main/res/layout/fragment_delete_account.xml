@@ -62,7 +62,7 @@
         android:text="@string/confirm_delete"
         android:drawableEnd="@drawable/ic_delete"
         android:drawablePadding="8dp"
-        android:paddingHorizontal="110dp"
+        android:paddingHorizontal="100dp"
         app:layout_constraintBottom_toTopOf="@id/cancel_delete_acc_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

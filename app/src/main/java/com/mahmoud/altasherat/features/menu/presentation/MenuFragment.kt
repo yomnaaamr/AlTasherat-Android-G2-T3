@@ -27,7 +27,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
         binding.menuRecyclerView.adapter = adapter
         val menuItems = MenuDataSource.getNavigationItems(requireContext())
-        viewModel.onAction(MenuContract.MenuAction.GetUserData)
 
         collectFlow(viewModel.state) { state ->
 
@@ -41,7 +40,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                     showLoading()
                 }
 
-                MenuContract.MenuScreenState.Success -> {
+                is MenuContract.MenuScreenState.Success -> {
                     hideLoading()
                 }
             }
@@ -49,6 +48,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             val hasUserLoggedIn = state.isAuthenticated
             val filteredItems = if (hasUserLoggedIn) {
+                viewModel.onAction(MenuContract.MenuAction.GetUserData)
+
 //                        exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
             } else {
@@ -79,7 +80,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
         user?.let {
             val middleName = if (it.middleName.isNullOrEmpty()) "" else " ${it.middleName}"
-            binding.userName.text = getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
+            binding.userName.text =
+                getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
 
             it.image?.path?.let { path ->
                 Glide.with(requireContext())
