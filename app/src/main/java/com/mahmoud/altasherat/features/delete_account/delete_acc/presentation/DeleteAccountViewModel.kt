@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.delete_account.delete_acc.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.Resource
@@ -42,7 +41,6 @@ class DeleteAccountViewModel @Inject constructor(
 
     private fun deleteAccount(password: String) {
         val deleteRequest = DeleteAccRequest(password)
-        Log.d("DELETE_REQUEST", deleteRequest.password)
         deleteAccUC.invoke(deleteRequest).onEach { result ->
             _state.value = when (result) {
                 is Resource.Loading -> DeleteAccountContract.DeleteAccountState.Loading
@@ -52,12 +50,61 @@ class DeleteAccountViewModel @Inject constructor(
                 }
 
                 is Resource.Success -> {
-                    deleteTokenUC()
-                    deleteUserUC()
-                    deleteCountryUC()
-                    _events.send(DeleteAccountContract.DeleteAccountEvent.NavigationToDashboard)
+                    deleteDataFromLocal()
                     DeleteAccountContract.DeleteAccountState.Success(result.data)
                 }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun deleteDataFromLocal() {
+        deleteTokenUC().onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    deleteUserUC().onEach { result1 ->
+                        when (result1) {
+                            is Resource.Success -> {
+                                deleteCountryUC().onEach { result2 ->
+                                    when (result2) {
+                                        is Resource.Success -> {
+                                            _events.send(DeleteAccountContract.DeleteAccountEvent.NavigationToDashboard)
+                                        }
+
+                                        is Resource.Error -> {
+                                            _events.send(
+                                                DeleteAccountContract.DeleteAccountEvent.Error(
+                                                    result2.error
+                                                )
+                                            )
+                                        }
+
+                                        else -> {}
+                                    }
+                                }.launchIn(viewModelScope)
+                            }
+
+                            is Resource.Error -> {
+                                _events.send(
+                                    DeleteAccountContract.DeleteAccountEvent.Error(
+                                        result1.error
+                                    )
+                                )
+                            }
+
+                            else -> {}
+                        }
+                    }.launchIn(viewModelScope)
+                }
+
+                is Resource.Error -> {
+                    _events.send(
+                        DeleteAccountContract.DeleteAccountEvent.Error(
+                            result.error
+                        )
+                    )
+                }
+
+                else -> {}
             }
         }.launchIn(viewModelScope)
     }

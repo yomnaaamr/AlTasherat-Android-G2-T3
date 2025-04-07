@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.al_tashirat_services.user_services.domain.usecase
 
+import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
@@ -25,6 +26,8 @@ class DeleteUserInfoUC(
                         "Unknown error in DeleteUserInfoUC: $throwable"
                     )
                 )
+            Log.d("DELETE_ERROR", throwable.message.toString())
+
             emit(Resource.Error(failureResource.error))
         }.flowOn(Dispatchers.IO)
 }
