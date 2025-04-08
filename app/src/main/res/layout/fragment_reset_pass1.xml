@@ -102,6 +102,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/phone_frame_layout"
                     android:layout_width="0dp"
@@ -114,11 +115,11 @@
                         android:id="@+id/phone_layout"
                         style="@style/textInputLayoutStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         app:boxBackgroundColor="?colorSurfaceInverse"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:placeholderText="@string/enter_phone_number"
+                        app:layout_constraintEnd_toStartOf="@id/phone_code_picker"  app:placeholderText="@string/enter_phone_number"
                         app:startIconDrawable="@drawable/ic_phone">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +133,8 @@
                         android:id="@+id/phone_code_picker"
                         style="?textAppearanceTitleMedium"
                         android:layout_width="wrap_content"
-                        android:layout_height="56dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_height="55dp"
                         android:layout_gravity="end|bottom"
                         android:background="@drawable/custom_phone_end_icon"
                         android:clickable="true"
@@ -148,6 +150,7 @@
                         app:layout_constraintTop_toTopOf="@+id/phone_layout"
                         tools:text="🇸🇦 (+966)" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

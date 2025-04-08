@@ -290,7 +290,7 @@
                             android:id="@+id/phone_code_picker"
                             style="?textAppearanceTitleMedium"
                             android:layout_width="wrap_content"
-                            android:layout_height="51dp"
+                            android:layout_height="55dp"
                             android:layout_gravity="end|bottom"
                             android:background="@drawable/custom_phone_end_icon"
                             android:clickable="true"
@@ -355,12 +355,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView5"
                         app:placeholderText="@string/Contact_Message_text"
-                        app:startIconDrawable="@drawable/ic_email">
+                        app:iconGravity="top"
+                        app:startIconDrawable="@drawable/ic_email"
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_message"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="top|start"
                             android:focusableInTouchMode="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
