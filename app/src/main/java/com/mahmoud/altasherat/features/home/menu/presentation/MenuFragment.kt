@@ -27,33 +27,25 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
         binding.menuRecyclerView.adapter = adapter
         val menuItems = MenuDataSource.getNavigationItems(requireContext())
+        viewModel.onAction(MenuContract.MenuAction.GetUserData)
+
 
         collectFlow(viewModel.state) { state ->
 
             when (state.screenState) {
-                is MenuContract.MenuScreenState.Error -> {
-                    hideLoading()
-                }
-
-                is MenuContract.MenuScreenState.Idle -> {
-                    hideLoading()
-                }
                 is MenuContract.MenuScreenState.Loading -> {
                     showLoading()
                 }
 
-                is MenuContract.MenuScreenState.Success -> {
+                else -> {
                     hideLoading()
                 }
             }
 
 
             val hasUserLoggedIn = state.isAuthenticated
-
             val filteredItems = if (hasUserLoggedIn) {
-                viewModel.onAction(MenuContract.MenuAction.GetUserData)
-
-//                        exclude auth fragment from menu
+//             exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
             } else {
                 menuItems.filter { !it.requiresAuth }
@@ -81,7 +73,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
         binding.profileImg.editIcon.visibility = View.GONE
 
         user?.let {
-            val middleName = if (it.middleName.isNullOrEmpty()) "" else " ${it.middleName}"
+            val middleName = if (it.middleName.isNullOrEmpty()) "" else "${it.middleName}"
             binding.userName.text =
                 getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
 
