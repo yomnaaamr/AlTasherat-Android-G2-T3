@@ -1,60 +1,45 @@
 package com.mahmoud.altasherat.features.authentication.reset_password.presentation
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.mahmoud.altasherat.R
+import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.databinding.FragmentResetPassword2Binding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ResetPassFragment2.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ResetPassFragment2 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ResetPassFragment2 :BaseFragment<FragmentResetPassword2Binding>(FragmentResetPassword2Binding::inflate)  {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+    override fun FragmentResetPassword2Binding.initialize() {
+
+        val digit1 = binding.digit1
+        val digit2 = binding.digit2
+        val digit3 = binding.digit3
+        val digit4 = binding.digit4
+
+        digit1.addTextChangedListener(DigitTextWatcher(digit1, digit2))
+        digit2.addTextChangedListener(DigitTextWatcher(digit2, digit3))
+        digit3.addTextChangedListener(DigitTextWatcher(digit3, digit4))
+        digit4.addTextChangedListener(DigitTextWatcher(digit4, null))
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reset_password2, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResetPasswordFragment2.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResetPassFragment2().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    inner class DigitTextWatcher(
+        private val currentEditText: EditText,
+        private val nextEditText: EditText?
+    ) : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            if (s?.length == 1 && nextEditText != null) {
+                nextEditText.requestFocus()
             }
+//            currentEditText.setTextColor(Color.BLUE)
+        }
     }
 }
