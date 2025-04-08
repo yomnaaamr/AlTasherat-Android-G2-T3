@@ -142,6 +142,8 @@
     <string name="reset_password_text">استعادة كلمة المرور</string>
     <string name="enter_phone_to_reset_text">ادخل رقم جوالك لاستعادة كلمة المرور</string>
     <string name="enter_code_to_reset_text">ادخل الكود المرسل لجوالك للمتابعة</string>
+    <string name="password_repeat">إعادة كلمة المرور</string>
+    <string name="enter_password_repeat">اعد ادخال كلمة المرور مرة آخري</string>
 
 
 </resources>
