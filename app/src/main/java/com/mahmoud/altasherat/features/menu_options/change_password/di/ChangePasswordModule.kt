@@ -1,11 +1,11 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.di
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
-import com.mahmoud.altasherat.features.change_password.data.repository.ChangePassRepository
-import com.mahmoud.altasherat.features.change_password.data.repository.remote.ChangePassRemoteDS
-import com.mahmoud.altasherat.features.change_password.domain.repository.IChangePassRepository
-import com.mahmoud.altasherat.features.change_password.domain.repository.remote.IChangePassRemoteDS
-import com.mahmoud.altasherat.features.change_password.domain.usecase.ChangePasswordUC
+import com.mahmoud.altasherat.features.menu_options.change_password.data.repository.ChangePassRepository
+import com.mahmoud.altasherat.features.menu_options.change_password.data.repository.remote.ChangePassRemoteDS
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.repository.IChangePassRepository
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.repository.remote.IChangePassRemoteDS
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.usecase.ChangePasswordUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

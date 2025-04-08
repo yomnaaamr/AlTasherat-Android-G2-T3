@@ -4,9 +4,9 @@ import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkPro
 import com.mahmoud.altasherat.common.util.Constants.CHANGE_PASSWORD_ENDPOINT
 import com.mahmoud.altasherat.common.util.Constants.CONTENT_TYPE_JSON
 import com.mahmoud.altasherat.common.util.Constants.HEADER_ACCEPT
-import com.mahmoud.altasherat.features.change_password.data.models.dto.ChangePasswordDto
-import com.mahmoud.altasherat.features.change_password.data.models.request.ChangePassRequest
-import com.mahmoud.altasherat.features.change_password.domain.repository.remote.IChangePassRemoteDS
+import com.mahmoud.altasherat.features.menu_options.change_password.data.models.dto.ChangePasswordDto
+import com.mahmoud.altasherat.features.menu_options.change_password.data.models.request.ChangePassRequest
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.repository.remote.IChangePassRemoteDS
 
 class ChangePassRemoteDS(
     private val networkProvider: IRestApiNetworkProvider

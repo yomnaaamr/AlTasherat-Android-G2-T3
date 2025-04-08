@@ -7,7 +7,7 @@ import com.mahmoud.altasherat.features.menu_options.change_password.domain.model
 class ChangePasswordContract {
     data class ChangePasswordUIState(
         val isLoading: Boolean = false,
-        val response: ChangePasswordAction.ChangePassword? = null,
+        val response: ChangePassword? = null,
         val screenState: ChangePasswordState = ChangePasswordState.Idle
     )
 

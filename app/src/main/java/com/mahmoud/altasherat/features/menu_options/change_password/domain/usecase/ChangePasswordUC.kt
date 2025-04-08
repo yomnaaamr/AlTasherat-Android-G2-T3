@@ -3,9 +3,9 @@ package com.mahmoud.altasherat.features.menu_options.change_password.domain.usec
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import com.mahmoud.altasherat.features.change_password.data.models.request.ChangePassRequest
-import com.mahmoud.altasherat.features.change_password.domain.models.ChangePassword
-import com.mahmoud.altasherat.features.change_password.domain.repository.IChangePassRepository
+import com.mahmoud.altasherat.features.menu_options.change_password.data.models.request.ChangePassRequest
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.models.ChangePassword
+import com.mahmoud.altasherat.features.menu_options.change_password.domain.repository.IChangePassRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
