@@ -15,7 +15,7 @@ fun NetworkError.toResourceId(): Int {
         NetworkError.UNAUTHORIZED -> R.string.error_unauthorized
         NetworkError.FORBIDDEN -> R.string.error_forbidden
         NetworkError.NOT_FOUND -> R.string.error_not_found
-        NetworkError.InvalidCredentials -> R.string.invalid_phone_or_password
+        NetworkError.InvalidCredentials -> R.string.invalid_credentials
     }
 }
 

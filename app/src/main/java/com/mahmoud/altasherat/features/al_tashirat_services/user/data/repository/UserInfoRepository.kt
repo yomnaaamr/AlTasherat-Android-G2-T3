@@ -19,4 +19,12 @@ class UserInfoRepository(
         return userLocalDS.getUserAccessToken()
     }
 
+    override suspend fun deleteUserAccessToken() {
+        userLocalDS.deleteUserAccessToken()
+    }
+
+    override suspend fun deleteUserInfo() {
+        userLocalDS.deleteUserInfo()
+    }
+
 }
