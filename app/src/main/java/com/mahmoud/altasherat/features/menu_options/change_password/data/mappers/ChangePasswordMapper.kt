@@ -5,9 +5,9 @@ import com.mahmoud.altasherat.features.menu_options.change_password.domain.model
 
 
 internal object ChangePasswordMapper {
-    fun dtoToDomain(model: ChangePasswordDto): ChangePassword {
+    fun dtoToDomain(model: ChangePasswordDto?): ChangePassword {
         return ChangePassword(
-            message = model.message,
+            message = model?.message ?: "",
         )
     }
 

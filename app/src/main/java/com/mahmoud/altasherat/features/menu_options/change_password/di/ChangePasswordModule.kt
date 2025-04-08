@@ -18,10 +18,12 @@ object ChangePasswordModule {
 
     @Provides
     fun provideChangePasswordRemoteDS(
-        apiNetworkProvider: IRestApiNetworkProvider
+        apiNetworkProvider: IRestApiNetworkProvider,
+        localDS: IUserInfoLocalDS
     ): IChangePassRemoteDS {
         return ChangePassRemoteDS(
             networkProvider = apiNetworkProvider,
+            userLocalDS = localDS,
         )
     }
 
@@ -29,11 +31,9 @@ object ChangePasswordModule {
     @Provides
     fun provideChangePasswordRepository(
         deleteAccDS: IChangePassRemoteDS,
-        localDS: IUserInfoLocalDS
     ): IChangePassRepository {
         return ChangePassRepository(
-            changePassRemoteDS = deleteAccDS,
-            userLocalDS = localDS,
+            changePassRemoteDS = deleteAccDS
         )
     }
 

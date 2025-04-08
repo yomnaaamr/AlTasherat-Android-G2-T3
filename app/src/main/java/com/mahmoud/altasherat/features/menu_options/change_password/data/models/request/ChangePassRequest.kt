@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.data.models.request
 
-import android.util.Log
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -23,7 +22,6 @@ data class ChangePassRequest(
                 errors.add(result.error as ValidationError)
             }
         }
-        Log.d("VALIDATION_ERROR_LIST", errors.toString())
 
         return Resource.Success(errors)
     }
