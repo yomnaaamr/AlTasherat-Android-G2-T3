@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.data.mappers
+package com.mahmoud.altasherat.features.menu_options.change_password.data.mappers
 
 import com.mahmoud.altasherat.features.change_password.data.models.dto.ChangePasswordDto
 import com.mahmoud.altasherat.features.change_password.domain.models.ChangePassword

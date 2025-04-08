@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.data.models.dto
+package com.mahmoud.altasherat.features.menu_options.change_password.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.data.repository
+package com.mahmoud.altasherat.features.menu_options.change_password.data.repository
 
 import com.mahmoud.altasherat.features.change_password.data.mappers.ChangePasswordMapper
 import com.mahmoud.altasherat.features.change_password.data.models.request.ChangePassRequest

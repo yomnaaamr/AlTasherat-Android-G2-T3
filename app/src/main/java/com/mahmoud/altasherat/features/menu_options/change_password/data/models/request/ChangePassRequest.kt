@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.data.models.request
+package com.mahmoud.altasherat.features.menu_options.change_password.data.models.request
 
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource

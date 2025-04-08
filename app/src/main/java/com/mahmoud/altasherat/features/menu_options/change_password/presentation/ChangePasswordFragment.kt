@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mahmoud.altasherat.R
 
-
 class ChangePasswordFragment : Fragment() {
 
     override fun onCreateView(

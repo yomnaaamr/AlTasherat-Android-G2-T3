@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.domain.usecase
+package com.mahmoud.altasherat.features.menu_options.change_password.domain.usecase
 
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError

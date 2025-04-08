@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.change_password.di
+package com.mahmoud.altasherat.features.menu_options.change_password.di
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.change_password.data.repository.ChangePassRepository
