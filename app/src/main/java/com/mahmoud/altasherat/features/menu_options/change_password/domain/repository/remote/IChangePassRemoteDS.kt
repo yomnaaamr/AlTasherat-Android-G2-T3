@@ -4,5 +4,5 @@ import com.mahmoud.altasherat.features.menu_options.change_password.data.models.
 import com.mahmoud.altasherat.features.menu_options.change_password.data.models.request.ChangePassRequest
 
 interface IChangePassRemoteDS {
-    suspend fun changePassword(request: ChangePassRequest): ChangePasswordDto
+    suspend fun changePassword(request: ChangePassRequest, token: String): ChangePasswordDto
 }
