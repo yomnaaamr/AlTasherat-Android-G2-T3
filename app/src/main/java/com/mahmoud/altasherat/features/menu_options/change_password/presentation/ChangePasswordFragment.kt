@@ -1,20 +1,128 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.presentation
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.mahmoud.altasherat.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.common.domain.util.error.ValidationError
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.databinding.FragmentChangePasswordBinding
+import com.mahmoud.altasherat.features.menu_options.change_password.data.models.request.ChangePassRequest
+import dagger.hilt.android.AndroidEntryPoint
 
-class ChangePasswordFragment : Fragment() {
+@AndroidEntryPoint
+class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>(
+    FragmentChangePasswordBinding::inflate
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_password, container, false)
+    private val changePassViewModel: ChangePasswordViewModel by viewModels()
+    override fun FragmentChangePasswordBinding.initialize() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(changePassToolbar)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayShowTitleEnabled(true)
+        }
+        setupObservers()
+        setupListeners()
+
+        binding.oldPasswordEdit.addTextChangedListener { it ->
+
+        }
     }
 
+    private fun setupObservers() {
+
+        collectFlow(changePassViewModel.state) { state ->
+            state.response?.let {
+                showMessage(state.response.message, MessageType.SNACKBAR, this)
+            }
+            when (state.screenState) {
+                is ChangePasswordContract.ChangePasswordState.Idle -> hideLoading()
+                is ChangePasswordContract.ChangePasswordState.Loading -> showLoading()
+                is ChangePasswordContract.ChangePasswordState.Success -> hideLoading()
+                is ChangePasswordContract.ChangePasswordState.Error -> hideLoading()
+            }
+        }
+
+        collectFlow(changePassViewModel.events) { event ->
+            when (event) {
+                is ChangePasswordContract.ChangePasswordEvent.NavigationToMenu -> {
+                    findNavController().navigateUp()
+                }
+
+                is ChangePasswordContract.ChangePasswordEvent.Error -> {
+                    when (event.error) {
+                        is AltasheratError.ValidationErrors -> {
+                            displayValidationErrors(event.error.errors)
+                        }
+
+                        else -> {
+                            val errorMessage = event.error.toErrorMessage(requireContext())
+                            showMessage(errorMessage, MessageType.SNACKBAR, this)
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    private fun setupListeners() {
+        // Handle back navigation
+        binding.changePassToolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.saveBtn.setOnClickListener {
+            val oldPassword = binding.oldPasswordEdit.text.toString()
+            val newPassword = binding.newPasswordEdit.text.toString()
+            val confirmPassword = binding.confirmPasswordEdit.text.toString()
+            changePassViewModel.onAction(
+                ChangePasswordContract.ChangePasswordAction.ChangePassword(
+                    ChangePassRequest(
+                        oldPassword = oldPassword,
+                        newPassword = newPassword,
+                        newPasswordConfirmation = confirmPassword
+                    )
+                )
+            )
+        }
+    }
+
+    private fun displayValidationErrors(errors: List<ValidationError>) {
+        val errorFields = mapOf(
+            setOf(
+                ValidationError.EMPTY_PASSWORD,
+                ValidationError.INVALID_PASSWORD
+            ) to binding.oldPasswordLayout,
+            setOf(
+                ValidationError.EMPTY_PASSWORD,
+                ValidationError.INVALID_PASSWORD
+            ) to binding.newPasswordLayout,
+            setOf(
+                ValidationError.EMPTY_PASSWORD,
+                ValidationError.INVALID_PASSWORD_CONFIRMATION
+            ) to binding.confirmPasswordLayout
+        )
+
+        binding.oldPasswordLayout.isErrorEnabled = false
+        binding.oldPasswordLayout.error = null
+
+        binding.newPasswordLayout.isErrorEnabled = false
+        binding.newPasswordLayout.error = null
+
+        binding.confirmPasswordLayout.isErrorEnabled = false
+        binding.confirmPasswordLayout.error = null
+
+        errors.forEach { error ->
+            errorFields.entries.find { it.key.contains(error) }?.value?.let { view ->
+                view.isErrorEnabled = true
+                view.error = error.toErrorMessage(requireContext())
+            }
+        }
+    }
 }

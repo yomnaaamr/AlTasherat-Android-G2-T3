@@ -27,18 +27,18 @@ data class ChangePassRequest(
     }
 
     private fun validateOldPassword(): Resource<Unit> {
-        if (oldPassword.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
+        if (oldPassword.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
         return Resource.Success(Unit)
     }
 
     private fun validateNewPassword(): Resource<Unit> {
-        if (newPassword.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
+        if (newPassword.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
         if (newPassword.length < 8 || newPassword.length > 50) return Resource.Error(ValidationError.INVALID_PASSWORD)
         return Resource.Success(Unit)
     }
 
     private fun validateNewPasswordConfirmation(): Resource<Unit> {
-        if (newPasswordConfirmation.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
+        if (newPasswordConfirmation.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
         if (newPasswordConfirmation.length < 8 || newPasswordConfirmation.length > 50) return Resource.Error(
             ValidationError.INVALID_PASSWORD
         )
