@@ -68,7 +68,7 @@
                 style="?textAppearanceTitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F1F4FB"
+                android:background="@color/textBackgroundColor"
                 android:paddingVertical="8dp"
                 android:text="@string/Contact_info"
                 android:textAlignment="center"

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
 import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserAccessTokenUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class MenuViewModel @Inject constructor(
     private val hasUserLoggedInUC: HasUserLoggedInUC,
     private val getUserInfoUC: GetUserInfoUC,
-) : ViewModel() {
+    private val deleteTokenUC: DeleteUserAccessTokenUC,
+    ) : ViewModel() {
 
 
     private val _state = MutableStateFlow(MenuContract.MenuState())
@@ -27,6 +29,25 @@ class MenuViewModel @Inject constructor(
 
     private val _events = Channel<MenuContract.MenuEvent>()
     val events = _events.receiveAsFlow()
+
+
+    fun onAction(action: MenuContract.MenuAction) {
+        when (action) {
+            is MenuContract.MenuAction.GetUserData -> getUserData()
+            is MenuContract.MenuAction.Logout -> logout()
+        }
+    }
+
+    private fun logout() {
+        deleteTokenUC()
+            .onEachSuccessSuspend {
+                _events.send(MenuContract.MenuEvent.NavigationToAuth)
+            }
+            .onEachErrorSuspend {
+                _events.send(MenuContract.MenuEvent.Error(it))
+            }
+            .launchIn(viewModelScope)
+    }
 
 
     init {
@@ -50,12 +71,6 @@ class MenuViewModel @Inject constructor(
 
     }
 
-
-    fun onAction(action: MenuContract.MenuAction) {
-        when (action) {
-            is MenuContract.MenuAction.GetUserData -> getUserData()
-        }
-    }
 
 
     private fun getUserData() {

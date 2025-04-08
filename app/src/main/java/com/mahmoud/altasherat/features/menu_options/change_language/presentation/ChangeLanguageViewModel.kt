@@ -41,6 +41,8 @@ class ChangeLanguageViewModel @Inject constructor(
             is ChangeLanguageContract.ChangeLanguageAction.SaveSelectedLanguage -> {
                 saveSelectedLanguage(action.selectedLanguage)
             }
+
+            is ChangeLanguageContract.ChangeLanguageAction.GetLanguageCode -> getLanguageCode()
         }
     }
 

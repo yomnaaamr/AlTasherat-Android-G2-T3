@@ -14,6 +14,7 @@ class MenuContract {
 
     sealed interface MenuEvent {
         data class Error(val error: AltasheratError) : MenuEvent
+        data object NavigationToAuth : MenuEvent
     }
 
     sealed interface MenuScreenState {
@@ -26,5 +27,6 @@ class MenuContract {
 
     sealed interface MenuAction {
         data object GetUserData : MenuAction
+        data object Logout : MenuAction
     }
 }
