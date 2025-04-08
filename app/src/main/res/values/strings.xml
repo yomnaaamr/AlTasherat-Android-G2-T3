@@ -149,5 +149,5 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
     <string name="reset_password_text">Reset Password</string>
     <string name="enter_phone_to_reset_text">Enter your phone number to reset your password</string>
-
+    <string name="enter_code_to_reset_text">Enter the code sent to your phone to continue</string>
 </resources>
