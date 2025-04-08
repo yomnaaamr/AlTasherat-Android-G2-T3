@@ -67,6 +67,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
+
+        binding.forgetPassTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_authFragment_to_resetPassFragment1)
+        }
+
     }
 
     private fun setupObservers() {
