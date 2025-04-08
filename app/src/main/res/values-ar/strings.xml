@@ -140,6 +140,13 @@
     <string name="invalid_credentials">بيانات دخول غير صحيحة</string>
     <string name="password_required">كلمة المرور مطلوبة</string>
     <string name="invalid_pass_confirmation">يجب أن تكون كلمة المرور والتأكيد متساويان</string>
+    <string name="change_password_title">تغيير كلمة المرور</string>
+    <string name="old_password">كلمة المرور القديمة</string>
+    <string name="enter_old_password">ادخل كلمة المرور القديمة</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="enter_new_password">ادخل كلمة المرور الجديدة</string>
+    <string name="confirm_password">إعادة كلمة المرور الجديدة</string>
+    <string name="enter_new_password_again">اعد ادخال كلمة المرور الجديدة مرة آخرى</string>
 
 
 </resources>

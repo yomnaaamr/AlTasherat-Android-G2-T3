@@ -148,5 +148,12 @@ Survival: All provisions that are stated to remain in force or that, by their na
 
     <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
     <string name="invalid_pass_confirmation">Password and confirmation must be the same</string>
+    <string name="change_password_title">Change Password</string>
+    <string name="old_password">Old password</string>
+    <string name="enter_old_password">Enter old password</string>
+    <string name="new_password">New password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_new_password_again">Enter new password again</string>
 
 </resources>
