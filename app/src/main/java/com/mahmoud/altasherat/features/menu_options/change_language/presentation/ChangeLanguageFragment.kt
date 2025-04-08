@@ -32,6 +32,8 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
     override fun FragmentChangeLanguageBinding.initialize() {
 
 
+        viewModel.onAction(ChangeLanguageContract.ChangeLanguageAction.GetLanguageCode)
+
         setupObservers()
 
         binding.saveButton.setOnClickListener {

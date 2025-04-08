@@ -1,6 +1,7 @@
 <resources>
     <color name="tabColor">#8EE7AD</color>
     <color name="cardViewBackground">#20255F</color>
+    <color name="textBackgroundColor">#1A1C20</color>
     <color name="md_theme_primary">#4426F5</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#434078</color>

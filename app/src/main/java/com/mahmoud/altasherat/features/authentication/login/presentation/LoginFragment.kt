@@ -29,6 +29,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private val loginViewModel: LoginViewModel by viewModels()
     private var selectedCountry: Country? = null
     private lateinit var bottomSheet: CountryPickerBottomSheet
+    private var countries: List<Country> = emptyList()
+
 
 
     override fun FragmentLoginBinding.initialize() {
@@ -63,7 +65,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             )
         }
 
+
+        binding.forgetPassTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_authFragment_to_resetPassFragment1)
+        }
+
         binding.phoneCodePicker.setOnClickListener {
+
+            bottomSheet = CountryPickerBottomSheet(
+                countries ,
+                selectedCountry!!.id.minus(1)
+            ) { newSelectedCountry ->
+                this@LoginFragment.selectedCountry = newSelectedCountry as Country
+                binding.phoneCodePicker.setText(
+                    resources.getString(
+                        R.string.country_picker_display,
+                        newSelectedCountry.flag,
+                        formatCountryCode(newSelectedCountry.phoneCode)
+                    ))
+            }
+
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 
@@ -80,20 +101,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 firstItem.flag,
                 formatCountryCode(firstItem.phoneCode)
             )
-            binding.phoneCodePicker.apply {
-                setText(initialSelect)
-                bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                    this@LoginFragment.selectedCountry = selectedCountry as Country
-                    setText(
-                        resources.getString(
-                            R.string.country_picker_display,
-                            selectedCountry.flag,
-                            formatCountryCode(selectedCountry.phoneCode)
-                        )
-                    )
+            this.countries = countries
+            selectedCountry = firstItem
 
-                }
-            }
+            binding.phoneCodePicker.setText(initialSelect)
+
         }
 
         collectFlow(loginViewModel.event) { event ->

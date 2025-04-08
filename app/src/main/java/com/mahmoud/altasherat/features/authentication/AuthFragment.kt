@@ -113,6 +113,13 @@ class AuthFragment : Fragment() {
                         R.color.md_theme_onSurface
                     )
                 )
+
+                // Mirror the plane icon
+                if (selectedIndex == 0) {
+                    planeIcon?.scaleX = -1f
+                } else {
+                    planeIcon?.scaleX = 1f
+                }
             } else {
                 planeIcon?.visibility = View.INVISIBLE
                 indicator?.visibility = View.INVISIBLE
