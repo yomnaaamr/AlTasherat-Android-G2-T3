@@ -50,7 +50,7 @@
         <action
             android:id="@+id/action_authFragment_to_home_nav_graph"
             app:destination="@id/home_nav_graph"
-            app:popUpTo="@id/authFragment"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_authFragment_to_resetPassFragment1"
@@ -95,7 +95,9 @@
         tools:layout="@layout/fragment_reset_password3" >
         <action
             android:id="@+id/action_resetPasswordFragment3_to_home_nav_graph"
-            app:destination="@id/home_nav_graph" />
+            app:destination="@id/home_nav_graph"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 

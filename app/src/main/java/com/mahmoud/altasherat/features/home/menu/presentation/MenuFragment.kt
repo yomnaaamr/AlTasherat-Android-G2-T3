@@ -63,8 +63,13 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
             updateUserData(state.user)
 
         }
+
         binding.editProfileButton.setOnClickListener {
             findNavController().navigate(R.id.action_menuFragment_to_profileInfoFragment)
+        }
+
+        binding.logoutButton.setOnClickListener {
+           findNavController().navigate(R.id.action_menu_to_authFragment)
         }
     }
 
