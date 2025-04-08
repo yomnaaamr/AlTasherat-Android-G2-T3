@@ -129,6 +129,16 @@
     <string name="Contact_Message">الرسالة</string>
     <string name="Contact_Message_text">اكتب رسالة التواصل</string>
     <string name="updated_successfully_txt">تم التحديث بنجاح</string>
+    <string name="account_settings_delete_account">اعدادات الحساب والغاء تنشيط الحساب وحذفه</string>
+    <string name="manage_account">ادارة الحســاب</string>
+    <string name="permanently_deactivate_the_account">إلغاء تنشيط الحساب نهائياً</string>
+    <string name="all_information_transactions_and_reservations_will_be_lost">سوف يتم فقد  كل المعلومات والمعاملات والحجوزات</string>
+    <string name="confirm_delete">تأكيد الحذف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="enter_password_to_confirm">ادخل كلمة المرور للتأكيد</string>
+    <string name="delete_account">حــذف الحساب</string>
+    <string name="invalid_credentials">بيانات دخول غير صحيحة</string>
+    <string name="password_required">كلمة المرور مطلوبة</string>
 
 
 </resources>

@@ -19,6 +19,7 @@ object Constants {
     const val LOGIN_ENDPOINT = "login"
     const val SIGNUP_ENDPOINT = "signup"
     const val UPDATE_ACCOUNT_ENDPOINT = "update-account"
+    const val DELETE_ACCOUNT_ENDPOINT = "delete-account"
 
     const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 

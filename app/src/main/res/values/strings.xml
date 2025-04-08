@@ -135,6 +135,16 @@ Survival: All provisions that are stated to remain in force or that, by their na
 
     <string name="country_picker_display" translatable="false">%1$s %2$s</string>
     <string name="updated_successfully_txt">Updated successfully</string>
+    <string name="account_settings_delete_account">Account settings, delete account</string>
+    <string name="manage_account">Manage Account</string>
+    <string name="permanently_deactivate_the_account">Permanently deactivate the account</string>
+    <string name="all_information_transactions_and_reservations_will_be_lost">All information, transactions and reservations will be lost.</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_password_to_confirm">Enter password to confirm</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="password_required">The password field is required.</string>
 
     <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
 

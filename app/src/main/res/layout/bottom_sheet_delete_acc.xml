@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="16dp"
+    android:backgroundTint="@color/splash_screen_background"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/drag_handle"
+        android:layout_width="100dp"
+        android:layout_height="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/md_theme_primary" />
+
+    <TextView
+        android:id="@+id/delete_bottom_sheet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_account"
+        style="?textAppearanceTitleMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+
+    <TextView
+        android:id="@+id/password_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/password"
+        style="?textAppearanceTitleMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/delete_bottom_sheet_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="?colorSurfaceInverse"
+        app:boxCornerRadiusBottomEnd="26dp"
+        app:boxCornerRadiusBottomStart="26dp"
+        app:boxCornerRadiusTopEnd="26dp"
+        app:boxCornerRadiusTopStart="26dp"
+        app:boxStrokeColor="?colorPrimary"
+        app:boxStrokeWidth="0dp"
+        app:endIconMode="password_toggle"
+        app:expandedHintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_txt"
+        app:placeholderText="@string/enter_password_to_confirm"
+        app:placeholderTextAppearance="?textAppearanceBodySmall"
+        app:startIconDrawable="@drawable/ic_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/confirm_delete_acc_btn"
+        style="@style/CustomButton"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableEnd="@drawable/ic_delete"
+        android:drawablePadding="8dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@android:color/white"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="100dp"
+        android:text="@string/confirm_delete"
+        app:layout_constraintTop_toBottomOf="@id/password_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_delete_acc_btn"
+        style="?materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/cancel"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="@color/md_theme_onErrorContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirm_delete_acc_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/md_theme_onErrorContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

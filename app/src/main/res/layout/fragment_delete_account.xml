@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".features.delete_account.delete_acc.presentation.DeleteAccountFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/delete_acc_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="@string/manage_account"
+        app:titleTextAppearance="?textAppearanceTitleMedium" />
+
+    <TextView
+        android:id="@+id/deactivate_acc_txt"
+        style="?textAppearanceTitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/permanently_deactivate_the_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/delete_acc_toolbar" />
+
+    <ImageView
+        android:id="@+id/delete_acc_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_delete_acc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/information_will_be_deleted_text"
+        style="?textAppearanceTitleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="44dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/all_information_transactions_and_reservations_will_be_lost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/delete_acc_img" />
+
+    <Button
+        android:id="@+id/confirm_delete_acc_btn"
+        style="@style/CustomButton"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/confirm_delete"
+        android:drawableEnd="@drawable/ic_delete"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="100dp"
+        app:layout_constraintBottom_toTopOf="@id/cancel_delete_acc_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancel_delete_acc_btn"
+        style="?materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/cancel"
+        android:textAppearance="?textAppearanceTitleSmall"
+        android:textColor="@color/md_theme_onErrorContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/md_theme_onErrorContainer" />
+</androidx.constraintlayout.widget.ConstraintLayout>
