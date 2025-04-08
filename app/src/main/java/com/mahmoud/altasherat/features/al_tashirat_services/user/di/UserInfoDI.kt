@@ -6,6 +6,8 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user.data.repository
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.repository.local.UserInfoLocalDS
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.IUserInfoRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserAccessTokenUC
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserInfoUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserAccessToken
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserInfoUC
 import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS
@@ -49,8 +51,18 @@ internal object UserInfoDI {
     }
 
     @Provides
+    fun provideDeleteUserTokenUC(repository: IUserInfoRepository): DeleteUserAccessTokenUC {
+        return DeleteUserAccessTokenUC(repository)
+    }
+
+    @Provides
     fun provideGetUserTokenUC(repository: IUserInfoRepository): GetUserAccessToken {
         return GetUserAccessToken(repository)
+    }
+
+    @Provides
+    fun provideDeleteUserInfoUC(repository: IUserInfoRepository): DeleteUserInfoUC {
+        return DeleteUserInfoUC(repository)
     }
 
 }
