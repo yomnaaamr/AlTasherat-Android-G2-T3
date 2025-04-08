@@ -5,6 +5,7 @@ import com.mahmoud.altasherat.features.change_password.data.repository.ChangePas
 import com.mahmoud.altasherat.features.change_password.data.repository.remote.ChangePassRemoteDS
 import com.mahmoud.altasherat.features.change_password.domain.repository.IChangePassRepository
 import com.mahmoud.altasherat.features.change_password.domain.repository.remote.IChangePassRemoteDS
+import com.mahmoud.altasherat.features.change_password.domain.usecase.ChangePasswordUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,9 +33,9 @@ object ChangePasswordModule {
             changePassRemoteDS = deleteAccDS,
         )
     }
-//
-//    @Provides
-//    fun provideChangePasswordUseCase(repository: IChangePassRepository): ChangePasswordUC {
-//        return ChangePasswordUC(repository)
-//    }
+
+    @Provides
+    fun provideChangePasswordUseCase(repository: IChangePassRepository): ChangePasswordUC {
+        return ChangePasswordUC(repository)
+    }
 }
