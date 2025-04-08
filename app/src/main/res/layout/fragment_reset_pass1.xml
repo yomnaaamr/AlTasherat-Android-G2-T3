@@ -25,7 +25,7 @@
         android:layout_marginBottom="-60dp"
         android:elevation="20dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/ic_map_right"
+        android:src="@drawable/img_map_right"
         app:layout_constraintBottom_toTopOf="@id/content_card"
         app:layout_constraintStart_toStartOf="@id/content_card" />
 
@@ -168,5 +168,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content_card" />
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/img_plane_mans_hand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
