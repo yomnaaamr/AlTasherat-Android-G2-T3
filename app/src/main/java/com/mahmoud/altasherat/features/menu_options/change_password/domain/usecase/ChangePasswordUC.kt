@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.domain.usecase
 
-import android.util.Log
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
@@ -18,7 +17,6 @@ class ChangePasswordUC(
     private val repository: IChangePassRepository
 ) {
     operator fun invoke(passwordRequest: ChangePassRequest): Flow<Resource<ChangePassword>> = flow {
-        Log.d("PASSWORD_REQUEST_UC", passwordRequest.toString())
         emit(Resource.Loading)
         passwordRequest.validateChangePasswordRequest().onSuccess { errors ->
             if (errors.isNotEmpty()) throw AltasheratException(

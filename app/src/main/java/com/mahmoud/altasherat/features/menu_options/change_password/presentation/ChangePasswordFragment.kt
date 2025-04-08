@@ -1,7 +1,6 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.presentation
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
@@ -27,10 +26,6 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>(
         }
         setupObservers()
         setupListeners()
-
-        binding.oldPasswordEdit.addTextChangedListener { it ->
-
-        }
     }
 
     private fun setupObservers() {
@@ -96,26 +91,29 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>(
     private fun displayValidationErrors(errors: List<ValidationError>) {
         val errorFields = mapOf(
             setOf(
-                ValidationError.EMPTY_PASSWORD,
-                ValidationError.INVALID_PASSWORD
+                ValidationError.EMPTY_OLD_PASSWORD,
+                ValidationError.INVALID_OLD_PASSWORD
             ) to binding.oldPasswordLayout,
             setOf(
-                ValidationError.EMPTY_PASSWORD,
-                ValidationError.INVALID_PASSWORD
+                ValidationError.EMPTY_NEW_PASSWORD,
+                ValidationError.INVALID_NEW_PASSWORD
             ) to binding.newPasswordLayout,
             setOf(
-                ValidationError.EMPTY_PASSWORD,
+                ValidationError.EMPTY_PASSWORD_CONFIRMATION,
                 ValidationError.INVALID_PASSWORD_CONFIRMATION
             ) to binding.confirmPasswordLayout
         )
 
         binding.oldPasswordLayout.isErrorEnabled = false
+        binding.oldPasswordLayout.errorIconDrawable = null
         binding.oldPasswordLayout.error = null
 
         binding.newPasswordLayout.isErrorEnabled = false
+        binding.newPasswordLayout.errorIconDrawable = null
         binding.newPasswordLayout.error = null
 
         binding.confirmPasswordLayout.isErrorEnabled = false
+        binding.confirmPasswordLayout.errorIconDrawable = null
         binding.confirmPasswordLayout.error = null
 
         errors.forEach { error ->

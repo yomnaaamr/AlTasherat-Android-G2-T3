@@ -147,6 +147,11 @@
     <string name="enter_new_password">ادخل كلمة المرور الجديدة</string>
     <string name="confirm_password">إعادة كلمة المرور الجديدة</string>
     <string name="enter_new_password_again">اعد ادخال كلمة المرور الجديدة مرة آخرى</string>
+    <string name="invalid_old_password">Invalid old passord</string>
+    <string name="empty_old_password">Old password can\'t be empty</string>
+    <string name="invalid_new_password">Invalid new password</string>
+    <string name="empty_new_password">New password can\'t be empty</string>
+    <string name="empty_password_confirmation">Password confirmation can\'t be embty</string>
 
 
 </resources>

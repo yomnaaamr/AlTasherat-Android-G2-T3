@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.menu_options.change_password.data.models.request
 
+import android.util.Log
 import com.google.gson.annotations.SerializedName
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -22,25 +23,26 @@ data class ChangePassRequest(
                 errors.add(result.error as ValidationError)
             }
         }
+        Log.d("VALIDATION_ERROR_LIST", errors.toString())
 
         return Resource.Success(errors)
     }
 
     private fun validateOldPassword(): Resource<Unit> {
-        if (oldPassword.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
+        if (oldPassword.isBlank()) return Resource.Error(ValidationError.EMPTY_OLD_PASSWORD)
         return Resource.Success(Unit)
     }
 
     private fun validateNewPassword(): Resource<Unit> {
-        if (newPassword.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
-        if (newPassword.length < 8 || newPassword.length > 50) return Resource.Error(ValidationError.INVALID_PASSWORD)
+        if (newPassword.isBlank()) return Resource.Error(ValidationError.EMPTY_NEW_PASSWORD)
+        if (newPassword.length < 8 || newPassword.length > 50) return Resource.Error(ValidationError.INVALID_NEW_PASSWORD)
         return Resource.Success(Unit)
     }
 
     private fun validateNewPasswordConfirmation(): Resource<Unit> {
-        if (newPasswordConfirmation.isNullOrEmpty()) return Resource.Error(ValidationError.EMPTY_PASSWORD)
+        if (newPasswordConfirmation.isBlank()) return Resource.Error(ValidationError.EMPTY_PASSWORD_CONFIRMATION)
         if (newPasswordConfirmation.length < 8 || newPasswordConfirmation.length > 50) return Resource.Error(
-            ValidationError.INVALID_PASSWORD
+            ValidationError.INVALID_PASSWORD_CONFIRMATION
         )
         if (newPasswordConfirmation != newPassword) return Resource.Error(ValidationError.INVALID_PASSWORD_CONFIRMATION)
         return Resource.Success(Unit)

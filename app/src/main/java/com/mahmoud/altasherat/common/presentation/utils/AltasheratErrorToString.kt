@@ -47,6 +47,11 @@ fun ValidationError.toResourceId(): Int {
         ValidationError.INVALID_MIDDLE_NAME -> R.string.error_invalid_middlename
         ValidationError.INVALID_IMAGE_EXTENSION -> R.string.invalid_image_extension
         ValidationError.INVALID_IMAGE_SIZE -> R.string.invalid_image_size
+        ValidationError.INVALID_OLD_PASSWORD -> R.string.invalid_old_password
+        ValidationError.EMPTY_OLD_PASSWORD -> R.string.empty_old_password
+        ValidationError.INVALID_NEW_PASSWORD -> R.string.invalid_new_password
+        ValidationError.EMPTY_NEW_PASSWORD -> R.string.empty_new_password
+        ValidationError.EMPTY_PASSWORD_CONFIRMATION -> R.string.empty_password_confirmation
     }
 }
 
