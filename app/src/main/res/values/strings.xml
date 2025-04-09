@@ -169,5 +169,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="email_not_verified">Email not verified</string>
     <string name="confirmtion_sent_to_email">Confirmation sent to email</string>
     <string name="email_verified_successfully">Email verified successfully</string>
+    <string name="email_verification">Email Verification</string>
 
 </resources>

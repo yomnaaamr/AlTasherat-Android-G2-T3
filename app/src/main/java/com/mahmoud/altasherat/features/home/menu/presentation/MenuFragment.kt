@@ -14,8 +14,8 @@ import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import com.mahmoud.altasherat.features.home.menu.data.MenuDataSource
 import com.mahmoud.altasherat.features.home.menu.presentation.adapters.MenuNavigationAdapter
-import com.mahmoud.altasherat.features.home.menu.presentation.verify_email.VerifyActions
-import com.mahmoud.altasherat.features.home.menu.presentation.verify_email.VerifySnackBar
+import com.mahmoud.altasherat.features.home.menu.verify_email.VerifyActions
+import com.mahmoud.altasherat.features.home.menu.verify_email.VerifySnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

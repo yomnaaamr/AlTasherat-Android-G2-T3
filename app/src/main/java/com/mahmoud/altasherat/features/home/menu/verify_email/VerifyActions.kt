@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.home.menu.presentation.verify_email
+package com.mahmoud.altasherat.features.home.menu.verify_email
 
 sealed interface VerifyActions {
     interface OnConfirmClickListener : VerifyActions {

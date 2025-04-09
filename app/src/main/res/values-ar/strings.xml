@@ -161,6 +161,7 @@
     <string name="email_not_verified">البريد الالكترونى غير مؤكد</string>
     <string name="confirmtion_sent_to_email">تم ارسال التأكيد للبريد الالكترونى</string>
     <string name="email_verified_successfully">تم تأكيد البريد الالكترونى بنجاح</string>
+    <string name="email_verification">تأكيد البريد الالكترونى</string>
 
 
 </resources>

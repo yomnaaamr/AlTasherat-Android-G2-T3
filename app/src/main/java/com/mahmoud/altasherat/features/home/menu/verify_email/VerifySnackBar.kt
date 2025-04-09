@@ -1,4 +1,4 @@
-package com.mahmoud.altasherat.features.home.menu.presentation.verify_email
+package com.mahmoud.altasherat.features.home.menu.verify_email
 
 import android.annotation.SuppressLint
 import android.app.Activity
