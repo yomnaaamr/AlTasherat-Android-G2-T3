@@ -165,5 +165,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="invalid_new_password">Invalid new password</string>
     <string name="empty_new_password">New password can\'t be empty</string>
     <string name="empty_password_confirmation">Password confirmation can\'t be embty</string>
+    <string name="confirm">Confirm</string>
 
 </resources>

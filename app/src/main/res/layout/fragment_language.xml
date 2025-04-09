@@ -145,12 +145,12 @@
             <TextView
                 android:id="@+id/helper_txt"
                 style="?textAppearanceBodySmall"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:gravity="center_horizontal"
                 android:text="@string/you_can_change_your_country_or_language_any_time_from_menu"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

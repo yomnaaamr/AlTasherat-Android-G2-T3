@@ -2,37 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingHorizontal="16dp"
-    android:backgroundTint="@color/splash_screen_background"
+    android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    android:layout_height="match_parent">
+    android:backgroundTint="@color/splash_screen_background"
+    android:paddingHorizontal="16dp">
 
     <View
         android:id="@+id/drag_handle"
         android:layout_width="100dp"
         android:layout_height="4dp"
+        android:background="@color/md_theme_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/md_theme_primary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/delete_bottom_sheet_title"
+        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_account"
-        style="?textAppearanceTitleMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
     <TextView
         android:id="@+id/password_txt"
+        style="?textAppearanceTitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/password"
-        style="?textAppearanceTitleMedium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/delete_bottom_sheet_title" />
 
@@ -71,31 +71,31 @@
         style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:layout_marginTop="40dp"
         android:drawableEnd="@drawable/ic_delete"
         android:drawablePadding="8dp"
-        android:layout_marginTop="40dp"
-        android:textColor="@android:color/white"
         android:foreground="?attr/selectableItemBackground"
         android:paddingHorizontal="100dp"
         android:text="@string/confirm_delete"
-        app:layout_constraintTop_toBottomOf="@id/password_layout"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
     <Button
         android:id="@+id/cancel_delete_acc_btn"
         style="?materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:text="@string/cancel"
-        android:layout_marginTop="8dp"
         android:textAppearance="?textAppearanceTitleSmall"
         android:textColor="@color/md_theme_onErrorContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/confirm_delete_acc_btn"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirm_delete_acc_btn"
         app:strokeColor="@color/md_theme_onErrorContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

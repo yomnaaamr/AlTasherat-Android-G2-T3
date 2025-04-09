@@ -63,26 +63,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
-                        android:paddingEnd="100dp"
+                        android:maxLines="1"
                         android:paddingStart="100dp"
-                        android:maxLines="1" />
+                        android:paddingEnd="100dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <AutoCompleteTextView
                     android:id="@+id/phone_code_picker"
+                    style="?textAppearanceTitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="53dp"
-                    android:minWidth="100dp"
                     android:layout_gravity="end|bottom"
-                    tools:text="🇸🇦 (+966)"
-                    android:focusable="true"
-                    android:textColor="@android:color/white"
-                    android:inputType="none"
-                    android:paddingHorizontal="8dp"
-                    style="?textAppearanceTitleMedium"
                     android:background="@drawable/custom_phone_end_icon"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:inputType="none"
+                    android:minWidth="100dp"
+                    android:paddingHorizontal="8dp"
+                    android:textColor="@android:color/white"
+                    tools:text="🇸🇦 (+966)" />
             </FrameLayout>
 
             <TextView

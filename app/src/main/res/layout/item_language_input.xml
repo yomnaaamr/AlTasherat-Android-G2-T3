@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="@drawable/bg_language_selector"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="28dp"
     app:cardElevation="0dp"
     app:strokeColor="@null"
-    app:strokeWidth="0dp"
-    android:background="@drawable/bg_language_selector" >
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,8 +30,8 @@
 
         <TextView
             android:id="@+id/language_name"
-            android:layout_width="wrap_content"
             style="?textAppearanceTitleSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingHorizontal="4dp" />
