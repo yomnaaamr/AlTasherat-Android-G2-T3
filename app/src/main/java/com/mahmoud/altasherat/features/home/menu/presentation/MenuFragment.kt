@@ -103,7 +103,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
             val filteredItems = if (hasUserLoggedIn) {
                 VerifySnackBar.showVerificationSnackbar(
                     activity = requireActivity(),
-                    message = "Email not verified",
+                    message = resources.getString(R.string.email_not_verified),
                     verifyActions = object : VerifyActions.OnConfirmClickListener,
                         VerifyActions.OnCloseClickListener {
                         override fun onConfirmClicked() {
@@ -114,7 +114,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                         override fun onCloseClicked() {
                             // handle close
                             Toast.makeText(requireContext(), "Close", Toast.LENGTH_SHORT).show()
-                            
+
                         }
                     },
                 )
