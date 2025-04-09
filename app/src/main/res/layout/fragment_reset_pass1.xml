@@ -102,7 +102,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/phone_frame_layout"
                     android:layout_width="0dp"
@@ -117,9 +116,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         app:boxBackgroundColor="?colorSurfaceInverse"
+                        app:layout_constraintEnd_toStartOf="@id/phone_code_picker"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/phone_code_picker"  app:placeholderText="@string/enter_phone_number"
+                        app:placeholderText="@string/enter_phone_number"
                         app:startIconDrawable="@drawable/ic_phone">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -133,9 +133,9 @@
                         android:id="@+id/phone_code_picker"
                         style="?textAppearanceTitleMedium"
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="6dp"
                         android:layout_height="55dp"
                         android:layout_gravity="end|bottom"
+                        android:layout_marginTop="6dp"
                         android:background="@drawable/custom_phone_end_icon"
                         android:clickable="true"
                         android:focusableInTouchMode="true"
@@ -166,8 +166,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_continue_icon"
-        android:text="@string/send"
         android:paddingHorizontal="66dp"
+        android:text="@string/send"
         app:layout_constraintBottom_toBottomOf="@id/content_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
