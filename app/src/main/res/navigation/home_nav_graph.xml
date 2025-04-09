@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_menuFragment_to_profileInfoFragment"
             app:destination="@id/profileInfoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_verifiedEmailFragment"
+            app:destination="@id/verifiedEmailFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -100,4 +103,9 @@
             app:popUpTo="@id/deleteAccountFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/verifiedEmailFragment"
+        android:name="com.mahmoud.altasherat.features.home.menu.verify_email.VerifiedEmailFragment"
+        android:label="fragment_verified_email"
+        tools:layout="@layout/fragment_verified_email" />
 </navigation>

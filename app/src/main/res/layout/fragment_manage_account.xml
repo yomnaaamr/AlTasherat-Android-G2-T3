@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".features.delete_account.manage_account.ManageAccountFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/manage_acc_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="@string/manage_account"
-        app:titleTextAppearance="?textAppearanceTitleMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:title="@string/manage_account"
+        app:titleTextAppearance="?textAppearanceTitleMedium" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/manage_acc_card"

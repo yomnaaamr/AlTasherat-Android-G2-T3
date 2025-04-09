@@ -157,6 +157,12 @@
     <string name="invalid_new_password">كلمة المرور الجديدة غير صالحة</string>
     <string name="empty_new_password">كلمة المرور الجديدة لايمكن أن تكون فارغة</string>
     <string name="empty_password_confirmation">تأكيد كلمة المرور لايمكن ان يكون فارغاً</string>
+    <string name="confirm">تأكيد</string>
+    <string name="email_not_verified">البريد الالكترونى غير مؤكد</string>
+    <string name="confirmtion_sent_to_email">تم ارسال التأكيد للبريد الالكترونى</string>
+    <string name="email_verified_successfully">تم تأكيد البريد الالكترونى بنجاح</string>
+    <string name="email_verification">تأكيد البريد الالكترونى</string>
+    <string name="email_verfication_description">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى: \nemail@gmail.com\nتحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
 
 
 </resources>

@@ -13,6 +13,8 @@ import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import com.mahmoud.altasherat.features.home.menu.data.MenuDataSource
 import com.mahmoud.altasherat.features.home.menu.presentation.adapters.MenuNavigationAdapter
+import com.mahmoud.altasherat.features.home.menu.verify_email.VerifyActions
+import com.mahmoud.altasherat.features.home.menu.verify_email.VerifySnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -98,6 +100,20 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             val hasUserLoggedIn = state.isAuthenticated
             val filteredItems = if (hasUserLoggedIn) {
+                VerifySnackBar.showVerificationSnackbar(
+                    activity = requireActivity(),
+                    message = resources.getString(R.string.email_not_verified),
+                    verifyActions = object : VerifyActions.OnConfirmClickListener,
+                        VerifyActions.OnCloseClickListener {
+                        override fun onConfirmClicked() {
+                            findNavController().navigate(R.id.action_menuFragment_to_verifiedEmailFragment)
+                        }
+
+                        override fun onCloseClicked() {
+
+                        }
+                    },
+                )
 //             exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
             } else {
