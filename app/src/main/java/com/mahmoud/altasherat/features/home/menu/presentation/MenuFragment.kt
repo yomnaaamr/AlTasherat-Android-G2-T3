@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.home.menu.presentation
 
 import android.view.View
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,8 @@ import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import com.mahmoud.altasherat.features.home.menu.data.MenuDataSource
 import com.mahmoud.altasherat.features.home.menu.presentation.adapters.MenuNavigationAdapter
+import com.mahmoud.altasherat.features.home.menu.presentation.verify_email.VerifyActions
+import com.mahmoud.altasherat.features.home.menu.presentation.verify_email.VerifySnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -98,6 +101,23 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             val hasUserLoggedIn = state.isAuthenticated
             val filteredItems = if (hasUserLoggedIn) {
+                VerifySnackBar.showVerificationSnackbar(
+                    activity = requireActivity(),
+                    message = "Email not verified",
+                    verifyActions = object : VerifyActions.OnConfirmClickListener,
+                        VerifyActions.OnCloseClickListener {
+                        override fun onConfirmClicked() {
+                            // handle confirm
+                            Toast.makeText(requireContext(), "Confirm", Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onCloseClicked() {
+                            // handle close
+                            Toast.makeText(requireContext(), "Close", Toast.LENGTH_SHORT).show()
+                            
+                        }
+                    },
+                )
 //             exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
             } else {
