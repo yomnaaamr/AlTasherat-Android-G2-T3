@@ -25,6 +25,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private lateinit var authViewModel: AuthViewModel
     private val viewModel: SignupViewModel by viewModels()
     private lateinit var bottomSheet: CountryPickerBottomSheet
+    private var selectedCountry: Country? = null
+    private var countries: List<Country> = emptyList()
 
 
     override fun FragmentSignupBinding.initialize() {
@@ -82,21 +84,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 firstItem.flag,
                 formatCountryCode(firstItem.phoneCode)
             )
-            binding.phoneCodePicker.apply {
-                setText(initialSelect)
-                bottomSheet = CountryPickerBottomSheet(countries) { selectedCountry ->
-                    val country = selectedCountry as Country
-                    setText(
-                        resources.getString(
-                            R.string.country_picker_display,
-                            country.flag,
-                            formatCountryCode(country.phoneCode)
-                        )
-                    )
-                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(selectedCountry.phoneCode))
-                    viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(selectedCountry.id.toString()))
-                }
-            }
+
+            this.countries = countries
+            selectedCountry = firstItem
+
+            binding.phoneCodePicker.setText(initialSelect)
         }
 
 
@@ -141,6 +133,23 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         }
 
         binding.phoneCodePicker.setOnClickListener {
+            bottomSheet = CountryPickerBottomSheet(
+                countries ,
+                selectedCountry!!.id.minus(1)
+            ) { newSelectedCountry ->
+                this@SignupFragment.selectedCountry = newSelectedCountry as Country
+                binding.phoneCodePicker.setText(
+                    resources.getString(
+                        R.string.country_picker_display,
+                        newSelectedCountry.flag,
+                        formatCountryCode(newSelectedCountry.phoneCode)
+                    ))
+
+
+                viewModel.onAction(SignupContract.SignUpAction.UpdateCountryCode(newSelectedCountry.phoneCode))
+                viewModel.onAction(SignupContract.SignUpAction.UpdateCountryID(newSelectedCountry.id.toString()))
+            }
+
             bottomSheet.show(childFragmentManager, "CountryPickerBottomSheet")
         }
 

@@ -139,6 +139,11 @@
     <string name="delete_account">حــذف الحساب</string>
     <string name="invalid_credentials">بيانات دخول غير صحيحة</string>
     <string name="password_required">كلمة المرور مطلوبة</string>
+    <string name="reset_password_text">استعادة كلمة المرور</string>
+    <string name="enter_phone_to_reset_text">ادخل رقم جوالك لاستعادة كلمة المرور</string>
+    <string name="enter_code_to_reset_text">ادخل الكود المرسل لجوالك للمتابعة</string>
+    <string name="password_repeat">إعادة كلمة المرور</string>
+    <string name="enter_password_repeat">اعد ادخال كلمة المرور مرة آخري</string>
     <string name="invalid_pass_confirmation">يجب أن تكون كلمة المرور والتأكيد متساويان</string>
     <string name="change_password_title">تغيير كلمة المرور</string>
     <string name="old_password">كلمة المرور القديمة</string>

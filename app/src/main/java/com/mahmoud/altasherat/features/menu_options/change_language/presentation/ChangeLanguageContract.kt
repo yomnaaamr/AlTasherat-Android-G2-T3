@@ -8,6 +8,7 @@ class ChangeLanguageContract {
 
     sealed interface ChangeLanguageAction {
         data class SaveSelectedLanguage(val selectedLanguage: Language) : ChangeLanguageAction
+        data object GetLanguageCode: ChangeLanguageAction
     }
 
     sealed interface ChangeLanguageEvent {

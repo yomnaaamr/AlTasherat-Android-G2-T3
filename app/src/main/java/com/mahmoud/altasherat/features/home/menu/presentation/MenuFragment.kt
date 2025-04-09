@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.databinding.FragmentMenuBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
 import com.mahmoud.altasherat.features.home.menu.data.MenuDataSource
@@ -26,34 +28,77 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
     override fun FragmentMenuBinding.initialize() {
 
         binding.menuRecyclerView.adapter = adapter
-        val menuItems = MenuDataSource.getNavigationItems(requireContext())
+        viewModel.onAction(MenuContract.MenuAction.GetUserData)
+
+        setupObservers()
+
+        binding.editProfileButton.setOnClickListener {
+            findNavController().navigate(R.id.action_menuFragment_to_profileInfoFragment)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            viewModel.onAction(MenuContract.MenuAction.Logout)
+        }
+    }
+
+
+    private fun updateUserData(user: User?) {
+        binding.profileImg.editIcon.visibility = View.GONE
+
+        user?.let {
+            val middleName = if (it.middleName.isNullOrEmpty()) "" else "${it.middleName}"
+            binding.userName.text =
+                getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
+
+            it.image?.path?.let { path ->
+                Glide.with(requireContext())
+                    .load(path.toUri())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_default_profile)
+                    .into(binding.profileImg.profileImg)
+            }
+        }
+
+    }
+
+
+    private fun setupObservers() {
+        collectFlow(viewModel.events) { event ->
+            when (event) {
+                is MenuContract.MenuEvent.Error -> {
+                    showMessage(
+                        event.error.toErrorMessage(requireContext()),
+                        MessageType.SNACKBAR,
+                        this
+                    )
+                }
+
+                is MenuContract.MenuEvent.NavigationToAuth -> {
+                    findNavController().navigate(R.id.action_menu_to_authFragment)
+                }
+            }
+
+        }
+
 
         collectFlow(viewModel.state) { state ->
 
             when (state.screenState) {
-                is MenuContract.MenuScreenState.Error -> {
-                    hideLoading()
-                }
-
-                is MenuContract.MenuScreenState.Idle -> {
-                    hideLoading()
-                }
                 is MenuContract.MenuScreenState.Loading -> {
                     showLoading()
                 }
 
-                is MenuContract.MenuScreenState.Success -> {
+                else -> {
                     hideLoading()
                 }
             }
 
 
+            val menuItems = MenuDataSource.getNavigationItems(requireContext())
+
             val hasUserLoggedIn = state.isAuthenticated
-
             val filteredItems = if (hasUserLoggedIn) {
-                viewModel.onAction(MenuContract.MenuAction.GetUserData)
-
-//                        exclude auth fragment from menu
+//             exclude auth fragment from menu
                 menuItems.filter { it.id != 1 }
             } else {
                 menuItems.filter { !it.requiresAuth }
@@ -70,28 +115,6 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
 
             updateUserData(state.user)
 
-        }
-        binding.editProfileButton.setOnClickListener {
-            findNavController().navigate(R.id.action_menuFragment_to_profileInfoFragment)
-        }
-    }
-
-
-    private fun updateUserData(user: User?) {
-        binding.profileImg.editIcon.visibility = View.GONE
-
-        user?.let {
-            val middleName = if (it.middleName.isNullOrEmpty()) "" else " ${it.middleName}"
-            binding.userName.text =
-                getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
-
-            it.image?.path?.let { path ->
-                Glide.with(requireContext())
-                    .load(path.toUri())
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_default_profile)
-                    .into(binding.profileImg.profileImg)
-            }
         }
 
     }

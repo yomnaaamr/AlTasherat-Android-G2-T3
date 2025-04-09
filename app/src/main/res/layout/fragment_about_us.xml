@@ -185,7 +185,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F1F4FB"
+                android:background="@color/textBackgroundColor"
                 android:orientation="vertical"
                 android:padding="8dp">
 
