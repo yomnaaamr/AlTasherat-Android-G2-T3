@@ -1,7 +1,6 @@
 package com.mahmoud.altasherat.features.home.menu.presentation
 
 import android.view.View
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -107,13 +106,10 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
                     verifyActions = object : VerifyActions.OnConfirmClickListener,
                         VerifyActions.OnCloseClickListener {
                         override fun onConfirmClicked() {
-                            // handle confirm
-                            Toast.makeText(requireContext(), "Confirm", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_menuFragment_to_verifiedEmailFragment)
                         }
 
                         override fun onCloseClicked() {
-                            // handle close
-                            Toast.makeText(requireContext(), "Close", Toast.LENGTH_SHORT).show()
 
                         }
                     },

@@ -56,9 +56,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_verification_txt"
-        android:text="أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى: \nemail@gmail.com\nتحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة" />
+        android:text="@string/email_verfication_description" />
 
     <Button
+        android:id="@+id/skip_btn"
         style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
