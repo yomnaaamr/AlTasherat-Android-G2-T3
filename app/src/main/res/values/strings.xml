@@ -172,5 +172,6 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="email_verification">Email Verification</string>
     <string name="email_verfication_description">Confirmation message sent to email:\nemail@gmail.com\nCheck your email and click on confirm link to continue</string>
     <string name="back_text">Back</string>
+    <string name="version_text">Current Version: V1.0</string>
 
 </resources>
