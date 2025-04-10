@@ -5,6 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
+import com.mahmoud.altasherat.features.al_tashirat_services.language.data.MockLanguageData.language
 import com.mahmoud.altasherat.features.al_tashirat_services.language.data.repository.LanguageRepository
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.repository.local.ILanguageLocalDS
@@ -54,8 +55,6 @@ class SaveSelectedLanguageUCTest {
     @Test
     fun `getLanguageCode returns unknown error when exception is thrown`() = runTest {
         // Given
-        val language = Language(0, "Arabic", code = "ar", flag = "🇸🇦")
-
         val expectedException = AltasheratException(AltasheratError.UnknownError("Test Error"))
 
         whenever(languageLocalDS.saveSelectedLanguage(language)).thenAnswer { throw expectedException }
