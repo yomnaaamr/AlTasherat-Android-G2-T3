@@ -26,8 +26,6 @@ data class UpdateAccRequest(
     val countryCode: String,
     @SerializedName("phone[number]")
     val number: String,
-//    @SerializedName("phone")
-//    val phone: PhoneRequest,
     @SerializedName("image")
     val image: File?,
     @SerializedName("country")
