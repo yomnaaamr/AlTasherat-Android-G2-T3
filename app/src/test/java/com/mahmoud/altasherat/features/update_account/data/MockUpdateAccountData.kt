@@ -9,6 +9,7 @@ import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccD
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc
 
+
 internal object MockUpdateAccountData {
     val validUpdateAccRequest = UpdateAccRequest(
         firstName = "John",
@@ -90,4 +91,17 @@ internal object MockUpdateAccountData {
         message = "Updated successfully",
         user = validUser
     )
+
+    val invalidUpdateAccRequestEmptyFirstName = validUpdateAccRequest.copy(firstName = "")
+    val invalidUpdateAccRequestShortFirstName = validUpdateAccRequest.copy(firstName = "Jo")
+    val invalidUpdateAccRequestShortMiddleName = validUpdateAccRequest.copy(middlename = "a".repeat(20))
+    val invalidUpdateAccRequestEmptyLastName = validUpdateAccRequest.copy(lastname = "")
+    val invalidUpdateAccRequestShortLastName = validUpdateAccRequest.copy(lastname = "Do")
+    val invalidUpdateAccRequestEmptyEmail = validUpdateAccRequest.copy(email = "")
+    val invalidUpdateAccRequestInvalidEmail = validUpdateAccRequest.copy(email = "invalidemail")
+    val invalidUpdateAccRequestEmptyPhoneNumber = validUpdateAccRequest.copy(number = "")
+    val invalidUpdateAccRequestShortPhoneNumber = validUpdateAccRequest.copy(number = "123")
+    val invalidUpdateAccRequestEmptyCountryCode = validUpdateAccRequest.copy(countryCode = "")
+    val invalidUpdateAccRequestShortCountryCode = validUpdateAccRequest.copy(countryCode = "1")
+
 }

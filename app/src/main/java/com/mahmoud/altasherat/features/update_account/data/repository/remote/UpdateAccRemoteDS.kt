@@ -16,7 +16,7 @@ class UpdateAccRemoteDS(
     private val userLocalDS: IUserInfoLocalDS
 ) : IUpdateAccRemoteDS {
     override suspend fun updateRemoteUserInfo(
-        updateRequest: UpdateAccRequest, token: String
+        updateRequest: UpdateAccRequest
     ): UpdateAccDto {
         val requestMap = updateRequest.createPartMap()
 
