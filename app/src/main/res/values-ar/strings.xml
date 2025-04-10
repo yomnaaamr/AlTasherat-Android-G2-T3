@@ -163,6 +163,7 @@
     <string name="email_verified_successfully">تم تأكيد البريد الالكترونى بنجاح</string>
     <string name="email_verification">تأكيد البريد الالكترونى</string>
     <string name="email_verfication_description">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى: \nemail@gmail.com\nتحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
+    <string name="back_text">السابق</string>
 
 
 </resources>
