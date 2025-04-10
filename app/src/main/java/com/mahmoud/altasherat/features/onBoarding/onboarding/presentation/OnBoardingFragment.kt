@@ -42,6 +42,7 @@ class OnBoardingFragment : Fragment() {
         setupViewPager()
         setupTabLayout()
         setupBackButtonListener()
+        setupPageChangeListener()
         updateBackButtonVisibility()
         binding.buttonNext.setOnClickListener {
             val nextScreen = viewPager2.currentItem + 1
@@ -51,6 +52,15 @@ class OnBoardingFragment : Fragment() {
                 findNavController().navigate(R.id.action_onBoardingFragment2_to_authFragment)
             }
         }
+    }
+
+    private fun setupPageChangeListener() {
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateBackButtonVisibility()
+            }
+        })
     }
 
     private fun updateBackButtonVisibility() {

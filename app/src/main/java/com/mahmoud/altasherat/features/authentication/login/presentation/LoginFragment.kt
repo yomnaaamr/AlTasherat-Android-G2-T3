@@ -47,7 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 .replace(R.id.auth_fragment_container, SignupFragment())
                 .commit()
 
-            authViewModel.switchToTab(0)
+            authViewModel.switchToTab(1)
         }
 
 

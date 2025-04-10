@@ -114,11 +114,18 @@ class AuthFragment : Fragment() {
                     )
                 )
 
+                val currentLocale = resources.configuration.locales[0]
+
                 // Mirror the plane icon
                 if (selectedIndex == 0) {
-                    planeIcon?.scaleX = -1f
+                    if (currentLocale.language == "en") {
+                        planeIcon?.scaleX = 1f
+                    }else planeIcon?.scaleX = -1f
+
                 } else {
-                    planeIcon?.scaleX = 1f
+                    if (currentLocale.language == "en") {
+                        planeIcon?.scaleX = -1f
+                    } else planeIcon?.scaleX = 1f
                 }
             } else {
                 planeIcon?.visibility = View.INVISIBLE
