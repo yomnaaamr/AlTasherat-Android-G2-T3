@@ -279,7 +279,8 @@ class ProfileInfoFragment :
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
                 )
-                Glide.with(requireContext()).load(imageUri).centerCrop()
+                Glide.with(requireContext()).load(imageUri)
+                    .circleCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
             }

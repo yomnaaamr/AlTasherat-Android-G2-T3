@@ -55,7 +55,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>(FragmentMenuBinding::infl
             it.image?.path?.let { path ->
                 Glide.with(requireContext())
                     .load(path.toUri())
-                    .centerCrop()
+                    .circleCrop()
                     .placeholder(R.drawable.ic_default_profile)
                     .into(binding.profileImg.profileImg)
             }
