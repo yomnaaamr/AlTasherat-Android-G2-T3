@@ -81,7 +81,6 @@ class GetOnBoardingStateUCTest {
             assertThat(awaitItem()).isEqualTo(Resource.Loading)
             val errorResult = awaitItem() as Resource.Error
             assertThat(errorResult.error).isEqualTo(AltasheratError.UnknownError("Test Error"))
-            awaitComplete()
 
             awaitComplete()
         }
