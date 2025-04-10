@@ -36,7 +36,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
         val languages = LanguageDataSource.getLanguages(requireContext())
         if (languages.isNotEmpty()) {
-            selectedLanguage = languages.first()
+            selectedLanguage = languages.last()
         }
 
         languageAdapter =
