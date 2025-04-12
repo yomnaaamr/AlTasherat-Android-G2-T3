@@ -10,7 +10,6 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.DeleteUserInfoUC
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserAccessToken
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.GetUserInfoUC
-import com.mahmoud.altasherat.features.update_account.domain.repository.remote.IUpdateAccRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,9 +44,8 @@ internal object UserInfoDI {
     @Provides
     fun provideUserRepository(
         localDataSource: IUserInfoLocalDS,
-        remoteDataSource: IUpdateAccRemoteDS
     ): IUserInfoRepository {
-        return UserInfoRepository(remoteDataSource, localDataSource)
+        return UserInfoRepository(localDataSource)
     }
 
     @Provides

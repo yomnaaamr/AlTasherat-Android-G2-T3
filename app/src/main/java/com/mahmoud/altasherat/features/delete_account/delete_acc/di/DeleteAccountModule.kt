@@ -18,22 +18,23 @@ object DeleteAccountModule {
 
     @Provides
     fun provideDeleteAccRemoteDS(
-        apiNetworkProvider: IRestApiNetworkProvider
+        apiNetworkProvider: IRestApiNetworkProvider,
+        userLocalDS: IUserInfoLocalDS
+
     ): IDeleteAccountRemoteDS {
         return DeleteAccountRemoteDS(
             restApiNetworkProvider = apiNetworkProvider,
+            userLocalDS = userLocalDS,
         )
     }
 
 
     @Provides
     fun provideDeleteAccRepository(
-        userLocalDS: IUserInfoLocalDS,
         deleteAccDS: IDeleteAccountRemoteDS,
     ): IDeleteAccountRepository {
         return DeleteAccountRepository(
-            deleteAccDS = deleteAccDS,
-            userLocalDS = userLocalDS
+            deleteAccDS = deleteAccDS
         )
     }
 

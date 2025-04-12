@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.update_account.data.repository
 
-import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
 import com.mahmoud.altasherat.features.update_account.data.mappers.UpdateAccMapper
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 import com.mahmoud.altasherat.features.update_account.domain.models.UpdateAcc
@@ -11,7 +10,6 @@ import com.mahmoud.altasherat.features.update_account.domain.repository.remote.I
 class UpdateAccRepository(
     private val updateRemoteDS: IUpdateAccRemoteDS,
     private val updateLocalDS: IUpdateAccLocalDS,
-    private val userLocalDS: IUserInfoLocalDS,
 ) : IUpdateAccRepository {
 
 
@@ -22,7 +20,7 @@ class UpdateAccRepository(
 
     override suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAcc {
         val response =
-            updateRemoteDS.updateRemoteUserInfo(updateRequest, userLocalDS.getUserAccessToken())
+            updateRemoteDS.updateRemoteUserInfo(updateRequest)
         return UpdateAccMapper.dtoToDomain(response)
     }
 

@@ -23,9 +23,11 @@ internal object UpdateAccountDI {
 
     @Provides
     fun provideUpdateAccRemoteDS(
-        restApiNetworkProvider: IRestApiNetworkProvider
+        restApiNetworkProvider: IRestApiNetworkProvider,
+        userLocalDataSource: IUserInfoLocalDS
+
     ): IUpdateAccRemoteDS {
-        return UpdateAccRemoteDS(restApiNetworkProvider)
+        return UpdateAccRemoteDS(restApiNetworkProvider, userLocalDataSource)
     }
 
     @Provides
@@ -39,10 +41,9 @@ internal object UpdateAccountDI {
     @Provides
     fun provideUpdateAccRepository(
         updateLocalDataSource: IUpdateAccLocalDS,
-        userLocalDataSource: IUserInfoLocalDS,
         remoteDataSource: IUpdateAccRemoteDS
     ): IUpdateAccRepository {
-        return UpdateAccRepository(remoteDataSource, updateLocalDataSource, userLocalDataSource)
+        return UpdateAccRepository(remoteDataSource, updateLocalDataSource)
     }
 
     @Provides
