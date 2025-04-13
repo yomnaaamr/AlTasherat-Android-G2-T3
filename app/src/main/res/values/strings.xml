@@ -171,5 +171,17 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="email_verified_successfully">Email verified successfully</string>
     <string name="email_verification">Email Verification</string>
     <string name="email_verfication_description">Confirmation message sent to email:\nemail@gmail.com\nCheck your email and click on confirm link to continue</string>
+    <string name="home_text">Have you got jobs and visas you want to tell us about? Fill out the form and let us know the details. Have you got jobs and visas you want to tell us about? Fill out the form and let us know the details.</string>
+    <string name="tourism_visa_text">Tourism Visas</string>
+    <string name="request_visa_now_text">Request Visa Now</string>
+    <string name="request_visa_text">Issue Visas</string>
+    <string name="tourism_easily">Tourism Easily</string>
+    <string name="request_job_visa_text">Request Job Visa</string>
+    <string name="easily_with_our_platform">Easily with the Visa Platform</string>
+    <string name="jobs_visa_text">Job Visas</string>
+    <string name="you_can_sell_visa_text">You can offer a visa</string>
+    <string name="from_our_platform">through the Visa Platform</string>
+    <string name="sell_visa_text">Offer Visas</string>
+    <string name="fill_the_form_now_text">Fill out the form now</string>
 
 </resources>
