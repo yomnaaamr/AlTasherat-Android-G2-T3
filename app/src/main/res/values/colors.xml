@@ -48,7 +48,7 @@
     <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
     <color name="md_theme_surfaceContainerLow">#F6F2FA</color>
     <color name="md_theme_surfaceContainer">#FFFFFF</color>
-    <color name="md_theme_surfaceContainerHigh">#87FFFFFF</color>
+    <color name="md_theme_surfaceContainerHigh">#FFFFFF</color>
     <color name="md_theme_surfaceContainerHighest">#E5E1E9</color>
     <color name="md_theme_primary_mediumContrast">#322F66</color>
     <color name="md_theme_onPrimary_mediumContrast">#FFFFFF</color>
