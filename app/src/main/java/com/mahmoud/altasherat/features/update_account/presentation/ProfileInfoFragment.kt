@@ -273,7 +273,7 @@ class ProfileInfoFragment :
                 )
             }
             if (user.image != null) {
-                Glide.with(requireContext()).load(user.image.path!!.toUri()).centerCrop()
+                Glide.with(requireContext()).load(user.image.path!!.toUri()).circleCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
 
