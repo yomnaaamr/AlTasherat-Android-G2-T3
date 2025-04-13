@@ -4,5 +4,5 @@ import com.mahmoud.altasherat.features.update_account.data.models.dto.UpdateAccD
 import com.mahmoud.altasherat.features.update_account.data.models.request.UpdateAccRequest
 
 interface IUpdateAccRemoteDS {
-    suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest, token: String): UpdateAccDto
+    suspend fun updateRemoteUserInfo(updateRequest: UpdateAccRequest): UpdateAccDto
 }
