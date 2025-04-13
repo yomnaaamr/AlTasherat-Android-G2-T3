@@ -12,7 +12,8 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +30,7 @@
         <TextView
             android:id="@+id/text_view"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="115dp"
             android:background="@color/textBackgroundColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guide_70_percent"
@@ -47,8 +48,8 @@
             android:id="@+id/my_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:lineHeight="15dp"
-            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:lineHeight="17dp"
             android:text="@string/home_text"
             android:textAppearance="?textAppearanceBodySmall"
             android:textStyle="bold"
@@ -59,11 +60,14 @@
 
 
         <ImageView
-            android:layout_width="210dp"
+            android:layout_width="200dp"
             android:layout_height="162dp"
+            android:padding="8dp"
+            android:layout_marginStart="14dp"
             android:src="@drawable/img_home_first"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/my_text_view"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,9 +139,9 @@
             android:id="@+id/button_subtext_one"
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="255dp"
             android:background="@drawable/button_subtext_background"
             android:paddingVertical="8dp"
+            android:layout_marginEnd="18dp"
             android:text="@string/request_visa_now_text"
             android:textAlignment="center"
             android:textAppearance="?textAppearanceBodyMedium"
@@ -145,7 +149,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/button_text_one"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/background_image_one"
             app:layout_constraintTop_toTopOf="@+id/button_text_one" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -217,7 +220,7 @@
             android:id="@+id/button_subtext_two"
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="255dp"
+            android:layout_marginEnd="18dp"
             android:background="@drawable/button_subtext_background"
             android:paddingVertical="8dp"
             android:text="@string/request_visa_now_text"
@@ -227,7 +230,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/button_text_two"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/background_image_two"
             app:layout_constraintTop_toTopOf="@+id/button_text_two" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -299,7 +301,7 @@
             android:id="@+id/button_subtext_three"
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="255dp"
+            android:layout_marginEnd="18dp"
             android:background="@drawable/button_subtext_background"
             android:paddingVertical="8dp"
             android:text="@string/fill_the_form_now_text"
@@ -309,7 +311,6 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/button_text_three"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/background_image_three"
             app:layout_constraintTop_toTopOf="@+id/button_text_three" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
