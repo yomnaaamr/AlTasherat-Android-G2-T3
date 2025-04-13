@@ -14,8 +14,8 @@ import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
 import com.mahmoud.altasherat.common.util.Constants
 import com.mahmoud.altasherat.databinding.FragmentLanguageBinding
 import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models.ListItem
-import com.mahmoud.altasherat.features.al_tashirat_services.language.data.LanguageDataSource
 import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
+import com.mahmoud.altasherat.features.al_tashirat_services.language.data.LanguageDataSource
 import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.models.Language
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +29,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
     private var selectedLanguage: Language? = null
     private var selectedCountry: Country? = null
+    private var selectedCountryPosition: Int = -1
     private var countries: List<Country> = emptyList()
 
 
@@ -94,12 +95,17 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     private fun setupListeners() {
 
         binding.chooseCountryLayout.setOnClickListener {
-
+            val preSelectedPosition = if (selectedCountryPosition != -1) {
+                selectedCountryPosition
+            } else {
+                countries.indexOfFirst { it.id == selectedCountry?.id }
+            }
             bottomSheet = CountryPickerBottomSheet(
                 countries ,
-                selectedCountry!!.id.minus(1)
-            ) { newSelectedCountry ->
+                preSelectedPosition
+            ) { newSelectedCountry, position ->
                 this@LanguageFragment.selectedCountry = newSelectedCountry as Country
+                selectedCountryPosition = position
                 binding.countryFlag.text = newSelectedCountry.flag
                 binding.countryName.text = newSelectedCountry.name
             }
@@ -137,7 +143,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
         }
     }
 
-    override fun onItemSelected(item: ListItem) {
+    override fun onItemSelected(item: ListItem, position: Int) {
         selectedLanguage = item as Language
     }
 }

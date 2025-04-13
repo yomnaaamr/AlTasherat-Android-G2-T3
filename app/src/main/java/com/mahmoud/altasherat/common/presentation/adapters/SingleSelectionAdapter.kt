@@ -18,7 +18,6 @@ class SingleSelectionAdapter(
     private val items: List<ListItem>,
     private val clickListener: OnItemClickListener,
     private val defaultPosition: Int = 0,
-//    private val selectedCountryPosition: Int = 0
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var checkedLanguagePosition = -1
@@ -46,7 +45,7 @@ class SingleSelectionAdapter(
             val position = items.indexOf(current)
             checkedCountryPosition = position
             notifyDataSetChanged()
-            clickListener.onItemSelected(current)
+            clickListener.onItemSelected(current, position)
         }
     }
 
@@ -81,7 +80,7 @@ class SingleSelectionAdapter(
             val position = items.indexOf(current)
             checkedLanguagePosition = position
             notifyDataSetChanged()
-            clickListener.onItemSelected(current)
+            clickListener.onItemSelected(current, position)
         }
     }
 
@@ -128,5 +127,5 @@ class SingleSelectionAdapter(
 }
 
 interface OnItemClickListener {
-    fun onItemSelected(item: ListItem)
+    fun onItemSelected(item: ListItem, position: Int)
 }

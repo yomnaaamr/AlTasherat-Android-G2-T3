@@ -38,7 +38,10 @@ class ProfileInfoFragment :
     private var _userCountry: Country? = null
     private var phoneCountry: Country? = null
     private var user: User? = null
-    private var _countries: List<Country>? = null
+    private var _countries: List<Country> = emptyList()
+    private var selectedCountryPosition: Int = -1
+    private var selectedPhoneCodePosition: Int = -1
+
 
     override fun FragmentProfileInfoBinding.initialize() {
         setupObservers()
@@ -49,10 +52,16 @@ class ProfileInfoFragment :
     private fun setupListeners() {
         binding.phoneCodePicker.setOnClickListener {
             binding.phoneCodePicker.apply {
+                val preSelectedPosition = if (selectedPhoneCodePosition != -1) {
+                    selectedPhoneCodePosition
+                } else {
+                    _countries.indexOfFirst { it.id == phoneCountry?.id }
+                }
                 bottomSheet = CountryPickerBottomSheet(
-                    _countries!!, phoneCountry!!.id.minus(1)
-                ) { selectedCountry ->
+                    _countries, preSelectedPosition
+                ) { selectedCountry, position ->
                     phoneCountry = selectedCountry as Country
+                    selectedPhoneCodePosition = position
                     setText(
                         resources.getString(
                             R.string.country_picker_display,
@@ -109,10 +118,16 @@ class ProfileInfoFragment :
         }
 
         binding.countryEdit.setOnClickListener {
+            val preSelectedPosition = if (selectedCountryPosition != -1) {
+                selectedCountryPosition
+            } else {
+                _countries.indexOfFirst { it.id == _userCountry?.id }
+            }
             bottomSheet = CountryPickerBottomSheet(
-                _countries as List<ListItem>, _userCountry!!.id.minus(1)
-            ) { selectedCountry ->
+                _countries as List<ListItem>, preSelectedPosition
+            ) { selectedCountry, position ->
                 _userCountry = selectedCountry as Country
+                selectedCountryPosition = position
                 binding.countryEdit.setText(_userCountry?.flag + " " + _userCountry?.name)
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateCountryID(
