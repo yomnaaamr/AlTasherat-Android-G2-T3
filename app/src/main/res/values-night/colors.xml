@@ -46,7 +46,7 @@
     <color name="md_theme_surfaceDim">#131318</color>
     <color name="md_theme_surfaceBright">#3A383F</color>
     <color name="md_theme_surfaceContainerLowest">#0E0E13</color>
-    <color name="md_theme_surfaceContainerLow">#1C1B20</color>
+    <color name="md_theme_surfaceContainerLow">#871C204C</color>
     <color name="md_theme_surfaceContainer">#1C204C</color>
     <color name="md_theme_surfaceContainerHigh">#010533</color>
     <color name="md_theme_surfaceContainerHighest">#35343A</color>
