@@ -141,7 +141,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             }
             bottomSheet = CountryPickerBottomSheet(
                 countries ,
-                preSelectedPosition
+                preSelectedPosition,
+                isPhonePicker = true
             ) { newSelectedCountry,position ->
                 this@SignupFragment.selectedCountry = newSelectedCountry as Country
                 selectedPhoneCodePosition = position

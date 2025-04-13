@@ -16,7 +16,9 @@ import com.mahmoud.altasherat.features.al_tashirat_services.common.domain.models
 class CountryPickerBottomSheet(
     private val list: List<ListItem>,
     private val selectedCountryIndex: Int = 0,
-    private val onCountrySelected: (ListItem, Int) -> Unit
+    private val isPhonePicker: Boolean = false,
+    private val onCountrySelected: (ListItem, Int) -> Unit,
+
 ) :
     BottomSheetDialogFragment(), OnItemClickListener {
 
@@ -35,7 +37,8 @@ class CountryPickerBottomSheet(
         val adapter = SingleSelectionAdapter(
             list,
             this@CountryPickerBottomSheet,
-            defaultPosition = selectedCountryIndex
+            defaultPosition = selectedCountryIndex,
+            isPhonePicker = isPhonePicker
         )
 
 

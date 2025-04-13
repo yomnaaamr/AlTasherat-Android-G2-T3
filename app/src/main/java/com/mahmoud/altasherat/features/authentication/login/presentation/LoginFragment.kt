@@ -79,7 +79,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
             bottomSheet = CountryPickerBottomSheet(
                 countries ,
-                preSelectedPosition
+                preSelectedPosition,
+                isPhonePicker = true
             ) { newSelectedCountry, position ->
                 this@LoginFragment.selectedCountry = newSelectedCountry as Country
                 selectedPhoneCodePosition = position

@@ -58,7 +58,9 @@ class ProfileInfoFragment :
                     _countries.indexOfFirst { it.id == phoneCountry?.id }
                 }
                 bottomSheet = CountryPickerBottomSheet(
-                    _countries, preSelectedPosition
+                    _countries,
+                    preSelectedPosition,
+                    isPhonePicker = true
                 ) { selectedCountry, position ->
                     phoneCountry = selectedCountry as Country
                     selectedPhoneCodePosition = position
