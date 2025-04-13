@@ -100,9 +100,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginBottom="16dp"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,10 +112,10 @@
 
                     <ImageView
                         android:layout_width="156dp"
-                        android:layout_height="115dp"
+                        android:layout_height="105dp"
                         android:layout_marginStart="16dp"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/img_about_us2" />
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -129,7 +128,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="10dp"
                             android:drawablePadding="8dp"
                             android:text="@string/application_for_tourist_visa"
                             android:textAppearance="?textAppearanceBodySmall"
@@ -141,7 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="10dp"
                             android:drawablePadding="8dp"
                             android:text="@string/application_for_work_visa"
                             android:textAppearance="?textAppearanceBodySmall"
@@ -153,7 +152,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="10dp"
                             android:drawablePadding="8dp"
                             android:text="@string/embassy_services"
                             android:textAppearance="?textAppearanceBodySmall"
@@ -165,7 +164,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="13dp"
+                            android:layout_marginTop="10dp"
                             android:drawablePadding="8dp"
                             android:text="@string/consular_services"
                             android:textAppearance="?textAppearanceBodySmall"
