@@ -163,6 +163,18 @@
     <string name="email_verified_successfully">تم تأكيد البريد الالكترونى بنجاح</string>
     <string name="email_verification">تأكيد البريد الالكترونى</string>
     <string name="email_verfication_description">أرسلنا رسالة تأكيد بالبريد الإلكتروني إلى: \nemail@gmail.com\nتحقق من بريدك الإلكتروني وانقر على رابط التأكيد للمتابعة</string>
+    <string name="error_empty_middlename">MiddleName Can\'t be empty</string>
+    <string name="empty_birthdate">Empty BirthDate</string>
+    <string name="empty_passport_number">Empty Passport Number</string>
+    <string name="invalid_passport_number">Invalid passport number</string>
+    <string name="empty_passport_images">Empty passport images</string>
+    <string name="empty_attachments">Empty atachments</string>
+    <string name="invalid_attachments">Invalid attachments</string>
+    <string name="empty_country">Empty destination country</string>
+    <string name="empty_purpose">Empty purpose of visa</string>
+    <string name="invalid_adults_count">Invalid adults count</string>
+    <string name="invalid_children_count">Invalid children count</string>
+    <string name="invalid_visa_message">Invalid visa message</string>
 
 
 </resources>
