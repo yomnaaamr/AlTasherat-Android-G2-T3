@@ -54,9 +54,9 @@ interface RetrofitApiService {
 
     @Multipart
     @POST("{path}")
-    suspend fun updateAccount(
+    suspend fun postFiles(
         @Path("path", encoded = true) endpoint: String,
-        @Part image: MultipartBody.Part?,
+        @Part files: List<MultipartBody.Part>?,
         @PartMap data: Map<String, RequestBody>,
         @HeaderMap headers: Map<String, Any>,
     ): Response<ResponseBody>

@@ -21,3 +21,13 @@ fun File.toImagePart(paramName: String = "image"): MultipartBody.Part {
     val requestFile = this.asRequestBody("image/*".toMediaTypeOrNull())
     return MultipartBody.Part.createFormData(paramName, this.name, requestFile)
 }
+
+fun File.toPassportImagePart(paramName: String = "passport_images[]"): MultipartBody.Part {
+    val requestFile = this.asRequestBody("passport_image/*".toMediaTypeOrNull())
+    return MultipartBody.Part.createFormData(paramName, this.name, requestFile)
+}
+
+fun File.toAttachmentsPart(paramName: String = "attachments[]"): MultipartBody.Part {
+    val requestFile = this.asRequestBody("attachments/*".toMediaTypeOrNull())
+    return MultipartBody.Part.createFormData(paramName, this.name, requestFile)
+}
