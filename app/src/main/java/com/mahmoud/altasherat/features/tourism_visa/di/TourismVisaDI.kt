@@ -6,6 +6,7 @@ import com.mahmoud.altasherat.features.tourism_visa.data.repository.TourismVisaR
 import com.mahmoud.altasherat.features.tourism_visa.data.repository.remote.TourismVisaRemoteDS
 import com.mahmoud.altasherat.features.tourism_visa.domain.repository.ITourismVisaRepository
 import com.mahmoud.altasherat.features.tourism_visa.domain.repository.remote.ITourismVisaRemoteDS
+import com.mahmoud.altasherat.features.tourism_visa.domain.usecase.StoreTourismVisaUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
