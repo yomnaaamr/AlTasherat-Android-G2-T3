@@ -7,8 +7,7 @@ object TourismVisaRequestResponseMapper {
 
     fun dtoToDomain(input: TourismVisaRequestsResponseDto): TourismVisaRequests {
         return TourismVisaRequests(
-            message = input.message.orEmpty(),
-            visaRequests = input.visaRequests?.map { TourismVisaRequestMapper.dtoToDomain(it) } ?: emptyList()
+            visaRequests = input.data?.map { TourismVisaRequestMapper.dtoToDomain(it) } ?: emptyList()
         )
     }
 }

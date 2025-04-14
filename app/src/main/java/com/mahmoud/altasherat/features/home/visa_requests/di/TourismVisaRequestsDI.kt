@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.home.visa_requests.di
 
 import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
+import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
 import com.mahmoud.altasherat.features.home.visa_requests.data.repository.TourismVisaRequestsRepository
 import com.mahmoud.altasherat.features.home.visa_requests.data.repository.remote.TourismVisaRequestsRemoteDS
 import com.mahmoud.altasherat.features.home.visa_requests.domain.repository.ITourismVisaRequestsRepository
@@ -18,8 +19,11 @@ object TourismVisaRequestsDI {
 
 
     @Provides
-    fun provideRemoteDataSource(restApiNetworkProvider: IRestApiNetworkProvider): ITourismVisaRequestsRemoteDS {
-        return TourismVisaRequestsRemoteDS(restApiNetworkProvider)
+    fun provideRemoteDataSource(
+        restApiNetworkProvider: IRestApiNetworkProvider,
+        userLocalDS: IUserInfoLocalDS
+    ): ITourismVisaRequestsRemoteDS {
+        return TourismVisaRequestsRemoteDS(restApiNetworkProvider,userLocalDS)
     }
 
 

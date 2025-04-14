@@ -29,9 +29,9 @@ class TourismVisaRequestsViewModel @Inject constructor(
 
     init {
         getTourismVisaRequestsUC()
-            .onEachSuccessSuspend {
+            .onEachSuccessSuspend { requestsList->
                 _state.value = _state.value.copy(
-                    response = it,
+                    response = requestsList,
                     screenState = TourismVisaRequestsContract.TourismVisaRequestsScreenState.Success
                 )
             }
