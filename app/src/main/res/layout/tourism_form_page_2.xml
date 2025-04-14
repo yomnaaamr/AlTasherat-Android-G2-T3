@@ -32,7 +32,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passport_info_txt">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -306,14 +306,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/adults_plus_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="0dp"
-                app:contentPadding="12dp"
+                app:cardCornerRadius="100dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/adults_number_txt">
 
@@ -322,6 +320,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
 
@@ -331,20 +331,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:text="1"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/adults_plus_card"
                 app:layout_constraintStart_toEndOf="@id/adults_plus_card"
                 app:layout_constraintTop_toTopOf="@id/adults_plus_card" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/adults_minus_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="0dp"
-                app:contentPadding="12dp"
+                app:cardBackgroundColor="?colorSurfaceInverse"
+                app:cardCornerRadius="100dp"
+                android:layout_marginHorizontal="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/adults_plus_card"
                 app:layout_constraintStart_toEndOf="@id/adults_number_value"
                 app:layout_constraintTop_toTopOf="@id/adults_plus_card">
@@ -354,6 +355,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
 
@@ -362,7 +364,6 @@
                 style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Children number"
                 app:layout_constraintBottom_toBottomOf="@id/adults_number_txt"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -372,14 +373,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/children_plus_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="50dp"
-                app:cardElevation="0dp"
-                app:contentPadding="12dp"
+                app:cardBackgroundColor="?colorTertiary"
+                app:cardCornerRadius="100dp"
                 app:layout_constraintStart_toStartOf="@id/children_number_txt"
                 app:layout_constraintTop_toBottomOf="@id/children_number_txt">
 
@@ -388,6 +387,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
 
@@ -397,20 +398,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:text="1"
                 app:layout_constraintBottom_toBottomOf="@id/children_plus_card"
                 app:layout_constraintStart_toEndOf="@id/children_plus_card"
                 app:layout_constraintTop_toTopOf="@id/children_plus_card" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/children_minus_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
-                app:cardBackgroundColor="?colorPrimary"
+                app:cardBackgroundColor="?colorSurfaceInverse"
                 app:cardCornerRadius="50dp"
-                app:cardElevation="0dp"
-                app:contentPadding="12dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/children_plus_card"
                 app:layout_constraintStart_toEndOf="@id/children_number_value"
                 app:layout_constraintTop_toTopOf="@id/children_plus_card">
@@ -420,6 +421,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
 
@@ -429,6 +431,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="Send"
                 app:icon="@drawable/ic_continue_icon"
                 app:iconGravity="textEnd"
