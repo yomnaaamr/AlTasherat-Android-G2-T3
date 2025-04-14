@@ -1,11 +1,13 @@
 package com.mahmoud.altasherat.common.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.presentation.utils.formatCountryCode
 import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_COUNTRY
 import com.mahmoud.altasherat.common.util.Constants.VIEW_TYPE_LANGUAGE
 import com.mahmoud.altasherat.databinding.ItemCountryBinding
@@ -18,7 +20,7 @@ class SingleSelectionAdapter(
     private val items: List<ListItem>,
     private val clickListener: OnItemClickListener,
     private val defaultPosition: Int = 0,
-//    private val selectedCountryPosition: Int = 0
+    private val isPhonePicker: Boolean = false
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var checkedLanguagePosition = -1
@@ -33,12 +35,35 @@ class SingleSelectionAdapter(
             itemView.setOnClickListener(this)
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(item: ListItem) {
             val isItemSelected = checkedCountryPosition == absoluteAdapterPosition
-            binding.countryName.text = item.name
+            if (isPhonePicker){
+                binding.countryName.text = itemView.context.resources.getString(
+                    R.string.country_picker_display,
+                    item.flag,
+                    formatCountryCode(item.phoneCode)
+                )
+            }else{
+                binding.countryName.text = item.name
+            }
             item.isSelected = isItemSelected
             Log.d("IsItemSelected?", isItemSelected.toString())
-            binding.checkIcon.visibility = if (isItemSelected) View.VISIBLE else View.INVISIBLE
+            if (isItemSelected) {
+                binding.countryName.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    binding.root.context.getDrawable(R.drawable.ic_checked),
+                    null
+                )
+            } else {
+                binding.countryName.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    null,
+                    null,
+                    null,
+                    null
+                )
+            }
         }
 
         override fun onClick(view: View?) {
@@ -46,7 +71,7 @@ class SingleSelectionAdapter(
             val position = items.indexOf(current)
             checkedCountryPosition = position
             notifyDataSetChanged()
-            clickListener.onItemSelected(current)
+            clickListener.onItemSelected(current, position)
         }
     }
 
@@ -81,7 +106,7 @@ class SingleSelectionAdapter(
             val position = items.indexOf(current)
             checkedLanguagePosition = position
             notifyDataSetChanged()
-            clickListener.onItemSelected(current)
+            clickListener.onItemSelected(current, position)
         }
     }
 
@@ -128,5 +153,5 @@ class SingleSelectionAdapter(
 }
 
 interface OnItemClickListener {
-    fun onItemSelected(item: ListItem)
+    fun onItemSelected(item: ListItem, position: Int)
 }

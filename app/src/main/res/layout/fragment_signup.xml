@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".features.authentication.signup.presentation.SignupFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_background"
         android:layout_width="0dp"
+        style="?attr/materialCardViewElevatedStyle"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        app:cardBackgroundColor="?colorSurfaceVariant"
         app:cardCornerRadius="18dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -252,7 +252,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/signup_btn"

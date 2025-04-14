@@ -4,6 +4,7 @@ interface ListItem {
     val id: Int
     val name: String
     val code: String
+    val phoneCode: String
     val flag: String
     var isSelected: Boolean
 }

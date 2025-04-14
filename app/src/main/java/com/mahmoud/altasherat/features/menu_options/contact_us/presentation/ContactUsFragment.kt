@@ -43,6 +43,7 @@ class ContactUsFragment :
             val fullName = getString(R.string.user_full_name, it.firstname, middleName, it.lastname)
             binding.etName.setText(fullName)
             binding.etEmail.setText(it.email)
+            binding.etPhone.setText(it.phone.number)
         }
     }
 

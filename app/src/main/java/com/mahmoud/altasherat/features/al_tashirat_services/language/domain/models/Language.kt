@@ -7,6 +7,7 @@ class Language(
     override val name: String,
     override val code: String,
     override val flag: String,
-    override var isSelected: Boolean = false
+    override var isSelected: Boolean = false,
+    override val phoneCode: String
 
 ) : ListItem

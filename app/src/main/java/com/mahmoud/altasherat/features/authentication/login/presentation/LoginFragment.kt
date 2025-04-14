@@ -28,6 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private lateinit var authViewModel: AuthViewModel
     private val loginViewModel: LoginViewModel by viewModels()
     private var selectedCountry: Country? = null
+    private var selectedPhoneCodePosition: Int = -1
     private lateinit var bottomSheet: CountryPickerBottomSheet
     private var countries: List<Country> = emptyList()
 
@@ -47,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 .replace(R.id.auth_fragment_container, SignupFragment())
                 .commit()
 
-            authViewModel.switchToTab(0)
+            authViewModel.switchToTab(1)
         }
 
 
@@ -71,12 +72,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         binding.phoneCodePicker.setOnClickListener {
-
+            val preSelectedPosition = if (selectedPhoneCodePosition != -1) {
+                selectedPhoneCodePosition
+            } else {
+                countries.indexOfFirst { it.id == selectedCountry?.id }
+            }
             bottomSheet = CountryPickerBottomSheet(
                 countries ,
-                selectedCountry!!.id.minus(1)
-            ) { newSelectedCountry ->
+                preSelectedPosition,
+                isPhonePicker = true
+            ) { newSelectedCountry, position ->
                 this@LoginFragment.selectedCountry = newSelectedCountry as Country
+                selectedPhoneCodePosition = position
                 binding.phoneCodePicker.setText(
                     resources.getString(
                         R.string.country_picker_display,

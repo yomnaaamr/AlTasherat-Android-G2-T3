@@ -74,6 +74,10 @@ class MenuViewModel @Inject constructor(
 
 
     private fun getUserData() {
+
+        val hasUser = _state.value.isAuthenticated
+        if (!hasUser) return
+
         getUserInfoUC()
             .onEachErrorSuspend { error ->
                 _events.send(MenuContract.MenuEvent.Error(error))
