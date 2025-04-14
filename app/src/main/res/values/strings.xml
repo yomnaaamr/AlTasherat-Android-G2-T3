@@ -183,8 +183,8 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="from_our_platform">through the Visa Platform</string>
     <string name="sell_visa_text">Offer Visas</string>
     <string name="fill_the_form_now_text">Fill out the form now</string>
-    <string name="order_date_text">تاريخ الطلب</string>
-    <string name="persons_num_text">عدد الاشخاص</string>
-    <string name="children_num_text">عدد الاطفال</string>
-
+    <string name="order_date_text">Order Date</string>
+    <string name="persons_num_text">Number of Persons</string>
+    <string name="children_num_text">Number of Children</string>
+    <string name="request_id_format">Request ID: %1$d</string>
 </resources>

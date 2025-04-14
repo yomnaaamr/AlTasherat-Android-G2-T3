@@ -178,6 +178,6 @@
     <string name="order_date_text">تاريخ الطلب</string>
     <string name="persons_num_text">عدد الاشخاص</string>
     <string name="children_num_text">عدد الاطفال</string>
-
+    <string name="request_id_format">رقم الطلب: %1$d</string>
 
 </resources>
