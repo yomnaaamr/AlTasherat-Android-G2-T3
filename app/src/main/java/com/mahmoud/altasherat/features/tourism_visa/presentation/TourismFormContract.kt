@@ -72,7 +72,7 @@ class TourismFormContract {
     sealed interface TourismFormState {
         data object Idle : TourismFormState
         data object Loading : TourismFormState
-        data object Success : TourismFormState
+        data class Success(val result: String?) : TourismFormState
         data class Error(val error: AltasheratError) : TourismFormState
     }
 }
