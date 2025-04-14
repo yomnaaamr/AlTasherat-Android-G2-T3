@@ -175,6 +175,8 @@
     <string name="invalid_adults_count">Invalid adults count</string>
     <string name="invalid_children_count">Invalid children count</string>
     <string name="invalid_visa_message">Invalid visa message</string>
+    <string name="back_text">السابق</string>
+    <string name="version_text">النسخة الحالية: V1.0</string>
 
 
 </resources>

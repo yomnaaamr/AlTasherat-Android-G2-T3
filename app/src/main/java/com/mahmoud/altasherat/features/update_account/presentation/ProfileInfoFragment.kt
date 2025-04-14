@@ -1,7 +1,6 @@
 package com.mahmoud.altasherat.features.update_account.presentation
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.provider.MediaStore
@@ -11,6 +10,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -36,7 +38,10 @@ class ProfileInfoFragment :
     private var _userCountry: Country? = null
     private var phoneCountry: Country? = null
     private var user: User? = null
-    private var _countries: List<Country>? = null
+    private var _countries: List<Country> = emptyList()
+    private var selectedCountryPosition: Int = -1
+    private var selectedPhoneCodePosition: Int = -1
+
 
     override fun FragmentProfileInfoBinding.initialize() {
         setupObservers()
@@ -47,10 +52,18 @@ class ProfileInfoFragment :
     private fun setupListeners() {
         binding.phoneCodePicker.setOnClickListener {
             binding.phoneCodePicker.apply {
+                val preSelectedPosition = if (selectedPhoneCodePosition != -1) {
+                    selectedPhoneCodePosition
+                } else {
+                    _countries.indexOfFirst { it.id == phoneCountry?.id }
+                }
                 bottomSheet = CountryPickerBottomSheet(
-                    _countries!!, phoneCountry!!.id.minus(1)
-                ) { selectedCountry ->
+                    _countries,
+                    preSelectedPosition,
+                    isPhonePicker = true
+                ) { selectedCountry, position ->
                     phoneCountry = selectedCountry as Country
+                    selectedPhoneCodePosition = position
                     setText(
                         resources.getString(
                             R.string.country_picker_display,
@@ -71,38 +84,52 @@ class ProfileInfoFragment :
 
 
         binding.birthdayEdit.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
-
             val maxCalendar = Calendar.getInstance()
             maxCalendar.add(Calendar.YEAR, -13)
             val maxDate = maxCalendar.timeInMillis
 
-            val datePickerDialog = DatePickerDialog(
-                this.requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDate = String.format(
-                        Locale.US, "%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay
-                    )
-                    binding.birthdayEdit.setText(formattedDate)
-                    viewModel.onAction(
-                        ProfileInfoContract.ProfileInfoAction.UpdateBirthday(
-                            formattedDate
-                        )
-                    )
-                }, year, month, day
-            )
-            datePickerDialog.window?.setBackgroundDrawableResource(R.color.splash_screen_background)
-            datePickerDialog.datePicker.maxDate = maxDate
-            datePickerDialog.show()
+            val constraintsBuilder = CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointBackward.before(maxDate))
+                .setEnd(maxDate)
+
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select your birthday")
+                .setSelection(maxDate)
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+
+            datePicker.addOnPositiveButtonClickListener { selectedDateInMillis ->
+                val selectedDate = Calendar.getInstance().apply {
+                    timeInMillis = selectedDateInMillis
+                }
+
+                val formattedDate = String.format(
+                    Locale.US,
+                    "%04d-%02d-%02d",
+                    selectedDate.get(Calendar.YEAR),
+                    selectedDate.get(Calendar.MONTH) + 1,
+                    selectedDate.get(Calendar.DAY_OF_MONTH)
+                )
+
+                binding.birthdayEdit.setText(formattedDate)
+                viewModel.onAction(
+                    ProfileInfoContract.ProfileInfoAction.UpdateBirthday(formattedDate)
+                )
+            }
+            datePicker.show(parentFragmentManager, "DATE_PICKER")
         }
 
         binding.countryEdit.setOnClickListener {
+            val preSelectedPosition = if (selectedCountryPosition != -1) {
+                selectedCountryPosition
+            } else {
+                _countries.indexOfFirst { it.id == _userCountry?.id }
+            }
             bottomSheet = CountryPickerBottomSheet(
-                _countries as List<ListItem>, _userCountry!!.id.minus(1)
-            ) { selectedCountry ->
+                _countries as List<ListItem>, preSelectedPosition
+            ) { selectedCountry, position ->
                 _userCountry = selectedCountry as Country
+                selectedCountryPosition = position
                 binding.countryEdit.setText(_userCountry?.flag + " " + _userCountry?.name)
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateCountryID(
@@ -263,7 +290,7 @@ class ProfileInfoFragment :
                 )
             }
             if (user.image != null) {
-                Glide.with(requireContext()).load(user.image.path!!.toUri()).centerCrop()
+                Glide.with(requireContext()).load(user.image.path!!.toUri()).circleCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
 
@@ -279,7 +306,8 @@ class ProfileInfoFragment :
                 viewModel.onAction(
                     ProfileInfoContract.ProfileInfoAction.UpdateImage(imageUri!!.toFile(this.requireContext()))
                 )
-                Glide.with(requireContext()).load(imageUri).centerCrop()
+                Glide.with(requireContext()).load(imageUri)
+                    .circleCrop()
                     .placeholder(R.drawable.profile_place_holder)
                     .into(binding.profileImg.profileImg)
             }

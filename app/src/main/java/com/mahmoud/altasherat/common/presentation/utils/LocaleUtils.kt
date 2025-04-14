@@ -9,3 +9,11 @@ fun Context.changeLocale(languageCode: String) {
     val locale = Locale.forLanguageTag(languageCode)
     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(locale.toLanguageTag()))
 }
+
+fun formatCountryCode(countryCode: String): String {
+    return if (countryCode.startsWith("00")) {
+        "(+" + countryCode.substring(2) + ")"
+    } else {
+        "(+$countryCode)"
+    }
+}

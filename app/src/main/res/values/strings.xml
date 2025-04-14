@@ -184,5 +184,7 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="invalid_adults_count">Invalid adults count</string>
     <string name="invalid_children_count">Invalid children count</string>
     <string name="invalid_visa_message">Invalid visa message</string>
+    <string name="back_text">Back</string>
+    <string name="version_text">Current Version: V1.0</string>
 
 </resources>
