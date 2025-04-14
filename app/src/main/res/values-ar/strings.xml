@@ -175,6 +175,9 @@
     <string name="from_our_platform">من خلال منصة التأشيرات</string>
     <string name="sell_visa_text">عـــــرض تأشيرات</string>
     <string name="fill_the_form_now_text">املأ الاستمارة الآن</string>
+    <string name="order_date_text">تاريخ الطلب</string>
+    <string name="persons_num_text">عدد الاشخاص</string>
+    <string name="children_num_text">عدد الاطفال</string>
 
 
 </resources>
