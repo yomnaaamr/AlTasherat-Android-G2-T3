@@ -24,7 +24,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="Visa and Passport Information"
-        app:drawableStartCompat="@drawable/ic_personal_info_prefix"
+        app:drawableStartCompat="@drawable/ic_passport_info_prefix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/header_view"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,12 +68,13 @@
                 app:layout_constraintTop_toBottomOf="@id/passport_number_txt"
                 app:placeholderText="Enter passport number"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
-                app:startIconDrawable="@drawable/ic_user">
+                app:startIconDrawable="@drawable/ic_passport">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passport_edit"
                     style="?textAppearanceTitleSmall"
                     android:layout_width="match_parent"
+                    android:paddingStart="48dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:maxLines="1" />
@@ -101,7 +102,7 @@
                 app:boxCornerRadiusTopStart="26dp"
                 app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
-                app:endIconDrawable="@drawable/ic_arrow_down"
+                app:endIconDrawable="@drawable/ic_upload"
                 app:endIconMode="custom"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +110,7 @@
                 app:layout_constraintTop_toBottomOf="@id/passport_image_txt"
                 app:placeholderText="Enter passport image"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
-                app:startIconDrawable="@drawable/ic_nationality">
+                app:startIconDrawable="@drawable/ic_passport">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passport_image_edit"
@@ -117,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:paddingStart="48dp"
                     android:focusable="false"
                     android:foreground="?attr/selectableItemBackground"
                     android:inputType="none"
@@ -162,6 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:paddingStart="48dp"
                     android:focusable="false"
                     android:foreground="?attr/selectableItemBackground"
                     android:inputType="none"
@@ -198,7 +201,7 @@
                 app:layout_constraintTop_toBottomOf="@id/visa_purpose_txt"
                 app:placeholderText="Enter visa purpose"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
-                app:startIconDrawable="@drawable/ic_user">
+                app:startIconDrawable="@drawable/ic_message">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/visa_purpose_edit"
@@ -206,7 +209,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
-                    android:inputType="text"
+                    android:paddingStart="48dp"
+                    android:inputType="textMultiLine"
                     android:maxLines="8" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -239,14 +243,15 @@
                 app:layout_constraintTop_toBottomOf="@id/visa_message_txt"
                 app:placeholderText="Enter your explanation"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
-                app:startIconDrawable="@drawable/ic_user">
+                app:startIconDrawable="@drawable/ic_message">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/visa_message_edit"
                     style="?textAppearanceTitleSmall"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text"
+                    android:paddingStart="48dp"
+                    android:inputType="textMultiLine"
                     android:maxLines="8" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -272,7 +277,7 @@
                 app:boxCornerRadiusTopStart="26dp"
                 app:boxStrokeColor="?colorPrimary"
                 app:boxStrokeWidth="0dp"
-                app:endIconDrawable="@drawable/ic_arrow_down"
+                app:endIconDrawable="@drawable/ic_upload"
                 app:endIconMode="custom"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -280,7 +285,7 @@
                 app:layout_constraintTop_toBottomOf="@id/your_files_txt"
                 app:placeholderText="Upload your files"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
-                app:startIconDrawable="@drawable/ic_nationality">
+                app:startIconDrawable="@drawable/ic_file">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/personal_files_edit"
@@ -289,6 +294,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="false"
+                    android:paddingStart="48dp"
                     android:foreground="?attr/selectableItemBackground"
                     android:inputType="none"
                     android:maxLines="1" />
