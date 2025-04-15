@@ -51,8 +51,3 @@ fun List<File>.toAttachmentsParts(): List<MultipartBody.Part> {
         MultipartBody.Part.createFormData(key, file.name, requestFile)
     }
 }
-
-//fun File.toAttachmentsPart(paramName: String = "attachments[]"): MultipartBody.Part {
-//    val requestFile = this.asRequestBody("attachments/*".toMediaTypeOrNull())
-//    return MultipartBody.Part.createFormData(paramName, this.name, requestFile)
-//}

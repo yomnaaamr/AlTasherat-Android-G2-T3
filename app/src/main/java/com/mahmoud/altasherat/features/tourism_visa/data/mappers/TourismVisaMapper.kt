@@ -28,7 +28,7 @@ internal object TourismVisaMapper {
             purposeOfVisit = model.purposeOfVisit,
             adultsCount = model.adultsCount,
             childrenCount = model.childrenCount,
-            message = model.message,
+            message = model.message.orEmpty(),
             statuses = model.statuses.map { it -> RequestStateMapper.dtoToDomain(it) },
         )
     }

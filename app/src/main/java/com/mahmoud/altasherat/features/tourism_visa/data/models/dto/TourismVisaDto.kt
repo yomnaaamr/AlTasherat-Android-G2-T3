@@ -43,7 +43,7 @@ class TourismVisaDto(
     @SerializedName("children_count")
     val childrenCount: Int,
     @SerializedName("message")
-    val message: String,
+    val message: String?,
     @SerializedName("statuses")
     val statuses: List<StatusDto>
 )
