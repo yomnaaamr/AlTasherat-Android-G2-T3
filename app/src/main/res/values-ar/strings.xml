@@ -181,6 +181,9 @@
     <string name="request_id_format">رقم الطلب: %1$d</string>
     <string name="back_text">السابق</string>
     <string name="version_text">النسخة الحالية: V1.0</string>
+    <string name="chip_text_one">فيزا سياحية</string>
+    <string name="chip_text_two">فيزا توظيف</string>
+    <string name="chip_text_three">عرض فيزا</string>
 
 
 </resources>

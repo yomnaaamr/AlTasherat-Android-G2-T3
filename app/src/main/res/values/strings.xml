@@ -189,5 +189,8 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="request_id_format">Request ID: %1$d</string>
     <string name="back_text">Back</string>
     <string name="version_text">Current Version: V1.0</string>
+    <string name="chip_text_one">Tourist Visa</string>
+    <string name="chip_text_two">Employment Visa</string>
+    <string name="chip_text_three">Offer Visa</string>
 
 </resources>

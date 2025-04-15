@@ -187,7 +187,4 @@
     </style>
 
 
-    <style name="PlaceholderTop" parent="TextAppearance.Design.Hint">
-        <item name="android:gravity">top|start</item>
-    </style>
 </resources>
