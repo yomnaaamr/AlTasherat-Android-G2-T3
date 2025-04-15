@@ -327,7 +327,7 @@ class TourismFormFragment :
             if (userCountry != null) {
                 _userCountry = userCountry
                 _visaCountry = userCountry
-//                viewModel.onIntent(TourismFormIntent.UpdateUserCountry(_userCountry!!))
+                viewModel.onIntent(TourismFormIntent.UpdateUserCountry(_userCountry!!))
                 page1Binding.countryEdit.setText(
                     resources.getString(
                         R.string.country_picker_display, _userCountry?.flag, _userCountry?.name
