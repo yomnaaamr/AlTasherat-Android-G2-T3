@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:title="Tourism Form Data"
+        app:title="@string/tourism_form_data"
         app:titleTextAppearance="?textAppearanceTitleMedium" />
 
     <androidx.viewpager2.widget.ViewPager2

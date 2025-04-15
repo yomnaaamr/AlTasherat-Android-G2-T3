@@ -57,7 +57,7 @@ fun ValidationError.toResourceId(): Int {
         ValidationError.EMPTY_PASSPORT_NUMBER -> R.string.empty_passport_number
         ValidationError.INVALID_PASSPORT_NUMBER -> R.string.invalid_passport_number
         ValidationError.EMPTY_PASSPORT_IMAGES -> R.string.empty_passport_images
-        ValidationError.INVALID_PASSPORT_IMAGES -> R.string.empty_passport_images
+        ValidationError.INVALID_PASSPORT_IMAGES -> R.string.invalid_passport_images
         ValidationError.EMPTY_ATTACHMENTS -> R.string.empty_attachments
         ValidationError.INVALID_ATTACHMENTS -> R.string.invalid_attachments
         ValidationError.EMPTY_COUNTRY -> R.string.empty_country

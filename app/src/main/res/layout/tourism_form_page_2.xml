@@ -23,7 +23,7 @@
         android:paddingVertical="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Visa and Passport Information"
+        android:text="@string/visa_and_passport_information"
         app:drawableStartCompat="@drawable/ic_passport_info_prefix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/header_view"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Passport number"
+                android:text="@string/passport_number"
                 app:layout_constraintStart_toStartOf="@id/passport_number_layout"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,7 +66,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passport_number_txt"
-                app:placeholderText="Enter passport number"
+                app:placeholderText="@string/enter_passport_number"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_passport">
 
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Passport Image"
+                android:text="@string/passport_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passport_number_layout" />
 
@@ -108,7 +108,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passport_image_txt"
-                app:placeholderText="Enter passport image"
+                app:placeholderText="@string/enter_passport_image"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_passport">
 
@@ -132,7 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Visa Country"
+                android:text="@string/visa_country"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passport_image_layout" />
 
@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/visa_country_txt"
-                app:placeholderText="Choose visa country"
+                app:placeholderText="@string/choose_visa_country"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_nationality">
 
@@ -178,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Visa reason"
+                android:text="@string/visa_reason"
                 app:layout_constraintStart_toStartOf="@id/visa_purpose_layout"
                 app:layout_constraintTop_toBottomOf="@id/visa_country_layout" />
 
@@ -199,7 +199,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/visa_purpose_txt"
-                app:placeholderText="Enter visa purpose"
+                app:placeholderText="@string/enter_visa_purpose"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_message">
 
@@ -220,7 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Visa explanation"
+                android:text="@string/visa_explanation"
                 app:layout_constraintStart_toStartOf="@id/visa_message_layout"
                 app:layout_constraintTop_toBottomOf="@id/visa_purpose_layout" />
 
@@ -241,7 +241,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/visa_message_txt"
-                app:placeholderText="Enter your explanation"
+                app:placeholderText="@string/enter_your_explanation"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_message">
 
@@ -261,7 +261,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Personal files"
+                android:text="@string/personal_files"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/visa_message_layout" />
 
@@ -283,7 +283,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/your_files_txt"
-                app:placeholderText="Upload your files"
+                app:placeholderText="@string/upload_your_files"
                 app:placeholderTextAppearance="?textAppearanceBodySmall"
                 app:startIconDrawable="@drawable/ic_file">
 
@@ -306,7 +306,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Adults number"
+                android:text="@string/adults_number"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personal_files_layout" />
 
@@ -325,7 +325,7 @@
                     style="?attr/textAppearanceTitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
+                    android:text="@string/plus_icon"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
@@ -359,7 +359,7 @@
                     style="?attr/textAppearanceTitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
+                    android:text="@string/minus_icon"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
@@ -369,7 +369,7 @@
                 style="?textAppearanceTitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Children number"
+                android:text="@string/children_number"
                 app:layout_constraintBottom_toBottomOf="@id/adults_number_txt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.65"
@@ -391,7 +391,7 @@
                     style="?attr/textAppearanceTitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
+                    android:text="@string/plus_icon"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
@@ -424,7 +424,7 @@
                     style="?attr/textAppearanceTitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
+                    android:text="@string/minus_icon"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
             </androidx.cardview.widget.CardView>
@@ -436,7 +436,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="Send"
+                android:text="@string/send"
                 app:icon="@drawable/ic_continue_icon"
                 app:iconGravity="textEnd"
                 app:iconPadding="10dp"

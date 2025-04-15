@@ -206,5 +206,29 @@ Survival: All provisions that are stated to remain in force or that, by their na
     <string name="chip_text_one">Tourist Visa</string>
     <string name="chip_text_two">Employment Visa</string>
     <string name="chip_text_three">Offer Visa</string>
+    <string name="invalid_passport_images">Invalid passport images</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="complete_information">Complete information</string>
+    <string name="visa_and_passport_information">Visa and Passport Information</string>
+    <string name="passport_number">Passport number</string>
+    <string name="enter_passport_number">Enter passport number</string>
+    <string name="passport_image">Passport Image</string>
+    <string name="enter_passport_image">Enter passport image</string>
+    <string name="visa_country">Visa Country</string>
+    <string name="choose_visa_country">Choose visa country</string>
+    <string name="visa_reason">Visa reason</string>
+    <string name="enter_visa_purpose">Enter visa purpose</string>
+    <string name="visa_explanation">Visa explanation</string>
+    <string name="enter_your_explanation">Enter your explanation</string>
+    <string name="personal_files">Personal files</string>
+    <string name="upload_your_files">Upload your files</string>
+    <string name="adults_number">Adults number</string>
+    <string name="plus_icon" translatable="false">+</string>
+    <string name="minus_icon" translatable="false">-</string>
+    <string name="children_number">Children number</string>
+    <string name="tourism_form_data">Tourism Form Data</string>
 
 </resources>

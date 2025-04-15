@@ -25,7 +25,7 @@
         android:paddingVertical="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Personal Information"
+        android:text="@string/personal_information"
         app:drawableStartCompat="@drawable/ic_personal_info_prefix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/header_view"
@@ -357,7 +357,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Gender"
+                android:text="@string/gender"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/country_layout" />
 
@@ -380,7 +380,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="16dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="Male"
+                    android:text="@string/male"
                     app:drawableStartCompat="@drawable/ic_male" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -404,7 +404,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="16dp"
                     android:layout_gravity="center_horizontal"
-                    android:text="Female"
+                    android:text="@string/female"
                     app:drawableStartCompat="@drawable/ic_female" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -415,7 +415,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="24dp"
-                android:text="Complete information"
+                android:text="@string/complete_information"
                 app:icon="@drawable/ic_continue_icon"
                 app:iconGravity="textEnd"
                 app:iconPadding="10dp"
