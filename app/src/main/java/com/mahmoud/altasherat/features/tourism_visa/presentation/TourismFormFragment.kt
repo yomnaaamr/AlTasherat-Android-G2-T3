@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.tourism_visa.presentation
 
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -46,7 +47,7 @@ class TourismFormFragment :
     private var phoneCountry: Country? = null
     private var _countries: List<Country> = emptyList()
     private var selectedCountryPosition: Int = -1
-    private var selectedVisaCountryPosition: Int = 0
+    private var selectedVisaCountryPosition: Int = -1
     private var selectedPhoneCodePosition: Int = -1
 
 
@@ -234,13 +235,17 @@ class TourismFormFragment :
         }
 
         page2Binding.visaCountryEdit.setOnClickListener {
-            val preSelectedPosition = selectedVisaCountryPosition
+            val preSelectedPosition = if (selectedVisaCountryPosition != -1) {
+                selectedVisaCountryPosition
+            } else {
+                0
+            }
             bottomSheet = CountryPickerBottomSheet(
                 _countries as List<ListItem>, preSelectedPosition
             ) { selectedCountry, position ->
                 _visaCountry = selectedCountry as Country
-                page1Binding.countryEdit.setText(_visaCountry?.flag + " " + _visaCountry?.name)
                 selectedVisaCountryPosition = position
+                page2Binding.visaCountryEdit.setText(_visaCountry?.flag + " " + _visaCountry?.name)
                 viewModel.onIntent(
                     TourismFormIntent.UpdateDestinationCountry(
                         selectedCountry.id
@@ -311,13 +316,14 @@ class TourismFormFragment :
             when (state.screenState) {
                 is TourismFormContract.TourismFormState.Idle -> showLoading()
                 is TourismFormContract.TourismFormState.Loading -> showLoading()
-                is TourismFormContract.TourismFormState.Error -> hideLoading()
+                is TourismFormContract.TourismFormState.Error,
                 is TourismFormContract.TourismFormState.Success -> {
                     collectFlow(viewModel.countries) { countries ->
                         if (countries.isEmpty()) return@collectFlow
                         phoneCountry = countries.find { it.phoneCode == state.countryCode }
                         _countries = countries
                         fillUserData(state)
+                        Log.d("UI_STATE", state.toString())
                         hideLoading()
                     }
                 }
@@ -388,7 +394,7 @@ class TourismFormFragment :
             resources.getString(
                 R.string.country_picker_display,
                 phoneCountry?.flag,
-                formatCountryCode(phoneCountry?.phoneCode!!)
+                formatCountryCode(phoneCountry?.phoneCode.toString())
             )
         )
         if (page1Binding.emailEdit.text.isNullOrEmpty()) {
@@ -404,19 +410,27 @@ class TourismFormFragment :
         if (state.gender == 0) {
             page1Binding.maleCard.setCardBackgroundColor(resources.getColor(R.color.md_theme_primary))
             page1Binding.femaleCard.setCardBackgroundColor(resources.getColor(R.color.md_theme_inverseSurface))
-            page1Binding.maleTxt.setTextColor(resources.getColor(R.color.md_theme_inverseSurface))
-            page1Binding.femaleTxt.setTextColor(resources.getColor(android.R.color.black))
+            page1Binding.maleTxt.setTextColor(resources.getColor(R.color.md_theme_onPrimary))
+            page1Binding.femaleTxt.setTextColor(resources.getColor(R.color.md_theme_inverseOnSurface))
         } else if (state.gender == 1) {
             page1Binding.maleCard.setCardBackgroundColor(resources.getColor(R.color.md_theme_inverseSurface))
             page1Binding.femaleCard.setCardBackgroundColor(resources.getColor(R.color.md_theme_primary))
-            page1Binding.femaleTxt.setTextColor(resources.getColor(R.color.md_theme_inverseSurface))
-            page1Binding.maleTxt.setTextColor(resources.getColor(android.R.color.black))
+            page1Binding.femaleTxt.setTextColor(resources.getColor(R.color.md_theme_onPrimary))
+            page1Binding.maleTxt.setTextColor(resources.getColor(R.color.md_theme_inverseOnSurface))
         }
 
         if (page2Binding.passportEdit.text.isNullOrEmpty()) {
             page2Binding.passportEdit.setText(state.passportNumber)
         }
         //passportImages
+        val imagesSize = state.passportImages.size
+        if (imagesSize > 0) {
+            page2Binding.passportImageEdit.setText(
+                "${state.passportImages.size} images selected"
+            )
+        }
+
+
         page2Binding.visaCountryEdit.setText(
             resources.getString(
                 R.string.country_picker_display,
@@ -431,6 +445,13 @@ class TourismFormFragment :
             page2Binding.visaMessageEdit.setText(state.message)
         }
         //passport attachments
+        val filesSize = state.attachments.size
+        if (filesSize > 0) {
+            page2Binding.personalFilesEdit.setText(
+                "${state.attachments.size} files selected"
+            )
+        }
+
         page2Binding.adultsNumberValue.text = state.adultsCount.toString()
         page2Binding.childrenNumberValue.text = state.childrenCount.toString()
     }
