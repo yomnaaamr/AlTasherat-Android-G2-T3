@@ -276,22 +276,25 @@ class TourismFormFragment :
             }
         }
         page2Binding.adultsMinusCard.setOnClickListener {
-            val count = page2Binding.adultsNumberValue.text.toString().toInt()
+            var count = page2Binding.adultsNumberValue.text.toString().toInt()
             if (count > 0) {
-                viewModel.onIntent(TourismFormIntent.UpdateAdultsCount(count - 1))
+                count -= 1
+                viewModel.onIntent(TourismFormIntent.UpdateAdultsCount(count))
             }
         }
 
         page2Binding.childrenPlusCard.setOnClickListener {
-            val count = page2Binding.childrenNumberValue.text.toString().toIntOrNull() ?: 0
+            var count = page2Binding.childrenNumberValue.text.toString().toInt()
             if (count < 10) {
-                viewModel.onIntent(TourismFormIntent.UpdateChildrenCount(count + 1))
+                count += 1
+                viewModel.onIntent(TourismFormIntent.UpdateChildrenCount(count))
             }
         }
-        page2Binding.childrenPlusCard.setOnClickListener {
-            val count = page2Binding.childrenNumberValue.text.toString().toIntOrNull() ?: 0
+        page2Binding.childrenMinusCard.setOnClickListener {
+            var count = page2Binding.childrenNumberValue.text.toString().toInt()
             if (count > 0) {
-                viewModel.onIntent(TourismFormIntent.UpdateChildrenCount(count - 1))
+                count -= 1
+                viewModel.onIntent(TourismFormIntent.UpdateChildrenCount(count))
             }
         }
 
@@ -426,12 +429,8 @@ class TourismFormFragment :
             page2Binding.visaMessageEdit.setText(state.message)
         }
         //passport attachments
-        if (page2Binding.adultsNumberValue.text.isNullOrEmpty()) {
-            page2Binding.adultsNumberValue.text = state.adultsCount.toString()
-        }
-        if (page2Binding.childrenNumberValue.text.isNullOrEmpty()) {
-            page2Binding.childrenNumberValue.text = state.childrenCount.toString()
-        }
+        page2Binding.adultsNumberValue.text = state.adultsCount.toString()
+        page2Binding.childrenNumberValue.text = state.childrenCount.toString()
     }
 
     private val pickMultipleImagesLauncher =
