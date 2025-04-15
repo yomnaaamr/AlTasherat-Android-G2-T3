@@ -44,7 +44,7 @@ class TourismFormFragment :
     private var phoneCountry: Country? = null
     private var _countries: List<Country> = emptyList()
     private var selectedCountryPosition: Int = -1
-    private var selectedVisaCountryPosition: Int = -1
+    private var selectedVisaCountryPosition: Int = 0
     private var selectedPhoneCodePosition: Int = -1
 
 
@@ -232,15 +232,12 @@ class TourismFormFragment :
         }
 
         page2Binding.visaCountryEdit.setOnClickListener {
-            val preSelectedPosition = if (selectedVisaCountryPosition != -1) {
-                selectedVisaCountryPosition
-            } else {
-                _countries.indexOfFirst { it.id == _userCountry?.id }
-            }
+            val preSelectedPosition = selectedVisaCountryPosition
             bottomSheet = CountryPickerBottomSheet(
                 _countries as List<ListItem>, preSelectedPosition
             ) { selectedCountry, position ->
                 _visaCountry = selectedCountry as Country
+                page1Binding.countryEdit.setText(_visaCountry?.flag + " " + _visaCountry?.name)
                 selectedVisaCountryPosition = position
                 viewModel.onIntent(
                     TourismFormIntent.UpdateDestinationCountry(
