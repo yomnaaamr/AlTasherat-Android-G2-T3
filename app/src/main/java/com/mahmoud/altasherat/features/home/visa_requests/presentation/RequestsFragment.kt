@@ -10,20 +10,29 @@ import dagger.hilt.android.AndroidEntryPoint
 class RequestsFragment : BaseFragment<FragmentRequestsBinding>(FragmentRequestsBinding::inflate) {
 
     private val viewModel: TourismVisaRequestsViewModel by viewModels()
-    private val adapter = TourismVisaRequestsAdapter{ clickItem ->
+    private val adapter = TourismVisaRequestsAdapter { clickItem ->
     }
 
 
     override fun FragmentRequestsBinding.initialize() {
 
+        val languageCode = context?.resources?.configuration?.locales?.get(0)?.language
+
+        viewModel.onAction(
+            TourismVisaRequestsContract.TourismVisaRequestsAction.GetTourismVisaRequests(
+                (languageCode.toString())
+            )
+        )
+
         binding.visaRequestRecyclerView.adapter = adapter
 
-        collectFlow(viewModel.state){ state ->
+        collectFlow(viewModel.state) { state ->
 
-            when(state.screenState){
+            when (state.screenState) {
                 is TourismVisaRequestsContract.TourismVisaRequestsScreenState.Loading -> {
                     showLoading()
                 }
+
                 else -> {
                     hideLoading()
                 }

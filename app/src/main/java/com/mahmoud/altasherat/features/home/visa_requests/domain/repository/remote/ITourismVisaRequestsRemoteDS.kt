@@ -4,5 +4,5 @@ import com.mahmoud.altasherat.features.home.visa_requests.data.models.dto.Touris
 
 interface ITourismVisaRequestsRemoteDS {
 
-    suspend fun getTourismVisaRequests(): TourismVisaRequestsResponseDto
+    suspend fun getTourismVisaRequests(languageCode: String): TourismVisaRequestsResponseDto
 }

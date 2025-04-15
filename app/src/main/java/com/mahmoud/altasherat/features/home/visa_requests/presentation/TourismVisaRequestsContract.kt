@@ -11,7 +11,7 @@ class TourismVisaRequestsContract {
     )
 
     sealed interface TourismVisaRequestsAction {
-        data object GetTourismVisaRequests : TourismVisaRequestsAction
+        data class GetTourismVisaRequests(val languageCode: String) : TourismVisaRequestsAction
     }
 
     sealed interface TourismVisaRequestsEvent {

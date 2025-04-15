@@ -3,7 +3,7 @@ package com.mahmoud.altasherat.features.home.visa_requests.domain.useCases
 import com.mahmoud.altasherat.common.domain.util.Resource
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import com.mahmoud.altasherat.features.home.visa_requests.domain.models.TourismVisaRequest
+import com.mahmoud.altasherat.features.home.visa_requests.domain.models.TourismVisaRequests
 import com.mahmoud.altasherat.features.home.visa_requests.domain.repository.ITourismVisaRequestsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -16,10 +16,10 @@ class GetTourismVisaRequestsUC(
 ) {
 
 
-    operator fun invoke(): Flow<Resource<List<TourismVisaRequest>>> {
+    operator fun invoke(languageCode: String): Flow<Resource<TourismVisaRequests>> {
         return flow {
             emit(Resource.Loading)
-            val response = tourismVisaRequestsRepository.getTourismVisaRequests()
+            val response = tourismVisaRequestsRepository.getTourismVisaRequests(languageCode)
             emit(Resource.Success(response))
 
         }.catch { throwable ->

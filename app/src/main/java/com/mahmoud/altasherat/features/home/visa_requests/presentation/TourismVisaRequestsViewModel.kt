@@ -27,11 +27,19 @@ class TourismVisaRequestsViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
 
-    init {
-        getTourismVisaRequestsUC()
-            .onEachSuccessSuspend { requestsList->
+    fun onAction(action: TourismVisaRequestsContract.TourismVisaRequestsAction) {
+        when (action) {
+            is TourismVisaRequestsContract.TourismVisaRequestsAction.GetTourismVisaRequests -> {
+                getTourismVisaRequests(action.languageCode)
+            }
+        }
+    }
+
+    private fun getTourismVisaRequests(languageCode: String) {
+        getTourismVisaRequestsUC(languageCode)
+            .onEachSuccessSuspend { requestsList ->
                 _state.value = _state.value.copy(
-                    response = requestsList,
+                    response = requestsList.visaRequests,
                     screenState = TourismVisaRequestsContract.TourismVisaRequestsScreenState.Success
                 )
             }
@@ -48,4 +56,6 @@ class TourismVisaRequestsViewModel @Inject constructor(
                     _state.value.copy(screenState = TourismVisaRequestsContract.TourismVisaRequestsScreenState.Loading)
             }.launchIn(viewModelScope)
     }
+
+
 }
