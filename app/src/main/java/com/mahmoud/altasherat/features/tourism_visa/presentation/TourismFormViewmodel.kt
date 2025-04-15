@@ -12,6 +12,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.usecase.
 import com.mahmoud.altasherat.features.tourism_visa.data.models.request.StoreTourismVisaRequest
 import com.mahmoud.altasherat.features.tourism_visa.domain.usecase.StoreTourismVisaUC
 import com.mahmoud.altasherat.features.tourism_visa.presentation.TourismFormContract.TourismFormIntent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
+@HiltViewModel
 class TourismFormViewmodel @Inject constructor(
     private val getUserInfoUC: GetUserInfoUC,
     private val getCountriesFromLocalUC: GetCountriesFromLocalUC,
@@ -53,7 +55,7 @@ class TourismFormViewmodel @Inject constructor(
                         firstName = result.firstname,
                         middleName = result.middleName ?: "",
                         lastName = result.lastname,
-                        gender = true,
+                        gender = 0,
                         birthDate = result.birthDate ?: "",
                         passportNumber = "",
                         passportImages = emptyList(),
@@ -61,7 +63,7 @@ class TourismFormViewmodel @Inject constructor(
                         countryCode = result.phone.countryCode,
                         phoneNumber = result.phone.number,
                         email = result.email,
-                        destinationCountry = "",
+                        destinationCountry = 1,
                         purposeOfVisit = "",
                         adultsCount = 0,
                         childrenCount = 0,
@@ -78,6 +80,9 @@ class TourismFormViewmodel @Inject constructor(
                         )
                     )
                 }
+            }
+            .onEachLoadingSuspend {
+                _state.update { it.copy(screenState = TourismFormContract.TourismFormState.Loading) }
             }
             .launchIn(viewModelScope)
     }
@@ -109,7 +114,7 @@ class TourismFormViewmodel @Inject constructor(
             is TourismFormIntent.UpdateFirstName -> _state.update { it.copy(firstName = intent.value) }
             is TourismFormIntent.UpdateMiddleName -> _state.update { it.copy(middleName = intent.value) }
             is TourismFormIntent.UpdateLastName -> _state.update { it.copy(lastName = intent.value) }
-            is TourismFormIntent.UpdateGender -> _state.update { it.copy(gender = intent.isMale) }
+            is TourismFormIntent.UpdateGender -> _state.update { it.copy(gender = intent.value) }
             is TourismFormIntent.UpdateBirthDate -> _state.update { it.copy(birthDate = intent.value) }
             is TourismFormIntent.UpdatePassportNumber -> _state.update { it.copy(passportNumber = intent.value) }
             is TourismFormIntent.UpdatePassportImages -> _state.update { it.copy(passportImages = intent.files) }
@@ -122,7 +127,7 @@ class TourismFormViewmodel @Inject constructor(
                     destinationCountry = intent.value
                 )
             }
-
+            is TourismFormIntent.UpdateUserCountry -> _state.update { it.copy(userCountry = intent.value) }
             is TourismFormIntent.UpdatePurposeOfVisit -> _state.update { it.copy(purposeOfVisit = intent.value) }
             is TourismFormIntent.UpdateAdultsCount -> _state.update { it.copy(adultsCount = intent.count) }
             is TourismFormIntent.UpdateChildrenCount -> _state.update { it.copy(childrenCount = intent.count) }
@@ -137,7 +142,7 @@ class TourismFormViewmodel @Inject constructor(
             firstName = current.firstName,
             middleName = current.middleName,
             lastname = current.lastName,
-            gender = current.gender == true,
+            gender = current.gender,
             birthDate = current.birthDate,
             passportNumber = current.passportNumber,
             passportImages = current.passportImages,

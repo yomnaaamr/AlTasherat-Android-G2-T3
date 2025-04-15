@@ -129,6 +129,7 @@
     <string name="Contact_Message">الرسالة</string>
     <string name="Contact_Message_text">اكتب رسالة التواصل</string>
     <string name="updated_successfully_txt">تم التحديث بنجاح</string>
+    <string name="tourism_visa_created_successfully_txt">تم تسجيل الفيزا السياحية بنجاح</string>
     <string name="account_settings_delete_account">اعدادات الحساب والغاء تنشيط الحساب وحذفه</string>
     <string name="manage_account">ادارة الحســاب</string>
     <string name="permanently_deactivate_the_account">إلغاء تنشيط الحساب نهائياً</string>

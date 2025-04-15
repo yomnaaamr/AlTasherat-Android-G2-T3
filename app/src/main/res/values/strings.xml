@@ -135,6 +135,7 @@ Survival: All provisions that are stated to remain in force or that, by their na
 
     <string name="country_picker_display" translatable="false">%1$s %2$s</string>
     <string name="updated_successfully_txt">Updated successfully</string>
+    <string name="tourism_visa_created_successfully_txt">Tourism Visa Created successfully</string>
     <string name="account_settings_delete_account">Account settings, delete account</string>
     <string name="manage_account">Manage Account</string>
     <string name="permanently_deactivate_the_account">Permanently deactivate the account</string>

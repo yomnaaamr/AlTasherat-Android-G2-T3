@@ -18,7 +18,7 @@ data class StoreTourismVisaRequest(
     @SerializedName("lastname")
     val lastname: String,
     @SerializedName("gender")
-    val gender: Boolean,
+    val gender: Int,
     @SerializedName("birthdate")
     val birthDate: String,
     @SerializedName("passport_number")
@@ -34,7 +34,7 @@ data class StoreTourismVisaRequest(
     @SerializedName("contact_email")
     val email: String,
     @SerializedName("destination_country")
-    val destinationCountry: String,
+    val destinationCountry: Int,
     @SerializedName("purpose_of_visit")
     val purposeOfVisit: String,
     @SerializedName("adults_count")
@@ -162,7 +162,7 @@ data class StoreTourismVisaRequest(
     }
 
     private fun validateDestinationCountry(): Resource<Unit> {
-        if (destinationCountry.isBlank()) return Resource.Error(ValidationError.EMPTY_COUNTRY)
+        if (destinationCountry.toString().isBlank()) return Resource.Error(ValidationError.EMPTY_COUNTRY)
         return Resource.Success(Unit)
     }
 
@@ -239,8 +239,8 @@ data class StoreTourismVisaRequest(
             map["contact_email"] = it.toRequestBody("application/json".toMediaTypeOrNull())
         }
 
-        this.destinationCountry.takeIf { it.isNotEmpty() }?.let {
-            map["destination_country"] = it.toRequestBody("application/json".toMediaTypeOrNull())
+        this.destinationCountry.let {
+            map["destination_country"] = it.toString().toRequestBody("application/json".toMediaTypeOrNull())
         }
 
         this.purposeOfVisit.takeIf { it.isNotEmpty() }?.let {

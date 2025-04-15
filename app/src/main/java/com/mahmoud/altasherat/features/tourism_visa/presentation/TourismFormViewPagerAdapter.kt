@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class TourismFormViewPagerAdapter(
-    private val pages: List<View>
+    private val pages: List<View?>
 ) : RecyclerView.Adapter<TourismFormViewPagerAdapter.PagerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,

@@ -1,6 +1,7 @@
 package com.mahmoud.altasherat.features.tourism_visa.presentation
 
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.models.Country
 import java.io.File
 
 class TourismFormContract {
@@ -10,7 +11,7 @@ class TourismFormContract {
         val firstName: String = "",
         val middleName: String = "",
         val lastName: String = "",
-        val gender: Boolean? = null, // true = male, false = female
+        val gender: Int = 0,
         val birthDate: String = "",
         val passportNumber: String = "",
         val passportImages: List<File> = emptyList(),
@@ -18,49 +19,32 @@ class TourismFormContract {
         val countryCode: String = "",
         val phoneNumber: String = "",
         val email: String = "",
-        val destinationCountry: String = "",
+        val userCountry: Country? = null,
+        val destinationCountry: Int = 1,
         val purposeOfVisit: String = "",
         val adultsCount: Int = 1,
-        val childrenCount: Int = 0,
+        val childrenCount: Int = 1,
         val message: String? = null
     )
 
     sealed interface TourismFormIntent {
-        // Basic identity fields
         data class UpdateFirstName(val value: String) : TourismFormIntent
         data class UpdateMiddleName(val value: String) : TourismFormIntent
         data class UpdateLastName(val value: String) : TourismFormIntent
-
-        // Gender (true = male, false = female)
-        data class UpdateGender(val isMale: Boolean) : TourismFormIntent
-
-        // Birth date
+        data class UpdateGender(val value: Int) : TourismFormIntent
         data class UpdateBirthDate(val value: String) : TourismFormIntent
-
-        // Passport info
         data class UpdatePassportNumber(val value: String) : TourismFormIntent
         data class UpdatePassportImages(val files: List<File>) : TourismFormIntent
-
-        // Attachments
         data class UpdateAttachments(val files: List<File>) : TourismFormIntent
-
-        // Phone
         data class UpdateCountryCode(val value: String) : TourismFormIntent
         data class UpdatePhoneNumber(val value: String) : TourismFormIntent
-
-        // Contact
         data class UpdateEmail(val value: String) : TourismFormIntent
-
-        // Travel details
-        data class UpdateDestinationCountry(val value: String) : TourismFormIntent
+        data class UpdateDestinationCountry(val value: Int) : TourismFormIntent
+        data class UpdateUserCountry(val value: Country) : TourismFormIntent
         data class UpdatePurposeOfVisit(val value: String) : TourismFormIntent
         data class UpdateAdultsCount(val count: Int) : TourismFormIntent
         data class UpdateChildrenCount(val count: Int) : TourismFormIntent
-
-        // Optional message
         data class UpdateMessage(val value: String?) : TourismFormIntent
-
-        // Form submission
         object SubmitForm : TourismFormIntent
     }
 

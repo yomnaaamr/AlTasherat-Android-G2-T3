@@ -364,7 +364,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/male_card"
                 style="?materialCardViewFilledStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="?colorSurfaceInverse"
@@ -378,7 +378,8 @@
                     style="?textAppearanceTitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="16dp"
+                    android:layout_gravity="center_horizontal"
                     android:text="Male"
                     app:drawableStartCompat="@drawable/ic_male" />
             </com.google.android.material.card.MaterialCardView>
@@ -386,7 +387,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/female_card"
                 style="?materialCardViewFilledStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 app:cardBackgroundColor="?colorSurfaceInverse"
@@ -401,7 +402,8 @@
                     style="?textAppearanceTitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="16dp"
+                    android:layout_gravity="center_horizontal"
                     android:text="Female"
                     app:drawableStartCompat="@drawable/ic_female" />
             </com.google.android.material.card.MaterialCardView>
