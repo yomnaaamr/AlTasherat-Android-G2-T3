@@ -4,6 +4,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.country.data.mappers
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.mappers.ImageMapper
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.mappers.PhoneMapper
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.mappers.UserMapper
+import com.mahmoud.altasherat.features.authentication.signup.data.mappers.RequestStateMapper
 import com.mahmoud.altasherat.features.tourism_visa.data.models.dto.TourismVisaDto
 import com.mahmoud.altasherat.features.tourism_visa.domain.models.TourismVisa
 
@@ -20,7 +21,7 @@ internal object TourismVisaMapper {
             nationality = CountryMapper.dtoToDomain(model.nationality),
             passportNumber = model.passportNumber,
             passportImages = model.passportImages.map { it -> ImageMapper.dtoToDomain(it) },
-            attachments = model.attachments,
+            attachments = model.attachments.map { it -> ImageMapper.dtoToDomain(it) },
             phone = PhoneMapper.dtoToDomain(model.phone),
             contactEmail = model.contactEmail,
             destinationCountry = CountryMapper.dtoToDomain(model.destinationCountry),
@@ -28,8 +29,7 @@ internal object TourismVisaMapper {
             adultsCount = model.adultsCount,
             childrenCount = model.childrenCount,
             message = model.message,
-            statuses = model.statuses,
-            canUpdateStatus = model.canUpdateStatus
+            statuses = model.statuses.map { it -> RequestStateMapper.dtoToDomain(it) },
         )
     }
 

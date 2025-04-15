@@ -5,7 +5,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.country.data.models.
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.dto.ImageDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.dto.PhoneDto
 import com.mahmoud.altasherat.features.al_tashirat_services.user.data.models.dto.UserDto
-import java.io.File
+import com.mahmoud.altasherat.features.home.visa_requests.data.models.dto.StatusDto
 
 class TourismVisaDto(
     @SerializedName("id")
@@ -29,7 +29,7 @@ class TourismVisaDto(
     @SerializedName("passport_images")
     val passportImages: List<ImageDto>,
     @SerializedName("attachments")
-    val attachments: List<File>,
+    val attachments: List<ImageDto>,
     @SerializedName("phone")
     val phone: PhoneDto,
     @SerializedName("contact_email")
@@ -45,7 +45,5 @@ class TourismVisaDto(
     @SerializedName("message")
     val message: String,
     @SerializedName("statuses")
-    val statuses: List<Int>,
-    @SerializedName("can_update_status")
-    val canUpdateStatus: Boolean
+    val statuses: List<StatusDto>
 )

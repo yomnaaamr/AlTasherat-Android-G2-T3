@@ -15,7 +15,11 @@
         android:id="@+id/dashboardFragment"
         android:name="com.mahmoud.altasherat.features.home.visa_dashboard.presentation.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_tourismFormFragment"
+            app:destination="@id/tourismFormFragment" />
+    </fragment>
 
 
     <fragment

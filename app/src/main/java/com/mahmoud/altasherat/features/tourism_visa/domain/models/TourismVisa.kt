@@ -4,7 +4,7 @@ import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.model
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.Image
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.Phone
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.models.User
-import java.io.File
+import com.mahmoud.altasherat.features.home.visa_requests.domain.models.Status
 
 data class TourismVisa(
     val id: Int,
@@ -17,7 +17,7 @@ data class TourismVisa(
     val nationality: Country,
     val passportNumber: String,
     val passportImages: List<Image>,
-    val attachments: List<File>,
+    val attachments: List<Image>,
     val phone: Phone,
     val contactEmail: String,
     val destinationCountry: Country,
@@ -25,6 +25,5 @@ data class TourismVisa(
     val adultsCount: Int,
     val childrenCount: Int,
     val message: String,
-    val statuses: List<Int>,
-    val canUpdateStatus: Boolean
+    val statuses: List<Status>,
 )

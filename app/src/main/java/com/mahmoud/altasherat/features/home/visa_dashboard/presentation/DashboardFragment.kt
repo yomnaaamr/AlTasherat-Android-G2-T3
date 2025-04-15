@@ -13,7 +13,7 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboa
     override fun FragmentDashboardBinding.initialize() {
 
         binding.homeLayoutOne.setOnClickListener {
-
+            findNavController().navigate(R.id.action_dashboardFragment_to_tourismFormFragment)
         }
     }
 
