@@ -12,6 +12,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.common.domain.util.error.AltasheratError
 import com.mahmoud.altasherat.common.domain.util.error.ValidationError
@@ -479,7 +481,7 @@ class TourismFormFragment :
             ) to page2Binding.passportEdit,
             setOf(
                 ValidationError.EMPTY_PASSPORT_IMAGES, ValidationError.INVALID_PASSPORT_IMAGES
-            ) to page2Binding.passportImageEdit,
+            ) to page2Binding.passportImageLayout,
             setOf(
                 ValidationError.EMPTY_PURPOSE, ValidationError.INVALID_PURPOSE
             ) to page2Binding.visaPurposeEdit,
@@ -488,7 +490,7 @@ class TourismFormFragment :
             ) to page2Binding.visaMessageEdit,
             setOf(
                 ValidationError.EMPTY_ATTACHMENTS, ValidationError.INVALID_ATTACHMENTS
-            ) to page2Binding.personalFilesEdit,
+            ) to page2Binding.personalFilesLayout,
         )
 
         page1Binding.firstNameEdit.error = null
@@ -499,18 +501,33 @@ class TourismFormFragment :
         page1Binding.emailEdit.error = null
         page1Binding.birthdayEdit.error = null
         page2Binding.passportEdit.error = null
-        page2Binding.passportImageEdit.error = null
+
+        page2Binding.passportImageLayout.isErrorEnabled = false
+        page2Binding.passportImageLayout.error = null
         page2Binding.visaPurposeEdit.error = null
         page2Binding.visaMessageEdit.error = null
-        page2Binding.personalFilesEdit.error = null
+
+        page2Binding.personalFilesLayout.isErrorEnabled = true
+        page2Binding.personalFilesLayout.error = null
 
 
         errors.forEach { error ->
             if (error == ValidationError.INVALID_ADULTS_COUNT || error == ValidationError.INVALID_CHILDREN_COUNT) {
                 showMessage(error.toErrorMessage(requireContext()), MessageType.SNACKBAR, this)
             }
-            errorFields.entries.find { it.key.contains(error) }?.value?.error =
-                error.toErrorMessage(requireContext())
+
+            errorFields.entries.find { it.key.contains(error) }?.value?.let { view ->
+                when (view) {
+                    is TextInputLayout -> {
+                        view.isErrorEnabled = true
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+
+                    is TextInputEditText -> {
+                        view.error = error.toErrorMessage(requireContext())
+                    }
+                }
+            }
         }
 
 

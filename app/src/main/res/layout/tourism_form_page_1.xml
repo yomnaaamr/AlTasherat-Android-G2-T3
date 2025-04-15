@@ -344,6 +344,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="48dp"
                     android:focusable="false"
                     android:foreground="?attr/selectableItemBackground"
                     android:inputType="none"
