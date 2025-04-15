@@ -26,6 +26,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private val viewModel: SignupViewModel by viewModels()
     private lateinit var bottomSheet: CountryPickerBottomSheet
     private var selectedCountry: Country? = null
+    private var selectedPhoneCodePosition: Int = -1
     private var countries: List<Country> = emptyList()
 
 
@@ -133,11 +134,18 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         }
 
         binding.phoneCodePicker.setOnClickListener {
+            val preSelectedPosition = if (selectedPhoneCodePosition != -1) {
+                selectedPhoneCodePosition
+            } else {
+                countries.indexOfFirst { it.id == selectedCountry?.id }
+            }
             bottomSheet = CountryPickerBottomSheet(
                 countries ,
-                selectedCountry!!.id.minus(1)
-            ) { newSelectedCountry ->
+                preSelectedPosition,
+                isPhonePicker = true
+            ) { newSelectedCountry,position ->
                 this@SignupFragment.selectedCountry = newSelectedCountry as Country
+                selectedPhoneCodePosition = position
                 binding.phoneCodePicker.setText(
                     resources.getString(
                         R.string.country_picker_display,
@@ -163,7 +171,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 .replace(R.id.auth_fragment_container, LoginFragment())
                 .commit()
 
-            authViewModel.switchToTab(1)
+            authViewModel.switchToTab(0)
 
         }
 

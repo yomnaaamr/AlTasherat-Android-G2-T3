@@ -179,5 +179,8 @@
     <string name="persons_num_text">عدد الاشخاص</string>
     <string name="children_num_text">عدد الاطفال</string>
     <string name="request_id_format">رقم الطلب: %1$d</string>
+    <string name="back_text">السابق</string>
+    <string name="version_text">النسخة الحالية: V1.0</string>
+
 
 </resources>

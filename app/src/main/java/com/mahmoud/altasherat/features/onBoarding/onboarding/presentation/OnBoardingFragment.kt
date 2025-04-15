@@ -11,8 +11,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahmoud.altasherat.R
 import com.mahmoud.altasherat.databinding.FragmentOnBoardingBinding
-import com.mahmoud.altasherat.features.onBoarding.onboarding.presentation.OnBoardingContent
-import com.mahmoud.altasherat.features.onBoarding.onboarding.presentation.OnBoardingViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,12 +41,37 @@ class OnBoardingFragment : Fragment() {
         tabLayout = binding.tabLayout
         setupViewPager()
         setupTabLayout()
+        setupBackButtonListener()
+        setupPageChangeListener()
+        updateBackButtonVisibility()
         binding.buttonNext.setOnClickListener {
             val nextScreen = viewPager2.currentItem + 1
             if (nextScreen < onBoardingViewPagerAdapter.itemCount) {
                 viewPager2.currentItem = nextScreen
             } else {
                 findNavController().navigate(R.id.action_onBoardingFragment2_to_authFragment)
+            }
+        }
+    }
+
+    private fun setupPageChangeListener() {
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateBackButtonVisibility()
+            }
+        })
+    }
+
+    private fun updateBackButtonVisibility() {
+        val currentItem = viewPager2.currentItem
+        binding.relativeLayout.visibility = if (currentItem > 0) View.VISIBLE else View.GONE
+    }
+
+    private fun setupBackButtonListener() {
+        binding.backButton.setOnClickListener {
+            if (viewPager2.currentItem > 0) {
+                viewPager2.currentItem -= 1
             }
         }
     }

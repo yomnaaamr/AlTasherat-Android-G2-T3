@@ -27,6 +27,8 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
     private lateinit var languageAdapter: SingleSelectionAdapter
     private val viewModel: ChangeLanguageViewModel by viewModels()
     private lateinit var selectedLanguage: Language
+    private var selectedLanguagePosition: Int = 0
+
 
 
     override fun FragmentChangeLanguageBinding.initialize() {
@@ -73,11 +75,12 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
             val languages = LanguageDataSource.getLanguages(requireContext())
             selectedLanguage = languages.find { it.code == userLanguageCode }!!
 
+            selectedLanguagePosition = languages.indexOfFirst { it.id == selectedLanguage.id }
             languageAdapter =
                 SingleSelectionAdapter(
                     languages,
                     this@ChangeLanguageFragment,
-                    selectedLanguage.id
+                    selectedLanguagePosition
                 )
 
             binding.languageRecycler.apply {
@@ -87,8 +90,9 @@ class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding>(
         }
     }
 
-    override fun onItemSelected(item: ListItem) {
+    override fun onItemSelected(item: ListItem, position:Int) {
         selectedLanguage = item as Language
+        selectedLanguagePosition = position
     }
 
 
