@@ -437,6 +437,7 @@ class TourismFormFragment :
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri> ->
             if (uris.isNotEmpty()) {
                 val files = uris.mapNotNull { uri -> uri.toFile(requireContext()) }
+                page2Binding.passportImageEdit.setText("${files.size} images selected")
                 viewModel.onIntent(TourismFormIntent.UpdatePassportImages(files))
             }
         }
@@ -445,6 +446,7 @@ class TourismFormFragment :
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris: List<Uri> ->
             if (uris.isNotEmpty()) {
                 val files = uris.mapNotNull { uri -> uri.toFile(requireContext()) }
+                page2Binding.personalFilesEdit.setText("${files.size} files selected")
                 viewModel.onIntent(TourismFormIntent.UpdateAttachments(files))
             }
         }
