@@ -35,7 +35,8 @@ class SaveSelectedLanguageUCTest {
     @Test
     fun `saveSelectedLanguage returns success when language is saved successfully`() = runTest {
         // Given
-        val language = Language(0, "Arabic", code = "ar", flag = "🇸🇦")
+        val language = Language(0, "Arabic", code = "ar", flag = "🇸🇦",  isSelected = false,
+            phoneCode = "+20")
 
         whenever(languageLocalDS.saveSelectedLanguage(language)).thenReturn(Unit)
 

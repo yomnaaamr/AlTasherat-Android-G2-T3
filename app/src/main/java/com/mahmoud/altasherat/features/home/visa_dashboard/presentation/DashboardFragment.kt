@@ -1,22 +1,20 @@
 package com.mahmoud.altasherat.features.home.visa_dashboard.presentation
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.databinding.FragmentDashboardBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
 
-class DashboardFragment : Fragment() {
+    override fun FragmentDashboardBinding.initialize() {
 
+        binding.homeLayoutOne.setOnClickListener {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        }
     }
 
 }

@@ -22,6 +22,7 @@ object Constants {
     const val DELETE_ACCOUNT_ENDPOINT = "delete-account"
     const val CHANGE_PASSWORD_ENDPOINT = "change-password"
     const val STORE_TOURISM_VISA_ENDPOINT = "tourism-visa"
+    const val TOURISM_VISAS_ENDPOINT = "tourism-visa"
 
     const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
 
