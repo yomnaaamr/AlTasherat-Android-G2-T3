@@ -6,8 +6,8 @@ import com.mahmoud.altasherat.common.util.Constants.CONTENT_TYPE_JSON
 import com.mahmoud.altasherat.common.util.Constants.HEADER_ACCEPT
 import com.mahmoud.altasherat.common.util.Constants.STORE_TOURISM_VISA_ENDPOINT
 import com.mahmoud.altasherat.features.al_tashirat_services.user.domain.repository.local.IUserInfoLocalDS
-import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toAttachmentsPart
-import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toPassportImagePart
+import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toAttachmentsParts
+import com.mahmoud.altasherat.features.al_tashirat_services.user.util.toPassportImageParts
 import com.mahmoud.altasherat.features.tourism_visa.data.models.dto.TourismVisaResponseDto
 import com.mahmoud.altasherat.features.tourism_visa.data.models.request.StoreTourismVisaRequest
 import com.mahmoud.altasherat.features.tourism_visa.domain.repository.remote.ITourismVisaRemoteDS
@@ -18,8 +18,8 @@ class TourismVisaRemoteDS(
 ) : ITourismVisaRemoteDS {
     override suspend fun storeTourismVisa(request: StoreTourismVisaRequest): TourismVisaResponseDto {
         val requestMap = request.createPartMap()
-        val imageParts = request.passportImages.map { it -> it.toPassportImagePart() }
-        val attachmentsParts = request.attachments.map { it -> it.toAttachmentsPart() }
+        val imageParts = request.passportImages.toPassportImageParts()
+        val attachmentsParts = request.attachments.toAttachmentsParts()
         val allFiles = imageParts + attachmentsParts
         return restApiNetworkProvider.postFiles(
             endpoint = STORE_TOURISM_VISA_ENDPOINT,

@@ -126,13 +126,14 @@ data class StoreTourismVisaRequest(
 
         if (attachments.isEmpty()) return Resource.Error(ValidationError.EMPTY_ATTACHMENTS)
         if (attachments.size > 3) return Resource.Error(ValidationError.INVALID_ATTACHMENTS)
-        attachments.forEach { attachment ->
+        for (attachment in attachments) {
             val extension = attachment.extension.lowercase()
             val maxSize = 512 * 1024 // 512 KB
 
             if (extension != "pdf") {
                 return Resource.Error(ValidationError.INVALID_ATTACHMENTS)
             }
+
             if (attachment.length() > maxSize) {
                 return Resource.Error(ValidationError.INVALID_ATTACHMENTS)
             }

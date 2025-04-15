@@ -1,5 +1,6 @@
 package com.mahmoud.altasherat.features.tourism_visa.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
@@ -156,6 +157,7 @@ class TourismFormViewmodel @Inject constructor(
             childrenCount = current.childrenCount,
             message = current.message
         )
+        Log.d("REQUEST", request.toString())
         storeTourismForm(request)
             .onEachSuccessSuspend { result ->
                 _events.send(TourismFormContract.TourismFormEvent.NavigationToProfileMenu)
