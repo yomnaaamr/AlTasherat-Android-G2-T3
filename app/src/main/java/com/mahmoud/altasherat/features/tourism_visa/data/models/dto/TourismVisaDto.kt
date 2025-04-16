@@ -9,41 +9,41 @@ import com.mahmoud.altasherat.features.home.visa_requests.data.models.dto.Status
 
 class TourismVisaDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
     @SerializedName("user")
-    val user: UserDto,
+    val user: UserDto? = null,
     @SerializedName("firstname")
-    val firstName: String,
+    val firstName: String? = null,
     @SerializedName("middlename")
-    val middleName: String,
+    val middleName: String? = null,
     @SerializedName("lastname")
-    val lastName: String,
+    val lastName: String? = null,
     @SerializedName("gender")
-    val gender: Int,
+    val gender: Int? = null,
     @SerializedName("birthdate")
-    val birthdate: String,
+    val birthdate: String? = null,
     @SerializedName("nationality")
-    val nationality: CountryDto,
+    val nationality: CountryDto? = null,
     @SerializedName("passport_number")
-    val passportNumber: String,
+    val passportNumber: String? = null,
     @SerializedName("passport_images")
-    val passportImages: List<ImageDto>,
+    val passportImages: List<ImageDto>? = null,
     @SerializedName("attachments")
-    val attachments: List<ImageDto>,
+    val attachments: List<ImageDto>? = null,
     @SerializedName("phone")
-    val phone: PhoneDto,
+    val phone: PhoneDto? = null,
     @SerializedName("contact_email")
-    val contactEmail: String,
+    val contactEmail: String? = null,
     @SerializedName("destination_country")
-    val destinationCountry: CountryDto,
+    val destinationCountry: CountryDto? = null,
     @SerializedName("purpose_of_visit")
-    val purposeOfVisit: String,
+    val purposeOfVisit: String? = null,
     @SerializedName("adults_count")
-    val adultsCount: Int,
+    val adultsCount: Int? = null,
     @SerializedName("children_count")
-    val childrenCount: Int,
+    val childrenCount: Int? = null,
     @SerializedName("message")
-    val message: String?,
+    val message: String? = null,
     @SerializedName("statuses")
-    val statuses: List<StatusDto>
+    val statuses: List<StatusDto>? = null
 )

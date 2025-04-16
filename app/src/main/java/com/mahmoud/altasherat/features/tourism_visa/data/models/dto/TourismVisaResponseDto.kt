@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TourismVisaResponseDto(
     @SerializedName("message")
-    val message: String,
+    val message: String? = null,
     @SerializedName("tourism_visa")
-    val tourismVisa: TourismVisaDto
+    val tourismVisa: TourismVisaDto? = null
 )
