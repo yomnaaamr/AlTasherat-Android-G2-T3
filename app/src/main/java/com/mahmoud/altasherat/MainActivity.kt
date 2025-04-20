@@ -3,6 +3,7 @@ package com.mahmoud.altasherat
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -30,6 +31,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mahmoud.altasherat.common.presentation.toErrorMessage
 import com.mahmoud.altasherat.features.splash.presentation.SplashState
 import com.mahmoud.altasherat.features.splash.presentation.SplashViewModel
@@ -49,12 +52,18 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: SplashViewModel by viewModels()
 //    private var preDrawListener: ViewTreeObserver.OnPreDrawListener? = null // Store the listener reference
 
+    private lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         splashScreenView = findViewById(R.id.splash_layout)
         mainContentView = findViewById(R.id.main)
@@ -140,6 +149,20 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+        bottomNav = findViewById(R.id.bottom_navigation)
+
+        bottomNav.setupWithNavController(navController)
+
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.requestsFragment,R.id.dashboardFragment,
+                R.id.menuFragment -> {
+                    bottomNav.visibility = View.VISIBLE
+                }
+                else -> bottomNav.visibility = View.GONE
+            }
+        }
 
 
     }

@@ -1,7 +1,14 @@
 <resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="onBoardingTitle">Welcome to the Visa Application</string>
+    <string name="onBoarding1_SubTitle">
+        With the Visa Application, obtaining your electronic visa has become incredibly easy, whether it\'s a tourist visa, employment visa, or company visa. Don\'t worry about the exhausting procedures; we have a complete team working for your convenience.</string>
+    <string name="onBoarding2_subTitle">Whether you are looking for a job or you are one of the owners of companies looking for employment, a team of experts will be at your service at the highest level, just fill out your form with easy steps without complications</string>
+    <string name="onBoarding3_subTitle">You can reach your favorite destination anywhere in the world just prepare for your trip and leave the rest to us and enjoy a smooth and safe experience of obtaining your tourist visa</string>
+    <string name="next">Next</string>
     <string name="app_name" translatable="false">Al Tasherat</string>
     <string name="altasherat_platform">Altasherat Platform</string>
-
     <string name="error_no_internet">Couldn\'t connect to server, please check your internet connection.</string>
     <string name="error_unknown">Something went wrong. Please try again later.</string>
     <string name="error_serialization">Couldn\'t serialize or deserialize data.</string>
@@ -11,12 +18,217 @@
     <string name="error_forbidden">Access to this resource is forbidden. You do not have the required permissions.</string>
     <string name="error_not_found">The requested resource could not be found. Please check the URL or try again later.</string>
     <string name="error_unknown_http">An unexpected error occurred (HTTP %1$d). Please try again later or contact support.</string>
-
-
     <string name="error_io">An I/O error occurred while accessing local storage</string>
     <string name="error_data_corruption">Data corruption detected in local storage</string>
     <string name="error_type_mismatch">Unsupported data type for local storage</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="continue_txt">Continue</string>
+    <string name="please_choose_language_txt">Please Choose Language</string>
+    <string name="please_choose_country_txt">Please Choose Country</string>
+    <string name="you_can_change_your_country_or_language_any_time_from_menu">You can change your country or language any time from menu</string>
+    <string name="choose_country">Choose Country</string>
+
+    <string name="selection_required">You need to make a selection.</string>
+
+    <string name="arabic_language">Arabic</string>
+    <string name="english_language">English</string>
+
+
+    <string name="error_invalid_email">Invalid email address.</string>
+    <string name="error_empty_email">Email cannot be empty.</string>
+    <string name="error_invalid_password">Invalid password.</string>
+    <string name="error_empty_password">Password cannot be empty.</string>
+    <string name="error_empty_username">Username cannot be empty</string>
+    <string name="error_invalid_username">Username must be 3–20 characters long and contain only letters, numbers, or underscores</string>
+    <string name="error_empty_firstname">First name is required.</string>
+    <string name="error_invalid_firstname">First name must be between 3 and 15 characters.</string>
+    <string name="error_invalid_middlename">Middle name cannot exceed 15 characters.</string>
+    <string name="error_empty_lastname">Last name is required.</string>
+    <string name="error_invalid_lastname">Last name must be between 3 and 15 characters.</string>
+    <string name="error_empty_password_confirmation">Password confirmation is required.</string>
+    <string name="error_invalid_password_confirmation">Password confirmation must be between 8 and 50 characters.</string>
+    <string name="error_password_mismatch">Passwords do not match.</string>
+    <string name="error_empty_phone_number">Phone number is required.</string>
+    <string name="error_invalid_phone_number">Phone number must be between 9 and 15 digits.</string>
+    <string name="error_empty_country_code">Country code is required.</string>
+    <string name="error_invalid_country_code">Country code must be between 3 and 5 characters.</string>
+
+    <string name="skip_txt">Skip</string>
+    <string name="signup">Sign up</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="not_have_account">Do not have account?</string>
+    <string name="create_new_acc">Create new account</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="enter_first_name">Enter First name</string>
+    <string name="enter_last_name">Enter last name</string>
+    <string name="email">Email</string>
+    <string name="enter_email_address">Enter email address</string>
+    <string name="phone">Phone</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="invalid_password_length">Password length must be more than 8 and less than 50</string>
+    <string name="invalid_phone_or_password">Invalid Phone Number or Password</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="change_password">Change Password</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="language">Language</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
+    <string name="loading">Loading…</string>
+    <string name="profile">Profile</string>
+    <string name="requests">Requests</string>
+    <string name="altasherat">Altasherat</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="enter_middle_name">Enter Middle Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="enter_your_country">Enter your country</string>
+    <string name="country">Country</string>
+    <string name="enter_birthday">Enter Birthday</string>
+    <string name="more">More</string>
+    <string name="invalid_image_extension">Invalid Image Extension</string>
+    <string name="invalid_image_size">Invalid Image Size</string>
+    <string name="about_visa_platform">About Altasherat Platform</string>
+    <string name="visa_platform_description">With the Visa Platform, you are always at the heart of our interests and the most important guest. Our goal is to make the travel experience easy and more enjoyable, which is why we gather all available travel options for travelers to Egypt in one place, so that Egypt is on your mobile.</string>
+    <string name="consular_services">Consular Services</string>
+    <string name="embassy_services">Embassy Services</string>
+    <string name="application_for_work_visa">Application for Work Visa</string>
+    <string name="application_for_tourist_visa">Application for Tourist Visa</string>
+    <string name="what_do_you_offer">What do you offer?</string>
+
+    <string name="terms_and_conditions_text">Welcome to the Visa Platform. The following are the terms and conditions that pertain to the terms of use and access to the pages of the Egypt Key website for electronic services, and the words and expressions contained in this agreement are given the following meanings.
+
+The customer\'s use of the website constitutes an express and clear acknowledgment that they have read and understood the terms and conditions of this agreement and the method of using the website. This is considered an express acceptance and approval from them of the terms and conditions of this agreement and their response to it. The customer\'s use of the website is also considered an express acknowledgment from them of their commitment and response to all the terms and conditions of the agreement and all the terms and conditions specific to the Egypt Key application establishment.
+
+General Provisions
+Applicable Law: These terms of use and any related non-contractual rights or obligations shall be subject to and interpreted in accordance with the laws of the Kingdom of Saudi Arabia and the Arab Republic of Egypt.
+Problem Resolution: If you have any problems with our services, please contact us. We will work diligently to resolve the problem you are facing as soon as possible. Any disputes or disagreements related to these terms of use, including any related non-contractual rights or obligations, shall be settled through the Kingdom of Saudi Arabia and the Arab Republic of Egypt.
+Rights of Others: A person who is not a party to these terms of use has no right to enforce any of their terms.
+Relationship of the Parties: Nothing in these terms of use shall be construed or interpreted by the parties or others to interpret the relationship between us as that of partners or agents or to create a joint venture between the parties, but it is understood and clear that all parties to the agreement are independent parties.
+Additional Assurances: The parties shall take the necessary actions or arrangements to take the necessary actions and prepare documents and other matters within their authority in order to enforce these terms of use and verify their implementation, including, but not limited to, assisting each party in complying with the applicable law.
+Waiver: These terms of use are committed to ensuring benefit for the parties and their relevant successors and officially authorized representatives. You agree that you will not assign or transfer these terms of use or any of your rights or obligations related to these terms of use, whether directly or indirectly, without first obtaining prior written consent from us.
+Entire Agreement: These terms of use and the documents referred to or included in the terms of use constitute the entire agreement between the parties with respect to the subject matter of the agreement and supersede and override all prior agreements, negotiations, and representations, whether written or oral, related to the subject matter. Except as specified in these terms of use and the documents referred to or included in these terms of use, there are no other terms, representations, warranties, undertakings, or agreements between the parties, whether direct or indirect, collective or express or implied.
+Amendments: No amendment, addition, or completion may be made to these terms of use. We reserve the right to make any amendment, change, addition, or completion to these terms of use at any time or from time to time. We will publish the current version of the terms of use on the website, and it will be effective upon its publication on the website or based on the date specified by us as the "Effective Date" (if any). Your continued use of the services in the event of any changes constitutes your agreement to be bound by the amended terms of use.
+Severability: If any provision of these terms of use is deemed void by any competent court or is unlawful or unenforceable, that provision shall be severed from these terms of use, and the remaining terms and conditions shall remain in full force and effect as long as the legal and economic essence of the transactions conducted under its terms remains without any adverse effect on its parties.
+Disclaimer: No party shall be liable for the existence of loss, damage, delay, or non-performance resulting from events beyond the control of any party, whether such event is foreseeable (such as acts of God, actions of legislative, judicial, or regulatory authorities of any federal or local government or judicial authorities, or actions by any of our subcontractors or any third-party suppliers of goods or services to us, or labor disputes, or complete power outages, or economic boycotts).
+No Waiver: The waiver of any provision in these terms of use shall not constitute a waiver of any other provisions (similar or dissimilar), nor shall any other waiver constitute a continuing waiver of any relevant provisions, unless expressly stated in writing.
+Communication: You can contact us via email, through our social media sites, or through live chat on the website, or by contacting our call center.
+Survival: All provisions that are stated to remain in force or that, by their nature, continue to apply after the termination of the contract shall remain in effect after the termination or suspension of your membership on the website.</string>
+    <string name="save">Save</string>
+    <string name="Contact_info">Contact Information</string>
+    <string name="Contact_phone">( +20) 1011777751 - (+966) 550440787</string>
+    <string name="Contact_us_email_text">Travel@altaherat.com  -  Info@altasherat.com</string>
+    <string name="location_text">Saudi Arabia - Riyadh\nCairo - Garden City</string>
+    <string name="name_text">Name</string>
+    <string name="send">Send</string>
+    <string name="Contact_name_input">Enter name to contact</string>
+    <string name="Contact_Subject">Subject</string>
+    <string name="enter_subject_text">Choose contact subject</string>
+    <string name="Contact_Message">Message</string>
+    <string name="Contact_Message_text">Write your contact message</string>
+
+
+    <string name="country_picker_display" translatable="false">%1$s %2$s</string>
+    <string name="updated_successfully_txt">Updated successfully</string>
+    <string name="tourism_visa_created_successfully_txt">Tourism Visa Created successfully</string>
+    <string name="account_settings_delete_account">Account settings, delete account</string>
+    <string name="manage_account">Manage Account</string>
+    <string name="permanently_deactivate_the_account">Permanently deactivate the account</string>
+    <string name="all_information_transactions_and_reservations_will_be_lost">All information, transactions and reservations will be lost.</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_password_to_confirm">Enter password to confirm</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="invalid_credentials">Invalid Credentials</string>
+    <string name="password_required">The password field is required.</string>
+
+    <string name="user_full_name" translatable="false">%1$s %2$s %3$s</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="enter_phone_to_reset_text">Enter your phone number to reset your password</string>
+    <string name="enter_code_to_reset_text">Enter the code sent to your phone to continue</string>
+    <string name="password_repeat">Repeat Password</string>
+    <string name="enter_password_repeat">Re-enter your password</string>
+    <string name="invalid_pass_confirmation">Password and confirmation must be the same</string>
+    <string name="change_password_title">Change Password</string>
+    <string name="old_password">Old password</string>
+    <string name="enter_old_password">Enter old password</string>
+    <string name="new_password">New password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_new_password_again">Enter new password again</string>
+    <string name="invalid_old_password">Invalid old password</string>
+    <string name="empty_old_password">Old password can\'t be empty</string>
+    <string name="invalid_new_password">Invalid new password</string>
+    <string name="empty_new_password">New password can\'t be empty</string>
+    <string name="empty_password_confirmation">Password confirmation can\'t be embty</string>
+    <string name="confirm">Confirm</string>
+    <string name="email_not_verified">Email not verified</string>
+    <string name="confirmtion_sent_to_email">Confirmation sent to email</string>
+    <string name="email_verified_successfully">Email verified successfully</string>
+    <string name="email_verification">Email Verification</string>
+    <string name="email_verfication_description">Confirmation message sent to email:\nemail@gmail.com\nCheck your email and click on confirm link to continue</string>
+    <string name="error_empty_middlename">MiddleName Can\'t be empty</string>
+    <string name="empty_birthdate">Empty BirthDate</string>
+    <string name="empty_passport_number">Empty Passport Number</string>
+    <string name="invalid_passport_number">Invalid passport number</string>
+    <string name="empty_passport_images">Empty passport images</string>
+    <string name="empty_attachments">Empty atachments</string>
+    <string name="invalid_attachments">Invalid attachments</string>
+    <string name="empty_country">Empty destination country</string>
+    <string name="empty_purpose">Empty purpose of visa</string>
+    <string name="invalid_purpose">Invalid purpose of visa</string>
+    <string name="invalid_adults_count">Invalid adults count</string>
+    <string name="invalid_children_count">Invalid children count</string>
+    <string name="invalid_visa_message">Invalid visa message</string>
+    <string name="home_text">Have you got jobs and visas you want to tell us about? Fill out the form and let us know the details. Have you got jobs and visas you want to tell us about? Fill out the form and let us know the details.</string>
+    <string name="tourism_visa_text">Tourism Visas</string>
+    <string name="request_visa_now_text">Request Visa Now</string>
+    <string name="request_visa_text">Issue Visas</string>
+    <string name="tourism_easily">Tourism Easily</string>
+    <string name="request_job_visa_text">Request Job Visa</string>
+    <string name="easily_with_our_platform">Easily with the Visa Platform</string>
+    <string name="jobs_visa_text">Job Visas</string>
+    <string name="you_can_sell_visa_text">You can offer a visa</string>
+    <string name="from_our_platform">through the Visa Platform</string>
+    <string name="sell_visa_text">Offer Visas</string>
+    <string name="fill_the_form_now_text">Fill out the form now</string>
+    <string name="order_date_text">Order Date</string>
+    <string name="persons_num_text">Number of Persons</string>
+    <string name="children_num_text">Number of Children</string>
+    <string name="request_id_format">Request ID: %1$d</string>
+    <string name="back_text">Back</string>
+    <string name="version_text">Current Version: V1.0</string>
+    <string name="chip_text_one">Tourist Visa</string>
+    <string name="chip_text_two">Employment Visa</string>
+    <string name="chip_text_three">Offer Visa</string>
+    <string name="invalid_passport_images">Invalid passport images</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="complete_information">Complete information</string>
+    <string name="visa_and_passport_information">Visa and Passport Information</string>
+    <string name="passport_number">Passport number</string>
+    <string name="enter_passport_number">Enter passport number</string>
+    <string name="passport_image">Passport Image</string>
+    <string name="enter_passport_image">Enter passport image</string>
+    <string name="visa_country">Visa Country</string>
+    <string name="choose_visa_country">Choose visa country</string>
+    <string name="visa_reason">Visa reason</string>
+    <string name="enter_visa_purpose">Enter visa purpose</string>
+    <string name="visa_explanation">Visa explanation</string>
+    <string name="enter_your_explanation">Enter your explanation</string>
+    <string name="personal_files">Personal files</string>
+    <string name="upload_your_files">Upload your files</string>
+    <string name="adults_number">Adults number</string>
+    <string name="plus_icon" translatable="false">+</string>
+    <string name="minus_icon" translatable="false">-</string>
+    <string name="children_number">Children number</string>
+    <string name="tourism_form_data">Tourism Form Data</string>
 
 </resources>

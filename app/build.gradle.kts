@@ -2,8 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.percelize)
+
 }
 
 android {
@@ -19,7 +21,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://intern.api.altashirat.solutionplus.net/api/\"")
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"https://intern.api.altashirat.solutionplus.net/api/\""
+        )
 
     }
 
@@ -39,7 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
         buildConfig = true
     }
@@ -57,16 +63,25 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.recyclerview)
 
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
+
+    implementation(libs.ssp.android)
+    implementation(libs.sdp.android)
+
+
+
+
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     //Serialization
-    implementation (libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.json)
 
     //PreferenceDataStore
     implementation(libs.androidx.datastore.preferences)
@@ -86,6 +101,6 @@ dependencies {
     testImplementation(libs.truth)
 
 
-
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.glide)
 }

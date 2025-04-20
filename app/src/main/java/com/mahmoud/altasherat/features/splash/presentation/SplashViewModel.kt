@@ -3,8 +3,15 @@ package com.mahmoud.altasherat.features.splash.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mahmoud.altasherat.common.domain.util.Resource
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachLoadingSuspend
+import com.mahmoud.altasherat.common.domain.util.onEachSuccessSuspend
+import com.mahmoud.altasherat.common.util.Constants
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.GetCountriesFromRemoteUC
+import com.mahmoud.altasherat.features.al_tashirat_services.country.domain.usecase.HasCountriesUC
+import com.mahmoud.altasherat.features.al_tashirat_services.language.domain.usecase.GetLanguageCodeUC
+import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.GetOnBoardingStateUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -12,16 +19,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getCountriesUC: GetCountriesUC
+    private val getCountriesFromRemoteUC: GetCountriesFromRemoteUC,
+    private val getLanguageCodeUC: GetLanguageCodeUC,
+    private val hasUserLoggedInUC: HasUserLoggedInUC,
+    private val hasCountriesUC: HasCountriesUC,
+    private val getOnBoardingStateUC: GetOnBoardingStateUC
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<SplashState>(SplashState.Loading)
+    private val _state =
+        MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
     val state = _state.asStateFlow()
 
     private val _events = Channel<SplashEvent>()
@@ -33,28 +45,83 @@ class SplashViewModel @Inject constructor(
 
 
     init {
-        getCountriesUC()
-            .onEach { result ->
-                Log.d("ViewModel", "Current SplashState: $result") // Log the state
-                _state.value = when (result) {
-                    is Resource.Error -> {
-//                        _events.send(SplashEvent.Error(result.error))
-                        SplashState.Error(result.error)
-                    }
+
+
+        hasCountriesUC()
+            .onEachSuccessSuspend { hasCountries ->
+                if (hasCountries) {
+                    isUserFirstTime()
+                } else {
+                    fetchCountries()
+                }
+            }
+            .onEachErrorSuspend {
+                _events.send(SplashContract.SplashEvent.Error(it))
+                _state.value = SplashContract.SplashState.Error(it)
+            }.launchIn(viewModelScope)
 
                     is Resource.Loading -> SplashState.Loading
                     is Resource.Success -> {
-//                        when i uncomment it the state not getting updated
-//                        _events.send(SplashEvent.NavigateToHome)
-//                        delay(5000)
+                        _events.send(SplashEvent.NavigateToHome)
                         SplashState.Success
-//                        SplashState.Loading
-
-
                     }
                 }
             }
+            .onEachErrorSuspend {
+                _events.send(SplashContract.SplashEvent.Error(it))
+                _state.value = SplashContract.SplashState.Error(it)
+            }
             .launchIn(viewModelScope)
+
+    }
+
+
+    private fun hasLoggedInUser() {
+
+        hasUserLoggedInUC()
+            .onEachSuccessSuspend { hasUser ->
+                if (hasUser) {
+                    _events.send(SplashContract.SplashEvent.NavigateToHome)
+                } else {
+                    _events.send(SplashContract.SplashEvent.NavigateToAuth)
+                }
+                _state.value = SplashContract.SplashState.Success
+            }
+            .onEachErrorSuspend {
+                _events.send(SplashContract.SplashEvent.Error(it))
+                _state.value = SplashContract.SplashState.Error(it)
+            }.launchIn(viewModelScope)
+
+    }
+
+
+    private fun fetchCountries() {
+
+        getCountriesFromRemoteUC(Constants.LOCALE_EN)
+            .onEachSuccessSuspend {
+                _events.send(SplashContract.SplashEvent.NavigateToLanguage)
+                SplashContract.SplashState.Success
+            }
+            .onEachErrorSuspend {
+                _events.send(SplashContract.SplashEvent.Error(it))
+                _state.value = SplashContract.SplashState.Error(it)
+            }
+            .onEachLoadingSuspend {
+                _state.value = SplashContract.SplashState.Loading
+            }.launchIn(viewModelScope)
+
+    }
+
+    private fun getLanguageCode() {
+
+        getLanguageCodeUC()
+            .onEachSuccessSuspend { languageCode ->
+                _languageCode.value = languageCode
+            }
+            .onEachErrorSuspend {
+                _events.send(SplashContract.SplashEvent.Error(it))
+            }.launchIn(viewModelScope)
+
     }
 
 

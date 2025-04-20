@@ -1,0 +1,29 @@
+package com.mahmoud.altasherat.common.util
+
+object Constants {
+    const val TAG = "AI_Tasherat"
+
+    const val VIEW_TYPE_COUNTRY = 0
+    const val VIEW_TYPE_LANGUAGE = 1
+
+    const val HEADER_ACCEPT = "Accept"
+    const val HEADER_CONTENT_TYPE = "Content-Type"
+    const val CONTENT_TYPE_JSON = "application/json"
+    const val CONTENT_TYPE_MULTIPART = "multipart/form-data"
+    const val HEADER_X_LOCALE = "X-locale"
+    const val LOCALE_EN = "en"
+    const val LOCALE_AR = "ar"
+    const val AUTHORIZATION = "Authorization"
+
+    const val COUNTRIES_ENDPOINT = "countries"
+    const val LOGIN_ENDPOINT = "login"
+    const val SIGNUP_ENDPOINT = "signup"
+    const val UPDATE_ACCOUNT_ENDPOINT = "update-account"
+    const val DELETE_ACCOUNT_ENDPOINT = "delete-account"
+    const val CHANGE_PASSWORD_ENDPOINT = "change-password"
+    const val STORE_TOURISM_VISA_ENDPOINT = "tourism-visa"
+    const val TOURISM_VISAS_ENDPOINT = "tourism-visa"
+
+    const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+
+}

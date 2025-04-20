@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+
+    <fragment
+        android:id="@+id/requestsFragment"
+        android:name="com.mahmoud.altasherat.features.home.visa_requests.presentation.RequestsFragment"
+        android:label="fragment_requests"
+        tools:layout="@layout/fragment_requests" />
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.mahmoud.altasherat.features.home.visa_dashboard.presentation.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_tourismFormFragment"
+            app:destination="@id/tourismFormFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.mahmoud.altasherat.features.home.menu.presentation.MenuFragment"
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+
+        <action
+            android:id="@+id/action_menu_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/home_nav_graph"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_menuFragment_to_profileInfoFragment"
+            app:destination="@id/profileInfoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_verifiedEmailFragment"
+            app:destination="@id/verifiedEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.change_password.presentation.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.about_us.presentation.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/changeLanguageFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.change_language.presentation.ChangeLanguageFragment"
+        android:label="fragment_change_language"
+        tools:layout="@layout/fragment_change_language">
+        <action
+            android:id="@+id/action_changeLanguageFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.contact_us.presentation.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.privacy_policy.presentation.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="com.mahmoud.altasherat.features.menu_options.terms_and_conditions.presentation.TermsAndConditionsFragment"
+        android:label="fragment_terms_and_conditions"
+        tools:layout="@layout/fragment_terms_and_conditions" />
+    <fragment
+        android:id="@+id/profileInfoFragment"
+        android:name="com.mahmoud.altasherat.features.update_account.presentation.ProfileInfoFragment"
+        android:label="ProfileInfoFragment"
+        tools:layout="@layout/fragment_profile_info">
+        <action
+            android:id="@+id/action_profileInfoFragment_to_manageAccountFragment"
+            app:destination="@id/manageAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageAccountFragment"
+        android:name="com.mahmoud.altasherat.features.delete_account.manage_account.ManageAccountFragment"
+        android:label="fragment_manage_account"
+        tools:layout="@layout/fragment_manage_account">
+        <action
+            android:id="@+id/action_manageAccountFragment_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.mahmoud.altasherat.features.delete_account.delete_acc.presentation.DeleteAccountFragment"
+        android:label="fragment_delete_account"
+        tools:layout="@layout/fragment_delete_account">
+        <action
+            android:id="@+id/action_deleteAccountFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/deleteAccountFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifiedEmailFragment"
+        android:name="com.mahmoud.altasherat.features.home.menu.verify_email.VerifiedEmailFragment"
+        android:label="fragment_verified_email"
+        tools:layout="@layout/fragment_verified_email" />
+    <fragment
+        android:id="@+id/tourismFormFragment"
+        android:name="com.mahmoud.altasherat.features.tourism_visa.presentation.TourismFormFragment"
+        android:label="fragment_tourism_form"
+        tools:layout="@layout/fragment_tourism_form" />
+</navigation>

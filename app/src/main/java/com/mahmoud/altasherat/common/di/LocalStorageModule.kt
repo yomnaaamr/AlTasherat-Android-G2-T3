@@ -29,4 +29,5 @@ object LocalStorageModule {
     fun provideGson(): Gson {
         return GsonBuilder().create()
     }
+
 }

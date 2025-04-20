@@ -1,15 +1,11 @@
 package com.mahmoud.altasherat.features.splash.di
 
-import com.google.gson.Gson
 import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvider
-import com.mahmoud.altasherat.common.domain.repository.remote.IRestApiNetworkProvider
 import com.mahmoud.altasherat.features.splash.data.repository.SplashRepository
 import com.mahmoud.altasherat.features.splash.data.repository.local.SplashLocalDS
-import com.mahmoud.altasherat.features.splash.data.repository.remote.SplashRemoteDS
 import com.mahmoud.altasherat.features.splash.domain.repository.ISplashRepository
 import com.mahmoud.altasherat.features.splash.domain.repository.local.ISplashLocalDS
-import com.mahmoud.altasherat.features.splash.domain.repository.remote.ISplashRemoteDS
-import com.mahmoud.altasherat.features.splash.domain.usecase.GetCountriesUC
+import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,33 +16,24 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 internal object SplashDI {
 
-    @Provides
-    fun provideRemoteDataSource(restApiNetworkProvider: IRestApiNetworkProvider): ISplashRemoteDS {
-        return SplashRemoteDS(restApiNetworkProvider)
-    }
-
 
     @Provides
     fun provideLocalDataSource(
-        localStorageProvider: ILocalStorageProvider,
-        gson: Gson
+        localStorageProvider: ILocalStorageProvider
     ): ISplashLocalDS {
-        return SplashLocalDS(localStorageProvider, gson)
+        return SplashLocalDS(localStorageProvider)
     }
 
     @Provides
     fun provideSplashRepository(
-        remoteDataSource: ISplashRemoteDS,
         localDataSource: ISplashLocalDS
     ): ISplashRepository {
-        return SplashRepository(remoteDataSource, localDataSource)
+        return SplashRepository(localDataSource)
     }
-
 
     @Provides
-    fun provideGetCountriesUC(repository: ISplashRepository): GetCountriesUC {
-        return GetCountriesUC(repository)
+    fun provideHasUserLoggedInUC(repository: ISplashRepository): HasUserLoggedInUC {
+        return HasUserLoggedInUC(repository)
+
     }
-
-
 }

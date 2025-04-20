@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="85dp"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".features.home.menu.presentation.MenuFragment">
+
+
+    <LinearLayout
+        android:id="@+id/user_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <include
+            android:id="@+id/profile_img"
+            layout="@layout/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:textAppearance="?textAppearanceTitleMedium"
+            tools:text="نادين محمد السيد" />
+
+        <Button
+            android:id="@+id/edit_profile_button"
+            style="@style/CustomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="22dp"
+            android:text="@string/edit_profile" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@android:color/darker_gray" />
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/menu_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_menu_destination" />
+
+
+    <LinearLayout
+        android:id="@+id/logout_and_version_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/version_text"
+            android:textAppearance="?textAppearanceTitleSmall"
+            tools:text="النسخة الحالية : V1.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout_button"
+            style="@style/ElevatedButtonStyle"
+            android:drawableEnd="@drawable/ic_logout"
+            android:text="@string/logout"
+            android:textAppearance="?textAppearanceTitleSmall" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,80 +1,82 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.util.Log
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahmoud.altasherat.R
-import com.mahmoud.altasherat.common.presentation.toErrorMessage
+import com.mahmoud.altasherat.common.presentation.base.BaseFragment
+import com.mahmoud.altasherat.common.presentation.base.delegators.MessageType
+import com.mahmoud.altasherat.common.presentation.utils.changeLocale
+import com.mahmoud.altasherat.common.presentation.utils.toErrorMessage
+import com.mahmoud.altasherat.common.util.Constants
+import com.mahmoud.altasherat.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
 
     private val splashViewModel: SplashViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+
+    override fun FragmentSplashBinding.initialize() {
         setupObservers()
-        return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
 
     private fun setupObservers() {
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    splashViewModel.state.collect { splashState ->
-                        when (splashState) {
-//                            is SplashState.Idle -> {}
-                            is SplashState.Loading -> {}
-                            is SplashState.Success -> {
-                                // Handle Success state
-                            }
-                            is SplashState.Error -> {
-                                // Handle Error state
-                            }
-                        }
-                    }
+        collectFlow(splashViewModel.state) { splashState ->
+            when (splashState) {
+                is SplashContract.SplashState.Idle -> {}
+                is SplashContract.SplashState.Loading -> {}
+                is SplashContract.SplashState.Success -> {
+                    // Handle Success state
+                }
+
+                is SplashContract.SplashState.Error -> {
+                    // Handle Error state
+                }
+            }
+        }
+
+
+        collectFlow(splashViewModel.events) { splashEvent ->
+            when (splashEvent) {
+                is SplashContract.SplashEvent.NavigateToHome -> {
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                }
+
+                is SplashContract.SplashEvent.Error -> {
+                    val errorMessage =
+                        splashEvent.error.toErrorMessage(requireContext())
+                    Log.e("Splash error", errorMessage)
+                    showMessage(errorMessage, MessageType.SNACKBAR, this)
+                }
+
+                SplashContract.SplashEvent.NavigateToLanguage -> {
+                    findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
+                }
+
+                SplashContract.SplashEvent.NavigateToAuth -> {
+                    findNavController().navigate(R.id.action_splashFragment_to_authFragment)
 
                 }
             }
-            launch {
-                splashViewModel.events.collect { splashEvent ->
-                    when (splashEvent) {
-                        is SplashEvent.NavigateToHome -> {
-                            findNavController().navigate(R.id.action_splashFragment_to_placeholder)
-                        }
-
-                        is SplashEvent.Error -> {
-                            val errorMessage = splashEvent.error.toErrorMessage(requireContext())
-                            showToast(errorMessage)
-                        }
-                    }
-                }
-
-            }
-
 
         }
+
+
+
+        collectFlow(splashViewModel.languageCode) { languageCode ->
+            if (languageCode != null) {
+                requireContext().changeLocale(languageCode)
+            } else {
+                //  Set a default locale
+                requireContext().changeLocale(Constants.LOCALE_EN)
+            }
+
+        }
+
     }
 
-    private fun showToast(
-        message: String,
-        duration: Int = Toast.LENGTH_LONG
-    ) {
-        Toast.makeText(requireContext(), message, duration).show()
-    }
 }

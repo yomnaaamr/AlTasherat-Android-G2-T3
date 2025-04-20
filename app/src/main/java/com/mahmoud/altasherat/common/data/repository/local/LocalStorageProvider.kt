@@ -14,10 +14,10 @@ import com.mahmoud.altasherat.common.domain.repository.local.ILocalStorageProvid
 import com.mahmoud.altasherat.common.domain.repository.local.IStorageKeyEnum
 import com.mahmoud.altasherat.common.domain.util.error.LocalStorageError
 import com.mahmoud.altasherat.common.domain.util.exception.AltasheratException
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KClass
+
 
 class LocalStorageProvider(
     private val context: Context
@@ -63,21 +63,19 @@ class LocalStorageProvider(
         }
     }
 
-    override suspend fun <Model : Any> getFlow(
-        key: IStorageKeyEnum,
-        defaultValue: Model,
-        type: KClass<Model>
-    ): Flow<Model> {
-        val preferencesKey = preferencesKey(key, type)
-        return context.dataStore.data
-            .map { preferences -> preferences[preferencesKey] ?: defaultValue }
-    }
 
     override suspend fun clear() {
         context.dataStore.edit { preferences ->
             preferences.clear()
         }
     }
+
+    override suspend fun<Model : Any> contains(key: IStorageKeyEnum,type: KClass<Model>): Boolean {
+        val preferencesKey = preferencesKey(key, type)
+        val preferences = context.dataStore.data.first()
+        return preferences.contains(preferencesKey)
+    }
+
 
 
     @Suppress("UNCHECKED_CAST")
