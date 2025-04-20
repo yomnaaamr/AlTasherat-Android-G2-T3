@@ -1,6 +1,5 @@
 package com.mahmoud.altasherat.features.splash.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud.altasherat.common.domain.util.onEachErrorSuspend
@@ -14,7 +13,6 @@ import com.mahmoud.altasherat.features.onBoarding.onboarding.domain.useCase.GetO
 import com.mahmoud.altasherat.features.splash.domain.usecase.HasUserLoggedInUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,13 +29,15 @@ class SplashViewModel @Inject constructor(
     private val getOnBoardingStateUC: GetOnBoardingStateUC
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashState>(SplashState.Loading)
-    private val _state =
-        MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
+    private val _state = MutableStateFlow<SplashContract.SplashState>(SplashContract.SplashState.Idle)
     val state = _state.asStateFlow()
 
-    private val _events = Channel<SplashEvent>()
+    private val _events = Channel<SplashContract.SplashEvent>()
     val events = _events.receiveAsFlow()
+
+    private val _languageCode = MutableStateFlow<String?>(null)
+    val languageCode: StateFlow<String?> = _languageCode
+
 
 
     private val _isContentVisible = MutableStateFlow(false)
@@ -60,11 +60,21 @@ class SplashViewModel @Inject constructor(
                 _state.value = SplashContract.SplashState.Error(it)
             }.launchIn(viewModelScope)
 
-                    is Resource.Loading -> SplashState.Loading
-                    is Resource.Success -> {
-                        _events.send(SplashEvent.NavigateToHome)
-                        SplashState.Success
-                    }
+
+        getLanguageCode()
+
+    }
+
+
+    private fun isUserFirstTime() {
+
+        getOnBoardingStateUC()
+            .onEachSuccessSuspend { notFirstTime ->
+                if (notFirstTime) {
+                    hasLoggedInUser()
+                } else {
+//                    _events.send(SplashContract.SplashEvent.NavigateToLanguage)
+                    _state.value = SplashContract.SplashState.Success
                 }
             }
             .onEachErrorSuspend {
@@ -99,7 +109,7 @@ class SplashViewModel @Inject constructor(
 
         getCountriesFromRemoteUC(Constants.LOCALE_EN)
             .onEachSuccessSuspend {
-                _events.send(SplashContract.SplashEvent.NavigateToLanguage)
+//                _events.send(SplashContract.SplashEvent.NavigateToLanguage)
                 SplashContract.SplashState.Success
             }
             .onEachErrorSuspend {

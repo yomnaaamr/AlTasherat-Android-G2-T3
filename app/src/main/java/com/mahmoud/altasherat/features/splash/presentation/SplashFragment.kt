@@ -40,30 +40,30 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         }
 
 
-        collectFlow(splashViewModel.events) { splashEvent ->
-            when (splashEvent) {
-                is SplashContract.SplashEvent.NavigateToHome -> {
-                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-                }
-
-                is SplashContract.SplashEvent.Error -> {
-                    val errorMessage =
-                        splashEvent.error.toErrorMessage(requireContext())
-                    Log.e("Splash error", errorMessage)
-                    showMessage(errorMessage, MessageType.SNACKBAR, this)
-                }
-
-                SplashContract.SplashEvent.NavigateToLanguage -> {
-                    findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
-                }
-
-                SplashContract.SplashEvent.NavigateToAuth -> {
-                    findNavController().navigate(R.id.action_splashFragment_to_authFragment)
-
-                }
-            }
-
-        }
+//        collectFlow(splashViewModel.events) { splashEvent ->
+//            when (splashEvent) {
+//                is SplashContract.SplashEvent.NavigateToHome -> {
+//                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+//                }
+//
+//                is SplashContract.SplashEvent.Error -> {
+//                    val errorMessage =
+//                        splashEvent.error.toErrorMessage(requireContext())
+//                    Log.e("Splash error", errorMessage)
+//                    showMessage(errorMessage, MessageType.SNACKBAR, this)
+//                }
+//
+//                SplashContract.SplashEvent.NavigateToLanguage -> {
+//                    findNavController().navigate(R.id.action_splashFragment_to_languageFragment)
+//                }
+//
+//                SplashContract.SplashEvent.NavigateToAuth -> {
+//                    findNavController().navigate(R.id.action_splashFragment_to_authFragment)
+//
+//                }
+//            }
+//
+//        }
 
 
 
