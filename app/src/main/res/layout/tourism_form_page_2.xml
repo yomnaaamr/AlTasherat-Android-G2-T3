@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/header_view"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_button_bg"
+        app:layout_constraintBottom_toBottomOf="@id/passport_info_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/passport_info_txt" />
+
+    <TextView
+        android:id="@+id/passport_info_txt"
+        style="?textAppearanceTitleMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?colorSurfaceInverse"
+        android:drawablePadding="8dp"
+        android:paddingVertical="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/visa_and_passport_information"
+        app:drawableStartCompat="@drawable/ic_passport_info_prefix"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/header_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passport_info_txt">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/passport_number_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/passport_number"
+                app:layout_constraintStart_toStartOf="@id/passport_number_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passport_number_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passport_number_txt"
+                app:placeholderText="@string/enter_passport_number"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_passport">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passport_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/passport_image_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/passport_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passport_number_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passport_image_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:endIconDrawable="@drawable/ic_upload"
+                app:endIconMode="custom"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passport_image_txt"
+                app:placeholderText="@string/enter_passport_image"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_passport">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passport_image_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="48dp"
+                    android:focusable="false"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:inputType="none"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/visa_country_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/visa_country"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passport_image_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/visa_country_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:endIconDrawable="@drawable/ic_arrow_down"
+                app:endIconMode="custom"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visa_country_txt"
+                app:placeholderText="@string/choose_visa_country"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_nationality">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/visa_country_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="48dp"
+                    android:focusable="false"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:inputType="none"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/visa_purpose_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/visa_reason"
+                app:layout_constraintStart_toStartOf="@id/visa_purpose_layout"
+                app:layout_constraintTop_toBottomOf="@id/visa_country_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/visa_purpose_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visa_purpose_txt"
+                app:placeholderText="@string/enter_visa_purpose"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_message">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/visa_purpose_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:inputType="textMultiLine"
+                    android:maxLines="8" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/visa_message_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/visa_explanation"
+                app:layout_constraintStart_toStartOf="@id/visa_message_layout"
+                app:layout_constraintTop_toBottomOf="@id/visa_purpose_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/visa_message_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visa_message_txt"
+                app:placeholderText="@string/enter_your_explanation"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_message">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/visa_message_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textMultiLine"
+                    android:maxLines="8" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/your_files_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/personal_files"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visa_message_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/personal_files_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="?colorSurfaceInverse"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="?colorPrimary"
+                app:boxStrokeWidth="0dp"
+                app:endIconDrawable="@drawable/ic_upload"
+                app:endIconMode="custom"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/your_files_txt"
+                app:placeholderText="@string/upload_your_files"
+                app:placeholderTextAppearance="?textAppearanceBodySmall"
+                app:startIconDrawable="@drawable/ic_file">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/personal_files_edit"
+                    style="?textAppearanceTitleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="48dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:inputType="none"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/adults_number_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/adults_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personal_files_layout" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/adults_plus_card"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="?colorPrimary"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/adults_number_txt">
+
+                <TextView
+                    style="?attr/textAppearanceTitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus_icon"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/adults_number_value"
+                style="?attr/textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/adults_plus_card"
+                app:layout_constraintStart_toEndOf="@id/adults_plus_card"
+                app:layout_constraintTop_toTopOf="@id/adults_plus_card" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/adults_minus_card"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="?colorSurfaceInverse"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="@id/adults_plus_card"
+                app:layout_constraintStart_toEndOf="@id/adults_number_value"
+                app:layout_constraintTop_toTopOf="@id/adults_plus_card">
+
+                <TextView
+                    style="?attr/textAppearanceTitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minus_icon"
+                    android:layout_gravity="center"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/children_number_txt"
+                style="?textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/children_number"
+                app:layout_constraintBottom_toBottomOf="@id/adults_number_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintStart_toEndOf="@id/adults_number_txt"
+                app:layout_constraintTop_toTopOf="@id/adults_number_txt" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/children_plus_card"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="?colorTertiary"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintStart_toStartOf="@id/children_number_txt"
+                app:layout_constraintTop_toBottomOf="@id/children_number_txt">
+
+                <TextView
+                    style="?attr/textAppearanceTitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus_icon"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/children_number_value"
+                style="?attr/textAppearanceTitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/children_plus_card"
+                app:layout_constraintStart_toEndOf="@id/children_plus_card"
+                app:layout_constraintTop_toTopOf="@id/children_plus_card" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/children_minus_card"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="?colorSurfaceInverse"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="@id/children_plus_card"
+                app:layout_constraintStart_toEndOf="@id/children_number_value"
+                app:layout_constraintTop_toTopOf="@id/children_plus_card">
+
+                <TextView
+                    style="?attr/textAppearanceTitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minus_icon"
+                    android:layout_gravity="center"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/send_btn"
+                style="@style/CustomButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/send"
+                app:icon="@drawable/ic_continue_icon"
+                app:iconGravity="textEnd"
+                app:iconPadding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/adults_plus_card" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

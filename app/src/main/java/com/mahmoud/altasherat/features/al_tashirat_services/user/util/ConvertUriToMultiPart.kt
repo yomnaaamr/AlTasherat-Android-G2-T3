@@ -8,8 +8,22 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 fun Uri.toFile(context: Context): File? {
-    val inputStream = context.contentResolver.openInputStream(this) ?: return null
-    val tempFile = File.createTempFile("upload", ".jpg", context.cacheDir)
+    val contentResolver = context.contentResolver
+    val inputStream = contentResolver.openInputStream(this) ?: return null
+
+    // Get MIME type
+    val mimeType = contentResolver.getType(this) ?: return null
+
+    // Map common MIME types to extensions
+    val extension = when (mimeType) {
+        "image/jpeg" -> ".jpg"
+        "image/png" -> ".png"
+        "application/pdf" -> ".pdf"
+        else -> return null // Unsupported file type
+    }
+
+    // Create temp file with correct extension
+    val tempFile = File.createTempFile("upload", extension, context.cacheDir)
     tempFile.outputStream().use { outputStream ->
         inputStream.copyTo(outputStream)
     }
@@ -20,4 +34,20 @@ fun Uri.toFile(context: Context): File? {
 fun File.toImagePart(paramName: String = "image"): MultipartBody.Part {
     val requestFile = this.asRequestBody("image/*".toMediaTypeOrNull())
     return MultipartBody.Part.createFormData(paramName, this.name, requestFile)
+}
+
+fun List<File>.toPassportImageParts(): List<MultipartBody.Part> {
+    return this.mapIndexed { index, file ->
+        val key = "passport_images[$index]"
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        MultipartBody.Part.createFormData(key, file.name, requestFile)
+    }
+}
+
+fun List<File>.toAttachmentsParts(): List<MultipartBody.Part> {
+    return this.mapIndexed { index, file ->
+        val key = "attachments[$index]"
+        val requestFile = file.asRequestBody("application/pdf".toMediaTypeOrNull())
+        MultipartBody.Part.createFormData(key, file.name, requestFile)
+    }
 }

@@ -82,16 +82,16 @@ class RetrofitRestApiNetworkProvider(
         )
     }
 
-    override suspend fun <T : Any> updateAccount(
+    override suspend fun <T : Any> postFiles(
         endpoint: String,
-        image: MultipartBody.Part?,
+        files: List<MultipartBody.Part>,
         data: Map<String, RequestBody>,
         headers: Map<String, Any>?,
         responseType: KClass<T>
     ): T = safeApiCall(responseType) {
-        apiService.updateAccount(
+        apiService.postFiles(
             endpoint = endpoint,
-            image = image,
+            files = files,
             data = data,
             headers = headers ?: hashMapOf(),
         )

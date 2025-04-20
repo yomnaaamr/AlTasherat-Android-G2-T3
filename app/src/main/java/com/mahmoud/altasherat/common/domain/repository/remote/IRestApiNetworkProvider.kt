@@ -37,9 +37,9 @@ interface IRestApiNetworkProvider {
         responseType: KClass<T>
     ): T
 
-    suspend fun <T : Any> updateAccount(
+    suspend fun <T : Any> postFiles(
         endpoint: String,
-        image: MultipartBody.Part? = null,
+        files: List<MultipartBody.Part> = emptyList(),
         data: Map<String, RequestBody>,
         headers: Map<String, Any>? = null,
         responseType: KClass<T>
